@@ -1,1 +1,0 @@
-# Image Lazy Loading Plugin
