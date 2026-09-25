@@ -1,0 +1,119 @@
+{% extends 'share_layout/base.html' %}
+{% load blog_tags %}
+{% load i18n %}
+
+{% block header %}
+    <title>{{ SITE_NAME }}</title>
+    <meta name="description" content="{{ SITE_DESCRIPTION }}"/>
+    <meta name="keywords" content="{{ SITE_KEYWORDS }}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="mx-auto max-w-[130rem] px-5 sm:px-8 lg:px-10 xl:px-12">
+
+        {% if page_type %}
+            {# 归档 / 分类 / 标签 / 作者 页：紧凑页头 #}
+            <header class="w-full max-w-[110rem] border-b border-border py-8 sm:py-10">
+                <div class="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <p class="m-0 mb-2 text-[13px] font-semibold tracking-[0.08em] text-primary">
+                            {% if page_type == "分类目录归档" %}分类
+                            {% elif page_type == "分类标签归档" %}标签
+                            {% elif page_type == "作者文章归档" %}作者
+                            {% else %}{{ page_type }}{% endif %}
+                        </p>
+                        <h1 class="m-0 text-[2rem] font-semibold leading-tight tracking-[-0.025em] text-foreground sm:text-[2.625rem]">{{ tag_name }}</h1>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span class="h-px w-7 bg-border" aria-hidden="true"></span>
+                        <span>共 <span class="font-mono tabular-nums text-foreground">{% if paginator %}{{ paginator.count }}{% else %}{{ article_list|length }}{% endif %}</span> 篇文章</span>
+                    </div>
+                </div>
+            </header>
+        {% else %}
+            {# 首页 Hero：白底 + 单点紫色氛围光，不用整块紫色背景 #}
+            <header class="relative isolate w-full max-w-[110rem] overflow-hidden border-b border-border py-14 sm:py-20">
+                <div aria-hidden="true"
+                     class="home-hero-orb pointer-events-none absolute -top-28 right-[-6rem] -z-10 h-[22rem] w-[22rem] rounded-full opacity-[0.16] blur-3xl"></div>
+
+                <p class="anim-fade-in m-0 mb-5 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                    <span class="inline-block size-1.5 rounded-full bg-primary"></span>
+                    {% if page_type %}{{ page_type }}{% else %}{% trans "recent articles" %}{% endif %}
+                </p>
+
+                <h1 class="anim-rise m-0 max-w-3xl text-balance text-4xl font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-6xl">
+                    {{ SITE_NAME }}
+                </h1>
+
+                {% if SITE_DESCRIPTION %}
+                    <p class="anim-delay-60 anim-rise m-0 mt-6 max-w-[46ch] text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+                        {{ SITE_DESCRIPTION }}
+                    </p>
+                {% endif %}
+
+                <div class="anim-delay-120 anim-rise mt-9 flex flex-wrap items-center gap-3">
+                    <a href="/feed"
+                       class="inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary-700 hover:shadow-glow">
+                        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 5a13 13 0 0113 13M6 12a6 6 0 016 6M6.5 18.5h.01"/>
+                        </svg>
+                        RSS
+                    </a>
+                    <a href="/archives.html"
+                       class="inline-flex h-11 items-center rounded-full border border-border px-5 text-sm font-medium text-foreground transition-colors duration-200 hover:border-primary-line hover:bg-primary-soft hover:text-primary">
+                        {% trans "article archive" %}
+                    </a>
+                </div>
+            </header>
+        {% endif %}
+
+        <div class="grid w-full max-w-[110rem] gap-10 py-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-12 lg:py-10 xl:gap-16">
+            <section class="min-w-0" aria-labelledby="article-list-heading">
+                <div class="flex items-center justify-between gap-4 border-b border-border pb-4">
+                    <h2 id="article-list-heading" class="m-0 text-sm font-semibold tracking-[0.06em] text-foreground">
+                        {% trans "recent articles" %}
+                    </h2>
+                    <span class="text-xs text-muted-foreground">按发布时间排序</span>
+                </div>
+
+                <div class="article-list space-y-0">
+                    {% for article in article_list %}
+                        {% load_article_detail article True user %}
+                    {% empty %}
+                        <div class="border-y border-border py-14 text-center" role="status">
+                            <p class="m-0 text-sm text-muted-foreground">暂时还没有文章。</p>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% if is_paginated %}
+                    <div class="mt-12">
+                        {% load_pagination_info page_obj page_type tag_name %}
+                    </div>
+                {% endif %}
+            </section>
+
+            {# 桌面端侧栏 #}
+            <div class="hidden border-l border-border/70 pl-8 lg:block xl:pl-10">
+                <div class="sticky top-20">
+                    {% load_sidebar user "p" %}
+                </div>
+            </div>
+        </div>
+
+        {# 移动端侧栏 #}
+        <div class="pb-12 lg:hidden">
+            <details class="group border-t border-border">
+                <summary class="flex cursor-pointer list-none items-center justify-between py-5 text-sm font-semibold tracking-[0.06em] text-muted-foreground [&::-webkit-details-marker]:hidden">
+                    <span>{% trans "Discover more" %}</span>
+                    <svg class="size-4 transition-transform duration-200 group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </summary>
+                <div class="pt-2">
+                    {% load_sidebar user "p" %}
+                </div>
+            </details>
+        </div>
+    </div>
+{% endblock %}

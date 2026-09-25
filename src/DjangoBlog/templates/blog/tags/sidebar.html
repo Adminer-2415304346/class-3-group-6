@@ -1,0 +1,131 @@
+{% load blog_tags %}
+{% load i18n %}
+
+{# 侧边栏：不用"描边+阴影"卡片堆叠，改用细分隔线分组，降低视觉噪音 #}
+<aside class="flex flex-col divide-y divide-border/70 border-t border-border lg:border-t-0">
+    {% if extra_sidebars %}
+        {% for sidebar in extra_sidebars %}
+            <section class="py-6 first:pt-0">
+                <h3 class="m-0 mb-3 text-[13px] font-semibold tracking-[0.06em] text-foreground">{{ sidebar.name }}</h3>
+                <div class="prose prose-sm max-w-none dark:prose-invert">
+                    {{ sidebar.content|sidebar_markdown|safe }}
+                </div>
+            </section>
+        {% endfor %}
+    {% endif %}
+
+    {% if most_read_articles %}
+        <section class="py-6 first:pt-0">
+            <h3 class="m-0 mb-4 text-[13px] font-semibold tracking-[0.06em] text-foreground">近期热读</h3>
+            <ol class="m-0 flex list-none flex-col gap-4 p-0">
+                {% for a in most_read_articles|slice:":6" %}
+                    <li class="flex gap-3">
+                        <span class="mt-0.5 w-4 shrink-0 text-right font-mono text-xs leading-5 tabular-nums {% if forloop.counter <= 3 %}text-primary{% else %}text-muted-foreground/60{% endif %}">{{ forloop.counter }}</span>
+                        <a href="{{ a.get_absolute_url }}" class="group min-w-0 flex-1">
+                            <span class="block text-sm leading-snug text-foreground transition-colors duration-150 group-hover:text-primary">{{ a.title }}</span>
+                            <span class="mt-1 block font-mono text-[11px] tabular-nums text-muted-foreground">{{ a.views }} {% trans 'views' %}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ol>
+        </section>
+    {% endif %}
+
+    {% if sidebar_comments and open_site_comment %}
+        <section class="py-6">
+            <h3 class="m-0 mb-4 text-[13px] font-semibold tracking-[0.06em] text-foreground">{% trans 'recent comments' %}</h3>
+            <ul class="m-0 flex list-none flex-col gap-3 p-0">
+                {% for c in sidebar_comments %}
+                    <li>
+                        <a href="{{ c.article.get_absolute_url }}#comment-{{ c.pk }}"
+                           class="group flex items-start gap-2.5">
+                            <img src="{{ c.author.email|gravatar_url:32 }}" alt="{{ c.author.username }}"
+                                 class="mt-0.5 size-6 shrink-0 rounded-full ring-1 ring-border" loading="lazy">
+                            <span class="min-w-0 flex-1">
+                                <span class="block text-sm leading-snug text-foreground transition-colors duration-150 group-hover:text-primary">{{ c.body|striptags|truncatechars:48 }}</span>
+                                <span class="mt-1 block text-[11px] text-muted-foreground">
+                                    <span class="font-medium text-foreground/80">{{ c.author.username }}</span>
+                                    <span class="mx-1">&middot;</span>{{ c.creation_time|timesince }}前
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
+    {% if sidebar_tags %}
+        <section class="py-6">
+            <h3 class="m-0 mb-4 text-[13px] font-semibold tracking-[0.06em] text-foreground">{% trans 'Tag Cloud' %}</h3>
+            <div class="flex flex-wrap gap-1.5">
+                {% for tag, count, size in sidebar_tags %}
+                    <a href="{{ tag.get_absolute_url }}"
+                       class="inline-flex items-center gap-1 rounded-full px-2.5 py-1 transition-colors duration-150
+                       {% if size >= 18 %}bg-primary-soft text-primary text-sm font-medium hover:bg-primary/15
+                       {% elif size >= 13 %}bg-muted text-foreground text-sm hover:bg-secondary
+                       {% else %}bg-muted text-muted-foreground text-xs hover:bg-secondary{% endif %}">
+                        {{ tag.name }}
+                        <span class="font-mono text-[10px] tabular-nums opacity-60">{{ count }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+
+    {% if recent_articles %}
+        <section class="py-6">
+            <h3 class="m-0 mb-4 text-[13px] font-semibold tracking-[0.06em] text-foreground">{% trans 'recent articles' %}</h3>
+            <ul class="m-0 flex list-none flex-col gap-1 p-0">
+                {% for a in recent_articles %}
+                    <li>
+                        <a href="{{ a.get_absolute_url }}"
+                           class="group -mx-2 block rounded-lg px-2 py-1.5 transition-colors duration-150 hover:bg-muted">
+                            <span class="block text-sm leading-snug text-foreground transition-colors duration-150 group-hover:text-primary">{{ a.title }}</span>
+                            <span class="mt-1 block font-mono text-[11px] tabular-nums text-muted-foreground">{{ a.pub_time|date:"Y-m-d" }}</span>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+
+    {% if show_google_adsense %}
+        <section class="py-6">
+            <div class="textwidget">{{ google_adsense_codes|safe }}</div>
+        </section>
+    {% endif %}
+
+    <section class="py-6">
+        <h3 class="m-0 mb-4 text-[13px] font-semibold tracking-[0.06em] text-foreground">GitHub</h3>
+        <div class="flex flex-wrap items-center gap-3">
+            <a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow" class="inline-block">
+                <img src="https://resource.lylinux.net/img.shields.io/github/stars/liangliangyy/djangoblog.svg?style=social&amp;label=Star" alt="GitHub stars" loading="lazy">
+            </a>
+            <a href="https://github.com/liangliangyy/DjangoBlog" rel="nofollow" class="inline-block">
+                <img src="https://resource.lylinux.net/img.shields.io/github/forks/liangliangyy/djangoblog.svg?style=social&amp;label=Fork" alt="GitHub forks" loading="lazy">
+            </a>
+        </div>
+    </section>
+
+    <section class="py-6">
+        <h3 class="m-0 mb-3 text-[13px] font-semibold tracking-[0.06em] text-foreground">{% trans 'Function' %}</h3>
+        <ul class="m-0 flex list-none flex-col gap-0.5 p-0">
+            <li>
+                <a href="/admin/" rel="nofollow" hx-boost="false"
+                   class="block -mx-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors duration-150 hover:bg-muted hover:text-primary">{% trans 'management site' %}</a>
+            </li>
+            {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'account:logout' %}" rel="nofollow" hx-boost="false"
+                       class="block -mx-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors duration-150 hover:bg-muted hover:text-primary">{% trans 'logout' %}</a>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{% url 'account:login' %}" rel="nofollow" hx-boost="false"
+                       class="block -mx-2 rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors duration-150 hover:bg-muted hover:text-primary">{% trans 'login' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </section>
+</aside>

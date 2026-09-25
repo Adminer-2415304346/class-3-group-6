@@ -1,0 +1,73 @@
+{% load blog_tags %}
+{% load cache %}
+{% load i18n %}
+{# 文章列表项：日期并入元信息行，让标题、摘要和列表标题共用一条阅读轴。 #}
+<article id="post-{{ article.pk }}" class="article-row group relative -mx-3 border-b border-border px-3 py-7 transition-colors duration-200 hover:bg-muted/30 sm:-mx-4 sm:px-4 sm:py-8">
+    <div class="min-w-0">
+        <div class="mb-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] leading-5">
+            {% if article.article_order > 0 %}
+                <span class="h-0.5 w-5 rounded-full bg-primary" aria-label="置顶文章"></span>
+            {% endif %}
+        {% if article.category %}
+            <a href="{{ article.category.get_absolute_url }}"
+               class="font-semibold tracking-[0.06em] text-primary transition-colors duration-150 hover:text-primary-deep">
+                {{ article.category.name }}
+            </a>
+            <span class="text-border" aria-hidden="true">/</span>
+        {% endif %}
+            <time datetime="{{ article.pub_time|date:'c' }}"
+                  class="font-mono text-xs tracking-tight text-muted-foreground">
+                {{ article.pub_time|date:"Y-m-d" }}
+            </time>
+        </div>
+
+        <h2 class="m-0 text-[1.375rem] font-semibold leading-[1.35] tracking-[-0.02em] text-foreground sm:text-2xl">
+            {% if isindex %}
+                <a href="{{ article.get_absolute_url }}" rel="bookmark"
+                   class="transition-colors duration-150 group-hover:text-primary">
+                    {% if query %}{{ article.title|highlight_search_term:query }}{% else %}{{ article.title }}{% endif %}
+                </a>
+            {% else %}
+                {% if query %}{{ article.title|highlight_search_term:query }}{% else %}{{ article.title }}{% endif %}
+            {% endif %}
+        </h2>
+
+        {% if isindex %}
+            <p class="m-0 mt-3 max-w-[72ch] line-clamp-2 text-[0.9375rem] leading-7 text-muted-foreground sm:text-base">
+                {{ article.body|striptags|truncatechars:150 }}
+            </p>
+        {% endif %}
+
+        <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
+            <span class="inline-flex items-center gap-1.5 font-mono">
+                <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/>
+                    <circle cx="12" cy="12" r="2.5" stroke-width="1.8"/>
+                </svg>
+                {{ article.views }}
+            </span>
+            {% if article.comment_status == "o" and open_site_comment %}
+                <span class="inline-flex items-center gap-1.5 font-mono">
+                    <svg class="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 12c0 4-4 7-9 7a10 10 0 01-2.6-.34L4 20l1.3-3.4A6.5 6.5 0 013 12c0-4 4-7 9-7s9 3 9 7z"/>
+                    </svg>
+                    {{ article.comment_set.count }}
+                </span>
+            {% endif %}
+            {% for tag in article.tags.all|slice:":3" %}
+                <a href="{{ tag.get_absolute_url }}"
+                   class="font-sans text-[11px] text-muted-foreground underline decoration-border underline-offset-4 transition-colors duration-150 hover:text-primary">
+                    #{{ tag.name }}
+                </a>
+            {% endfor %}
+            {% if isindex %}
+                <a href="{{ article.get_absolute_url }}"
+                   class="ml-auto hidden items-center gap-1 font-sans font-medium text-muted-foreground opacity-0 transition-all duration-200 hover:text-primary group-hover:opacity-100 group-focus-within:opacity-100 sm:inline-flex"
+                   aria-label="阅读全文：{{ article.title }}">
+                    阅读全文
+                    <span aria-hidden="true">→</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</article>
