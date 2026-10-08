@@ -53,10 +53,13 @@ def health_check(request):
         'timestamp': time.time()
     })
 
+# SZX：语言切换和健康检查直接注册在项目路由，位于下面的多语言路由组之外。
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('health/', health_check, name='health_check'),
 ]
+# SZX：项目路由按顺序尝试各应用 URLConf；空前缀路由由应用内部路径继续区分。
+# SZX：prefix_default_language=False 让默认语言沿用 /article/ 等无语言前缀的路径。
 urlpatterns += i18n_patterns(
     re_path(r'^admin/', admin_site.urls),
     re_path(r'', include('blog.urls', namespace='blog')),

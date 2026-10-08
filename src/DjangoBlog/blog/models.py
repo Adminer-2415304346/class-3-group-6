@@ -26,12 +26,14 @@ class LinkShowType(models.TextChoices):
     S = ('s', _('slide'))
 
 
+# SZX：抽象父模型统一主键和时间字段，不会单独生成一张 BaseModel 数据表。
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
     creation_time = models.DateTimeField(_('creation time'), default=now)
     last_modify_time = models.DateTimeField(_('modify time'), default=now)
 
     def save(self, *args, **kwargs):
+        # SZX：浏览量单字段更新直接执行 UPDATE；其他保存才处理 slug 并走父类 save。
         is_update_views = isinstance(
             self,
             Article) and 'update_fields' in kwargs and kwargs['update_fields'] == ['views']
@@ -89,6 +91,7 @@ class Article(BaseModel):
         default='o')
     type = models.CharField(_('type'), max_length=1, choices=TYPE, default='a')
     views = models.PositiveIntegerField(_('views'), default=0)
+    # SZX：文章对作者、分类使用外键，对标签使用多对多关系。
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('author'),
@@ -128,6 +131,7 @@ class Article(BaseModel):
             models.Index(fields=['category', 'status'], name='idx_category_status'),
         ]
 
+    # SZX：详情链接由路由名称反向生成，URL 中携带创建日期和文章主键。
     def get_absolute_url(self):
         return reverse('blog:detailbyid', kwargs={
             'article_id': self.id,
@@ -191,6 +195,7 @@ class Article(BaseModel):
 class Category(BaseModel):
     """文章分类"""
     name = models.CharField(_('category name'), max_length=30, unique=True)
+    # SZX：分类通过自关联构成树；根分类的 parent_category 为空。
     parent_category = models.ForeignKey(
         'self',
         verbose_name=_('parent category'),

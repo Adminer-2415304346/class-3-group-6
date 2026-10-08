@@ -42,6 +42,7 @@ CSRF_TRUSTED_ORIGINS = ['http://example.com']
 # Application definition
 
 
+# SZX：注册后的应用才能由 Django 加载模型、模板及各自的管理命令。
 INSTALLED_APPS = [
     # 'django.contrib.admin',
     'django.contrib.admin.apps.SimpleAdminConfig',
@@ -63,6 +64,7 @@ INSTALLED_APPS = [
     'djangoblog'
 ]
 
+# SZX：请求依次经过这些中间件，响应按相反顺序返回；末尾还有项目自定义的在线中间件。
 MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
@@ -80,8 +82,10 @@ MIDDLEWARE = [
     'blog.middleware.OnlineMiddleware'
 ]
 
+# SZX：项目级 URLConf 是请求进入各应用路由前的总入口。
 ROOT_URLCONF = 'djangoblog.urls'
 
+# SZX：DIRS 查找项目共用模板；APP_DIRS 再允许从已安装应用内查找模板。
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -105,6 +109,7 @@ WSGI_APPLICATION = 'djangoblog.wsgi.application'
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 
+# SZX：ORM 的 default 连接使用 MySQL，库名和连接信息优先从环境变量读取。
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -268,6 +273,7 @@ STATICFILES_DIRS = [
 # Vite开发服务器URL（开发模式）
 VITE_DEV_SERVER_URL = 'http://localhost:5173'
 
+# SZX：项目使用自定义用户模型；文章作者等外键通过 settings.AUTH_USER_MODEL 引用它。
 AUTH_USER_MODEL = 'accounts.BlogUser'
 LOGIN_URL = '/login/'
 

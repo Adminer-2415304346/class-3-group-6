@@ -5,6 +5,7 @@ import sys
 
 from docx import Document
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
+from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
@@ -19,6 +20,11 @@ UI_TEMPLATE = TEMPLATE_DIR / '文档模板-软件界面设计说明书模板.doc
 DATA_TEMPLATE = TEMPLATE_DIR / '文档模板-软件数据模型设计说明书模板.docx'
 BLUE = RGBColor(23, 49, 91)
 GRAY = RGBColor(82, 99, 119)
+BLACK = RGBColor(0, 0, 0)
+GROUP_MEMBERS = (
+    '石兆翔（2415304346）、喻飞扬（2415304347）、王子扬（2415304348）',
+    '顾梓鑫（2415304345）、宋洋（2415304330）、郭曹钰（2415304331）',
+)
 
 
 def east_asia_font(style, name='Microsoft YaHei'):
@@ -61,7 +67,7 @@ def add_page_number(paragraph):
         run._r.append(element)
 
 
-def prepare(template, title, kind):
+def prepare(template, title, kind, *, final=False):
     if not template.exists():
         raise FileNotFoundError(f'Course template missing: {template}')
     doc = Document(template)
@@ -91,7 +97,7 @@ def prepare(template, title, kind):
         east_asia_font(style)
         style.font.size = Pt(size)
         style.font.bold = True
-        style.font.color.rgb = BLUE
+        style.font.color.rgb = BLACK if final else BLUE
         style.paragraph_format.space_before = Pt(before)
         style.paragraph_format.space_after = Pt(after)
         style.paragraph_format.keep_with_next = True
@@ -99,6 +105,9 @@ def prepare(template, title, kind):
     doc.core_properties.title = title
     doc.core_properties.subject = kind
     doc.core_properties.keywords = '软件工程方法学,第四周,AI Agent 工程实践'
+    if final:
+        doc.core_properties.author = '24 级软件工程 3 班第 6 组'
+        doc.core_properties.last_modified_by = '石兆翔'
     header = section.header.paragraphs[0]
     header.text = '软件工程方法学  ·  第四周实践任务'
     header.alignment = WD_ALIGN_PARAGRAPH.RIGHT
@@ -113,12 +122,37 @@ def prepare(template, title, kind):
         run.font.size = Pt(8)
         run.font.color.rgb = GRAY
 
-    doc.add_paragraph(title, 'Heading 1')
-    p = doc.add_paragraph('24 级软件工程 3 班第 6 组  |  编制日期：2026-10-08  |  版本：个人分支初稿')
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p = doc.add_paragraph('学号、参会人员及最终审核信息：待小组填写；本稿依据当前代码与本地演示环境编写。')
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.runs[0].font.color.rgb = GRAY
+    if final:
+        try:
+            title_style = doc.styles['Title']
+        except KeyError:
+            title_style = doc.styles.add_style('Title', WD_STYLE_TYPE.PARAGRAPH)
+        east_asia_font(title_style)
+        title_style.font.size = Pt(20)
+        title_style.font.bold = True
+        title_style.font.color.rgb = BLACK
+        title_style.paragraph_format.space_after = Pt(15)
+        doc.add_paragraph(title, 'Title')
+        metadata = (
+            '组号：第 6 组  |  班级：24 级软件工程 3 班',
+            f'小组成员：{GROUP_MEMBERS[0]}',
+            GROUP_MEMBERS[1],
+            '编制：第 6 组  |  审核人：石兆翔  |  编制日期：2026-10-08  |  版本：1.0 提交版',
+        )
+        for line in metadata:
+            p = doc.add_paragraph(line)
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_after = Pt(2)
+            for run in p.runs:
+                run.font.size = Pt(8.5)
+                run.font.color.rgb = GRAY
+    else:
+        doc.add_paragraph(title, 'Heading 1')
+        p = doc.add_paragraph('24 级软件工程 3 班第 6 组  |  编制日期：2026-10-08  |  版本：个人分支初稿')
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p = doc.add_paragraph('学号、参会人员及最终审核信息：待小组填写；本稿依据当前代码与本地演示环境编写。')
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.runs[0].font.color.rgb = GRAY
     return doc
 
 
@@ -169,7 +203,8 @@ def figure(doc, filename, caption, width=6.55):
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(3)
     p.paragraph_format.keep_with_next = True
-    p.add_run().add_picture(str(ASSETS / filename), width=Inches(width))
+    picture = p.add_run().add_picture(str(ASSETS / filename), width=Inches(width))
+    picture._inline.docPr.set('descr', caption)
     p = doc.add_paragraph(caption)
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_after = Pt(13)
@@ -179,7 +214,7 @@ def figure(doc, filename, caption, width=6.55):
 
 
 def build_ui():
-    doc = prepare(UI_TEMPLATE, 'AI Agent 工程实践博客系统的界面设计', '软件界面设计说明书')
+    doc = prepare(UI_TEMPLATE, 'AI Agent 工程实践博客系统的界面设计', '软件界面设计说明书', final=True)
     h2(doc, '博客系统介绍')
     para(doc, '本系统是在开源 DjangoBlog 基础上二次开发的内容发布与交流平台。第四周以“AI Agent 工程实践”为博客内容主题，围绕架构、工具与工作流、知识与记忆、评测与安全、应用案例组织文章。系统本身仍是博客，不声称提供 Agent 自动执行、文档上传或任务编排能力。')
     para(doc, '界面目标是让读者迅速发现主题文章、按栏目与标签浏览、阅读正文并参与评论；让编辑通过 Django Admin 维护内容。桌面与移动端共享内容结构，提供搜索入口、浅色/深色切换和可访问的导航反馈。')
@@ -217,7 +252,7 @@ def build_ui():
         ('响应式与主题', '桌面 / 手机；浅色 / 深色', '小屏采用单列与移动导航；主题可由用户切换'),
     ])
 
-    h2(doc, '模板设计')
+    h2(doc, '模板设计').paragraph_format.page_break_before = True
     para(doc, '模板以两个共享布局为根：普通内容页继承 share_layout/base.html，登录与注册等账号页继承 share_layout/base_account.html。共享布局通过 include 组合导航和页脚；文章详情页通过 include 组合现代评论列表及发表评论组件。')
     figure(doc, '08-template-packages.png', '图 10  UML 包图：布局、页面、局部模板与自定义标签库的依赖关系')
     table(doc, ('关系', '代码实例', '作用'), [
