@@ -20,6 +20,7 @@ class LoginForm(AuthenticationForm):
 class RegisterForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(RegisterForm, self).__init__(*args, **kwargs)
+
         self.fields['username'].widget = widgets.TextInput(
             attrs={'placeholder': "username", "class": "form-control"})
         self.fields['email'].widget = widgets.EmailInput(
@@ -28,6 +29,7 @@ class RegisterForm(UserCreationForm):
             attrs={'placeholder': "password", "class": "form-control"})
         self.fields['password2'].widget = widgets.PasswordInput(
             attrs={'placeholder': "repeat password", "class": "form-control"})
+
     # YFY：clean_email表单钩子，校验邮箱是否已被注册，防止重复邮箱注册账号
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -50,6 +52,7 @@ class ForgetPasswordForm(forms.Form):
             }
         ),
     )
+
     new_password2 = forms.CharField(
         label="确认密码",
         widget=forms.PasswordInput(
@@ -59,6 +62,7 @@ class ForgetPasswordForm(forms.Form):
             }
         ),
     )
+
     email = forms.EmailField(
         label='邮箱',
         widget=forms.TextInput(
@@ -68,6 +72,7 @@ class ForgetPasswordForm(forms.Form):
             }
         ),
     )
+
     code = forms.CharField(
         label=_('Code'),
         widget=forms.TextInput(
@@ -77,13 +82,14 @@ class ForgetPasswordForm(forms.Form):
             }
         ),
     )
-    # YFY：clean_code钩子，调用utils工具类校验用户提交的重置密码验证码是否正确
+
     def clean_new_password2(self):
         password1 = self.data.get("new_password1")
         password2 = self.data.get("new_password2")
         if password1 and password2 and password1 != password2:
             raise ValidationError(_("passwords do not match"))
         password_validation.validate_password(password2)
+
         return password2
 
     def clean_email(self):
@@ -95,6 +101,7 @@ class ForgetPasswordForm(forms.Form):
             raise ValidationError(_("email does not exist"))
         return user_email
 
+    # YFY：clean_code钩子，调用utils工具类校验用户提交的重置密码验证码是否正确
     def clean_code(self):
         code = self.cleaned_data.get("code")
         error = utils.verify(
@@ -110,4 +117,3 @@ class ForgetPasswordCodeForm(forms.Form):
     email = forms.EmailField(
         label=_('Email'),
     )
-

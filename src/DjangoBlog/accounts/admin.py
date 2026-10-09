@@ -2,18 +2,22 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import AdminUserCreationForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.forms import UsernameField
+
 # Register your models here.
 from .models import BlogUser
+
 
 # YFY：BlogUserCreationForm用于后台新增用户，适配Django5.1+ usable_password字段，标记用户来源为adminsite
 class BlogUserCreationForm(AdminUserCreationForm):
     """后台“新增用户”表单。
+
     Django 5.1 起 UserAdmin.add_fieldsets 中新增了 usable_password 字段，
     对应的 add_form 必须是 AdminUserCreationForm（或其子类），
     否则新增用户页面会抛出
     FieldError: Unknown field(s) (usable_password) specified for BlogUser。
     密码校验、usable_password 处理以及密码加密保存均由父类完成。
     """
+
     class Meta:
         model = BlogUser
         fields = ('username', 'email', 'nickname')
@@ -33,6 +37,7 @@ class BlogUserChangeForm(UserChangeForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
 
 # YFY：BlogUserAdmin为自定义用户后台管理类，绑定BlogUser模型，配置列表展示、搜索、新增编辑表单
 class BlogUserAdmin(UserAdmin):
@@ -56,4 +61,3 @@ class BlogUserAdmin(UserAdmin):
     list_display_links = ('id', 'username')
     ordering = ('-id',)
     search_fields = ('username', 'nickname', 'email')
-

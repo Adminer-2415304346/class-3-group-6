@@ -1,8 +1,11 @@
 from django.urls import path
 from django.urls import re_path
+
 from . import views
 from .forms import LoginForm
+
 app_name = "accounts"
+
 urlpatterns = [
 # YFY：re_path使用正则匹配url，将/login/路由映射LoginView视图，kwargs传入自定义登录表单类
 re_path(r'^login/$',
