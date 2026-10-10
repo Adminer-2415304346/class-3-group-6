@@ -122,7 +122,7 @@
 
     <!-- RSS和图标 -->
     <link rel="alternate" type="application/rss+xml" title="{{ SITE_NAME }} &raquo; Feed" href="/feed"/>
-    <link rel="icon" href="{% static 'blog/favicon.svg' %}" type="image/svg+xml" sizes="any"/>
+    {% include 'share_layout/site_icons.html' %}
 
     <!-- 关键CSS：防止深色模式闪烁（仅首屏兜底，最终颜色由 main.css 的 token 决定）
          注意：这里不再用 !important 抢 main.css 的背景控制权，两处色值必须与 token 保持一致 -->
@@ -204,6 +204,7 @@
     <noscript><link rel="stylesheet" href="{% static 'pygments/default.css' %}"></noscript>
 
     <!-- 新前端：Tailwind CSS + Alpine.js - 完整样式系统（通过JS加载） -->
+    {% include 'share_layout/account_transition_head.html' %}
     {% vite_preload 'src/main.js' %}
     {% vite_js 'src/main.js' %}
 
@@ -227,6 +228,7 @@
 <body data-color-scheme="{{ COLOR_SCHEME|default:'purple' }}"
       data-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}"
       x-data="{ searchOpen: false }">
+{% include 'share_layout/account_transition.html' %}
 <div id="page" class="hfeed site flex min-h-[100dvh] flex-col">
     {% load i18n %}
     {% include 'share_layout/nav.html' %}

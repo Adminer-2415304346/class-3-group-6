@@ -1,0 +1,10 @@
+{% load static %}
+{# SZX：原生跨页过渡的启用声明作为关键样式提前加载，避免外部 CSS 冷加载时被跳过。 #}
+<style>
+    @view-transition { navigation: auto; }
+    @media (prefers-reduced-motion: reduce) {
+        @view-transition { navigation: none; }
+    }
+</style>
+{# pagereveal 必须在首帧前注册；不能给此脚本添加 async、defer 或 type="module"。 #}
+<script src="{% static 'blog/js/accountTransitions.js' %}?v=5"></script>

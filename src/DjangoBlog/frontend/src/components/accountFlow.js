@@ -14,7 +14,8 @@ function rgba(channels, alpha) {
     return `rgba(${channels[0]}, ${channels[1]}, ${channels[2]}, ${alpha})`;
 }
 
-function createAccountFlow(canvas, host) {
+/** SZX：登录页和已扫过的区域共用时间、曲线、光点及暂停状态；不新建第二条动画循环。 */
+export function createAccountFlow(canvas, host, wipeCanvas = null) {
     const context = canvas.getContext('2d', { alpha: true, desynchronized: true });
     if (!context) return { destroy() {} };
 
@@ -29,6 +30,10 @@ function createAccountFlow(canvas, host) {
     let elapsed = 0;
     let lastFrame = 0;
     let bounds = null;
+    const wipeContext = wipeCanvas?.getContext('2d', { alpha: true, desynchronized: true });
+    let wipeActive = false;
+    let wipeWidth = 1;
+    let wipeHeight = 1;
     let palette = {
         primary: [124, 58, 237],
         foreground: [24, 24, 27],
@@ -66,45 +71,48 @@ function createAccountFlow(canvas, host) {
         return y;
     }
 
-    function draw(time) {
-        context.clearRect(0, 0, width, height);
-
-        pointer.x += (pointer.targetX - pointer.x) * 0.075;
-        pointer.y += (pointer.targetY - pointer.y) * 0.075;
+    function drawSurface(target, targetWidth, targetHeight, time, extended = false) {
+        target.clearRect(0, 0, targetWidth, targetHeight);
+        // 右侧曲线向左延伸，而不是把一张小画布拉伸或平铺；边界两侧的线条处在同一坐标和相位。
+        const offsetX = extended && bounds?.width > 0 ? -bounds.left : 0;
+        const offsetY = extended && bounds?.height > 0 ? bounds.top : 0;
 
         if (pointer.active && !prefersReducedMotion) {
-            const halo = context.createRadialGradient(
-                pointer.x * width,
-                pointer.y * height,
+            const halo = target.createRadialGradient(
+                pointer.x * width - offsetX,
+                pointer.y * height + offsetY,
                 0,
-                pointer.x * width,
-                pointer.y * height,
+                pointer.x * width - offsetX,
+                pointer.y * height + offsetY,
                 Math.max(width, height) * 0.28,
             );
             halo.addColorStop(0, rgba(palette.primary, palette.dark ? 0.13 : 0.09));
             halo.addColorStop(1, rgba(palette.primary, 0));
-            context.fillStyle = halo;
-            context.fillRect(0, 0, width, height);
+            target.fillStyle = halo;
+            target.fillRect(0, 0, targetWidth, targetHeight);
         }
 
         const streamCount = Math.max(7, Math.min(12, Math.round(height / 76)));
         const step = Math.max(18, Math.round(width / 52));
-        context.lineCap = 'round';
-        context.lineJoin = 'round';
+        target.lineCap = 'round';
+        target.lineJoin = 'round';
 
         for (let index = 0; index < streamCount; index += 1) {
             const isAccent = index % 4 === 1;
-            context.beginPath();
-            for (let x = -step; x <= width + step; x += step) {
-                const y = streamY(index, x, time, streamCount);
-                if (x === -step) context.moveTo(x, y);
-                else context.lineTo(x, y);
+            target.beginPath();
+            // 采样网格也沿用源画布的原点，避免两侧折线在接缝处产生可见错位。
+            const firstX = Math.floor(offsetX / step) * step - step;
+            for (let sourceX = firstX; sourceX <= targetWidth + offsetX + step; sourceX += step) {
+                const x = sourceX - offsetX;
+                const y = streamY(index, sourceX, time, streamCount) + offsetY;
+                if (sourceX === firstX) target.moveTo(x, y);
+                else target.lineTo(x, y);
             }
-            context.strokeStyle = isAccent
+            target.strokeStyle = isAccent
                 ? rgba(palette.primary, palette.dark ? 0.24 : 0.18)
                 : rgba(palette.foreground, palette.dark ? 0.10 : 0.075);
-            context.lineWidth = isAccent ? 1.35 : 1;
-            context.stroke();
+            target.lineWidth = isAccent ? 1.35 : 1;
+            target.stroke();
         }
 
         const markerCount = Math.max(10, Math.min(22, Math.round(width / 45)));
@@ -112,28 +120,41 @@ function createAccountFlow(canvas, host) {
             const streamIndex = marker % streamCount;
             const speed = 0.000012 + (marker % 5) * 0.0000025;
             const progress = (time * speed + marker * 0.117) % 1;
-            const x = progress * (width + 80) - 40;
-            const y = streamY(streamIndex, x, time, streamCount);
             const radius = 1.4 + (marker % 3) * 0.7;
-
-            context.beginPath();
-            context.arc(x, y, radius, 0, TAU);
-            context.fillStyle = rgba(
-                marker % 3 === 0 ? palette.primary : palette.foreground,
-                marker % 3 === 0 ? (palette.dark ? 0.78 : 0.66) : (palette.dark ? 0.34 : 0.24),
-            );
-            context.fill();
+            // 左侧延伸同一组光点轨迹；右侧范围内的光点与源画布完全一致。
+            const firstCycle = extended ? -Math.ceil(Math.max(0, -offsetX) / (width + 80)) : 0;
+            for (let cycle = firstCycle; cycle <= 0; cycle += 1) {
+                const sourceX = progress * (width + 80) - 40 + cycle * (width + 80);
+                const x = sourceX - offsetX;
+                if (x < -40 || x > targetWidth + 40) continue;
+                const y = streamY(streamIndex, sourceX, time, streamCount) + offsetY;
+                target.beginPath();
+                target.arc(x, y, radius, 0, TAU);
+                target.fillStyle = rgba(
+                    marker % 3 === 0 ? palette.primary : palette.foreground,
+                    marker % 3 === 0 ? (palette.dark ? 0.78 : 0.66) : (palette.dark ? 0.34 : 0.24),
+                );
+                target.fill();
+            }
         }
     }
 
+    function draw(time) {
+        if (destroyed) return;
+        pointer.x += (pointer.targetX - pointer.x) * 0.075;
+        pointer.y += (pointer.targetY - pointer.y) * 0.075;
+        if (visible) drawSurface(context, width, height, time);
+        if (wipeActive && wipeContext) drawSurface(wipeContext, wipeWidth, wipeHeight, time, true);
+    }
+
     function scheduleFrame() {
-        if (destroyed || frameId || !visible || manuallyPaused || prefersReducedMotion || document.hidden) return;
+        if (destroyed || frameId || (!visible && !wipeActive) || manuallyPaused || prefersReducedMotion || document.hidden) return;
         frameId = window.requestAnimationFrame(renderFrame);
     }
 
     function renderFrame(now) {
         frameId = 0;
-        if (destroyed || !visible || manuallyPaused || document.hidden) return;
+        if (destroyed || (!visible && !wipeActive) || manuallyPaused || prefersReducedMotion || document.hidden) return;
         const delta = lastFrame ? Math.min(40, now - lastFrame) : 16;
         lastFrame = now;
         elapsed += delta;
@@ -142,9 +163,11 @@ function createAccountFlow(canvas, host) {
     }
 
     function resize() {
+        if (destroyed) return;
         bounds = host.getBoundingClientRect();
-        width = Math.max(1, Math.round(bounds.width));
-        height = Math.max(1, Math.round(bounds.height));
+        // 手机版默认隐藏右侧场景，但登录推进时仍要画出相同的流动背景。
+        width = Math.max(1, Math.round(bounds.width || window.innerWidth));
+        height = Math.max(1, Math.round(bounds.height || window.innerHeight));
         const pixelRatio = Math.min(2, window.devicePixelRatio || 1);
         canvas.width = Math.round(width * pixelRatio);
         canvas.height = Math.round(height * pixelRatio);
@@ -152,7 +175,37 @@ function createAccountFlow(canvas, host) {
         canvas.style.height = `${height}px`;
         context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
         updatePalette();
+        if (wipeActive) resizeWipe();
         draw(prefersReducedMotion ? 0 : elapsed);
+        scheduleFrame();
+    }
+
+    function resizeWipe() {
+        if (!wipeContext) return;
+        wipeWidth = Math.max(1, window.innerWidth);
+        wipeHeight = Math.max(1, window.innerHeight);
+        const pixelRatio = Math.min(2, window.devicePixelRatio || 1);
+        wipeCanvas.width = Math.round(wipeWidth * pixelRatio);
+        wipeCanvas.height = Math.round(wipeHeight * pixelRatio);
+        wipeContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    }
+
+    function handleWindowResize() {
+        if (!wipeActive) return;
+        resize();
+    }
+
+    function handleRootChange() {
+        if (destroyed) return;
+        const nextActive = Boolean(wipeContext && document.documentElement.hasAttribute('data-login-departure'));
+        if (nextActive && !wipeActive) resizeWipe();
+        wipeActive = nextActive;
+        updatePalette();
+        draw(prefersReducedMotion ? 0 : elapsed);
+        if (!visible && !wipeActive && frameId) {
+            window.cancelAnimationFrame(frameId);
+            frameId = 0;
+        }
         scheduleFrame();
     }
 
@@ -193,26 +246,25 @@ function createAccountFlow(canvas, host) {
     const resizeObserver = new ResizeObserver(resize);
     const intersectionObserver = new IntersectionObserver(([entry]) => {
         visible = entry?.isIntersecting ?? true;
-        if (!visible && frameId) {
+        if (!visible && !wipeActive && frameId) {
             window.cancelAnimationFrame(frameId);
             frameId = 0;
         }
         scheduleFrame();
     });
-    const themeObserver = new MutationObserver(() => {
-        updatePalette();
-        draw(prefersReducedMotion ? 0 : elapsed);
-    });
+    const themeObserver = new MutationObserver(handleRootChange);
 
     resizeObserver.observe(host);
     intersectionObserver.observe(host);
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-login-departure'] });
     host.addEventListener('pointermove', handlePointerMove, { passive: true });
     host.addEventListener('pointerleave', handlePointerLeave, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('resize', handleWindowResize, { passive: true });
     if (motionQuery.addEventListener) motionQuery.addEventListener('change', handleMotionChange);
     else motionQuery.addListener(handleMotionChange);
     resize();
+    handleRootChange();
 
     return {
         setPaused(paused) {
@@ -236,6 +288,7 @@ function createAccountFlow(canvas, host) {
             host.removeEventListener('pointermove', handlePointerMove);
             host.removeEventListener('pointerleave', handlePointerLeave);
             document.removeEventListener('visibilitychange', handleVisibilityChange);
+            window.removeEventListener('resize', handleWindowResize);
             if (motionQuery.removeEventListener) motionQuery.removeEventListener('change', handleMotionChange);
             else motionQuery.removeListener(handleMotionChange);
         },
@@ -249,7 +302,9 @@ export default function accountFlow() {
         init() {
             this.$nextTick(() => {
                 if (this.$refs.canvas) {
-                    this.controller = createAccountFlow(this.$refs.canvas, this.$el);
+                    const wipeCanvas = document.body.classList.contains('launcher-login-page')
+                        ? document.querySelector('.account-entry-flow') : null;
+                    this.controller = createAccountFlow(this.$refs.canvas, this.$el, wipeCanvas);
                 }
             });
         },
