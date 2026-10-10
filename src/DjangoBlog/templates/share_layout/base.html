@@ -3,16 +3,18 @@
 {% load i18n %}
 {% load compress %}
 {% load vite_tags %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="zh-CN" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<html lang="{{ LANGUAGE_CODE|default:'zh-CN' }}" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
 <head>
     {% load blog_tags %}
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="theme-color" content="#a855f7" media="(prefers-color-scheme: light)"/>
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)"/>
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)"/>
+    <meta name="theme-color" content="#0d0d11" media="(prefers-color-scheme: dark)"/>
+    <meta name="color-scheme" content="light dark"/>
     <meta name="robots" content="index, follow"/>
     {% head_meta %}
     {% block header %}
@@ -28,7 +30,12 @@
             const ENABLE_SYSTEM = true;
 
             function getPreferredTheme() {
-                const saved = localStorage.getItem(STORAGE_KEY);
+                let saved = null;
+                try {
+                    saved = localStorage.getItem(STORAGE_KEY);
+                } catch (error) {
+                    // 某些隐私模式会禁用 localStorage，继续使用系统主题即可。
+                }
                 if (saved !== null) return saved === 'dark' ? 'dark' : 'light';
                 if (ENABLE_SYSTEM && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                     return 'dark';
@@ -36,18 +43,51 @@
                 return 'light';
             }
 
-            function applyTheme(theme) {
-                const isDark = theme === 'dark';
-                if (isDark) {
-                    document.documentElement.setAttribute(THEME_ATTR, 'dark');
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.removeAttribute(THEME_ATTR);
-                    document.documentElement.classList.remove('dark');
-                }
+            // 主题切换过渡：只在切换过程中挂 data-theme-anim（见 main.css 的说明），
+            // 260ms 后摘掉。用统一计时器避免连点导致属性残留。
+            const ANIM_ATTR = 'data-theme-anim';
+            const ANIM_MS = 300;
+            let animTimer = null;
+
+            function withThemeTransition(fn) {
+                const root = document.documentElement;
+                root.setAttribute(ANIM_ATTR, '');
+                fn();
+                if (animTimer) clearTimeout(animTimer);
+                animTimer = setTimeout(function() {
+                    root.removeAttribute(ANIM_ATTR);
+                    animTimer = null;
+                }, ANIM_MS);
             }
 
-            // 立即应用主题到html元素（防止闪烁）
+            // 同步 <meta name="theme-color">：移动端地址栏/状态栏颜色，
+            // 并且让浏览器原生控件（滚动条、表单）跟随主题，避免"半明半暗"
+            const THEME_COLORS = { light: '#ffffff', dark: '#0d0d11' };
+            function applyMetaColor(theme) {
+                const color = THEME_COLORS[theme] || THEME_COLORS.light;
+                const metas = document.querySelectorAll('meta[name="theme-color"]');
+                for (let i = 0; i < metas.length; i++) {
+                    metas[i].setAttribute('content', color);
+                    metas[i].removeAttribute('media');
+                }
+                const scheme = document.querySelector('meta[name="color-scheme"]');
+                if (scheme) scheme.setAttribute('content', theme === 'dark' ? 'dark light' : 'light dark');
+            }
+
+            function applyTheme(theme) {
+                const isDark = theme === 'dark';
+                const root = document.documentElement;
+                if (isDark) {
+                    root.setAttribute(THEME_ATTR, 'dark');
+                    root.classList.add('dark');
+                } else {
+                    root.removeAttribute(THEME_ATTR);
+                    root.classList.remove('dark');
+                }
+                applyMetaColor(theme);
+            }
+
+            // 立即应用主题到html元素（防止闪烁，首屏不加过渡）
             const theme = getPreferredTheme();
             applyTheme(theme);
 
@@ -56,12 +96,21 @@
 
             // 全局主题管理器，供导航栏等组件调用
             window.themeManager = {
+                apply: function(t) {
+                    var next = t === 'dark' ? 'dark' : 'light';
+                    if (next === window.__THEME__) return next;
+                    withThemeTransition(function() { applyTheme(next); });
+                    try {
+                        localStorage.setItem(STORAGE_KEY, next);
+                    } catch (error) {
+                        // 存储不可用时仍允许本次切换生效。
+                    }
+                    window.__THEME__ = next;
+                    return next;
+                },
                 toggle: function() {
                     var current = document.documentElement.getAttribute(THEME_ATTR) === 'dark' ? 'dark' : 'light';
-                    var next = current === 'dark' ? 'light' : 'dark';
-                    applyTheme(next);
-                    localStorage.setItem(STORAGE_KEY, next);
-                    window.__THEME__ = next;
+                    return window.themeManager.apply(current === 'dark' ? 'light' : 'dark');
                 }
             };
         })();
@@ -69,54 +118,58 @@
 
     <!-- 资源提示优化 -->
     <!-- 仅保留真正需要的 dns-prefetch，MathJax 由智能加载器按需加载 -->
-    <link rel="dns-prefetch" href="//cdn.mathjax.org"/>
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net"/>
 
     <!-- RSS和图标 -->
     <link rel="alternate" type="application/rss+xml" title="{{ SITE_NAME }} &raquo; Feed" href="/feed"/>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
-    <link rel="apple-touch-icon" href="/favicon.ico"/>
+    <link rel="icon" href="{% static 'blog/favicon.svg' %}" type="image/svg+xml" sizes="any"/>
 
-    <!-- 关键CSS：防止深色模式闪烁 + 首屏优化（bootstrap 样式，Tailwind 加载前生效，颜色值与 design system 一致） -->
+    <!-- 关键CSS：防止深色模式闪烁（仅首屏兜底，最终颜色由 main.css 的 token 决定）
+         注意：这里不再用 !important 抢 main.css 的背景控制权，两处色值必须与 token 保持一致 -->
     <style>
         :root {
-            /* bootstrap token：与 main.css 的 --background/--foreground 保持同值 */
-            --bootstrap-bg-light: 249 250 251;
-            --bootstrap-fg-light: 17 24 39;
-            --bootstrap-bg-dark: 15 23 42;
-            --bootstrap-fg-dark: 226 232 240;
-            --bootstrap-skeleton-base: 243 244 246;
-            --bootstrap-skeleton-high: 229 231 235;
+            --bootstrap-bg-light: 255 255 255;   /* == --background */
+            --bootstrap-fg-light: 24 24 27;      /* == --foreground */
+            --bootstrap-bg-dark: 13 13 17;
+            --bootstrap-fg-dark: 237 237 242;
+            --bootstrap-skeleton-base: 246 246 248;
+            --bootstrap-skeleton-high: 228 228 231;
+        }
+
+        html,
+        html body {
+            background-color: rgb(var(--bootstrap-bg-light));
+            color: rgb(var(--bootstrap-fg-light));
         }
 
         html[data-theme="dark"],
         html[data-theme="dark"] body {
-            background-color: rgb(var(--bootstrap-bg-dark)) !important;
-            color: rgb(var(--bootstrap-fg-dark)) !important;
-        }
-
-        html:not([data-theme="dark"]),
-        html:not([data-theme="dark"]) body {
-            background-color: rgb(var(--bootstrap-bg-light)) !important;
-            color: rgb(var(--bootstrap-fg-light)) !important;
+            background-color: rgb(var(--bootstrap-bg-dark));
+            color: rgb(var(--bootstrap-fg-dark));
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
+            font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                "PingFang SC", "HarmonyOS Sans SC", "Hiragino Sans GB", "Microsoft YaHei",
+                "Noto Sans SC", sans-serif;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         #page {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
         }
 
+        /* z-index 分层：浮层(60) > 站点头部(40) > 普通内容 */
         #masthead {
             position: relative;
-            z-index: 999;
+            z-index: 40;
         }
 
         #main {
@@ -151,6 +204,7 @@
     <noscript><link rel="stylesheet" href="{% static 'pygments/default.css' %}"></noscript>
 
     <!-- 新前端：Tailwind CSS + Alpine.js - 完整样式系统（通过JS加载） -->
+    {% vite_preload 'src/main.js' %}
     {% vite_js 'src/main.js' %}
 
     <!-- 插件CSS文件 -->
@@ -173,10 +227,10 @@
 <body data-color-scheme="{{ COLOR_SCHEME|default:'purple' }}"
       data-authenticated="{% if user.is_authenticated %}true{% else %}false{% endif %}"
       x-data="{ searchOpen: false }">
-<div id="page" class="hfeed site flex min-h-screen flex-col">
+<div id="page" class="hfeed site flex min-h-[100dvh] flex-col">
     {% load i18n %}
     {% include 'share_layout/nav.html' %}
-    <div id="main" role="main" class="flex-1" hx-boost="true" hx-target="#main" hx-select="#main" hx-swap="innerHTML" hx-push-url="true">
+    <main id="main" class="flex-1" tabindex="-1" hx-boost="true" hx-target="#main" hx-select="#main" hx-swap="outerHTML" hx-push-url="true">
 
         {% block content %}
         {% endblock %}
@@ -186,7 +240,7 @@
         {% endblock %}
 
 
-    </div><!-- #main .wrapper -->
+    </main><!-- #main -->
     {% include 'share_layout/footer.html' %}
 </div><!-- #page -->
 
@@ -206,7 +260,8 @@
 {% endblock %}
 
 <!-- 回到顶部按钮 - Alpine.js组件 -->
-<button x-data="backToTop()"
+<button type="button"
+     x-data="backToTop()"
      x-init="init()"
      @click="scrollToTop()"
      id="rocket"
@@ -232,8 +287,6 @@
      aria-label="{% trans 'Image preview' %}">
     <!-- 遮罩层 -->
     <div x-show="showLightbox"
-         x-trap="showLightbox"
-         @click="closeLightbox()"
          class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0"
@@ -245,6 +298,8 @@
 
     <!-- 图片容器 -->
     <div x-show="showLightbox"
+         x-trap="showLightbox"
+         @click.self="closeLightbox()"
          class="fixed inset-0 z-50 flex items-center justify-center p-4"
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 scale-95"
@@ -264,7 +319,8 @@
             </div>
 
             <!-- 关闭按钮 -->
-            <button @click="closeLightbox()"
+            <button type="button"
+                    @click="closeLightbox()"
                     aria-label="{% trans 'Close' %}"
                     class="absolute top-2 right-2 inline-flex size-9 items-center justify-center rounded-full bg-black/60 text-white transition-colors hover:bg-black/80 focus:outline-none focus:ring-2 focus:ring-white/50">
                 <svg class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

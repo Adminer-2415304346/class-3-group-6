@@ -16,7 +16,8 @@
             {{ node.name }}
         </a>
         {% if child_categorys %}
-            <button @click="expanded = !expanded"
+            <button type="button"
+                    @click="expanded = !expanded"
                     class="flex items-center justify-center p-3
                            text-muted-foreground transition-all duration-200
                            hover:text-foreground"

@@ -17,7 +17,7 @@
           hx-post="{% url 'comments:postcomment' article.pk %}"
           hx-target="#main"
           hx-select="#main"
-          hx-swap="innerHTML"
+          hx-swap="outerHTML"
           hx-push-url="true">
 
         {% csrf_token %}
@@ -25,6 +25,7 @@
         <div class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
             <!-- 评论内容 -->
             <div class="p-4 md:p-5">
+                <label for="{{ form.body.id_for_label }}" class="sr-only">评论内容</label>
                 <textarea
                     name="{{ form.body.html_name }}"
                     id="{{ form.body.id_for_label }}"

@@ -32,216 +32,177 @@
   .scrollbar-none::-webkit-scrollbar {
     display: none;
   }
+
+  /* 首屏入场：轻微上移 + 淡入。只用 transform/opacity，走 GPU 合成层 */
+  @keyframes heroRise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .anim-rise {
+    animation: heroRise 0.6s var(--ease-out-soft) both;
+  }
+  .anim-fade-in {
+    animation: fadeInSoft 0.5s var(--ease-out-soft) both;
+  }
+  .anim-delay-60 {
+    animation-delay: 60ms;
+  }
+  .anim-delay-120 {
+    animation-delay: 120ms;
+  }
+  .home-hero-orb {
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgb(var(--color-primary-500)),
+      transparent 70%
+    );
+  }
+  @keyframes fadeInSoft {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
 }
 
-/* ==================== 主题配色方案 CSS 变量 ==================== */
+/* 尊重系统"减少动态效果"设置：关掉所有装饰性动画与过渡 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==================== 主题配色方案 ====================
+ * White x Violet —— 全站唯一强调色（Violet）
+ * 色阶由 #7C3AED(600) 与 #EDE9FE(100) 在 OKLab 感知空间线性插值生成，
+ * 相邻档位亮度步进均匀，不会出现某一档突然"跳色"。
+ * 其余 data-color-scheme 配色方案（blue/green/orange/pink/red/indigo/teal）
+ * 已移除：强调色只保留一个。
+ * ==================================================== */
 :root {
-  /* 默认主题：紫色 Purple Dream */
-  --color-primary-50: 240 249 255;
-  --color-primary-100: 224 242 254;
-  --color-primary-200: 186 230 253;
-  --color-primary-300: 125 211 252;
-  --color-primary-400: 102 126 234;
-  --color-primary-500: 102 126 234;
-  --color-primary-600: 118 75 162;
-  --color-primary-700: 91 33 182;
-  --color-primary-800: 76 29 149;
-  --color-primary-900: 59 7 100;
+  --color-primary-50: 248 246 255;
+  --color-primary-100: 237 233 254;
+  --color-primary-200: 221 214 254;
+  --color-primary-300: 196 181 253;
+  --color-primary-400: 167 139 250;
+  --color-primary-500: 139 92 246;
+  --color-primary-600: 124 58 237;
+  --color-primary-700: 109 40 217;
+  --color-primary-800: 91 33 182;
+  --color-primary-900: 76 29 149;
 }
 
-/* 紫色主题 - Purple Dream */
-:root[data-color-scheme="purple"],
-body[data-color-scheme="purple"] {
-  --color-primary-50: 250 245 255;
-  --color-primary-100: 243 232 255;
-  --color-primary-200: 233 213 255;
-  --color-primary-300: 216 180 254;
-  --color-primary-400: 192 132 252;
-  --color-primary-500: 168 85 247;
-  --color-primary-600: 147 51 234;
-  --color-primary-700: 126 34 206;
-  --color-primary-800: 107 33 168;
-  --color-primary-900: 88 28 135;
-}
 
-/* 蓝色主题 - Ocean Blue */
-:root[data-color-scheme="blue"],
-body[data-color-scheme="blue"] {
-  --color-primary-50: 239 246 255;
-  --color-primary-100: 219 234 254;
-  --color-primary-200: 191 219 254;
-  --color-primary-300: 147 197 253;
-  --color-primary-400: 96 165 250;
-  --color-primary-500: 59 130 246;
-  --color-primary-600: 37 99 235;
-  --color-primary-700: 29 78 216;
-  --color-primary-800: 30 64 175;
-  --color-primary-900: 30 58 138;
-}
 
-/* 绿色主题 - Forest Green */
-:root[data-color-scheme="green"],
-body[data-color-scheme="green"] {
-  --color-primary-50: 240 253 244;
-  --color-primary-100: 220 252 231;
-  --color-primary-200: 187 247 208;
-  --color-primary-300: 134 239 172;
-  --color-primary-400: 74 222 128;
-  --color-primary-500: 34 197 94;
-  --color-primary-600: 22 163 74;
-  --color-primary-700: 21 128 61;
-  --color-primary-800: 22 101 52;
-  --color-primary-900: 20 83 45;
-}
-
-/* 橙色主题 - Sunset Orange */
-:root[data-color-scheme="orange"],
-body[data-color-scheme="orange"] {
-  --color-primary-50: 255 247 237;
-  --color-primary-100: 255 237 213;
-  --color-primary-200: 254 215 170;
-  --color-primary-300: 253 186 116;
-  --color-primary-400: 251 146 60;
-  --color-primary-500: 249 115 22;
-  --color-primary-600: 234 88 12;
-  --color-primary-700: 194 65 12;
-  --color-primary-800: 154 52 18;
-  --color-primary-900: 124 45 18;
-}
-
-/* 粉色主题 - Cherry Blossom */
-:root[data-color-scheme="pink"],
-body[data-color-scheme="pink"] {
-  --color-primary-50: 253 242 248;
-  --color-primary-100: 252 231 243;
-  --color-primary-200: 251 207 232;
-  --color-primary-300: 249 168 212;
-  --color-primary-400: 244 114 182;
-  --color-primary-500: 236 72 153;
-  --color-primary-600: 219 39 119;
-  --color-primary-700: 190 24 93;
-  --color-primary-800: 157 23 77;
-  --color-primary-900: 131 24 67;
-}
-
-/* 红色主题 - Ruby Red */
-:root[data-color-scheme="red"],
-body[data-color-scheme="red"] {
-  --color-primary-50: 254 242 242;
-  --color-primary-100: 254 226 226;
-  --color-primary-200: 254 202 202;
-  --color-primary-300: 252 165 165;
-  --color-primary-400: 248 113 113;
-  --color-primary-500: 239 68 68;
-  --color-primary-600: 220 38 38;
-  --color-primary-700: 185 28 28;
-  --color-primary-800: 153 27 27;
-  --color-primary-900: 127 29 29;
-}
-
-/* 靛蓝主题 - Midnight Indigo */
-:root[data-color-scheme="indigo"],
-body[data-color-scheme="indigo"] {
-  --color-primary-50: 238 242 255;
-  --color-primary-100: 224 231 255;
-  --color-primary-200: 199 210 254;
-  --color-primary-300: 165 180 252;
-  --color-primary-400: 129 140 248;
-  --color-primary-500: 99 102 241;
-  --color-primary-600: 79 70 229;
-  --color-primary-700: 67 56 202;
-  --color-primary-800: 55 48 163;
-  --color-primary-900: 49 46 129;
-}
-
-/* 青色主题 - Teal Wave */
-:root[data-color-scheme="teal"],
-body[data-color-scheme="teal"] {
-  --color-primary-50: 240 253 250;
-  --color-primary-100: 204 251 241;
-  --color-primary-200: 153 246 228;
-  --color-primary-300: 94 234 212;
-  --color-primary-400: 45 212 191;
-  --color-primary-500: 20 184 166;
-  --color-primary-600: 13 148 136;
-  --color-primary-700: 15 118 110;
-  --color-primary-800: 17 94 89;
-  --color-primary-900: 19 78 74;
-}
-
-/* ==================== 语义化 CSS 变量系统 (对标 Next.js) ==================== */
+/* ==================== 语义化 CSS 变量系统 ====================
+ * 单一事实来源：所有颜色只能从这里取，不要再写死 hex。
+ * 契约（改色前必须重新校验对比度）：
+ *   --foreground         on --background  >= 12:1
+ *   --muted-foreground   on --card        >= 4.5:1
+ *   --primary            on --card        >= 4.5:1  正文链接，普通字号
+ *   --primary-foreground on --primary     >= 4.5:1  按钮文字
+ * ==================================================== */
 :root {
-  /* 基础色 - 亮色模式 - 使用OKLCH色彩空间获得更好的感知均匀性 */
-  --background: 249 250 251;           /* rgb(249 250 251) - 柔和的灰白背景 */
-  --foreground: 17 24 39;              /* rgb(17 24 39) - 深灰色文本 */
+  /* ---- Surfaces：白为主调 ---- */
+  --background: 255 255 255;
+  --foreground: 24 24 27;              /* #18181b  白底 16.9:1 */
 
-  /* 卡片 */
-  --card: 255 255 255;                 /* rgb(255 255 255) - 纯白卡片 */
-  --card-foreground: 17 24 39;         /* rgb(17 24 39) - 卡片文本色 */
+  --card: 255 255 255;
+  --card-foreground: 24 24 27;
 
-  /* Popover浮层 */
-  --popover: 255 255 255;              /* rgb(255 255 255) */
-  --popover-foreground: 17 24 39;      /* rgb(17 24 39) */
+  --popover: 255 255 255;
+  --popover-foreground: 24 24 27;
 
-  /* 边框和输入 */
-  --border: 229 231 235;               /* rgb(229 231 235) - 边框色 */
-  --input: 229 231 235;                /* rgb(229 231 235) - 输入框边框 */
-  --ring: var(--color-primary-500);   /* 使用主题色作为聚焦环 */
+  --border: 228 228 231;               /* #e4e4e7 */
+  --input: 212 212 216;                /* #d4d4d8 */
+  --ring: var(--color-primary-600);
 
-  /* 静音色 */
-  --muted: 243 244 246;                /* rgb(243 244 246) - 静音背景 */
-  --muted-foreground: 107 114 128;     /* rgb(107 114 128) - 静音文本 */
+  --muted: 246 246 248;
+  --muted-foreground: 102 112 133;     /* #667085  白底 5.9:1 */
 
-  /* 主色 - 使用现有的 primary 变量 */
-  --primary: var(--color-primary-500);
-  --primary-foreground: 255 255 255;   /* rgb(255 255 255) - 主色上的白色文本 */
+  /* ---- 强调色：全站唯一，只用于交互与选中态 ---- */
+  --primary: var(--color-primary-600);         /* #7C3AED  白底 5.6:1 */
+  --primary-foreground: 255 255 255;           /* 白字于 600 = 5.6:1 */
+  --primary-soft: 246 243 255;                 /* 极浅紫面 */
+  --primary-line: 226 219 253;                 /* 极浅紫描边 */
+  --primary-deep: var(--color-primary-700);    /* #6D28D9  hover 6.4:1 */
 
-  /* 次要色 */
-  --secondary: 243 244 246;            /* rgb(243 244 246) - 次要背景 */
-  --secondary-foreground: 31 41 55;    /* rgb(31 41 55) - 次要文本 */
+  --secondary: 245 245 247;            /* 中性面：不带蓝、不带紫 */
+  --secondary-foreground: 39 39 46;
 
-  /* 强调色 */
-  --accent: var(--color-primary-400);
-  --accent-foreground: 255 255 255;    /* rgb(255 255 255) - 强调色上的白色文本 */
+  /* accent 刻意不用紫色，避免强调色扩散——紫只出现在 primary-* */
+  --accent: 243 244 246;
+  --accent-foreground: 24 24 27;
 
-  /* 破坏性操作 */
-  --destructive: 239 68 68;            /* rgb(239 68 68) - 红色 */
+  --destructive: 220 38 38;
   --destructive-foreground: 255 255 255;
 
-  /* 圆角系统 */
-  --radius: 0.5rem;                    /* 8px - 基准圆角 */
+  /* ---- 圆角：容器大、内部元素小，制造层次而不是全站一个值 ---- */
+  --radius: 0.5rem;
+  --radius-xs: 6px;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
 
-  /* 阴影系统 - 使用更柔和的阴影 */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  /* ---- 阴影：统一冷灰、单一光源（自上向下），不用纯黑 ---- */
+  --shadow-xs: 0 1px 2px 0 rgb(24 24 27 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(24 24 27 / 0.06), 0 1px 2px -1px rgb(24 24 27 / 0.06);
+  --shadow-card: 0 1px 3px 0 rgb(24 24 27 / 0.06), 0 1px 2px -1px rgb(24 24 27 / 0.06);
+  --shadow-card-hover: 0 12px 24px -12px rgb(24 24 27 / 0.16), 0 2px 6px -2px rgb(24 24 27 / 0.08);
+  --shadow-elevated: 0 24px 48px -24px rgb(24 24 27 / 0.22), 0 4px 10px -4px rgb(24 24 27 / 0.08);
+  --shadow-glow: 0 16px 40px -16px rgb(124 58 237 / 0.28);
+
+  /* ---- 动效 ---- */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
 }
 
-/* 深色模式变量 */
+/* 深色模式：同族冷灰 + 带紫调的近黑，强调色调亮以维持对比度 */
 .dark,
 [data-theme="dark"] {
-  --background: 15 23 42;              /* rgb(15 23 42) - Slate-900 深灰背景 */
-  --foreground: 226 232 240;           /* rgb(226 232 240) - Slate-200 亮灰文本 */
+  --background: 13 13 17;              /* #0d0d11 近黑，不用纯黑 */
+  --foreground: 237 237 242;
 
-  --card: 30 41 59;                    /* rgb(30 41 59) - Slate-800 深色卡片 */
-  --card-foreground: 226 232 240;      /* rgb(226 232 240) - 卡片文本 */
+  --card: 21 21 27;                    /* #15151b */
+  --card-foreground: 237 237 242;
 
-  --popover: 30 41 59;                 /* rgb(30 41 59) */
-  --popover-foreground: 226 232 240;   /* rgb(226 232 240) */
+  --popover: 21 21 27;
+  --popover-foreground: 237 237 242;
 
-  --border: 51 65 85;                  /* rgb(51 65 85) - Slate-700 深色边框 */
-  --input: 51 65 85;                   /* rgb(51 65 85) - 输入框边框 */
+  --border: 39 39 48;                  /* #272730 */
+  --input: 48 48 60;
+  --ring: var(--color-primary-400);
 
-  --muted: 51 65 85;                   /* rgb(51 65 85) - 静音背景 */
-  --muted-foreground: 148 163 184;     /* rgb(148 163 184) - Slate-400 静音文本 */
+  --muted: 27 27 34;
+  --muted-foreground: 154 154 168;     /* 卡面 6.9:1 */
 
-  --secondary: 51 65 85;               /* rgb(51 65 85) - 次要背景 */
-  --secondary-foreground: 226 232 240; /* rgb(226 232 240) - 次要文本 */
+  --primary: var(--color-primary-400); /* #A78BFA  卡面 7.0:1 */
+  --primary-foreground: 24 24 27;      /* 深色下按钮用深色文字而非白字 */
+  --primary-soft: 30 26 48;
+  --primary-line: 55 48 90;
+  --primary-deep: var(--color-primary-300);
 
-  /* 深色模式阴影 - 使用更深更自然的阴影 */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-  --shadow-card-hover: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
-  --shadow-elevated: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --secondary: 32 32 40;
+  --secondary-foreground: 228 228 234;
+
+  --accent: 32 32 40;
+  --accent-foreground: 237 237 242;
+
+  --destructive: 248 113 113;
+  --destructive-foreground: 24 24 27;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-card-hover: 0 12px 24px -12px rgb(0 0 0 / 0.7), 0 2px 6px -2px rgb(0 0 0 / 0.5);
+  --shadow-elevated: 0 24px 48px -24px rgb(0 0 0 / 0.8), 0 4px 10px -4px rgb(0 0 0 / 0.5);
+  --shadow-glow: 0 16px 40px -16px rgb(124 58 237 / 0.45);
 }
 
 /* ==================== 基础样式层 ==================== */
@@ -268,74 +229,95 @@ body[data-color-scheme="teal"] {
     @apply scroll-smooth antialiased;
   }
 
-  /* Body基础样式 - 现代化柔和配色 */
+  /* Body —— 白底为主动底，不与卡片争抢层次 */
   body {
-    /* 亮色模式：柔和的灰白背景(#f9fafb)，避免纯白刺眼 */
-    @apply bg-gray-50;
-    /* 暗色模式：深Slate背景(#0f172a)，比纯黑更现代 */
-    @apply dark:bg-slate-900;
-    /* 文本色：深灰色而非纯黑，更柔和 */
-    @apply text-gray-800;
-    /* 暗色模式文本：柔和的灰白色(#e2e8f0) */
-    @apply dark:text-slate-100;
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
     @apply font-sans;
-    line-height: 1.75; /* 舒适的阅读行高 */
-    font-size: 1rem; /* 16px基准字体 */
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
-  /* 链接样式 */
-  a {
-    @apply text-primary-500 hover:text-primary-600 transition-colors duration-200;
-    @apply dark:text-primary-400 dark:hover:text-primary-300;
+  /* 链接 —— 默认继承文字色，只有 hover 才亮紫。
+     高级感的来源：同屏可见的紫色元素不超过 3 个。
+     注意：这里必须用 :where() 把选择器权重压到 0。
+     原因：a:hover 的权重是 (0,1,1)，比任何单个 utility 类 (0,1,0) 都高，
+     会强制覆盖组件自己声明的 hover 颜色——例如 bg-secondary + hover:bg-primary +
+     hover:text-primary-foreground 的图标按钮，hover 时文字被改成紫色、底色也是紫色，
+     图标就"消失"了。:where(a) 权重为 0，组件类可正常覆盖，且不需要 !important。 */
+  :where(a) {
+    color: inherit;
+    text-decoration-color: rgb(var(--color-primary-300));
+    text-underline-offset: 0.2em;
+    transition: color var(--dur-fast) var(--ease-out-soft);
+  }
+  :where(a):hover {
+    color: rgb(var(--primary-deep));
+    text-decoration-color: currentColor;
   }
 
-  /* 标题样式 - 清晰的视觉层次，现代化柔和配色 */
+  /* 正文/侧栏里的"裸链接"（作者、无类名的正文链接等自己没声明颜色），
+     这里补一个 hover 变紫的兜底，权重只有 (0,1,1) 的 :where 版本——
+     也就是低于任何 utility 类 (0,1,0)？不，是等于普通单类，但低于带祖先的组合，
+     因此不会覆盖 .hover:* 之类的组件声明。 */
+  :where(.article, .entry-content, .comment-content, aside) :where(a):hover {
+    color: rgb(var(--primary));
+  }
+
+  /* 标题 —— 字号/字重/字距由排版比例决定，颜色走单一 token */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
-    /* 亮色模式：深灰色(#1f2937)而非纯黑，更柔和现代 */
-    @apply text-gray-800;
-    /* 暗色模式：亮灰白色(#f1f5f9)，高对比但不刺眼 */
-    @apply dark:text-slate-100;
-    line-height: 1.25; /* 紧凑的标题行高 */
+    color: rgb(var(--foreground));
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.011em;
+    text-wrap: balance;
   }
 
-  /* 排版比例 - 明显的层次梯度 */
+  /* 排版比例：1.25 major third，中文取整避免亚像素模糊 */
   h1 {
-    font-size: 2.5rem; /* 40px */
+    font-size: 2.25rem;   /* 36px */
+    line-height: 1.15;
+    letter-spacing: -0.022em;
     @apply mt-0 mb-6;
   }
   h2 {
-    font-size: 2rem; /* 32px */
+    font-size: 1.75rem;   /* 28px */
+    line-height: 1.2;
+    letter-spacing: -0.018em;
     @apply mt-12 mb-4;
   }
   h3 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.375rem;  /* 22px */
     @apply mt-8 mb-4;
   }
   h4 {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.125rem;  /* 18px */
     @apply mt-6 mb-3;
   }
 
-  /* 侧边栏标题重置 - 移除默认的 margin */
-  aside h3 {
-    @apply mt-0 mb-0;
-    font-size: 0.875rem; /* 14px - 与模板中的 text-sm 一致 */
-    line-height: 1.5;
-  }
   h5 {
-    font-size: 1.125rem; /* 18px */
+    font-size: 1rem;
     @apply mt-4 mb-2;
   }
   h6 {
-    font-size: 1rem; /* 16px */
+    font-size: 0.9375rem;
     @apply mt-4 mb-2;
   }
 
   /* 段落和文本 */
   p {
     @apply mb-4;
-    line-height: 1.75; /* 继承body的行高 */
+    line-height: 1.75;
+    text-wrap: pretty;   /* 避免中文/英文末行只剩一个孤字 */
+  }
+
+  /* 段落间距优化 */
+  .prose p,
+  .entry-content p {
+    @apply mb-6;
   }
 
   /* 段落间距优化 */
@@ -354,13 +336,18 @@ body[data-color-scheme="teal"] {
     @apply max-w-full h-auto;
   }
 
-  /* 代码块 */
-  /* 内联代码 */
+  /* 代码 —— 统一等宽字体族；浅色下用极浅灰面，不用彩色块 */
   code {
-    @apply px-1.5 py-0.5 bg-gray-100 rounded text-sm;
-    color: #24292e;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    @apply px-1.5 py-0.5 rounded;
+    background-color: rgb(var(--muted));
+    color: rgb(var(--foreground));
+    font-family: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    font-size: 0.875em;
+    font-variant-ligatures: none;
   }
+
+  /* 深色模式的内联代码跟随同一组 token，无需单独覆盖 */
+
 
   /* 深色模式 - 内联代码 */
   [data-theme="dark"] code,
@@ -373,12 +360,14 @@ body[data-color-scheme="teal"] {
 
   /* 代码块容器 */
   pre {
-    @apply p-3 md:p-4 rounded-lg overflow-x-auto mb-4;
-    @apply text-sm md:text-base;
-    background-color: #f9f9f9;
-    border: 1px solid #e1e4e8;
+    @apply p-4 rounded-xl overflow-x-auto mb-4;
+    @apply text-sm md:text-[0.9375rem];
+    background-color: rgb(var(--muted));
+    border: 1px solid rgb(var(--border));
+    color: rgb(var(--foreground));
     max-width: 100%;
     -webkit-overflow-scrolling: touch;
+    line-height: 1.7;
   }
 
   /* 代码块自定义scrollbar样式 - 细小、半透明 */
@@ -413,39 +402,28 @@ body[data-color-scheme="teal"] {
     background: rgba(255, 255, 255, 0.3);
   }
 
-  /* 深色模式 - 代码块容器 */
-  [data-theme="dark"] pre {
-    background-color: #1e1e1e !important;
-    color: #d4d4d4 !important;
-    border-color: #30363d;
-  }
+  /* 说明：原先散落各处的 [data-theme="dark"] 色值覆盖已删除——
+   * 颜色统一由文件顶部 token 块提供，深色模式不再需要逐条 !important。 */
 
-  /* 代码块中的code标签 */
+  /* 代码块中的 code 标签 */
   pre code {
-    @apply p-0 bg-transparent;
-    @apply text-sm md:text-base;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    color: #24292e;
+    @apply p-0;
+    @apply text-sm md:text-[0.9375rem];
+    font-family: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+    background-color: transparent;
     border: none;
+    color: inherit;
     display: block;
   }
 
-  /* 深色模式 - 代码块中的code */
-  [data-theme="dark"] pre code {
-    background-color: transparent !important;
-    color: #d4d4d4 !important;
-    padding: 0;
-    border: none;
-  }
+
 
   /* 表格 */
   table {
     @apply w-full mb-4 border-collapse;
   }
 
-  th, td {
-    @apply border border-gray-300 dark:border-gray-700 px-4 py-2;
-  }
+
 
   th {
     @apply bg-gray-100 dark:bg-gray-800 font-semibold;
@@ -2515,41 +2493,7 @@ body[data-color-scheme="teal"] {
 /* ==================== 插件样式适配 ==================== */
 
 /* ========== Dark Mode 核心样式 ========== */
-/* CSS变量系统 - Solarized Dark风格 */
-:root {
-  /* 亮色主题变量 */
-  --dm-bg-primary: #ffffff;
-  --dm-bg-secondary: #f4f4f4;
-  --dm-bg-tertiary: #e6e6e6;
-
-  --dm-text-primary: #444444;
-  --dm-text-secondary: #757575;
-
-  --dm-link-color: #21759b;
-  --dm-link-hover: #0f3647;
-
-  --dm-border-color: #cccccc;
-  --dm-shadow: rgba(64, 64, 64, 0.1);
-
-  /* 过渡时长 */
-  --dm-transition: 300ms;
-}
-
-/* 暗色主题变量覆盖 */
-html[data-theme="dark"] {
-  --dm-bg-primary: #002b36;
-  --dm-bg-secondary: #073642;
-  --dm-bg-tertiary: #0e4450;
-
-  --dm-text-primary: #93a1a1;
-  --dm-text-secondary: #839496;
-
-  --dm-link-color: #2aa198;
-  --dm-link-hover: #3bc1b6;
-
-  --dm-border-color: #073642;
-  --dm-shadow: rgba(0, 0, 0, 0.3);
-}
+/* 说明：原 Solarized --dm-* 变量组已移除（全项目无任何引用），主题色统一走顶部语义 token。 */
 
 /* 深色模式切换按钮 */
 /* 深色模式切换按钮 - 确保始终可点击且清晰可见 */
@@ -3068,23 +3012,863 @@ img[loading="lazy"][src] {
   @apply outline-2 outline-offset-2 outline-primary-500;
 }
 
-/* ==================== 兼容性 ==================== */
-/* 平滑过渡所有颜色变化 */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+/* ==================== 主题切换过渡 ====================
+ * 这里刻意"不"给 * 挂全局 transition，原因：
+ *   1) 全局 transition 会让浏览器为每个元素都维持一层过渡计算，
+ *      切换主题时数百个节点（尤其是 backdrop-blur 的导航和模糊光斑）同时启动
+ *      background-color/border-color/color 三条过渡，帧率直接掉下来，
+ *      表现就是"切主题时样式卡住一下"；
+ *   2) 原本还对 button/input 写了 transition:none，再把 hover 态设成 all，
+ *      结果是按钮 hover 动画时有时无。
+ * 正确做法：只在主题真正切换的那 260ms 内，由 JS 给 <html> 挂上
+ * data-theme-anim 属性，让"不自己声明过渡"的元素做一次颜色过渡，
+ * 动画结束立刻摘掉。组件自己的 hover 过渡完全不受影响。
+ */
+[data-theme-anim] *,
+[data-theme-anim] *::before,
+[data-theme-anim] *::after {
+  transition-duration: 260ms;
+  transition-timing-function: ease;
+  transition-property: background-color, border-color, color;
 }
 
-/* 禁用某些元素的过渡 */
-button,
-input,
-textarea,
-select {
-  transition: none;
+/* 已经在做位移/缩放的装饰元素不参与主题过渡，避免和自身动画打架 */
+[data-theme-anim] .anim-rise,
+[data-theme-anim] .anim-fade-in,
+[data-theme-anim] [class*="animate-"] {
+  transition-property: none;
 }
 
-button:hover,
-input:focus,
-textarea:focus,
-select:focus {
-  transition: all 0.2s ease;
+/* 半透明 + backdrop-filter 的层（导航栏等）不参与过渡：
+   颜色渐变会让浏览器在 260ms 内逐帧重算高斯模糊，正是切主题时"卡一下"的主因。
+   这些层改成瞬时换色，视觉上察觉不到，但省掉全部模糊重算。 */
+[data-theme-anim] [class*="backdrop-blur"],
+[data-theme-anim] .backdrop-blur-header {
+  transition-property: none;
+}
+
+/* 深色下的滚动条配色：不写的话切换后滚动条还是亮的，看着像"没切干净" */
+html {
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ==================== 账户入口 ==================== */
+.account-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+.account-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(29rem, 0.88fr);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.account-skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+  font-size: 0.875rem;
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.account-skip-link:focus-visible {
+  color: rgb(var(--primary-foreground));
+  transform: translateY(0);
+}
+
+.account-visual {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  border-right: 1px solid rgb(var(--border));
+  background-color: rgb(var(--muted));
+}
+
+.account-flow-canvas,
+.account-visual-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.account-flow-canvas {
+  z-index: -1;
+}
+
+.account-visual-grid {
+  z-index: -2;
+  opacity: 0.58;
+  background-image:
+    linear-gradient(rgb(var(--border) / 0.42) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--border) / 0.42) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.9) 48%, transparent 96%);
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.3), rgb(0 0 0 / 0.9) 48%, transparent 96%);
+}
+
+.account-visual-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: clamp(1.75rem, 4.2vw, 4.75rem);
+}
+
+.account-brand {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  gap: 0.85rem;
+  border-radius: var(--radius-sm);
+  color: rgb(var(--foreground));
+  text-decoration: none;
+}
+
+.account-brand:hover {
+  color: rgb(var(--foreground));
+}
+
+.account-brand:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 5px;
+}
+
+.account-brand-mark {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(var(--primary) / 0.24);
+  border-radius: var(--radius-md);
+  background-color: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-glow);
+}
+
+.account-brand-copy {
+  display: grid;
+  min-width: 0;
+  gap: 0.1rem;
+}
+
+.account-brand-copy strong {
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-brand-copy span {
+  overflow: hidden;
+  color: rgb(var(--muted-foreground));
+  font-size: 0.75rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-visual-copy {
+  width: min(100%, 41rem);
+  margin: auto 0;
+  padding: clamp(3rem, 10vh, 8rem) 0;
+}
+
+.account-visual-kicker,
+.account-visual-title,
+.account-visual-description,
+.account-visual-note {
+  margin: 0;
+}
+
+.account-visual-kicker {
+  margin-bottom: 1.5rem;
+  color: rgb(var(--primary-deep));
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.account-visual-title {
+  max-width: 11em;
+  color: rgb(var(--foreground));
+  font-size: clamp(3.25rem, 5.7vw, 6.8rem);
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+
+.account-visual-description {
+  max-width: 31rem;
+  margin-top: 2rem;
+  color: rgb(var(--muted-foreground));
+  font-size: clamp(1rem, 1.35vw, 1.125rem);
+  line-height: 1.8;
+  text-wrap: pretty;
+}
+
+.account-visual-note {
+  color: rgb(var(--muted-foreground));
+  font-size: 0.8125rem;
+}
+
+.account-visual-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account-motion-toggle {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.8rem;
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius-sm);
+  background-color: rgb(var(--background) / 0.72);
+  color: rgb(var(--muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-soft),
+    background-color var(--dur-fast) var(--ease-out-soft),
+    color var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-motion-toggle:hover {
+  border-color: rgb(var(--primary) / 0.35);
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+}
+
+.account-motion-toggle:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 3px;
+}
+
+.account-entry {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  place-items: center;
+  background-color: rgb(var(--background));
+}
+
+.account-entry-tools {
+  position: absolute;
+  top: clamp(1.25rem, 2.4vw, 2rem);
+  right: clamp(1.25rem, 2.4vw, 2rem);
+  left: clamp(1.25rem, 2.4vw, 2rem);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account-home-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  color: rgb(var(--muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-home-link:hover {
+  color: rgb(var(--foreground));
+}
+
+.account-home-link:focus-visible,
+.account-theme-toggle:focus-visible,
+.account-password-toggle:focus-visible,
+.account-submit:focus-visible,
+.account-form a:focus-visible,
+.account-card-footer a:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 3px;
+}
+
+.account-theme-toggle {
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  place-items: center;
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius-md);
+  background-color: rgb(var(--card));
+  color: rgb(var(--muted-foreground));
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-soft),
+    color var(--dur-fast) var(--ease-out-soft),
+    background-color var(--dur-fast) var(--ease-out-soft),
+    transform var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-theme-toggle:hover {
+  border-color: rgb(var(--primary) / 0.35);
+  color: rgb(var(--foreground));
+  transform: translateY(-1px);
+}
+
+.account-theme-toggle:active {
+  transform: translateY(0);
+}
+
+.account-theme-glyph {
+  display: block;
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 1.8px solid currentColor;
+  border-radius: 50%;
+  box-shadow: inset -0.3rem -0.22rem 0 -0.12rem currentColor;
+  transform: rotate(-22deg);
+}
+
+[data-theme="dark"] .account-theme-glyph {
+  background-color: currentColor;
+  box-shadow: 0 0 0 0.28rem rgb(var(--card)), 0 0 0 0.36rem currentColor;
+  transform: scale(0.55);
+}
+
+.account-entry-inner {
+  display: grid;
+  width: 100%;
+  max-width: 40rem;
+  min-width: 0;
+  place-items: center;
+  align-self: center;
+  justify-self: center;
+  padding: 6rem clamp(1.5rem, 4vw, 4.75rem) 3rem;
+}
+
+.account-login {
+  width: 100%;
+  max-width: 29rem;
+}
+
+.account-form-header {
+  margin-bottom: 1.75rem;
+}
+
+.account-form-header h1 {
+  margin: 0;
+  color: rgb(var(--foreground));
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+
+.account-form-header p {
+  margin: 0.7rem 0 0;
+  color: rgb(var(--muted-foreground));
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+.account-card {
+  overflow: hidden;
+  border: 1px solid rgb(var(--border));
+  border-radius: 1.25rem;
+  background-color: rgb(var(--card));
+  box-shadow: var(--shadow-elevated);
+}
+
+.account-form {
+  display: grid;
+  gap: 1.2rem;
+  padding: clamp(1.35rem, 3vw, 2rem);
+}
+
+.account-field {
+  min-width: 0;
+}
+
+.account-field > label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.55rem;
+  color: rgb(var(--foreground));
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.account-required {
+  color: rgb(var(--destructive));
+}
+
+.account-form input.account-field-input {
+  display: block;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgb(var(--input));
+  border-radius: var(--radius-md);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  box-shadow: none;
+  transition:
+    border-color var(--dur-fast) var(--ease-out-soft),
+    box-shadow var(--dur-fast) var(--ease-out-soft),
+    background-color var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-form input.account-field-input::placeholder {
+  color: rgb(var(--muted-foreground) / 0.76);
+}
+
+.account-form input.account-field-input:hover {
+  border-color: rgb(var(--muted-foreground) / 0.58);
+}
+
+.account-form input.account-field-input:focus {
+  border-color: rgb(var(--primary));
+  outline-color: rgb(var(--ring) / 0.28);
+  box-shadow: 0 0 0 4px rgb(var(--ring) / 0.1);
+}
+
+.account-form input.account-field-input[aria-invalid="true"] {
+  border-color: rgb(var(--destructive));
+}
+
+.account-form input.account-field-input[aria-invalid="true"]:focus {
+  outline-color: rgb(var(--destructive) / 0.28);
+  box-shadow: 0 0 0 4px rgb(var(--destructive) / 0.1);
+}
+
+.account-password-wrap {
+  position: relative;
+}
+
+.account-form input.account-password-input {
+  padding-right: 4rem;
+}
+
+.account-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.35rem;
+  display: inline-flex;
+  min-width: 3.25rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.6rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: rgb(var(--muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: color var(--dur-fast) var(--ease-out-soft), background-color var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-password-toggle:hover {
+  background-color: rgb(var(--muted));
+  color: rgb(var(--foreground));
+}
+
+.account-field-error {
+  margin: 0.5rem 0 0;
+  color: rgb(var(--destructive));
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.account-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid rgb(var(--destructive) / 0.32);
+  border-radius: var(--radius-md);
+  background-color: rgb(var(--destructive) / 0.08);
+  color: rgb(var(--destructive));
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+.account-alert-icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  place-items: center;
+  margin-top: 0.05rem;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.account-alert .errorlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.account-form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.account-remember {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.55rem;
+  color: rgb(var(--muted-foreground));
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.account-remember input {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  accent-color: rgb(var(--primary));
+}
+
+.account-form-options > a,
+.account-card-footer a {
+  border-radius: 0.25rem;
+  color: rgb(var(--primary-deep));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-form-options > a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+}
+
+.account-form-options > a:hover,
+.account-card-footer a:hover {
+  color: rgb(var(--primary));
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.account-form button.account-submit {
+  display: inline-flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background-color: rgb(var(--primary));
+  color: rgb(var(--primary-foreground));
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.4;
+  box-shadow: var(--shadow-glow);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out-soft),
+    box-shadow var(--dur-fast) var(--ease-out-soft),
+    opacity var(--dur-fast) var(--ease-out-soft),
+    transform var(--dur-fast) var(--ease-out-soft);
+}
+
+.account-form button.account-submit:hover:not(:disabled) {
+  background-color: rgb(var(--primary-deep));
+  box-shadow: 0 18px 38px -18px rgb(var(--primary) / 0.56);
+  transform: translateY(-1px);
+}
+
+.account-form button.account-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.account-form button.account-submit:disabled {
+  opacity: 0.68;
+  cursor: wait;
+}
+
+.account-submit-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: accountSpin 0.7s linear infinite;
+}
+
+@keyframes accountSpin {
+  to { transform: rotate(360deg); }
+}
+
+.account-oauth {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.15rem;
+}
+
+.account-oauth:not(:has(.widget-login > *)) {
+  display: none;
+}
+
+.account-separator {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: rgb(var(--muted-foreground));
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.account-separator::before,
+.account-separator::after {
+  width: 100%;
+  height: 1px;
+  background-color: rgb(var(--border));
+  content: '';
+}
+
+.account-oauth .widget-login {
+  justify-content: center;
+}
+
+.account-oauth .widget-login > small {
+  display: none;
+}
+
+.account-oauth .widget-login a {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+}
+
+.account-card-footer {
+  margin: 0;
+  padding: 1rem 1.35rem;
+  border-top: 1px solid rgb(var(--border));
+  background-color: rgb(var(--muted) / 0.45);
+  color: rgb(var(--muted-foreground));
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .account-login {
+    animation: accountEnter 560ms var(--ease-out-soft) both;
+  }
+
+  @keyframes accountEnter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .account-motion-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 1079px) {
+  .account-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .account-visual,
+  .account-visual-inner {
+    min-height: 19rem;
+  }
+
+  .account-visual {
+    border-right: 0;
+    border-bottom: 1px solid rgb(var(--border));
+  }
+
+  .account-visual-inner {
+    padding: 1.75rem clamp(1.5rem, 7vw, 4rem);
+  }
+
+  .account-visual-copy {
+    width: min(100%, 38rem);
+    padding: 2.75rem 0 1.5rem;
+  }
+
+  .account-visual-kicker {
+    margin-bottom: 0.7rem;
+  }
+
+  .account-visual-title {
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    line-height: 1.04;
+  }
+
+  .account-visual-description {
+    max-width: 34rem;
+    margin-top: 1rem;
+    font-size: 0.9375rem;
+  }
+
+  .account-visual-footer {
+    display: none;
+  }
+
+  .account-entry {
+    min-height: auto;
+  }
+
+  .account-entry-inner {
+    max-width: 35rem;
+    padding: 6rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .account-visual,
+  .account-visual-inner {
+    min-height: 13.5rem;
+  }
+
+  .account-visual-inner {
+    padding: 1.2rem 1rem;
+  }
+
+  .account-brand-mark {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .account-brand-copy span {
+    display: none;
+  }
+
+  .account-visual-copy {
+    padding: 2.1rem 0 0.5rem;
+  }
+
+  .account-visual-kicker,
+  .account-visual-description {
+    display: none;
+  }
+
+  .account-visual-title {
+    max-width: 13em;
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    letter-spacing: -0.05em;
+  }
+
+  .account-entry-tools {
+    top: 1rem;
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .account-entry-inner {
+    padding: 5.75rem 1rem 2rem;
+  }
+
+  .account-form-header {
+    margin-bottom: 1.35rem;
+  }
+
+  .account-form-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .account-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .account-form {
+    gap: 1rem;
+    padding: 1.2rem;
+  }
+
+  .account-form-options {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 1080px) {
+  .account-visual-inner {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .account-visual-copy {
+    padding: 2.5rem 0;
+  }
+
+  .account-visual-title {
+    font-size: clamp(3rem, 5vw, 5.25rem);
+  }
+
+  .account-entry-inner {
+    padding-top: 5.5rem;
+    padding-bottom: 1.5rem;
+  }
 }

@@ -1,26 +1,26 @@
 {% load blog_tags %}
 {% load i18n %}
 
-<header class="sticky top-0 z-50 border-b border-border/60 dark:border-white/[0.08] bg-background/80 backdrop-blur-xl"
+<header id="masthead"
+        class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl dark:border-white/[0.08]"
+        @keydown.escape.window="$store.nav.mobileOpen = false"
         @keydown.ctrl.k.window.prevent="document.getElementById('header-search-input')?.focus()"
         @keydown.meta.k.window.prevent="document.getElementById('header-search-input')?.focus()">
     {# Skip to content link for accessibility #}
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:shadow-lg">
         {% trans 'Skip to content' %}
     </a>
-    <div class="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3 lg:px-6">
+    {# Full-bleed site chrome: keep only a compact viewport-safe gutter. #}
+    <div class="flex w-full items-center gap-5 px-4 py-2.5 sm:px-5 lg:px-6">
 
-        {# Logo #}
-        <a href="/" class="group flex flex-col items-end leading-none">
-            <span class="text-2xl sm:text-3xl lg:text-[2.125rem] font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+        {# Header logo stays concise; the site description belongs to the page hero. #}
+        <a href="/" class="group flex shrink-0 items-center">
+            <span class="block text-2xl leading-tight font-bold tracking-[-0.035em] text-foreground transition-colors group-hover:text-primary sm:text-3xl lg:text-[2rem]">
                 {{ SITE_NAME }}
             </span>
-            {% if SITE_DESCRIPTION %}
-            <span class="text-[11px] text-muted-foreground tracking-wide">
-                {{ SITE_DESCRIPTION }}
-            </span>
-            {% endif %}
         </a>
+
+        <span class="hidden h-7 w-px shrink-0 bg-border/80 lg:block" aria-hidden="true"></span>
 
         {# Desktop Nav #}
         <nav class="hidden flex-1 items-center gap-0.5 lg:flex"
@@ -28,11 +28,11 @@
              hx-boost="true"
              hx-target="#main"
              hx-select="#main"
-             hx-swap="innerHTML"
+             hx-swap="outerHTML"
              hx-push-url="true">
             {% current_nav_item request as nav_active %}
             <a href="{% url 'blog:index' %}"
-               class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if nav_active == 'index' %}text-primary bg-primary/5{% else %}text-muted-foreground{% endif %}"
+               class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if nav_active == 'index' %}text-primary{% else %}text-muted-foreground{% endif %}"
                {% if nav_active == 'index' %}aria-current="page"{% endif %}>
                 {% trans 'index' %}
                 {% if nav_active == 'index' %}<span class="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary"></span>{% endif %}
@@ -44,41 +44,55 @@
                 {% query nav_category_list parent_category=category as nav_children %}
                 {% if nav_children %}
                 {# Category with children — hover dropdown #}
-                <div class="relative" x-data="{ open: false }"
-                     @mouseenter="open = true" @mouseleave="open = false">
-                    <button @click="open = !open"
+                <div class="relative"
+                     x-data="{ open: false, pinned: false }"
+                     @mouseenter="open = true"
+                     @mouseleave="if (!pinned) open = false"
+                     @focusin="open = true"
+                     @focusout="if (!$el.contains($event.relatedTarget)) { open = false; pinned = false }"
+                     @click.outside="open = false; pinned = false"
+                     @keydown.escape.stop="open = false; pinned = false; $refs.trigger.focus()">
+                    <button type="button"
+                            x-ref="trigger"
+                            @click="pinned = !pinned; open = pinned"
                             :aria-expanded="open.toString()"
                             aria-haspopup="true"
-                            class="relative flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == category.get_absolute_url %}text-primary bg-primary/5{% else %}text-muted-foreground{% endif %}">
+                            aria-controls="category-menu-{{ category.id }}"
+                            class="relative flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == category.get_absolute_url %}text-primary{% else %}text-muted-foreground{% endif %}">
                         {{ category.name }}
                         <svg class="size-3.5 transition-transform duration-200" :class="open ? 'rotate-180' : ''" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div x-show="open"
+                    <div id="category-menu-{{ category.id }}"
+                         x-show="open"
                          x-transition:enter="transition ease-out duration-150"
-                         x-transition:enter-start="opacity-0 translate-y-1"
-                         x-transition:enter-end="opacity-100 translate-y-0"
+                         x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100"
                          x-transition:leave="transition ease-in duration-100"
                          x-transition:leave-start="opacity-100"
                          x-transition:leave-end="opacity-0"
-                         class="absolute left-0 top-full z-50 mt-1 min-w-48 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-xl shadow-foreground/5"
+                         class="absolute left-0 top-full z-[60] w-52 pt-1"
                          role="menu"
                          x-cloak>
-                        {% for child in nav_children %}
-                            <a href="{{ child.get_absolute_url }}"
-                               @click="open = false"
-                               class="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-secondary hover:text-primary">
-                                <span>{{ child.name }}</span>
-                                <span class="text-xs text-muted-foreground tabular-nums">{{ child.article_set.count }}</span>
-                            </a>
-                        {% endfor %}
+                        {# pt-1 keeps the visual gap while the hit area remains continuous. #}
+                        <div class="overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-xl shadow-foreground/5">
+                            {% for child in nav_children %}
+                                <a href="{{ child.get_absolute_url }}"
+                                   @click="open = false; pinned = false"
+                                   role="menuitem"
+                                   class="flex items-center justify-between rounded-lg px-3 py-2 text-sm text-foreground transition-colors hover:bg-secondary hover:text-primary">
+                                    <span>{{ child.name }}</span>
+                                    <span class="text-xs text-muted-foreground tabular-nums">{{ child.article_set.count }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% else %}
                 {# Leaf category — simple link #}
                 <a href="{{ category.get_absolute_url }}"
-                   class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == category.get_absolute_url %}text-primary bg-primary/5{% else %}text-muted-foreground{% endif %}">
+                   class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == category.get_absolute_url %}text-primary{% else %}text-muted-foreground{% endif %}">
                     {{ category.name }}
                     {% if request.path == category.get_absolute_url %}<span class="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary"></span>{% endif %}
                 </a>
@@ -89,27 +103,20 @@
             <span class="mx-1 h-4 w-px bg-border/60"></span>
 
             <a href="{% url 'blog:archives' %}"
-               class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if nav_active == 'archives' %}text-primary bg-primary/5{% else %}text-muted-foreground{% endif %}"
+               class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if nav_active == 'archives' %}text-primary{% else %}text-muted-foreground{% endif %}"
                {% if nav_active == 'archives' %}aria-current="page"{% endif %}>
                 归档
                 {% if nav_active == 'archives' %}<span class="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary"></span>{% endif %}
             </a>
             {% for page in nav_pages %}
                 <a href="{{ page.get_absolute_url }}"
-                   class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == page.get_absolute_url %}text-primary bg-primary/5{% else %}text-muted-foreground{% endif %}"
+                   class="relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 hover:bg-secondary hover:text-foreground {% if request.path == page.get_absolute_url %}text-primary{% else %}text-muted-foreground{% endif %}"
                    {% if request.path == page.get_absolute_url %}aria-current="page"{% endif %}>
                     {{ page.title }}
                     {% if request.path == page.get_absolute_url %}<span class="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary"></span>{% endif %}
                 </a>
             {% endfor %}
 
-            {# External: tools site #}
-            <span class="mx-2 h-4 w-px bg-border"></span>
-            <a href="https://tools.lylinux.net/" target="_blank" rel="noopener"
-               class="flex items-center gap-1 rounded-lg px-3.5 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-secondary hover:text-foreground">
-                工具站
-                <svg class="size-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
         </nav>
 
         {# Desktop inline search bar #}
@@ -131,7 +138,8 @@
         {# Right: theme toggle + mobile menu #}
         <div class="ml-auto flex items-center gap-0.5 lg:ml-0">
             {# Theme toggle #}
-            <button class="size-9 rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+            <button type="button"
+                    class="size-9 rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                     @click="window.themeManager && window.themeManager.toggle()"
                     aria-label="{% trans 'Toggle theme' %}">
                 {# Moon — shown in light mode #}
@@ -145,7 +153,8 @@
             </button>
 
             {# Mobile menu button #}
-            <button class="size-9 rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground lg:hidden"
+            <button type="button"
+                    class="size-9 rounded-lg text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground lg:hidden"
                     @click="$store.nav.mobileOpen = !$store.nav.mobileOpen"
                     :aria-expanded="$store.nav.mobileOpen.toString()"
                     aria-controls="mobile-nav"
@@ -175,7 +184,7 @@
          hx-boost="true"
          hx-target="#main"
          hx-select="#main"
-         hx-swap="innerHTML"
+         hx-swap="outerHTML"
          hx-push-url="true">
         <div class="flex flex-col gap-0.5">
 
@@ -216,7 +225,8 @@
                            class="flex flex-1 items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
                             {{ category.name }}
                         </a>
-                        <button @click="mobileSubOpen = !mobileSubOpen"
+                        <button type="button"
+                                @click="mobileSubOpen = !mobileSubOpen"
                                 :aria-expanded="mobileSubOpen.toString()"
                                 aria-label="{% trans 'Expand subcategories' %}"
                                 class="flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-secondary">
@@ -267,14 +277,6 @@
                 </a>
             {% endfor %}
 
-            {# External: tools site #}
-            <div class="my-1 border-t border-border/60"></div>
-            <a href="https://tools.lylinux.net/" target="_blank" rel="noopener"
-               @click="$store.nav.mobileOpen = false"
-               class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-secondary">
-                <svg class="size-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                工具站
-            </a>
         </div>
     </nav>
 </header>

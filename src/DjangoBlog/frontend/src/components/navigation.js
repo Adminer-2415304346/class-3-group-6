@@ -74,15 +74,31 @@ export default () => ({
     }
   },
 
-  // ==================== 主题切换（与dark_mode插件配合） ====================
+  // ==================== 主题切换 ====================
+  // 统一走 base.html 里内联脚本的 window.themeManager：
+  // 它负责 data-theme / .dark / localStorage('dark-mode-enabled') / theme-color meta，
+  // 并且只在切换的 260ms 内挂 data-theme-anim 让颜色平滑过渡。
+  //
+  // 这里原来是自己 setAttribute + 写 localStorage.setItem('theme', ...)：
+  //   - 存的键和另外两处（'dark-mode-enabled'）不一致，刷新后两边打架；
+  //   - 漏了 .dark class、theme-color meta，也没挂过渡标记，所以切换时样式会"跳/卡"。
   toggleTheme() {
+    if (window.themeManager && typeof window.themeManager.toggle === 'function') {
+      window.themeManager.toggle();
+      return;
+    }
+    // 兜底（内联脚本未执行时不至于点了没反应）
     const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-
-    console.log('🌓 Theme switched to:', newTheme);
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      html.classList.remove('dark');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      html.classList.add('dark');
+    }
+    try {
+      localStorage.setItem('dark-mode-enabled', isDark ? 'light' : 'dark');
+    } catch (e) { /* 隐私模式忽略 */ }
   },
 });

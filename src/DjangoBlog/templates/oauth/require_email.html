@@ -12,9 +12,9 @@
         <div class="p-8">
             <div class="text-center mb-8">
                 {% if picture %}
-                    <img class="size-14 rounded-xl border border-border mx-auto mb-4 shadow-sm object-cover" src="{{ picture }}" alt="">
+                    <img class="size-14 rounded-xl border border-border mx-auto mb-4 shadow-sm object-cover" src="{{ picture }}" alt="用户头像">
                 {% else %}
-                    <img class="size-14 rounded-xl border border-border mx-auto mb-4 shadow-sm object-cover" src="{% static 'blog/img/avatar.png' %}" alt="">
+                    <img class="size-14 rounded-xl border border-border mx-auto mb-4 shadow-sm object-cover" src="{% static 'blog/avatar.svg' %}" alt="默认用户头像">
                 {% endif %}
                 <h1 class="text-xl font-bold tracking-tight text-foreground mb-1">绑定您的邮箱账号</h1>
                 <p class="text-sm text-muted-foreground">请输入您的邮箱以完成绑定</p>

@@ -17,9 +17,9 @@
 
 {% endblock %}
 {% block content %}
-    <div class="mx-auto max-w-6xl px-4 py-4 lg:px-6 lg:py-6">
-        <div class="grid gap-6 lg:grid-cols-[1fr_300px]">
-            <main>
+    <div class="mx-auto max-w-site px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_19rem]">
+            <div class="min-w-0">
                 {# Page Header #}
                 <div class="mb-6">
                     <h1 class="text-xl font-bold text-foreground m-0">{% trans 'article archive' %}</h1>
@@ -75,7 +75,7 @@
                         </div>
                     {% endfor %}
                 </div>
-            </main>
+            </div>
 
             {# Sidebar #}
             <div class="hidden lg:block">

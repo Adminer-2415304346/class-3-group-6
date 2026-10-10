@@ -1,145 +1,76 @@
 /**
- * Dark Mode 核心功能
- * 实现主题切换、持久化存储和系统主题跟随
+ * Dark Mode：键盘快捷键 + 系统主题跟随
+ *
+ * 重要：真正的主题状态由 base.html 里的内联防闪烁脚本持有（window.themeManager）。
+ * 这个模块不要再自己 setAttribute 改主题——两套实现并存时会出现
+ *  - 页面加载时重复 applyTheme，可能和用户的 localStorage 偏好不一致；
+ *  - 绕过了 html 上的 data-theme-anim 过渡标记，切换时样式会"跳"一下；
+ *  - 连点时两套状态互相覆盖，表现为"有时卡样式"。
+ * 所以这里只负责触发，统一走 window.themeManager。
  */
 
 const STORAGE_KEY = 'dark-mode-enabled';
-const THEME_ATTR = 'data-theme';
 const ENABLE_SYSTEM = true;
 
-/**
- * 获取首选主题
- */
-function getPreferredTheme() {
-    // 1. 优先使用用户保存的偏好
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved !== null) {
-        return saved === 'dark' ? 'dark' : 'light';
-    }
-
-    // 2. 如果启用系统偏好跟随，检测系统设置
-    if (ENABLE_SYSTEM && window.matchMedia) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            return 'dark';
-        }
-    }
-
-    // 3. 默认主题
-    return 'light';
-}
-
-/**
- * 应用主题
- */
-function applyTheme(theme) {
-    if (theme === 'dark') {
-        document.documentElement.setAttribute(THEME_ATTR, 'dark');
-        document.body.setAttribute(THEME_ATTR, 'dark');
-    } else {
-        document.documentElement.removeAttribute(THEME_ATTR);
-        document.body.removeAttribute(THEME_ATTR);
-    }
-}
-
-/**
- * 获取当前主题
- */
+/** 读取当前主题：以 DOM 上的真实状态为准，避免两套缓存不一致 */
 function getCurrentTheme() {
-    return document.documentElement.getAttribute(THEME_ATTR) || 'light';
+    return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
 }
 
-/**
- * 设置主题
- */
+/** 设置主题（转发给内联脚本的实现，带过渡标记） */
 function setTheme(theme) {
-    const validTheme = theme === 'dark' ? 'dark' : 'light';
-
-    // 应用主题
-    applyTheme(validTheme);
-
-    // 保存到localStorage
-    localStorage.setItem(STORAGE_KEY, validTheme);
-
-    // 触发自定义事件
-    const event = new CustomEvent('themeChanged', {
-        detail: { theme: validTheme }
-    });
-    document.dispatchEvent(event);
-
-    return validTheme;
+    const next = theme === 'dark' ? 'dark' : 'light';
+    if (window.themeManager && typeof window.themeManager.apply === 'function') {
+        return window.themeManager.apply(next);
+    }
+    // 兜底：内联脚本尚未执行时（几乎不会发生）直接改 DOM
+    const root = document.documentElement;
+    if (next === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        root.classList.add('dark');
+    } else {
+        root.removeAttribute('data-theme');
+        root.classList.remove('dark');
+    }
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { /* 隐私模式忽略 */ }
+    window.__THEME__ = next;
+    return next;
 }
 
-/**
- * 切换主题
- */
+/** 切换：每次都按 DOM 当前状态重新判定，连点不会错位 */
 function toggleTheme() {
-    const current = getCurrentTheme();
-    const next = current === 'dark' ? 'light' : 'dark';
-    return setTheme(next);
+    return setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark');
 }
 
-/**
- * 初始化（防闪烁）
- * 必须在DOM渲染前执行
- */
-function initTheme() {
-    const theme = getPreferredTheme();
-    applyTheme(theme);
-}
-
-/**
- * 设置键盘快捷键
- */
+/** Ctrl/Cmd + Shift + D */
 function setupKeyboardShortcut() {
     document.addEventListener('keydown', function(e) {
-        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'D' || e.key === 'd')) {
             e.preventDefault();
             toggleTheme();
         }
     });
 }
 
-/**
- * 监听系统主题变化
- */
+/** 跟随系统：仅在用户没有手动选择过时生效 */
 function setupSystemThemeListener() {
     if (!ENABLE_SYSTEM || !window.matchMedia) return;
-
-    const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
+    const query = window.matchMedia('(prefers-color-scheme: dark)');
     const listener = function(e) {
-        // 只有在用户未手动设置时才跟随系统
-        if (localStorage.getItem(STORAGE_KEY) === null) {
-            setTheme(e.matches ? 'dark' : 'light');
-        }
+        let saved = null;
+        try { saved = localStorage.getItem(STORAGE_KEY); } catch (err) { /* ignore */ }
+        if (saved === null) setTheme(e.matches ? 'dark' : 'light');
     };
-
-    if (darkModeQuery.addEventListener) {
-        darkModeQuery.addEventListener('change', listener);
-    } else if (darkModeQuery.addListener) {
-        darkModeQuery.addListener(listener);
-    }
+    if (query.addEventListener) query.addEventListener('change', listener);
+    else if (query.addListener) query.addListener(listener);
 }
 
-/**
- * 初始化Dark Mode
- */
 export function initDarkMode() {
-    // 设置全局API
     window.DarkMode = {
         getCurrentTheme,
         setTheme,
-        toggle: toggleTheme
+        toggle: toggleTheme,
     };
-
-    // 设置键盘快捷键
     setupKeyboardShortcut();
-
-    // 监听系统主题变化
     setupSystemThemeListener();
-
-    console.log('🌗 Dark Mode initialized');
 }
-
-// 立即执行防闪烁初始化（在模块加载时）
-initTheme();

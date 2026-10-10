@@ -64,6 +64,7 @@ target/
 .iml
 # virtualenv
 venv/
+.venv/
 
 collectedstatic/
 djangoblog/whoosh_index/

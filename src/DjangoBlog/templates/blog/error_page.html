@@ -25,9 +25,9 @@
     <meta property="og:site_name" content="{{ SITE_NAME }}"/>
 {% endblock %}
 {% block content %}
-    <div class="mx-auto max-w-6xl px-4 py-4 lg:px-6 lg:py-6">
-        <div class="grid gap-6 lg:grid-cols-[1fr_300px]">
-            <main>
+    <div class="mx-auto max-w-site px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_19rem]">
+            <div class="min-w-0">
                 <div class="flex items-center justify-center min-h-[60vh]">
                     <div class="text-center px-4">
                         {# Error code #}
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
 
             {# Sidebar #}
             <div class="hidden lg:block">

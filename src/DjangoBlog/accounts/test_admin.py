@@ -92,3 +92,46 @@ class BlogUserAdminTest(BaseTestCase, AdminTestMixin):
         readonly_fields = self.blog_user_admin.get_readonly_fields(request, self.user)
         # 员工用户应该看到更多只读字段
         self.assertIsInstance(readonly_fields, (list, tuple))
+
+    def test_admin_add_user_page(self):
+        """测试新增用户页面可正常打开（回归：Django 5.1+ 的 usable_password 字段）"""
+        self.login_admin()
+        url = self.get_admin_url(BlogUser, action='add')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'usable_password')
+
+    def test_admin_add_user_without_usable_password(self):
+        """测试后台新增用户时禁用密码登录（usable_password=false）"""
+        self.login_admin()
+        url = self.get_admin_url(BlogUser, action='add')
+        response = self.client.post(url, {
+            'username': 'oauthuser',
+            'email': 'oauth@test.com',
+            'nickname': '第三方用户',
+            'usable_password': 'false',
+            'password1': '',
+            'password2': '',
+        })
+        self.assertEqual(response.status_code, 302)
+        user = BlogUser.objects.get(username='oauthuser')
+        self.assertFalse(user.has_usable_password())
+
+    def test_admin_add_user(self):
+        """测试通过后台新增用户"""
+        self.login_admin()
+        url = self.get_admin_url(BlogUser, action='add')
+        response = self.client.post(url, {
+            'username': 'newuser',
+            'email': 'newuser@test.com',
+            'nickname': '新用户',
+            'usable_password': 'true',
+            'password1': 'Str0ngPass!2024',
+            'password2': 'Str0ngPass!2024',
+        })
+        self.assertEqual(response.status_code, 302)
+        user = BlogUser.objects.get(username='newuser')
+        self.assertEqual(user.email, 'newuser@test.com')
+        self.assertEqual(user.nickname, '新用户')
+        self.assertEqual(user.source, 'adminsite')
+        self.assertTrue(user.check_password('Str0ngPass!2024'))
