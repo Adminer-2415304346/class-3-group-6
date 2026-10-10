@@ -1,0 +1,67 @@
+{% extends 'share_layout/base_account.html' %}
+
+{# SZX：账户三页共用启动器布局，避免注册和找回密码又回到旧版卡片。 #}
+{% block body_class %}launcher-page{% endblock %}
+
+{% block account_layout %}
+<main id="main" class="launcher-shell">
+    <section class="launcher-panel" aria-labelledby="{% block launcher_title_id %}account-title{% endblock %}"
+             x-data="{% block launcher_component %}launcherAccount{% endblock %}">
+        <nav class="launcher-tools" aria-label="账户页辅助导航">
+            <a class="launcher-back" href="{% block launcher_back_url %}/{% endblock %}" hx-boost="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="m12 5-7 7 7 7M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span>{% block launcher_back_label %}返回首页{% endblock %}</span>
+            </a>
+            <button type="button" class="account-theme-toggle launcher-theme-toggle"
+                    @click="window.DarkMode && window.DarkMode.toggle()"
+                    aria-label="切换明暗主题" title="切换明暗主题" x-cloak>
+                <span class="account-theme-glyph" aria-hidden="true"></span>
+            </button>
+        </nav>
+
+        <a class="launcher-brand" href="/" hx-boost="false" aria-label="{{ SITE_NAME }} 首页">
+            <span class="account-brand-mark launcher-brand-mark" aria-hidden="true">{% include 'share_layout/brand_mark.html' %}</span>
+            <strong>{{ SITE_NAME }}</strong>
+        </a>
+
+        <div id="account-content" class="launcher-content">
+            <div class="launcher-login">
+                {% block launcher_form %}{% endblock %}
+            </div>
+        </div>
+
+        <footer class="launcher-footer">
+            {% block launcher_links %}
+                <a href="{% url 'account:forget_password' %}" hx-boost="false">无法登录？</a>
+                <a href="{% url 'account:register' %}" hx-boost="false">创建账号</a>
+            {% endblock %}
+            <p>由 Django 驱动 · 为持续表达而生</p>
+        </footer>
+    </section>
+
+    <section class="account-visual launcher-visual" aria-labelledby="account-visual-title" x-data="accountFlow">
+        <canvas class="account-flow-canvas" x-ref="canvas" aria-hidden="true"></canvas>
+        <div class="account-visual-grid" aria-hidden="true"></div>
+        <div class="launcher-visual-inner">
+            <header class="launcher-visual-header">
+                <span>{{ SITE_NAME }}</span>
+                <span class="launcher-visual-index" aria-hidden="true">{% block launcher_scene_index %}阅读 / 思考 / 交流{% endblock %}</span>
+            </header>
+            <div class="account-visual-copy launcher-visual-copy">
+                <p class="account-visual-kicker">{% block launcher_scene_kicker %}写作与讨论持续发生{% endblock %}</p>
+                <p class="account-visual-title" id="account-visual-title">{% block launcher_scene_title %}文字留在这里，<br>思考继续向前。{% endblock %}</p>
+                <p class="account-visual-description">{% block launcher_scene_description %}登录后继续阅读与讨论，让每一次回应自然汇入新的想法。{% endblock %}</p>
+            </div>
+            <footer class="account-visual-footer launcher-visual-footer">
+                <p class="account-visual-note">{% block launcher_scene_note %}每一次探索，都值得记录。{% endblock %}</p>
+                <button type="button" class="account-motion-toggle" x-cloak
+                        @click="toggleFlow()" :aria-pressed="paused.toString()"
+                        :aria-label="paused ? '继续流动效果' : '暂停流动效果'"
+                        x-text="paused ? '继续流动' : '暂停流动'">暂停流动</button>
+            </footer>
+        </div>
+    </section>
+</main>
+{% endblock %}

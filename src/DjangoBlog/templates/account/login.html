@@ -1,124 +1,92 @@
-{% extends 'share_layout/base_account.html' %}
-{% load i18n %}
+{% extends 'share_layout/base_account_launcher.html' %}
+{% load i18n oauth_tags %}
 
 {% block page_title %}{% trans 'Sign in' %}{% endblock %}
+{% block body_class %}launcher-page launcher-login-page{% endblock %}
+{% block launcher_title_id %}login-title{% endblock %}
+{% block launcher_component %}launcherLogin{% endblock %}
 
-{% block content %}
-<div class="account-login" x-data="{ showPassword: false, submitting: false }">
-    <header class="account-form-header">
-        <h1>欢迎回来</h1>
-        <p>登录后继续阅读，并回到未完成的讨论。</p>
-    </header>
+{% block launcher_form %}
+<header class="launcher-heading">
+    <h1 id="login-title">欢迎回来</h1>
+    <p>登录，继续你的阅读与讨论。</p>
+</header>
 
-    <div class="account-card">
-        <form id="login-form"
-              class="account-form"
-              action="{% url 'account:login' %}"
-              method="post"
-              @submit="submitting = true"
-              :aria-busy="submitting.toString()">
-            {% csrf_token %}
+<form id="login-form" class="launcher-form" method="post"
+      action="{% url 'account:login' %}?next={{ redirect_to|urlencode }}"
+      hx-boost="false" @submit="submit($event)" :aria-busy="submitting.toString()">
+    {% csrf_token %}
 
-            {% if form.non_field_errors %}
-                <div class="account-alert" role="alert" aria-live="polite">
-                    <span class="account-alert-icon" aria-hidden="true">!</span>
-                    <div>{{ form.non_field_errors }}</div>
-                </div>
+    {% if form.non_field_errors %}
+        <div class="launcher-alert" role="alert" aria-live="polite" tabindex="-1" x-ref="errorSummary">
+            <span class="account-alert-icon" aria-hidden="true">!</span>
+            <div>{{ form.non_field_errors }}</div>
+        </div>
+    {% endif %}
+
+    {% for field in form %}
+        <div class="launcher-field">
+            <div class="launcher-input-wrap">
+                <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="sr-only">（必填）</span>{% endif %}</label>
+                {% if field.name == 'password' %}
+                    <input class="launcher-input launcher-password" type="password"
+                           :type="showPassword ? 'text' : 'password'"
+                           name="{{ field.name }}" id="{{ field.id_for_label }}"
+                           x-ref="password" @input="syncFields()" @change="syncFields()"
+                           autocomplete="current-password" placeholder="请输入密码"
+                           {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.id_for_label }}-error"{% endif %}
+                           {% if field.field.required %}required{% endif %}>
+                    <button class="launcher-password-toggle" type="button" x-cloak
+                            @click="showPassword = !showPassword"
+                            :aria-pressed="showPassword.toString()"
+                            :aria-label="showPassword ? '隐藏密码' : '显示密码'"
+                            :title="showPassword ? '隐藏密码' : '显示密码'">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                            <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" stroke-linejoin="round" />
+                            <circle cx="12" cy="12" r="2.5" />
+                            <path x-show="showPassword" d="m4 3 16 18" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                {% else %}
+                    <input class="launcher-input"
+                           type="{{ field.field.widget.input_type|default:'text' }}"
+                           name="{{ field.name }}" id="{{ field.id_for_label }}"
+                           value="{{ field.value|default:'' }}" x-ref="username"
+                           @input="syncFields()" @change="syncFields()"
+                           autocomplete="username" autocapitalize="none" spellcheck="false"
+                           placeholder="请输入{{ field.label }}"
+                           {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
+                           {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.id_for_label }}-error"{% endif %}
+                           {% if field.field.required %}required{% endif %}>
+                {% endif %}
+            </div>
+            {% if field.errors %}
+                <p class="launcher-field-error" id="{{ field.id_for_label }}-error" role="alert">{{ field.errors.0 }}</p>
             {% endif %}
+        </div>
+    {% endfor %}
 
-            {% for field in form %}
-                <div class="account-field">
-                    <label for="{{ field.id_for_label }}">
-                        <span>{{ field.label }}</span>
-                        {% if field.field.required %}
-                            <span class="account-required" aria-hidden="true">*</span>
-                            <span class="sr-only">必填</span>
-                        {% endif %}
-                    </label>
+    <label class="launcher-remember">
+        <input type="checkbox" name="remember" value="remember-me" {% if request.POST.remember %}checked{% endif %}>
+        <span>保持登录状态</span>
+    </label>
 
-                    {% if field.name == 'password' %}
-                        <div class="account-password-wrap">
-                            <input
-                                class="account-field-input account-password-input"
-                                :type="showPassword ? 'text' : 'password'"
-                                name="{{ field.name }}"
-                                id="{{ field.id_for_label }}"
-                                autocomplete="current-password"
-                                placeholder="请输入{{ field.label }}…"
-                                {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.id_for_label }}-error"{% endif %}
-                                {% if field.field.required %}required{% endif %}>
-                            <button
-                                class="account-password-toggle"
-                                type="button"
-                                @click="showPassword = !showPassword"
-                                :aria-pressed="showPassword.toString()"
-                                :aria-label="showPassword ? '隐藏密码' : '显示密码'"
-                                :title="showPassword ? '隐藏密码' : '显示密码'">
-                                <span x-text="showPassword ? '隐藏' : '显示'">显示</span>
-                            </button>
-                        </div>
-                    {% else %}
-                        <input
-                            class="account-field-input"
-                            type="{{ field.field.widget.input_type|default:'text' }}"
-                            name="{{ field.name }}"
-                            id="{{ field.id_for_label }}"
-                            value="{{ field.value|default:'' }}"
-                            autocomplete="username"
-                            autocapitalize="none"
-                            spellcheck="false"
-                            placeholder="请输入{{ field.label }}…"
-                            {% if field.errors %}aria-invalid="true" aria-describedby="{{ field.id_for_label }}-error"{% endif %}
-                            {% if field.field.required %}required{% endif %}>
-                    {% endif %}
-
-                    {% if field.errors %}
-                        <p class="account-field-error" id="{{ field.id_for_label }}-error" role="alert">
-                            {{ field.errors.0 }}
-                        </p>
-                    {% endif %}
-                </div>
-            {% endfor %}
-
-            <div class="account-form-options">
-                <label class="account-remember">
-                    <input type="checkbox" name="remember" value="remember-me">
-                    <span>保持登录状态</span>
-                </label>
-
-                <a href="{% url 'account:forget_password' %}"
-                   hx-get="{% url 'account:forget_password' %}"
-                   hx-target="body"
-                   hx-swap="outerHTML"
-                   hx-push-url="true">
-                    忘记密码？
-                </a>
-            </div>
-
-            <input type="hidden" name="next" value="{{ redirect_to }}">
-
-            <button class="account-submit" type="submit" :disabled="submitting">
-                <span class="account-submit-spinner" x-show="submitting" x-cloak aria-hidden="true"></span>
-                <span x-text="submitting ? '正在登录…' : '登录'">登录</span>
-            </button>
-
-            {% load oauth_tags %}
-            <div class="account-oauth">
-                <div class="account-separator"><span>其他登录方式</span></div>
-                {% load_oauth_applications request %}
-            </div>
-        </form>
-
-        <p class="account-card-footer">
-            还没有账号？
-            <a href="{% url 'account:register' %}"
-               hx-get="{% url 'account:register' %}"
-               hx-target="body"
-               hx-swap="outerHTML"
-               hx-push-url="true">
-                创建账号
-            </a>
-        </p>
+    <div class="account-oauth launcher-oauth">
+        <div class="account-separator"><span>其他登录方式</span></div>
+        {% load_oauth_applications request %}
     </div>
-</div>
+
+    <input type="hidden" name="next" value="{{ redirect_to }}">
+    <div class="launcher-submit-area">
+        <button class="launcher-submit" type="submit" :disabled="submitting"
+                :class="{ 'is-ready': ready, 'is-submitting': submitting }"
+                :aria-label="submitting ? '正在验证账号，请稍候' : '登录'" aria-label="登录">
+            <svg class="launcher-submit-arrow" viewBox="0 0 32 32"
+                 fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M6 16h20m-8-8 8 8-8 8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+        <p class="launcher-submit-hint" aria-live="polite" x-text="submitting ? '正在验证账号…' : '继续登录'">继续登录</p>
+    </div>
+</form>
 {% endblock %}

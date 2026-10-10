@@ -5,7 +5,6 @@ from django.contrib import auth
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth import get_user_model
 from django.contrib.auth import logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.http.request import HttpRequest
@@ -108,6 +107,12 @@ class LoginView(LoginFormView):
     success_url = '/'
     redirect_field_name = REDIRECT_FIELD_NAME
 
+    def get_form_kwargs(self):
+        # SZX：首次验证就传入当前请求，保留认证后端依赖的请求上下文。
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
     def get_context_data(self, **kwargs):
         redirect_to = self.request.GET.get(self.redirect_field_name)
         if redirect_to is None:
@@ -117,37 +122,30 @@ class LoginView(LoginFormView):
         return super(LoginView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        form = AuthenticationForm(data=self.request.POST, request=self.request)
+        # SZX：FormView 已验证 LoginForm；复用其用户缓存，不再重复查询和校验密码。
+        delete_sidebar_cache()
+        logger.info(self.redirect_field_name)
 
-        if form.is_valid():
-            delete_sidebar_cache()
-            logger.info(self.redirect_field_name)
-
-            auth.login(self.request, form.get_user())
-            # 设置登录有效期
-            if self.request.POST.get("remember"):
-                self.request.session.set_expiry(settings.REMEMBER_ME_LOGIN_TTL)
-                cookie_max_age = settings.REMEMBER_ME_LOGIN_TTL
-            else:
-                # 使用Django默认的2周
-                self.request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                cookie_max_age = settings.SESSION_COOKIE_AGE
-
-            # 获取响应对象并设置登录标记 cookie
-            response = super(LoginView, self).form_valid(form)
-            response.set_cookie(
-                'logged_user',
-                'true',
-                max_age=cookie_max_age,
-                httponly=False,  # 允许 JavaScript 访问
-                samesite='Lax'
-            )
-            return response
-            # return HttpResponseRedirect('/')
+        auth.login(self.request, form.get_user())
+        # 设置登录有效期
+        if self.request.POST.get("remember"):
+            self.request.session.set_expiry(settings.REMEMBER_ME_LOGIN_TTL)
+            cookie_max_age = settings.REMEMBER_ME_LOGIN_TTL
         else:
-            return self.render_to_response({
-                'form': form
-            })
+            # 使用Django默认的2周
+            self.request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+            cookie_max_age = settings.SESSION_COOKIE_AGE
+
+        # 获取响应对象并设置登录标记 cookie
+        response = super(LoginView, self).form_valid(form)
+        response.set_cookie(
+            'logged_user',
+            'true',
+            max_age=cookie_max_age,
+            httponly=False,  # 允许 JavaScript 访问
+            samesite='Lax'
+        )
+        return response
 
     def get_success_url(self):
 

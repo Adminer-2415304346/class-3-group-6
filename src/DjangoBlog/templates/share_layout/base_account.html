@@ -14,7 +14,7 @@
     <meta name="theme-color" content="#0d0d11" media="(prefers-color-scheme: dark)">
     <meta name="color-scheme" content="light dark">
     <title>{{ SITE_NAME }} | {% block page_title %}Account{% endblock %}</title>
-    <link rel="icon" href="{% static 'blog/favicon.svg' %}" type="image/svg+xml" sizes="any">
+    {% include 'share_layout/site_icons.html' %}
 
     <script>
         (function() {
@@ -81,6 +81,7 @@
         })();
     </script>
 
+    {% include 'share_layout/account_transition_head.html' %}
     {% vite_preload 'src/main.js' %}
     {% vite_js 'src/main.js' %}
 
@@ -89,9 +90,11 @@
     {% endcompress %}
 </head>
 
-<body class="account-page" x-data="{}">
+<body class="account-page {% block body_class %}{% endblock %}" x-data="{}">
+    {% include 'share_layout/account_transition.html' %}
     <a class="account-skip-link" href="#account-content">跳到账户表单</a>
 
+    {% block account_layout %}
     <main id="main" class="account-shell">
         <section class="account-visual"
                  aria-labelledby="account-visual-title"
@@ -104,7 +107,7 @@
             <div class="account-visual-inner">
                 <header>
                     <a href="/" class="account-brand" aria-label="返回 {{ SITE_NAME }} 首页">
-                        <span class="account-brand-mark" aria-hidden="true">{{ SITE_NAME|slice:":1" }}</span>
+                        <span class="account-brand-mark" aria-hidden="true">{% include 'share_layout/brand_mark.html' %}</span>
                         <span class="account-brand-copy">
                             <strong>{{ SITE_NAME }}</strong>
                             {% if SITE_DESCRIPTION %}
@@ -155,5 +158,6 @@
             </div>
         </section>
     </main>
+    {% endblock %}
 </body>
 </html>

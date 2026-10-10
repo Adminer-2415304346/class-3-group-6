@@ -1,0 +1,767 @@
+/* SZX：登录、注册和找回密码共用启动器样式；沿用全站颜色，不引入新主题或图片。 */
+.launcher-shell {
+    display: grid;
+    grid-template-columns: clamp(23rem, 30vw, 29rem) minmax(0, 1fr);
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.launcher-panel {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.5rem clamp(2rem, 3.1vw, 3rem) 1.75rem;
+    border-right: 1px solid rgb(var(--border));
+    background: rgb(var(--background));
+}
+
+.launcher-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0 -0.5rem;
+}
+
+.launcher-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.launcher-back svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.launcher-back:hover {
+    color: rgb(var(--foreground));
+}
+
+.launcher-theme-toggle {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+}
+
+.launcher-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+    align-self: center;
+    max-width: 100%;
+    margin-top: clamp(1.5rem, 3vh, 2.25rem);
+    color: rgb(var(--foreground));
+    text-align: center;
+    text-decoration: none;
+}
+
+.launcher-brand:hover {
+    color: rgb(var(--foreground));
+}
+
+.launcher-brand-mark {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    font-size: 1.375rem;
+    font-weight: 750;
+    box-shadow: none;
+}
+
+.launcher-brand strong {
+    font-size: 0.9375rem;
+    font-weight: 650;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.launcher-content {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    padding: clamp(1.5rem, 4vh, 3rem) 0;
+}
+
+.launcher-login {
+    width: 100%;
+    max-width: 22rem;
+}
+
+.launcher-heading {
+    margin-bottom: 1.75rem;
+    text-align: center;
+}
+
+.launcher-heading h1 {
+    margin: 0;
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.04em;
+}
+
+.launcher-heading p {
+    margin: 0.625rem 0 0;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.8125rem;
+    line-height: 1.7;
+}
+
+.launcher-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.launcher-field,
+.launcher-input-wrap {
+    min-width: 0;
+}
+
+.launcher-input-wrap {
+    position: relative;
+}
+
+.launcher-input-wrap > label {
+    position: absolute;
+    top: 0.625rem;
+    left: 1rem;
+    z-index: 1;
+    margin: 0;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.6875rem;
+    font-weight: 650;
+    line-height: 1.5;
+    pointer-events: none;
+}
+
+.launcher-form input.launcher-input {
+    display: block;
+    width: 100%;
+    min-height: 3.75rem;
+    padding: 1.75rem 1rem 0.625rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: var(--radius-sm);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    background: rgb(var(--muted));
+    color: rgb(var(--foreground));
+    font-size: 0.875rem;
+    line-height: 1.4;
+    box-shadow: none;
+    transition: border-color var(--dur-fast), background-color var(--dur-fast), outline-color var(--dur-fast);
+}
+
+.launcher-form input.launcher-input::placeholder {
+    color: rgb(var(--muted-foreground));
+    font-size: 0.8125rem;
+}
+
+.launcher-form input.launcher-input:hover {
+    border-color: rgb(var(--input));
+}
+
+.launcher-form input.launcher-input:focus {
+    border-color: rgb(var(--primary));
+    outline-color: rgb(var(--ring) / 0.28);
+    background: rgb(var(--background));
+}
+
+.launcher-input-wrap:focus-within > label {
+    color: rgb(var(--primary-deep));
+}
+
+.launcher-form input.launcher-input[aria-invalid="true"] {
+    border-color: rgb(var(--destructive));
+}
+
+.launcher-form input.launcher-password {
+    padding-right: 3.5rem;
+}
+
+.launcher-password-toggle {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.375rem;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: rgb(var(--muted-foreground));
+    cursor: pointer;
+}
+
+.launcher-password-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.launcher-password-toggle:hover {
+    color: rgb(var(--foreground));
+    background: rgb(var(--foreground) / 0.04);
+}
+
+.launcher-remember {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 0.625rem;
+    min-height: 2.75rem;
+    margin-top: -0.375rem;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.8125rem;
+    cursor: pointer;
+}
+
+.launcher-remember input {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin: 0;
+    accent-color: rgb(var(--primary));
+}
+
+.launcher-submit-area {
+    display: grid;
+    justify-items: center;
+    gap: 0.75rem;
+    padding-top: 1.25rem;
+}
+
+.launcher-form button.launcher-submit {
+    display: grid;
+    width: 4.5rem;
+    height: 4.5rem;
+    place-items: center;
+    padding: 0;
+    border: 1px solid rgb(var(--input));
+    border-radius: 1.125rem;
+    background: rgb(var(--background));
+    color: rgb(var(--muted-foreground));
+    box-shadow: none;
+    cursor: pointer;
+    transition: color var(--dur-base), background-color var(--dur-base), border-color var(--dur-base), transform var(--dur-base);
+}
+
+.launcher-submit-arrow {
+    width: 2rem;
+    height: 2rem;
+    transition: transform var(--dur-base) var(--ease-out-soft);
+}
+
+.launcher-form button.launcher-submit.is-ready,
+.launcher-form button.launcher-submit.is-submitting {
+    border-color: rgb(var(--primary));
+    background: rgb(var(--primary));
+    color: rgb(var(--primary-foreground));
+}
+
+.launcher-form button.launcher-submit:hover:not(:disabled) {
+    border-color: rgb(var(--primary));
+    color: rgb(var(--primary));
+}
+
+.launcher-form button.launcher-submit.is-ready:hover:not(:disabled) {
+    background: rgb(var(--primary-deep));
+    color: rgb(var(--primary-foreground));
+}
+
+.launcher-submit:hover:not(:disabled) .launcher-submit-arrow {
+    transform: translateX(3px);
+}
+
+.launcher-submit:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.launcher-submit:disabled {
+    cursor: wait;
+    opacity: 0.8;
+}
+
+.launcher-submit .account-submit-spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.launcher-submit-hint {
+    margin: 0;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.6875rem;
+    line-height: 1.5;
+}
+
+.launcher-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    padding: 0.875rem;
+    border: 1px solid rgb(var(--destructive) / 0.28);
+    border-radius: var(--radius-sm);
+    background: rgb(var(--destructive) / 0.06);
+    color: rgb(var(--destructive));
+    font-size: 0.8125rem;
+    line-height: 1.7;
+}
+
+.launcher-alert .errorlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.launcher-field-error {
+    margin: 0.5rem 0 0;
+    color: rgb(var(--destructive));
+    font-size: 0.75rem;
+    line-height: 1.6;
+}
+
+.launcher-help {
+    margin-top: 0.5rem;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.75rem;
+    line-height: 1.7;
+}
+
+.launcher-help > summary {
+    width: fit-content;
+    cursor: pointer;
+}
+
+.launcher-help > summary:hover {
+    color: rgb(var(--primary-deep));
+}
+
+.launcher-help > div {
+    padding-top: 0.375rem;
+}
+
+.launcher-help ul {
+    margin: 0;
+    padding-left: 1.125rem;
+    list-style: disc;
+}
+
+.launcher-form-note {
+    margin: 0;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.75rem;
+    line-height: 1.7;
+}
+
+.launcher-code-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 0.625rem;
+}
+
+.launcher-code-button {
+    min-height: 3.75rem;
+    padding: 0.75rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: var(--radius-sm);
+    background: rgb(var(--muted));
+    color: rgb(var(--foreground));
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color var(--dur-fast), color var(--dur-fast);
+}
+
+.launcher-code-button:hover:not(:disabled) {
+    border-color: rgb(var(--primary));
+    color: rgb(var(--primary-deep));
+}
+
+.launcher-code-button:disabled {
+    color: rgb(var(--muted-foreground));
+    cursor: not-allowed;
+}
+
+.launcher-code-error,
+.launcher-code-status {
+    margin-top: -0.375rem;
+}
+
+.launcher-oauth {
+    margin-top: 0;
+}
+
+.launcher-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 1.5rem;
+    text-align: center;
+}
+
+.launcher-footer > a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.launcher-footer > a:hover {
+    color: rgb(var(--primary-deep));
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.launcher-footer p {
+    width: 100%;
+    margin: 0.5rem 0 0;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.625rem;
+    line-height: 1.6;
+}
+
+.launcher-panel a:focus-visible,
+.launcher-panel button:focus-visible,
+.launcher-panel input[type="checkbox"]:focus-visible,
+.launcher-help > summary:focus-visible,
+.launcher-alert:focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 4px;
+}
+
+.launcher-visual {
+    border: 0;
+}
+
+.launcher-visual-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: clamp(2rem, 4.5vw, 5rem);
+}
+
+.launcher-visual-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: rgb(var(--muted-foreground));
+    font-size: 0.8125rem;
+    font-weight: 550;
+    line-height: 1.6;
+}
+
+.launcher-visual-index {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+}
+
+.launcher-visual-copy {
+    width: 100%;
+    max-width: 48rem;
+    padding: 4rem 0;
+}
+
+.launcher-visual .account-visual-title {
+    font-size: clamp(3.25rem, 5.6vw, 6.75rem);
+    line-height: 1.14;
+    letter-spacing: -0.055em;
+}
+
+.launcher-visual .account-visual-description {
+    max-width: 28rem;
+    margin-top: 1.75rem;
+}
+
+.launcher-visual-footer {
+    display: flex;
+}
+
+@media (max-width: 959px) {
+    .launcher-shell {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .launcher-panel {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 1.25rem max(1.5rem, calc((100vw - 24rem) / 2)) 1.5rem;
+        border-right: 0;
+    }
+
+    .launcher-visual {
+        display: none;
+    }
+
+    .launcher-brand {
+        margin-top: clamp(1rem, 3vh, 2rem);
+    }
+
+    .launcher-content {
+        padding: 2rem 0;
+    }
+}
+
+@media (max-height: 740px) {
+    .launcher-panel {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .launcher-brand {
+        flex-direction: row;
+        gap: 0.625rem;
+        margin-top: 1rem;
+    }
+
+    .launcher-brand-mark {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1rem;
+    }
+
+    .launcher-content {
+        padding: 1.5rem 0;
+    }
+
+    .launcher-heading {
+        margin-bottom: 1.25rem;
+    }
+
+    .launcher-submit-area {
+        padding-top: 0.5rem;
+    }
+
+    .launcher-form button.launcher-submit {
+        width: 3.75rem;
+        height: 3.75rem;
+        border-radius: var(--radius-lg);
+    }
+}
+
+/* SZX：四字段表单使用同一套紧凑间距，短屏保持提交入口易于到达。 */
+.launcher-extended-page .launcher-brand {
+    flex-direction: row;
+    gap: 0.625rem;
+    margin-top: 1rem;
+}
+
+.launcher-extended-page .launcher-brand-mark {
+    width: 2.25rem;
+    height: 2.25rem;
+}
+
+.launcher-extended-page .launcher-content {
+    padding: 1rem 0;
+}
+
+.launcher-extended-page .launcher-heading {
+    margin-bottom: 1rem;
+}
+
+.launcher-extended-page .launcher-form {
+    gap: 0.75rem;
+}
+
+.launcher-extended-page .launcher-form input.launcher-input {
+    min-height: 3.5rem;
+    padding-top: 1.625rem;
+    padding-bottom: 0.5rem;
+}
+
+.launcher-extended-page .launcher-code-button {
+    min-height: 3.5rem;
+}
+
+.launcher-extended-page .launcher-submit-area {
+    gap: 0.5rem;
+    padding-top: 0.25rem;
+}
+
+.launcher-extended-page .launcher-form button.launcher-submit {
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: var(--radius-lg);
+}
+
+.launcher-extended-page .launcher-footer p {
+    margin-top: 0.25rem;
+}
+
+/* SZX：共用输入控件；注册的独立空间结构由 registration.css 管理。 */
+.launcher-reset-page .launcher-heading h1 {
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    letter-spacing: -0.05em;
+}
+
+.launcher-heading .launcher-eyebrow {
+    margin: 0 0 0.75rem;
+    color: rgb(var(--primary-deep));
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+}
+
+.launcher-fields-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1.25rem 0.875rem;
+}
+
+.launcher-register-page .launcher-form,
+.launcher-reset-page .launcher-form {
+    gap: 1.25rem;
+}
+
+.launcher-form .launcher-submit-area-wide {
+    justify-items: stretch;
+    padding-top: 0.25rem;
+}
+
+.launcher-extended-page .launcher-form button.launcher-submit-wide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 3.5rem;
+    padding: 0 1.25rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.launcher-submit-wide .launcher-submit-arrow {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.launcher-reset-page .launcher-shell {
+    position: relative;
+    isolation: isolate;
+    grid-template-columns: minmax(0, 1fr);
+    place-items: center;
+    padding: 3rem 1.5rem 5rem;
+}
+
+.launcher-reset-page .launcher-panel {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(100%, 48rem);
+    min-height: 0;
+    padding: 1.5rem clamp(1.5rem, 4vw, 3rem) 1.75rem;
+    border: 1px solid rgb(var(--border));
+    border-radius: 1.5rem;
+    box-shadow: 0 1.5rem 5rem rgb(var(--foreground) / 0.07);
+}
+
+.launcher-reset-page .launcher-brand {
+    margin-top: 1.25rem;
+}
+
+.launcher-reset-page .launcher-login {
+    max-width: none;
+}
+
+.launcher-reset-page .launcher-content {
+    padding: 2rem 0 1.5rem;
+}
+
+.launcher-reset-page .launcher-heading {
+    margin-bottom: 2rem;
+}
+
+.launcher-reset-page .launcher-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    min-height: 100%;
+}
+
+.launcher-reset-page .launcher-visual-inner {
+    height: 100%;
+    min-height: 100%;
+    justify-content: flex-end;
+    padding: 1.5rem;
+}
+
+.launcher-reset-page .launcher-visual-header,
+.launcher-reset-page .account-visual-note {
+    display: none;
+}
+
+.launcher-reset-page .launcher-visual-copy {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+}
+
+.launcher-reset-page .launcher-visual-footer {
+    justify-content: flex-end;
+}
+
+@media (max-height: 740px) and (min-width: 960px) {
+    .launcher-reset-page .launcher-shell {
+        padding: 1.5rem 1.5rem 4rem;
+    }
+
+    .launcher-reset-page .launcher-panel {
+        padding-top: 1rem;
+        padding-bottom: 1.25rem;
+    }
+
+    .launcher-reset-page .launcher-brand {
+        margin-top: 0.75rem;
+    }
+
+    .launcher-reset-page .launcher-content {
+        padding: 1.25rem 0 1rem;
+    }
+
+    .launcher-reset-page .launcher-heading {
+        margin-bottom: 1.25rem;
+    }
+}
+
+@media (max-width: 599px) {
+    .launcher-fields-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .launcher-reset-page .launcher-shell {
+        padding: 1rem 0.75rem 5rem;
+    }
+
+    .launcher-reset-page .launcher-panel {
+        padding: 1rem 1.25rem 1.5rem;
+        border-radius: 1.25rem;
+    }
+
+    .launcher-reset-page .launcher-content {
+        padding: 1.5rem 0;
+    }
+
+    .launcher-reset-page .launcher-heading {
+        margin-bottom: 1.5rem;
+    }
+}
