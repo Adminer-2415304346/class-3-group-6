@@ -45,6 +45,8 @@ def get_redirecturl(request):
     return '/'
 
 
+# GZX：发起授权入口：按 type 取对应管理器，拼接授权 URL 后 302 跳转到第三方登录页；
+# 不接触 token，只负责把用户导出去。
 def oauthlogin(request):
     type = request.GET.get('type', None)
     if not type:
@@ -57,6 +59,8 @@ def oauthlogin(request):
     return HttpResponseRedirect(authorizeurl)
 
 
+# GZX：OAuth 回调核心：用 code 换 token → 拉第三方用户信息 → 按 (type, openid) 查/建 OAuthUser
+# → 有关联本站用户则直接登录，无邮箱则转补邮箱流程；此函数是"回调→关联本站用户"的汇合点。
 def authorize(request):
     type = request.GET.get('type', None)
     if not type:
@@ -130,6 +134,8 @@ def authorize(request):
                 )
                 return response
         else:
+            # GZX：第三方未返回邮箱（如 GitHub 私有邮箱）：先暂存 OAuthUser，跳转补邮箱页，
+            # 由 emailconfirm 验证链接后再完成与本站用户的绑定。
             user.save()
             url = reverse('oauth:require_email', kwargs={
                 'oauthid': user.id
