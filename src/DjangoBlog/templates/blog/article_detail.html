@@ -1,5 +1,6 @@
 {% extends 'share_layout/base.html' %}
 {# SY: 文章详情页面，继承base母模板，展示单篇文章完整信息 #}
+{# SZX：ArticleDetailView 以 article 命名单篇对象，在 get_context_data 中补充评论表单 form、分页评论 p_comments 及相邻文章。 #}
 {% load blog_tags %}
 {% load cache %}
 {% load i18n %}

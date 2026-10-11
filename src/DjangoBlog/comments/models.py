@@ -11,10 +11,12 @@ from blog.models import Article
 # 评论主模型，保存博客文章的评论以及评论回复数据，支持多级回复
 class Comment(models.Model):
     # WZY: 评论正文，文本字段，限制最多300字符，存储用户输入的评论内容
+    # SZX：max_length 参与模型/表单校验，不是 MySQL TEXT 列的物理长度限制。
     body = models.TextField('正文', max_length=300)
     # WZY: 评论创建时间，默认取当前时间，记录评论提交时刻
     creation_time = models.DateTimeField(_('creation time'), default=now)
     # WZY: 评论最后修改时间，记录评论内容更新的时间戳
+    # SZX：default=now 只提供实例初始值；修改时不会像 auto_now 一样自动更新时间。
     last_modify_time = models.DateTimeField(_('last modify time'), default=now)
     # WZY: 评论作者外键，关联系统用户；用户删除时，该用户所有评论级联删除
     author = models.ForeignKey(
@@ -26,14 +28,16 @@ class Comment(models.Model):
         Article,
         verbose_name=_('article'),
         on_delete=models.CASCADE)
-    # WZY: 父评论自关联外键，实现评论回复嵌套；顶级评论无回复，此字段允许为空null
+    # WZY: 父评论自关联外键，实现评论回复嵌套，此字段允许为空null
+    # SZX：顶级评论没有父评论，parent_comment 为 None；它仍然可以有子回复。
     parent_comment = models.ForeignKey(
         'self',
         verbose_name=_('parent comment'),
         blank=True,
         null=True,
         on_delete=models.CASCADE)
-    # WZY: 评论是否公开展示，审核开关；is_enable=False代表未审核，前端不展示；True代表审核通过可展示
+    # WZY: 评论是否公开展示；is_enable=False 不公开，True 允许进入公开评论列表
+    # SZX：此标志不能单独区分待审核与被禁用；免审核配置也会将新评论直接设为 True。
     is_enable = models.BooleanField(_('enable'),
                                     default=False, blank=False, null=False)
     # 模型元配置类，设置排序、索引、别名等数据库相关配置
@@ -44,9 +48,9 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
         get_latest_by = 'id'
         indexes = [
-            # WZY: 复合索引，优化查询某篇文章下指定父评论且已启用的评论列表
+            # 优化评论列表查询：article + parent_comment + is_enable组合索引
             models.Index(fields=['article', 'parent_comment', 'is_enable'], name='idx_art_parent_enable'),
-            # WZY: 复合索引，快速查询已启用评论并按id倒序，用于首页/侧边栏最新评论查询
+            # 优化侧边栏评论查询：is_enable + id组合索引
             models.Index(fields=['is_enable', '-id'], name='idx_enable_id'),
         ]
     # 返回对象的字符串展示，后台管理页面用于预览
@@ -74,7 +78,7 @@ class Comment(models.Model):
         result = {}
         for reaction in reactions:
             emoji = reaction['reaction_type']
-            # WZY: 查询该表情对应的互动用户，最多取10个用户名，用于前端展示
+            # 获取该 emoji 的所有点赞用户
             reaction_users = CommentReaction.objects.filter(
                 comment=self,
                 reaction_type=emoji
@@ -123,6 +127,7 @@ class CommentReaction(models.Model):
         on_delete=models.CASCADE
     )
     # WZY: 表情类型字段，只能选取REACTION_CHOICES内定义的表情
+    # SZX：choices 用于表单/模型校验；直接 ORM 保存不自动 full_clean，也没有枚举 CHECK 约束。
     reaction_type = models.CharField(
         _('reaction type'),
         max_length=10,
@@ -133,7 +138,7 @@ class CommentReaction(models.Model):
     class Meta:
         verbose_name = _('comment reaction')
         verbose_name_plural = _('comment reactions')
-        # WZY: 联合唯一约束：同一用户对同一条评论的同一种表情只能提交一次，防止重复点击
+        # 每个用户对同一评论的同一种 emoji 只能点一次
         unique_together = ['comment', 'user', 'reaction_type']
         indexes = [
             # WZY: 索引，加速根据评论+表情类型查询互动记录

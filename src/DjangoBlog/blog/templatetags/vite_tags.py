@@ -1,4 +1,5 @@
 # SY: Vite自定义标签，用来加载前端打包后的JS、CSS静态资源
+# SZX：vite_js 按 manifest 将入口映射为构建产物并附带 CSS；manifest 缺失、解析失败或为空时，回退到 Vite 开发服务器并加载 HMR 客户端。
 """
 Vite资源加载Django模板标签
 用于在Django模板中加载Vite构建的前端资源
