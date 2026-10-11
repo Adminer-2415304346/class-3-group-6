@@ -1,3 +1,4 @@
+# SY: Vite自定义标签，用来加载前端打包后的JS、CSS静态资源
 """
 Vite资源加载Django模板标签
 用于在Django模板中加载Vite构建的前端资源
