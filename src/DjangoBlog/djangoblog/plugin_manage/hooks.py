@@ -4,7 +4,7 @@ logger = logging.getLogger(__name__)
 
 _hooks = {}
 
-
+# GCY：插件钩子作为系统扩展点，仅特定业务事件发生时，才回调插件自定义处理逻辑
 def register(hook_name: str, callback: callable):
     """
     注册一个钩子回调。

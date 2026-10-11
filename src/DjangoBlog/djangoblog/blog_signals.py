@@ -63,7 +63,7 @@ def oauth_user_login_signal_handler(sender, **kwargs):
 
     delete_sidebar_cache()
 
-
+# GCY：Django模型信号属于条件触发，只有文章发生保存、删除事件时才会执行回调逻辑
 @receiver(post_save)
 def model_post_save_callback(
         sender,

@@ -8,7 +8,7 @@ from blog.documents import ELASTICSEARCH_ENABLED, ElaspedTimeDocumentManager
 
 logger = logging.getLogger(__name__)
 
-
+# GCY：中间件处于 HTTP 请求流水线，在请求到达业务视图之前完成请求拦截与预处理
 class OnlineMiddleware(object):
     def __init__(self, get_response=None):
         self.get_response = get_response

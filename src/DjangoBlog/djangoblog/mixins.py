@@ -66,7 +66,9 @@ class TimeStampedModel(models.Model):
 
 
 # ===== 视图层 Mixin =====
-
+# GCY：视图层Mixin，可供多个业务视图继承复用，实现查询缓存能力
+# GCY：缓存作用域局限于单次HTTP请求周期，减少重复数据库查询
+# GCY：属于架构复用组件，用来消除视图中重复的slug查询代码
 class SlugCachedMixin:
     """
     Mixin: 缓存 slug 查询结果，避免重复数据库查询
