@@ -1,3 +1,4 @@
+# SY: 自定义Django模板标签，在html模板中调用，向后端获取上下文数据
 import hashlib
 import json
 import logging
