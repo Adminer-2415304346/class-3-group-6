@@ -7,7 +7,8 @@ from .models import Category, Article
 
 logger = logging.getLogger(__name__)
 
-
+# GCY：seo_processor 已注册到模板引擎；使用请求上下文渲染模板时提供站点设置与导航数据，并非所有模板渲染都无条件调用。
+# SZX：审校限定调用条件；静态站点数据缓存 10 小时，SITE_BASE_URL 与 CURRENT_YEAR 在缓存命中时仍按当前请求和时间更新。
 def seo_processor(requests):
     key = 'seo_processor'
     value = cache.get(key)
