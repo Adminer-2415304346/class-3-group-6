@@ -30,6 +30,7 @@ class RegisterForm(UserCreationForm):
         self.fields['password2'].widget = widgets.PasswordInput(
             attrs={'placeholder': "repeat password", "class": "form-control"})
 
+    # YFY：clean_email表单钩子，校验邮箱是否已被注册，防止重复邮箱注册账号
     def clean_email(self):
         email = self.cleaned_data['email']
         if get_user_model().objects.filter(email=email).exists():
@@ -100,6 +101,7 @@ class ForgetPasswordForm(forms.Form):
             raise ValidationError(_("email does not exist"))
         return user_email
 
+    # YFY：clean_code钩子，调用utils工具类校验用户提交的重置密码验证码是否正确
     def clean_code(self):
         code = self.cleaned_data.get("code")
         error = utils.verify(

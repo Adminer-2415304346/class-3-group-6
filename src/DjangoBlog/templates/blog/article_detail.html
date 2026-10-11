@@ -1,4 +1,6 @@
 {% extends 'share_layout/base.html' %}
+{# SY: 文章详情页面，继承base母模板，展示单篇文章完整信息 #}
+{# SZX：ArticleDetailView 以 article 命名单篇对象，在 get_context_data 中补充评论表单 form、分页评论 p_comments 及相邻文章。 #}
 {% load blog_tags %}
 {% load cache %}
 {% load i18n %}
@@ -145,6 +147,7 @@
                 {# Comments Section #}
                 {% if article.comment_status == "o" and OPEN_SITE_COMMENT %}
                     {% include 'comments/tags/comment_list_modern.html' %}
+                    {# SY: 通过include复用评论子模板，加载评论模块，不修改comments目录内部代码 #}
 
                     {% if user.is_authenticated %}
                         {% include 'comments/tags/post_comment_modern.html' %}

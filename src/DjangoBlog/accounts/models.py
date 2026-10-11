@@ -8,6 +8,7 @@ from djangoblog.utils import get_current_site
 
 # Create your models here.
 
+# YFY：BlogUser继承AbstractUser，作为项目全局自定义用户模型，需要settings配置AUTH_USER_MODEL指向本类
 class BlogUser(AbstractUser):
     nickname = models.CharField(_('nick name'), max_length=100, blank=True)
     creation_time = models.DateTimeField(_('creation time'), default=now)

@@ -31,6 +31,7 @@ from djangoblog.mixins import (
 logger = logging.getLogger(__name__)
 
 
+# SZX：列表页以 Django ListView 为基础，两个 Mixin 补上查询缓存与页码处理。
 class ArticleListView(CachedListViewMixin, PageNumberMixin, ListView):
     """
     文章列表视图基类（重构版）
@@ -58,6 +59,7 @@ class ArticleListView(CachedListViewMixin, PageNumberMixin, ListView):
         return super(ArticleListView, self).get_context_data(**kwargs)
 
 
+# SZX：首页只展示已发布的普通文章；查询 Mixin 预加载作者、分类和标签。
 class IndexView(OptimizedArticleQueryMixin, ArticleListView):
     """
     首页视图（重构版）
@@ -86,6 +88,7 @@ class IndexView(OptimizedArticleQueryMixin, ArticleListView):
         return context
 
 
+# SZX：详情页按 article_id 取 Article，并把评论、相邻文章及 SEO 信息交给模板。
 class ArticleDetailView(DetailView):
     '''
     文章详情页面
@@ -174,6 +177,7 @@ class ArticleDetailView(DetailView):
         return context
 
 
+# SZX：category_name 对应 Category.slug；筛选范围包含当前分类及其子分类。
 class CategoryDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleListView):
     """
     分类目录列表（重构版）
@@ -255,6 +259,7 @@ class AuthorDetailView(OptimizedArticleQueryMixin, ArticleListView):
         return super(AuthorDetailView, self).get_context_data(**kwargs)
 
 
+# SZX：标签页先由 slug 取得 Tag，再通过文章与标签的多对多关系筛选文章。
 class TagDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleListView):
     """
     标签列表页面（重构版）

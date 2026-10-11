@@ -5,6 +5,9 @@
 
 // 导入样式文件（Vite开发模式必需）
 import './styles/main.css';
+import './styles/launcherLogin.css';
+import './styles/registration.css';
+import './styles/accountTransitions.css';
 
 import Alpine from 'alpinejs';
 import focus from '@alpinejs/focus';
@@ -29,6 +32,8 @@ import navigation from './components/navigation.js';
 import imageLightbox from './components/imageLightbox.js';
 import reactionPicker from './components/reactionPicker.js';
 import accountFlow from './components/accountFlow.js';
+import launcherLogin from './components/launcherLogin.js';
+import launcherAccount from './components/launcherAccount.js';
 
 // 注册全局Alpine数据
 Alpine.data('commentSystem', commentSystem);
@@ -37,6 +42,8 @@ Alpine.data('navigation', navigation);
 Alpine.data('imageLightbox', imageLightbox);
 Alpine.data('reactionPicker', reactionPicker);
 Alpine.data('accountFlow', accountFlow);
+Alpine.data('launcherLogin', launcherLogin);
+Alpine.data('launcherAccount', launcherAccount);
 
 // 全局工具函数
 window.Alpine = Alpine;
@@ -82,22 +89,27 @@ document.body.addEventListener('htmx:afterSwap', function(evt) {
 import NProgress from './utils/nprogress.js';
 NProgress.configure({ showSpinner: false });
 
-// 页面加载时的进度条
-NProgress.start();
-NProgress.set(0.4);
-
-const interval = setInterval(() => {
-    NProgress.inc();
-}, 1000);
-
-window.addEventListener('DOMContentLoaded', () => {
+// SZX：登录切屏已经反馈请求状态；避免同时出现另一条、不同步的进度条。
+const responseLinkedArrival = document.documentElement.getAttribute('data-account-arrival') === 'enter-site' ||
+    document.documentElement.getAttribute('data-account-transition') === 'enter-site' ||
+    document.documentElement.getAttribute('data-account-entered') === 'site';
+if (!responseLinkedArrival) {
+    NProgress.start();
+    NProgress.set(0.4);
+    const interval = setInterval(() => NProgress.inc(), 1000);
+    const finishPageProgress = () => {
+        NProgress.done();
+        clearInterval(interval);
+    };
+    if (document.readyState === 'complete') finishPageProgress();
+    else window.addEventListener('DOMContentLoaded', finishPageProgress, { once: true });
+} else {
     NProgress.done();
-    clearInterval(interval);
-});
+}
 
 // 页面导航时的进度条
 window.addEventListener('beforeunload', () => {
-    NProgress.start();
+    if (!document.documentElement.hasAttribute('data-login-departure')) NProgress.start();
 });
 
 // HTMX 事件监听 - 配合 NProgress

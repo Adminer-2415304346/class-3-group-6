@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UsernameField
 from .models import BlogUser
 
 
+# YFY：BlogUserCreationForm用于后台新增用户，适配Django5.1+ usable_password字段，标记用户来源为adminsite
 class BlogUserCreationForm(AdminUserCreationForm):
     """后台“新增用户”表单。
 
@@ -38,6 +39,7 @@ class BlogUserChangeForm(UserChangeForm):
         super().__init__(*args, **kwargs)
 
 
+# YFY：BlogUserAdmin为自定义用户后台管理类，绑定BlogUser模型，配置列表展示、搜索、新增编辑表单
 class BlogUserAdmin(UserAdmin):
     form = BlogUserChangeForm
     add_form = BlogUserCreationForm

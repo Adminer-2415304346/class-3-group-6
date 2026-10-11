@@ -1,128 +1,87 @@
-{% extends 'share_layout/base_account.html' %}
-{% load static %}
-{% load i18n %}
+{% extends 'share_layout/base_account_launcher.html' %}
 
-{% block page_title %}{% trans 'Create Account' %}{% endblock %}
+{% block page_title %}创建账号{% endblock %}
+{% block body_class %}launcher-page launcher-extended-page launcher-register-page{% endblock %}
 
-{% block content %}
-<div class="w-full max-w-md">
-    {# Header #}
-    <div class="mb-8 text-center">
-        <a href="/" class="mb-6 inline-flex items-center justify-center">
-            <div class="flex size-12 items-center justify-center rounded-xl bg-primary shadow-sm">
-                <span class="text-lg font-bold text-primary-foreground">
-                    {{ SITE_NAME|slice:":1" }}
-                </span>
-            </div>
-        </a>
-        <h1 class="mt-4 text-2xl font-bold tracking-tight text-foreground">
-            {% trans 'Create Account' %}
-        </h1>
-        <p class="mt-2 text-sm text-muted-foreground">
-            {% trans 'Join us today' %}
-        </p>
-    </div>
+{# SZX：注册使用完整的账户面板，不再将登录表单横跨屏幕翻转。行为继续复用原账户组件。 #}
+{% block account_layout %}
+<main id="main" class="launcher-shell registration-shell" x-data="accountFlow">
+    <section class="account-visual launcher-visual" aria-label="流动线条背景">
+        <canvas class="account-flow-canvas" x-ref="canvas" aria-hidden="true"></canvas>
+        <div class="account-visual-grid" aria-hidden="true"></div>
+    </section>
 
-    {# Form Card #}
-    <div class="rounded-xl border border-border bg-card p-6 shadow-sm sm:p-8">
-        <div x-data="{ showPassword: false }">
-
-            <form action="{% url 'account:register' %}" method="post" class="space-y-4">
-                {% csrf_token %}
-
-                {% if form.non_field_errors %}
-                    <div class="rounded-lg border border-destructive/30 bg-destructive/10 p-3">
-                        <div class="flex items-start gap-2">
-                            <svg class="size-4 text-destructive mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
-                            </svg>
-                            <div class="text-sm text-destructive">
-                                {{ form.non_field_errors }}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% for field in form %}
-                    <div>
-                        <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-foreground mb-1.5">
-                            {{ field.label }}
-                            {% if field.field.required %}
-                                <span class="text-destructive">*</span>
-                            {% endif %}
-                        </label>
-
-                        {% if 'password' in field.name %}
-                            <div class="relative">
-                                <input
-                                    :type="showPassword ? 'text' : 'password'"
-                                    name="{{ field.name }}"
-                                    id="{{ field.id_for_label }}"
-                                    value="{{ field.value|default:'' }}"
-                                    class="w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                                    placeholder="{{ field.label }}"
-                                    {% if field.field.required %}required{% endif %}>
-                                <button
-                                    type="button"
-                                    @click="showPassword = !showPassword"
-                                    :aria-pressed="showPassword.toString()"
-                                    aria-label="显示或隐藏密码"
-                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
-                                    <svg x-show="!showPassword" class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                    </svg>
-                                    <svg x-show="showPassword" class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        {% else %}
-                            <input
-                                type="{{ field.field.widget.input_type|default:'text' }}"
-                                name="{{ field.name }}"
-                                id="{{ field.id_for_label }}"
-                                value="{{ field.value|default:'' }}"
-                                class="w-full rounded-lg border border-border bg-background px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                                placeholder="{{ field.label }}"
-                                {% if field.field.required %}required{% endif %}>
-                        {% endif %}
-
-                        {% if field.errors %}
-                            <p class="mt-1.5 text-xs text-destructive">
-                                {{ field.errors.0 }}
-                            </p>
-                        {% endif %}
-
-                        {% if field.help_text %}
-                            <p class="mt-1 text-xs text-muted-foreground">
-                                {{ field.help_text }}
-                            </p>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-
-                <button
-                    type="submit"
-                    class="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-offset-2">
-                    {% trans 'Create Account' %}
-                </button>
-            </form>
-        </div>
-
-        <div class="border-t border-border/60 bg-secondary/30 px-8 py-4">
-            <div class="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span>{% trans 'Already have an account?' %}</span>
-                <a href="{% url 'account:login' %}"
-                   hx-get="{% url 'account:login' %}"
-                   hx-target="body"
-                   hx-swap="outerHTML"
-                   hx-push-url="true"
-                   class="font-medium text-primary transition-colors hover:text-primary/80">
-                    {% trans 'Sign In' %}
+    <section class="launcher-panel registration-board" aria-labelledby="account-title" x-data="launcherAccount">
+        <header class="registration-masthead">
+            <a class="launcher-brand" href="/" hx-boost="false" aria-label="{{ SITE_NAME }} 首页">
+                <span class="account-brand-mark launcher-brand-mark" aria-hidden="true">{% include 'share_layout/brand_mark.html' %}</span>
+                <strong>{{ SITE_NAME }}</strong>
+            </a>
+            <nav class="launcher-tools" aria-label="账户页辅助导航">
+                <a class="launcher-back" href="{% url 'account:login' %}" hx-boost="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                        <path d="m12 5-7 7 7 7M5 12h14" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>返回登录</span>
                 </a>
+                <button type="button" class="account-motion-toggle" x-cloak
+                        @click="toggleFlow()" :aria-pressed="paused.toString()"
+                        :aria-label="paused ? '继续流动效果' : '暂停流动效果'"
+                        x-text="paused ? '继续流动' : '暂停流动'">暂停流动</button>
+                <button type="button" class="account-theme-toggle launcher-theme-toggle" x-cloak
+                        @click="window.DarkMode && window.DarkMode.toggle()" aria-label="切换明暗主题" title="切换明暗主题">
+                    <span class="account-theme-glyph" aria-hidden="true"></span>
+                </button>
+            </nav>
+        </header>
+
+        <div class="registration-body">
+            <header class="registration-intro">
+                <p class="registration-kicker">从阅读到交流</p>
+                <h1 id="account-title">创建账号</h1>
+                <p class="registration-lead">留下想法，<br>接上新的讨论。</p>
+                <p class="registration-description">阅读 AI Agent 的工程实践，在文章与评论中交换经验，记录自己的思考。</p>
+                <ol class="registration-route" aria-label="注册后的使用流程">
+                    <li><span aria-hidden="true">01</span><div>设置账户<small>选择用户名与登录密码</small></div></li>
+                    <li><span aria-hidden="true">02</span><div>验证邮箱<small>通过邮件中的链接激活</small></div></li>
+                    <li><span aria-hidden="true">03</span><div>参与讨论<small>登录后继续阅读与交流</small></div></li>
+                </ol>
+            </header>
+
+            <div id="account-content" class="registration-form-pane" tabindex="-1">
+                <h2 class="registration-form-title">设置你的账户</h2>
+                <form id="register-form" class="launcher-form" action="{% url 'account:register' %}" method="post"
+                      x-ref="form" hx-boost="false" @submit="submit($event)" :aria-busy="submitting.toString()">
+                    {% csrf_token %}
+                    {% include 'share_layout/launcher_alert.html' %}
+
+                    <fieldset class="registration-fieldset">
+                        <legend>账户信息</legend>
+                        <div class="launcher-fields-grid">
+                            {% include 'share_layout/launcher_field.html' with field=form.username %}
+                            {% include 'share_layout/launcher_field.html' with field=form.email %}
+                        </div>
+                    </fieldset>
+                    <fieldset class="registration-fieldset">
+                        <legend>登录密码</legend>
+                        <div class="launcher-fields-grid">
+                            {% include 'share_layout/launcher_field.html' with field=form.password1 %}
+                            {% include 'share_layout/launcher_field.html' with field=form.password2 %}
+                        </div>
+                    </fieldset>
+                    <p class="launcher-form-note">注册后，请通过邮箱中的验证链接激活账号。</p>
+                    {% include 'share_layout/launcher_submit.html' with submit_label='创建账号' wide=True %}
+                </form>
             </div>
         </div>
-    </div>
-</div>
+
+        <footer class="launcher-footer registration-footer">
+            <p>由 Django 驱动 · 为持续表达而生</p>
+            <div>
+                <a href="{% url 'account:login' %}" hx-boost="false">已有账号？去登录</a>
+                <a href="{% url 'account:forget_password' %}" hx-boost="false">无法登录？</a>
+            </div>
+        </footer>
+    </section>
+</main>
 {% endblock %}

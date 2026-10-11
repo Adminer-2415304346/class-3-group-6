@@ -1,0 +1,13 @@
+<div class="launcher-submit-area{% if wide %} launcher-submit-area-wide{% endif %}">
+    <button class="launcher-submit{% if wide %} launcher-submit-wide{% endif %}" type="submit" :disabled="submitting"
+            :class="{ 'is-ready': ready, 'is-submitting': submitting }"
+            :aria-label="submitting ? '正在提交，请稍候' : '{{ submit_label }}'" aria-label="{{ submit_label }}">
+        {% if wide %}<span x-text="submitting ? '正在提交…' : '{{ submit_label }}'">{{ submit_label }}</span>{% endif %}
+        <svg class="launcher-submit-arrow" x-show="!submitting" viewBox="0 0 32 32"
+             fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 16h20m-8-8 8 8-8 8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="account-submit-spinner" x-show="submitting" x-cloak aria-hidden="true"></span>
+    </button>
+    {% if not wide %}<p class="launcher-submit-hint" aria-live="polite" x-text="submitting ? '正在提交…' : '{{ submit_label }}'">{{ submit_label }}</p>{% endif %}
+</div>

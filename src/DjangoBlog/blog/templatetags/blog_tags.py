@@ -1,3 +1,4 @@
+# SY: 自定义 Django 模板标签与过滤器，在服务端渲染模板时处理数据、生成内容或渲染子模板
 import hashlib
 import json
 import logging
@@ -406,6 +407,7 @@ def load_pagination_info(page_obj, page_type, tag_name):
     }
 
 
+# SZX：列表模板将当前 article、isindex 和 user 传入此 inclusion_tag；返回字典用于渲染 article_info.html，不是浏览器额外向后端请求数据。
 @register.inclusion_tag('blog/tags/article_info.html')
 def load_article_detail(article, isindex, user, query=None):
     """

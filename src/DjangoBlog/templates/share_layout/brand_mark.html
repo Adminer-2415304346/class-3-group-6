@@ -1,0 +1,5 @@
+{% load static %}
+{# SZX：只复用矢量标识，不重复 favicon 底色，也不添加重复的无障碍名称。 #}
+<svg class="site-mark" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true" focusable="false">
+    <use href="{% static 'blog/favicon.svg' %}?v=relay-1#site-brand-mark"></use>
+</svg>
