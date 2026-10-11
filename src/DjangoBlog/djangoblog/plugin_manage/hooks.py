@@ -4,7 +4,8 @@ logger = logging.getLogger(__name__)
 
 _hooks = {}
 
-# GCY：插件钩子作为系统扩展点，仅特定业务事件发生时，才回调插件自定义处理逻辑
+# GCY：register 仅将回调加入指定名字的钩子列表；业务代码显式调用 run_action 或 apply_filters 时，才执行该名字下已注册的回调。
+# SZX：审校区分注册与执行；Action 顺序调用回调，Filter 将每次返回值传给下一回调，不是由事件名自动触发。
 def register(hook_name: str, callback: callable):
     """
     注册一个钩子回调。

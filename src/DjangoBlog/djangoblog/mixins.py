@@ -66,9 +66,10 @@ class TimeStampedModel(models.Model):
 
 
 # ===== 视图层 Mixin =====
-# GCY：视图层Mixin，可供多个业务视图继承复用，实现查询缓存能力
-# GCY：缓存作用域局限于单次HTTP请求周期，减少重复数据库查询
-# GCY：属于架构复用组件，用来消除视图中重复的slug查询代码
+# GCY：SlugCachedMixin 被 CategoryDetailView、TagDetailView 继承，复用按 URL 中的 slug 查询分类或标签的逻辑。
+# GCY：对象保存在当前视图实例的 _slug_object 属性，重复调用 get_slug_object() 可复用结果；这不是跨请求共享缓存。
+# GCY：同一视图的列表筛选、缓存键生成及模板上下文可复用此对象，避免重复查询相同分类或标签。
+# SZX：审校补充实际调用方，并将实例缓存与下方 CachedListViewMixin 使用缓存后端的机制区分开。
 class SlugCachedMixin:
     """
     Mixin: 缓存 slug 查询结果，避免重复数据库查询
@@ -117,6 +118,7 @@ class SlugCachedMixin:
         return self._slug_object
 
 
+# SZX：IndexView 及分类、标签、作者、归档视图复用此查询入口；select_related 预加载作者/分类，prefetch_related 另行预取多对多标签。
 class OptimizedArticleQueryMixin:
     """
     Mixin: 优化文章查询（预加载关联对象）
@@ -154,6 +156,7 @@ class OptimizedArticleQueryMixin:
         )
 
 
+# SZX：缓存键和实际查询由子类实现；命中时复用缓存后端保存的结果，不能套用 SlugCachedMixin 仅限当前实例的缓存范围。
 class CachedListViewMixin:
     """
     Mixin: 为 ListView 提供统一的缓存逻辑
