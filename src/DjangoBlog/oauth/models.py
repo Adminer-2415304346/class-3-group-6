@@ -6,8 +6,9 @@ from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
 
-# GZX：OAuthUser 是第三方账号与本站用户的绑定表：openid+type 唯一定位外部身份，
+# GZX：OAuthUser 是第三方账号与本站用户的绑定表：回调使用 openid+type 识别外部身份，
 # author 外键关联本地 User；回调时先按 (type, openid) 查此表，不存在才新建并挂载到本站用户。
+# SZX：当前模型未对 (type, openid) 声明数据库联合唯一约束，author 也允许为空。
 class OAuthUser(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -35,7 +36,8 @@ class OAuthUser(models.Model):
 
 
 # GZX：OAuthConfig 按渠道(weibo/google/github/facebook/qq)保存 appkey/appsecret 与回调地址，
-# 是各 OAuthManager 子类构造时读取配置的数据来源；clean() 保证同一渠道只有一条启用配置。
+# 是各 OAuthManager 子类构造时读取配置的数据来源。
+# SZX：clean() 检查同渠道的全部配置（不限启用状态）；这是模型校验而非数据库唯一约束。
 class OAuthConfig(models.Model):
     TYPE = (
         ('weibo', _('weibo')),

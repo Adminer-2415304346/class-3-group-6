@@ -1,5 +1,6 @@
 {% extends 'share_layout/base.html' %}
-{# SY: 文章列表页，使用extends继承基础母模板base.html，在content块渲染全部文章列表 #}
+{# SY: 文章列表页，使用 extends 继承 base.html，在 content 块渲染当前筛选条件下的当前页文章列表 #}
+{# SZX：ArticleListView 以 article_list 命名列表上下文并提供 page_obj/paginator；首页 IndexView 仅查询 type='a'、status='p' 的普通已发布文章。 #}
 {% load blog_tags %}
 {% load i18n %}
 

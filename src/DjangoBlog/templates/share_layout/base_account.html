@@ -1,4 +1,5 @@
-{# SY: 账号体系专用母模板，继承base.html，用于登录、注册、个人中心页面 #}
+{# SY: 账号体系专用的独立母模板，提供账号页的通用布局与资源，不继承 base.html #}
+{# SZX：登录、注册、找回密码页经 base_account_launcher.html 间接继承本模板，OAuth 补充邮箱页直接继承本模板。 #}
 {% load static %}
 {% load i18n %}
 {% load compress %}

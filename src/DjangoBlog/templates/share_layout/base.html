@@ -1,4 +1,5 @@
 {# SY: 全局基础模板，所有普通页面extends继承，block定义可被子页面覆盖的内容占位区域 #}
+{# SZX：SITE_NAME、SITE_DESCRIPTION 与导航数据来自已注册的 seo_processor 上下文处理器；user 来自 Django auth 上下文处理器，并非本模板自行查询。 #}
 {% load static %}
 {% load cache %}
 {% load i18n %}
