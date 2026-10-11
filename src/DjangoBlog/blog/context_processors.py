@@ -7,7 +7,7 @@ from .models import Category, Article
 
 logger = logging.getLogger(__name__)
 
-
+# GCY：上下文处理器由 Django 框架调用，每次模板渲染时执行，向全部模板注入全局共享数据
 def seo_processor(requests):
     key = 'seo_processor'
     value = cache.get(key)
