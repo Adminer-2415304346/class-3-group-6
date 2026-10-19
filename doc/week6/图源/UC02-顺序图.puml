@@ -1,0 +1,22 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC02 查看文章详情
+actor "读者" as reader
+boundary "文章界面" as ui
+control "详情视图" as view
+entity "文章评论配置" as model
+control "插件钩子管理器" as hooks
+autonumber
+reader -> ui : 打开文章或评论页
+ui -> view : GET 文章详情
+view -> model : 按article_id取文章
+model --> view : 返回文章对象
+view -> model : 读取公开评论及配置
+model --> view : 返回评论与配置
+view -> model : 读取相邻已发布文章
+model --> view : 返回相邻文章
+view -> hooks : 执行详情加载动作
+hooks --> view : 完成上下文扩展
+view --> ui : 评论分页并渲染正文
+ui --> reader : 展示文章及评论区
+@enduml
