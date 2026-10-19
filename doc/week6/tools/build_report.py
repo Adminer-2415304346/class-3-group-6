@@ -289,7 +289,39 @@ def dict_table(d,title,items,keys=None):
     else:
         table(d,[captions.get(k,k) for k in keys],[[string(it.get(k,'')) for k in keys] for it in items],size=8.7)
 
+def append_activity_records(d,activity):
+    meeting=activity.get('meeting')
+    reading=activity.get('personal_reading',{})
+    if not meeting:return
+    heading(d,'附录D 组会与个人阅读记录',1,True)
+    heading(d,'D.1 第六周组会记录',2)
+    table(d,['项目','记录'],[
+      ('会议时间',meeting['date']+' '+meeting['start']+'—'+meeting['end']),
+      ('方式与地点',meeting['mode']+'，'+meeting['location']),
+      ('出席情况','全员出席：'+'、'.join(meeting['attendees'])+'；无缺席'),
+      ('主持与记录',meeting['chair']+'主持，'+meeting['recorder']+'记录'),
+      ('截止与确认','本周截止：'+meeting['deadline']+'；组长确认日期：'+meeting.get('confirmed_on','未提供')),
+      ('会议结论',meeting['decision']+'。延续六人模块责任，完成课件要求的架构、数据流、数据字典、用例及逐用例顺序图；由石兆翔汇总。'),
+      ('分工落实','SZX：整体架构与汇总；YFY：账号；WZY：评论与表情；GZX：OAuth；SY：模板与前端；GCY：共享机制、缓存、搜索及信号。'),
+      ('材料时间说明','材料此前已发布，2026年10月19日同步到本机。本轮Git提交与合并时间单独记录。'),
+      ('跟踪记录','模块分工与逐项验收见《第六周计划与组会议程》；仅石兆翔本人的阅读完成情况已确认，其余成员个人学习仍分别记录。')
+    ],[3.1,13.5],10)
+    heading(d,'D.2 石兆翔个人阅读记录',2,True)
+    body(d,'姓名：石兆翔；学号：2415304346；分支：szx_branch。本人于2026年10月19日确认TSPi第6—9章四章均已读完。以下要点结合章节主题和本项目整理。')
+    body(d,'实际阅读日期、用时、所用教材版本/来源与页码未提供，按四个章节记录范围；确认日期不作为实际阅读日期。',True)
+    table(d,['章节 / 主题','状态','学习要点与项目联系'],[
+      (str(ch['chapter'])+' '+ch['title'],ch['status'],'\n'.join(str(i+1)+'. '+s for i,s in enumerate(ch['key_points']))+'\n项目：'+ch['project_evidence']+'\n思考：'+ch['question']) for ch in reading.get('chapters',[])
+    ],[2.6,2.3,11.7],9.4)
+    body(d,'代码学习证据：blog/views.py本周3组SZX说明注释已随8328178提交，经PR #24、#25合入develop/main；AST和非注释代码一致。独立自测答卷、订正及得分未提供，参考思路不计为本人已完成自测。',True)
+
 def make_report(cases,a):
+    activity_path=CONTENT/'活动记录.json'
+    activity=json.loads(activity_path.read_text(encoding='utf-8')) if activity_path.exists() else {}
+    meeting=activity.get('meeting')
+    def cn_date(value):
+        year,month,day=value.split('-')
+        return f'{year}年{int(month)}月{int(day)}日'
+    meeting_note=(f"组会于{cn_date(meeting['date'])}{meeting['start']}—{meeting['end']}在{meeting['location']}{meeting['mode']}举行，六人全员出席，{meeting['chair']}主持并记录；本周截止日期为{cn_date(meeting['deadline'])}，会议确认{meeting['decision']}。" if meeting else None)
     d=Document(TEMPLATE)
     for el in list(d._element.body):
         if el.tag!=qn('w:sectPr'):d._element.body.remove(el)
@@ -310,13 +342,16 @@ def make_report(cases,a):
       ('小组成员','石兆翔 2415304346；喻飞扬 2415304347；王子扬 2415304348\n顾梓鑫 2415304345；宋洋 2415304330；郭曹钰 2415304331'),
       ('项目','DjangoBlog 二次开发；内容主题为 AI Agent 工程实践'),
       ('编制与核对','石兆翔负责汇总；本报告为源码静态分析成果'),
-      ('编制日期','2026年10月19日'),
+      ('编制日期',cn_date(activity.get('report_document_date','2026-10-19'))),
       ('源码基线',subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()),
       ('模板','《文档模板-开源软件泛读报告.docx》；保留六项正文结构，增加完整用例与顺序图附件')
     ],[3,13.6],10)
     body(d,'本报告分析已实现的技术博客。文章中的 Agent 案例属于内容主题，系统未因此具有自主智能体执行能力。图中控制类与边界类用于分析职责，不表示本周新增同名源码类。')
     body(d,'本次新完成内容：功能用例、上下文与一层数据流、主要数据字典、架构依赖、功能—类映射及各用例顺序图。界面截图与 ER 图承接第四、五周成果，并注明来源。',True)
-    body(d,'本周实际组会日期、个人阅读过程与成员确认不由源码推断，见随附计划与学习记录。',True)
+    if meeting_note:
+        body(d,meeting_note+'会议事实由组长于'+cn_date(meeting.get('confirmed_on','2026-10-19'))+'确认；个人原文阅读与自测记录见随附材料。',True)
+    else:
+        body(d,'本周实际组会日期、个人阅读过程与成员确认不由源码推断，见随附计划与学习记录。',True)
     # 页眉页码。
     hp=sec.header.paragraphs[0];hp.text='软件工程方法学  /  第6组  /  第六周泛读报告'
     for r in hp.runs:runfont(r,8)
@@ -328,8 +363,8 @@ def make_report(cases,a):
       ('数据流图与主要数据字典','1.2—1.3','上下文图、一层图；content/architecture.json'),
       ('界面与数据模型','第2、3节','引用week4界面截图、week5 ER与字段说明'),
       ('系统架构、包和类职责','第4、5节','UML包图、职责与功能追踪表'),
-      ('前阶段总结、本周计划与组会','第6节；独立计划文件','第六周计划与组会议程.md'),
-      ('TSPi 6—9章、Django熟悉与标注','配套个人材料','TSPi学习辅助、自测、Django代码标注记录')
+      ('前阶段总结、本周计划与组会','第6节、附录D；独立计划文件','第六周计划与组会议程.md'),
+      ('TSPi 6—9章、Django熟悉与标注','附录D及配套个人材料','TSPi学习辅助、自测、Django代码标注记录')
     ],[4.1,6.3,6.2])
     body(d,'分析方法：先沿 URLConf → 视图/表单 → 模型/共享组件 → 模板/响应追踪真实调用，再以业务职责建立用例、数据流和包依赖。带src/的路径相对仓库根目录，其余应用文件路径相对src/DjangoBlog；图的编号是本周统一编号。')
     body(d,'建模口径：用例图描述参与者目标；数据流图只表达数据输入、处理和存储；顺序图表达对象交互与响应先后；架构图表达包依赖。四类图不混用箭头含义。')
@@ -401,7 +436,10 @@ def make_report(cases,a):
         p=body(d,finding.get('id','')+' '+finding.get('title','')+'：'+finding.get('detail',string(finding)),True)
         p.paragraph_format.space_after=Pt(4)
     body(d,'下一步按缺陷影响和团队分工处理：先补文章详情与评论提交的发布/开关规则，再检查父评论归属、账号/OAuth约束和后台批处理后的缓存/索引一致性；修复应另建任务并配隔离回归。本次分析不擅自改业务规则。')
-    body(d,'本周组会采用随附议程核对上述模型；各成员逐项说明本人负责模块并确认。真实日期、发言及个人TSPi阅读完成情况待本人记录；当前文档生成不作为这些线下活动已完成的证明。')
+    if meeting_note:
+        body(d,meeting_note+'材料此前已发布，2026年10月19日同步到本机。本轮Git提交与合并时间另列于核验记录。具体记录见《第六周计划与组会议程》；个人阅读信息按本人提供情况补充。')
+    else:
+        body(d,'本周组会采用随附议程核对上述模型；各成员逐项说明本人负责模块并确认。真实日期、发言及个人TSPi阅读完成情况待本人记录；当前文档生成不作为这些线下活动已完成的证明。')
     heading(d,'附录A 用例说明',1,True)
     body(d,'所有用例共享系统时区及项目的路由/语言配置。前置条件仅描述本次选定场景，不替代源码已有的权限、校验或异常事实。与图中数据/对象名称同义的业务词可互相对应。')
     for i,u in enumerate(cases):
@@ -428,6 +466,7 @@ def make_report(cases,a):
       ('本周验证','见 第六周交付核验记录.md：图模型、DFD平衡、用例覆盖、DOCX结构与渲染检查。')
     ],[4.3,12.3])
     body(d,'可复现输入位于content/；图源位于图源/；tools/build_report.py基于本地模板重新生成。本报告不读取真实业务记录、密码或第三方凭据。',True)
+    append_activity_records(d,activity)
     d.core_properties.title='AI Agent工程实践-开源软件泛读报告'
     d.core_properties.author='石兆翔 / 24级软件工程3班第6组'
     d.core_properties.subject='软件工程方法学第六周任务'

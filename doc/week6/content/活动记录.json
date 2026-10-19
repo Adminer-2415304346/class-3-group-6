@@ -1,0 +1,114 @@
+{
+  "confirmed_on": "2026-10-19",
+  "source": "组长在本轮对话中提供的实际信息",
+  "report_document_date": "2026-10-18",
+  "meeting": {
+    "date": "2026-10-16",
+    "start": "20:00",
+    "end": "21:00",
+    "mode": "线下",
+    "location": "D7-406寝室",
+    "attendees": [
+      "石兆翔",
+      "喻飞扬",
+      "王子扬",
+      "顾梓鑫",
+      "宋洋",
+      "郭曹钰"
+    ],
+    "absent": [],
+    "chair": "石兆翔",
+    "recorder": "石兆翔",
+    "confirmed_on": "2026-10-17",
+    "confirmation_source": "组长在已保存Word中补充的确认日期",
+    "deadline": "2026-10-18",
+    "decision": "沿用现有分工与安排"
+  },
+  "personal_reading": {
+    "name": "石兆翔",
+    "student_id": "2415304346",
+    "branch": "szx_branch",
+    "status": "四章均已读完（本人确认）",
+    "confirmed_on": "2026-10-19",
+    "textbook_edition": null,
+    "textbook_source": null,
+    "actual_reading_dates": null,
+    "self_test_status": "未提供独立自测记录",
+    "chapters": [
+      {
+        "chapter": 6,
+        "title": "定义需求",
+        "status": "已读完（本人确认）",
+        "date": null,
+        "duration": null,
+        "pages": null,
+        "key_points": [
+          "需求需要明确参与者、触发、输入、结果与约束，才能形成可验证的验收条件。",
+          "用例、数据流、模型和测试应使用统一术语，并追踪同一条需求。",
+          "当前实现与需求期望应分别记录，不能以源码中已有外键推断跨对象规则齐全。"
+        ],
+        "project_evidence": "UC07；comments/views.py:CommentPostView；评论是否公开、父评论归属与文章开关",
+        "question": "怎样用最小但充分的验收例覆盖免审核和需审核两种评论流程？"
+      },
+      {
+        "chapter": 7,
+        "title": "团队设计",
+        "status": "已读完（本人确认）",
+        "date": null,
+        "duration": null,
+        "pages": null,
+        "key_points": [
+          "团队设计需要先明确模块责任及接口的输入、输出和异常。",
+          "用例图、数据流图、顺序图和架构图分别表达目标、数据、交互和依赖，应互相对应。",
+          "共用层与模块负责人需要明确缓存、插件和模板之间的调用边界。"
+        ],
+        "project_evidence": "系统包依赖图；djangoblog/mixins.py；comments与frontend的JSON交互",
+        "question": "如何在并行分工时及时发现字段、对象命名和异常处理不一致？"
+      },
+      {
+        "chapter": 8,
+        "title": "产品实现",
+        "status": "已读完（本人确认）",
+        "date": null,
+        "duration": null,
+        "pages": null,
+        "key_points": [
+          "实现应以已确认设计和约定为依据，保持改动范围清楚。",
+          "个人标注需要解释真实机制与边界，保留原有贡献来源。",
+          "注释修改、业务修复和环境配置应分开管理，并通过适当检查说明实际影响。"
+        ],
+        "project_evidence": "blog/views.py三组SZX注释；详情按主键查询、分类筛选与浏览量插件",
+        "question": "在只改注释的任务中，怎样同时验证语义准确性和代码行为未改变？"
+      },
+      {
+        "chapter": 9,
+        "title": "集成与系统测试",
+        "status": "已读完（本人确认）",
+        "date": null,
+        "duration": null,
+        "pages": null,
+        "key_points": [
+          "集成前应检查接口约定，并按照依赖安排合并和验证顺序。",
+          "测试需要记录版本、环境、输入、预期与实际结果，使问题可复查。",
+          "隔离环境与真实外部服务的验证结论应分别描述，历史测试不作为本轮重跑结果。"
+        ],
+        "project_evidence": "szx_branch→develop→main；本周交付核验；第五周隔离回归的范围说明",
+        "question": "表单与视图检查通过后，浏览器或真实OAuth仍失败时应如何定位责任边界？"
+      }
+    ]
+  },
+  "course_materials": {
+    "release_status": "此前已发布",
+    "initial_release_date": null,
+    "local_sync_date": "2026-10-19",
+    "note": "组长确认10月19日是同步到本机的日期，具体首次发布日期未提供"
+  },
+  "repository_update": {
+    "date": "2026-10-19",
+    "content_commit": "8328178",
+    "develop_pr": 24,
+    "main_pr": 25,
+    "main_merge": "5802230",
+    "note": "仅记录本轮GitHub提交合并，不作为课程材料首次发布时间"
+  }
+}

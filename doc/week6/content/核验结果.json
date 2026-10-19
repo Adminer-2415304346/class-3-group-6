@@ -11,10 +11,6 @@
   "source_noncomment_tokens_unchanged": true,
   "new_annotation_groups": 3,
   "docx_images": 22,
-  "docx_tables": 22,
-  "pdf": {
-    "pages": 50,
-    "blank_pages": [],
-    "out_of_page_text": []
-  }
+  "docx_tables": 24,
+  "report_format": "docx"
 }
