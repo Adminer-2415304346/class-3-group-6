@@ -1,0 +1,26 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC10 后台内容与站点管理
+actor "超级用户管理员" as admin
+boundary "后台管理界面" as ui
+control "自定义Admin站点" as site
+control "ModelAdmin及表单" as form
+entity "内容评论及配置" as model
+entity "缓存" as cache
+autonumber
+admin -> ui : 访问后台管理入口
+ui -> site : GET 后台页面
+site -> site : 检查is_superuser
+site -> form : 加载注册模型页面
+form -> model : 读取站点配置
+model --> form : 返回待编辑数据
+form --> ui : 渲染后台表单
+admin -> ui : 编辑并提交保存
+ui -> form : POST 编辑字段
+form -> form : 执行表单及模型校验
+form -> model : 保存BlogSettings
+model -> cache : 清除全部缓存
+model --> form : 保存完成
+form --> ui : 返回保存成功提示
+ui --> admin : 展示更新结果
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC07 发表评论与回复
+actor "已登录读者" as reader
+boundary "评论回复界面" as ui
+control "评论提交视图" as view
+control "登录保护及表单" as form
+entity "用户文章及配置" as data
+entity "评论模型" as comment
+autonumber
+reader -> ui : 输入评论或回复
+ui -> view : POST 正文及父ID
+view -> form : 验证登录CSRF及表单
+form --> view : 返回合法输入
+view -> data : 读取用户文章及配置
+data --> view : 返回开关及审核要求
+view -> view : 检查文章评论开关
+view -> comment : 读取目标父评论
+comment --> view : 返回父评论对象
+view -> comment : 关联并设is_enable=True
+view -> comment : 保存新评论
+comment --> view : 返回评论主键
+view --> ui : 重定向评论锚点
+ui --> reader : 展示公开回复
+@enduml

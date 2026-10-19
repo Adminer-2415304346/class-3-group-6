@@ -1,0 +1,26 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC04 注册与邮箱激活
+actor "注册访客" as visitor
+boundary "注册及结果界面" as ui
+control "注册激活视图" as view
+control "注册表单" as form
+entity "本站用户" as user
+participant "邮件服务" as mail
+autonumber
+visitor -> ui : 填写注册信息
+ui -> view : POST 注册及CSRF
+view -> form : 验证用户名邮箱密码
+form --> view : 返回校验结果
+view -> user : 保存未激活用户
+user --> view : 返回用户ID
+view -> mail : 信号请求发验证邮件
+mail --> visitor : 投递验证链接
+view --> ui : 结果跳转存在命名缺陷
+visitor -> view : GET 激活ID及签名
+view -> view : 校验激活签名
+view -> user : 设置is_active=True
+user --> view : 保存激活状态
+view --> ui : 渲染验证成功页
+ui --> visitor : 提示可以登录
+@enduml

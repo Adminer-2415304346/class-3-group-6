@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC03 搜索文章
+actor "读者" as reader
+boundary "搜索界面" as ui
+control "搜索视图及表单" as view
+participant "搜索索引后端" as index
+entity "文章模型" as article
+autonumber
+reader -> ui : 输入关键字
+ui -> view : GET q及page参数
+view -> index : 设置高亮及建议开关
+view -> index : 提交关键字检索
+index --> view : 返回结果及建议词
+view -> view : 构造分页上下文
+view --> ui : 渲染搜索结果页
+ui -> article : 解析result.object
+article --> ui : 返回对应文章
+ui --> reader : 展示摘要及分页
+reader -> ui : 选择结果文章
+@enduml

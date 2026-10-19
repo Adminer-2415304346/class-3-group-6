@@ -1,0 +1,25 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC08 评论表情互动
+actor "读者" as reader
+boundary "表情组件" as ui
+control "表情互动视图" as view
+entity "公开评论" as comment
+entity "表情记录" as reaction
+autonumber
+reader -> ui : 查看评论表情
+ui -> view : GET 表情统计
+view -> comment : 获取is_enable评论
+comment --> view : 返回公开评论
+view -> reaction : 聚合表情统计
+view --> ui : 返回统计JSON
+reader -> ui : 点击一种表情
+ui -> view : POST 表情及CSRF
+view -> view : 验登录评论及枚举
+view -> reaction : get_or_create记录
+reaction --> view : 返回新对象created=True
+view -> comment : 重新计算表情统计
+comment --> view : 返回数量用户及选中态
+view --> ui : 返回action及统计
+ui --> reader : 刷新表情状态
+@enduml

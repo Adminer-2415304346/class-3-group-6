@@ -1,0 +1,24 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC09 第三方登录与邮箱绑定
+actor "第三方账号用户" as user
+boundary "登录绑定界面" as ui
+control "OAuth视图及管理器" as view
+participant "OAuth提供方" as provider
+entity "外部身份及本站用户" as model
+autonumber
+user -> ui : 选择第三方登录
+ui -> view : GET type及next_url
+view -> model : 读取启用渠道配置
+model --> view : 返回OAuth配置
+view -> provider : 重定向发起授权
+provider --> user : 请求身份授权
+provider -> view : 浏览器回调code
+view -> provider : 换token并取用户资料
+provider --> view : 返回含邮箱的身份
+view -> model : 查建身份并关联用户
+model --> view : 返回本地用户关联
+view -> view : 发登录信号并建会话
+view --> ui : 写Cookie并安全跳转
+ui --> user : 展示已登录页面
+@enduml
