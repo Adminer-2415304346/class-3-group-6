@@ -68,20 +68,8 @@ def main():
             if name.endswith('.xml'):ET.fromstring(z.read(name))
     pages=ET.parse(WEEK/'图源/系统分析模型.drawio').getroot().findall('diagram')
     assert len(pages)==17,len(pages) # 用例、架构、上下文、4个一层分区、10顺序图
-    pdf=WEEK/'AI Agent工程实践-开源软件泛读报告.pdf'
-    pdf_result=None
-    if pdf.exists():
-        import fitz
-        pd=fitz.open(pdf)
-        blank=[]; outside=[]
-        for i,p in enumerate(pd):
-            if len(p.get_text().strip())<35 and not p.get_images():blank.append(i+1)
-            for b in p.get_text('blocks'):
-                if b[0]<15 or b[1]<10 or b[2]>p.rect.width-15 or b[3]>p.rect.height-10:outside.append(i+1)
-        assert not blank,blank
-        assert not outside,outside
-        pdf_result={'pages':len(pd),'blank_pages':blank,'out_of_page_text':outside}
-    result={'usecases':len(cases),'sequence_messages':messages,'diagrams':len(pages),'flows':len(flows),'structures':len(structures),'elements':len(dd['elements']),'stores':len(dd['stores']),'external_flows_balanced':len(external_signature(data['context'])),'source_ast_unchanged':True,'source_noncomment_tokens_unchanged':True,'new_annotation_groups':3,'docx_images':len(d.inline_shapes),'docx_tables':len(d.tables),'pdf':pdf_result}
+    assert not list(WEEK.glob('*.pdf')), '本轮按用户要求仅交付Word版本'
+    result={'usecases':len(cases),'sequence_messages':messages,'diagrams':len(pages),'flows':len(flows),'structures':len(structures),'elements':len(dd['elements']),'stores':len(dd['stores']),'external_flows_balanced':len(external_signature(data['context'])),'source_ast_unchanged':True,'source_noncomment_tokens_unchanged':True,'new_annotation_groups':3,'docx_images':len(d.inline_shapes),'docx_tables':len(d.tables),'report_format':'docx'}
     (WEEK/'content/核验结果.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,ensure_ascii=True,indent=2))
 
