@@ -1,0 +1,22 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC05 登录与退出
+actor "本站用户" as user
+boundary "登录及导航界面" as ui
+control "登录退出视图" as view
+control "认证表单及后端" as auth
+entity "用户会话" as session
+autonumber
+user -> ui : 打开登录入口
+ui -> view : GET 登录页
+view --> ui : 返回登录表单
+user -> ui : 提交账号密码
+ui -> view : POST 登录及next
+view -> auth : 验证账号密码及激活
+auth --> view : 返回已认证用户
+view -> session : auth.login建立会话
+view -> session : 设置会话有效期
+view -> view : 检查next同站范围
+view --> ui : 标记Cookie并重定向
+ui --> user : 展示登录后页面
+@enduml

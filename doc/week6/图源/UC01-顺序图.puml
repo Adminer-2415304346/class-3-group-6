@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC01 浏览文章列表
+actor "读者" as reader
+boundary "列表界面" as ui
+control "列表视图" as view
+entity "缓存" as cache
+entity "文章及分类标签" as model
+autonumber
+reader -> ui : 选择入口及页码
+ui -> view : GET 列表请求
+view -> model : 分类标签时解析slug
+model --> view : 返回筛选对象
+view -> cache : 读取列表缓存
+cache --> view : 返回命中或未命中
+view -> model : 缓存未命中查询文章
+model --> view : 返回预加载结果
+view -> cache : 保存列表结果
+view --> ui : 分页并渲染列表
+ui --> reader : 展示摘要及页码
+@enduml

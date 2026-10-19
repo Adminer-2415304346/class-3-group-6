@@ -95,6 +95,8 @@ class ArticleDetailView(DetailView):
     '''
     template_name = 'blog/article_detail.html'
     model = Article
+    # SZX（第六周）：默认 get_queryset() 未筛选发布状态；article_id 是取对象的主键，
+    # URL 中的年月日也未在本类重新校验，不能把列表页的筛选规则视为详情页权限。
     pk_url_kwarg = 'article_id'
     context_object_name = "article"
 
@@ -173,6 +175,8 @@ class ArticleDetailView(DetailView):
         hooks.run_action(ARTICLE_DETAIL_LOAD, article=article, context=context, request=self.request)
         
         # Action Hook, 通知插件"文章详情已获取"
+        # SZX（第六周）：这里只显式触发 Hook；浏览量更新由已注册的 view_count 插件执行，
+        # ArticleDetailView 自身没有直接调用 article.viewed()。
         hooks.run_action('after_article_body_get', article=article, request=self.request)
         return context
 
@@ -194,6 +198,8 @@ class CategoryDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleLis
         category = self.get_slug_object()
         categorynames = [c.name for c in category.get_sub_categorys()]
 
+        # SZX（第六周）：此处只限定 status='p'，未像首页同时限定 type='a'；
+        # 分析分类列表时应以该查询为准，不能据首页推断其排除了独立页面。
         return self.get_optimized_article_queryset().filter(
             category__name__in=categorynames, status='p'
         )
