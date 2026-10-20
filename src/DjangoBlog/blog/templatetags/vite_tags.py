@@ -1,4 +1,5 @@
 # SY: Vite自定义标签，用来加载前端打包后的JS、CSS静态资源
+# SZX（第7—8周）：模板到 Vite manifest 的资源桥接，路径依赖构建产物与部署静态配置。
 # SZX：vite_js 按 manifest 将入口映射为构建产物并附带 CSS；manifest 缺失、解析失败或为空时，回退到 Vite 开发服务器并加载 HMR 客户端。
 """
 Vite资源加载Django模板标签
@@ -31,6 +32,7 @@ def load_manifest():
     包含所有构建资源的映射关系
     """
     global _manifest_cache
+    # SZX（第7—8周）：生产缓存使用 None 区分未加载，空字典也是已读到的结果。
 
     # 开发模式下不使用缓存，每次都重新读取
     # 生产模式下使用缓存提高性能
@@ -75,6 +77,7 @@ def vite_asset(entry_name):
     用法：
         {% vite_asset 'src/main.js' %}
     """
+    # SZX（第7—8周）：只返回资源 URL；入口不存在时仍回退开发服务器，生产策略待完善。
     manifest = load_manifest()
 
     if entry_name in manifest:
@@ -103,6 +106,7 @@ def vite_js(entry_name='src/main.js'):
     用法：
         {% vite_js 'src/main.js' %}
     """
+    # SZX（第7—8周）：有 manifest 才走构建产物；缺失时注入 HMR，与 DEBUG 开关并不等价。
     manifest = load_manifest()
 
     # 开发模式：使用Vite开发服务器
@@ -115,6 +119,7 @@ def vite_js(entry_name='src/main.js'):
         ''')
 
     # 生产模式：使用构建后的文件
+    # SZX（第7—8周）：当前依赖可信模板参数和本地 manifest；输出 HTML 的信任边界需保留。
     if entry_name not in manifest:
         logger.error(f'❌ Entry "{entry_name}" not found in manifest')
         return ''

@@ -1,0 +1,2 @@
+# Keep all checks; business/test scope is selected explicitly by scan_app.py.
+skips: []

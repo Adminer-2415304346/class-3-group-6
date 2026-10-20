@@ -1,0 +1,496 @@
+{
+  "app": "blog",
+  "owner": "SZX",
+  "stage": "after",
+  "timestamp_utc": "2026-10-20T05:16:14.798692+00:00",
+  "base_commit": "2cc4cc721515258d17fa3168c690d72cb7867b51",
+  "python": "3.12.7",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "blog/migrations/0001_initial.py",
+    "blog/migrations/0002_blogsettings_global_footer_and_more.py",
+    "blog/migrations/0003_blogsettings_comment_need_review.py",
+    "blog/migrations/0004_rename_analyticscode_blogsettings_analytics_code_and_more.py",
+    "blog/migrations/0005_alter_article_options_alter_category_options_and_more.py",
+    "blog/migrations/0006_alter_blogsettings_options.py",
+    "blog/migrations/0007_article_idx_type_status_pub_article_idx_status_views_and_more.py",
+    "blog/migrations/0008_blogsettings_color_scheme.py",
+    "blog/migrations/0009_rename_demo_categories.py",
+    "blog/migrations/0010_refresh_demo_content.py",
+    "blog/migrations/__init__.py",
+    "blog/test_admin.py",
+    "blog/test_agent_demo_data.py",
+    "blog/test_article_business_logic.py",
+    "blog/test_brand_assets.py",
+    "blog/test_context_processors.py",
+    "blog/test_middleware.py",
+    "blog/test_templatetags.py",
+    "blog/test_views.py",
+    "blog/test_week78_quality.py",
+    "blog/tests.py"
+  ],
+  "files": [
+    {
+      "path": "blog/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "blog/admin.py",
+      "sha256": "a1414545866cca8cfc9f4868282e43f878656ee659853e8f464b5b0c9504036f",
+      "physical_lines": 149,
+      "code_token_lines": 104,
+      "comment_lines": 10,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 8,
+      "functions_and_methods": 12
+    },
+    {
+      "path": "blog/apps.py",
+      "sha256": "0fe483a500225e3ba8381f2b85fa954eb0a4b6b1cd4dbe111765992cf1c7639e",
+      "physical_lines": 58,
+      "code_token_lines": 41,
+      "comment_lines": 9,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "blog/context_processors.py",
+      "sha256": "5dfdd4e72c8f19919ea580166e0febe15626deca84159d14f10eb991e0a9e133",
+      "physical_lines": 56,
+      "code_token_lines": 44,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 0,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "blog/documents.py",
+      "sha256": "d6b6e0b615c2c6f7a8c27c62ab6ce9d6df26115324cda2b92ba361889cdc6e73",
+      "physical_lines": 269,
+      "code_token_lines": 198,
+      "comment_lines": 26,
+      "signed_comment_lines": {
+        "SZX": 15,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 11,
+      "functions_and_methods": 9
+    },
+    {
+      "path": "blog/forms.py",
+      "sha256": "be7b9c9cac05fb45e76797687ef24ddbd6344e827956b59b60bde387ea7b2b5e",
+      "physical_lines": 21,
+      "code_token_lines": 13,
+      "comment_lines": 2,
+      "signed_comment_lines": {
+        "SZX": 2,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "blog/management/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "blog/management/commands/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "blog/management/commands/build_index.py",
+      "sha256": "132e751ed85e0187273984d75ab3b3f5ce9239b4b851442adafe206fbd50e6b4",
+      "physical_lines": 21,
+      "code_token_lines": 13,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "blog/management/commands/build_search_words.py",
+      "sha256": "c9028381a4f7e69d382a24bcac89589c82e65ee5cfe91fe5f3b5941669f90493",
+      "physical_lines": 16,
+      "code_token_lines": 8,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "blog/management/commands/clear_cache.py",
+      "sha256": "ceed25ca562c45ba4f1ac6e4152e0d71259021503f395969a62597dcbfd80f0b",
+      "physical_lines": 14,
+      "code_token_lines": 7,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "blog/management/commands/create_testdata.py",
+      "sha256": "cf4b7e76ac454322637f03b88b505f14d7045353f38e47b5b42127dcfc845ba2",
+      "physical_lines": 193,
+      "code_token_lines": 161,
+      "comment_lines": 14,
+      "signed_comment_lines": {
+        "SZX": 7,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "blog/management/commands/ping_baidu.py",
+      "sha256": "4c624a72e03e2d84471e457a83bf94f38d55fc64c6193d12a47aabe6a6e98034",
+      "physical_lines": 56,
+      "code_token_lines": 41,
+      "comment_lines": 6,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "blog/management/commands/sync_user_avatar.py",
+      "sha256": "4fb4e32cfa032e5e01e867f24a72328aad1eff33fef5e851d0dbc7e2fb7b746e",
+      "physical_lines": 52,
+      "code_token_lines": 42,
+      "comment_lines": 5,
+      "signed_comment_lines": {
+        "SZX": 5,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "blog/middleware.py",
+      "sha256": "75162cbe11bc2e1f595000bb1cdd471606135d481146adbe74eafb9dc8d74c9c",
+      "physical_lines": 45,
+      "code_token_lines": 35,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "blog/models.py",
+      "sha256": "6609a5f70f519aa90de58ce8dd3ea5bbc2a13ffed0f47b2a5702a8175963185e",
+      "physical_lines": 425,
+      "code_token_lines": 339,
+      "comment_lines": 26,
+      "signed_comment_lines": {
+        "SZX": 20,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 15,
+      "functions_and_methods": 28
+    },
+    {
+      "path": "blog/search_indexes.py",
+      "sha256": "a75980b99e4b3adeff00b2e2800a36b379b2def6bbe8f607003b3604ea62c715",
+      "physical_lines": 19,
+      "code_token_lines": 10,
+      "comment_lines": 5,
+      "signed_comment_lines": {
+        "SZX": 4,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "blog/templatetags/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "blog/templatetags/blog_tags.py",
+      "sha256": "1387d85afd389d3551b67ad59caf25e4743a0c65df51ecfa2ea7888bd82b2a96",
+      "physical_lines": 742,
+      "code_token_lines": 555,
+      "comment_lines": 52,
+      "signed_comment_lines": {
+        "SZX": 16,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 35
+    },
+    {
+      "path": "blog/templatetags/vite_tags.py",
+      "sha256": "ccb936286b6a6bf44d886fefb87094f2c58dc11f2017e8f174de84f9e00288d1",
+      "physical_lines": 238,
+      "code_token_lines": 185,
+      "comment_lines": 20,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 7
+    },
+    {
+      "path": "blog/urls.py",
+      "sha256": "71aa429b4c409d61cdda93a6ebc75ba4ed402423290667766489d3105a8f597d",
+      "physical_lines": 68,
+      "code_token_lines": 60,
+      "comment_lines": 6,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "blog/views.py",
+      "sha256": "b324fe3844d02b06cb17df14e8d51229cd524d104f0acf68c11226ff15924a82",
+      "physical_lines": 446,
+      "code_token_lines": 320,
+      "comment_lines": 52,
+      "signed_comment_lines": {
+        "SZX": 22,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 9,
+      "functions_and_methods": 23
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SZX\\原始工具结果\\after\\ruff.json",
+        "blog/__init__.py",
+        "blog/admin.py",
+        "blog/apps.py",
+        "blog/context_processors.py",
+        "blog/documents.py",
+        "blog/forms.py",
+        "blog/management/__init__.py",
+        "blog/management/commands/__init__.py",
+        "blog/management/commands/build_index.py",
+        "blog/management/commands/build_search_words.py",
+        "blog/management/commands/clear_cache.py",
+        "blog/management/commands/create_testdata.py",
+        "blog/management/commands/ping_baidu.py",
+        "blog/management/commands/sync_user_avatar.py",
+        "blog/middleware.py",
+        "blog/models.py",
+        "blog/search_indexes.py",
+        "blog/templatetags/__init__.py",
+        "blog/templatetags/blog_tags.py",
+        "blog/templatetags/vite_tags.py",
+        "blog/urls.py",
+        "blog/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SZX\\原始工具结果\\after\\bandit.json",
+        "blog/__init__.py",
+        "blog/admin.py",
+        "blog/apps.py",
+        "blog/context_processors.py",
+        "blog/documents.py",
+        "blog/forms.py",
+        "blog/management/__init__.py",
+        "blog/management/commands/__init__.py",
+        "blog/management/commands/build_index.py",
+        "blog/management/commands/build_search_words.py",
+        "blog/management/commands/clear_cache.py",
+        "blog/management/commands/create_testdata.py",
+        "blog/management/commands/ping_baidu.py",
+        "blog/management/commands/sync_user_avatar.py",
+        "blog/middleware.py",
+        "blog/models.py",
+        "blog/search_indexes.py",
+        "blog/templatetags/__init__.py",
+        "blog/templatetags/blog_tags.py",
+        "blog/templatetags/vite_tags.py",
+        "blog/urls.py",
+        "blog/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SZX\\原始工具结果\\after\\bandit.json\r\n"
+    }
+  }
+}

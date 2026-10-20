@@ -1,3 +1,4 @@
+# SZX（第7—8周）：Django 启动时检查搜索后端，可能访问外部服务，隔离测试需先改设置。
 from django.apps import AppConfig
 import logging
 
@@ -14,6 +15,7 @@ class BlogConfig(AppConfig):
 
     def check_search_index(self):
         """检查搜索索引是否存在，不存在则创建空索引"""
+        # SZX（第7—8周）：ES 配置决定是否启用；异常只记日志，不等同于索引健康检查通过。
         from django.conf import settings
 
         # 1. 检查Elasticsearch索引
@@ -23,6 +25,7 @@ class BlogConfig(AppConfig):
                 if ELASTICSEARCH_ENABLED:
                     from elasticsearch import Elasticsearch
                     es_config = settings.ELASTICSEARCH_DSL['default']
+                    # SZX（第7—8周）：此处关闭证书验证；TLS 策略需与实际部署配置协调改进。
                     es = Elasticsearch(hosts=[es_config['hosts']], verify_certs=False)
 
                     # 检查blog索引是否存在
