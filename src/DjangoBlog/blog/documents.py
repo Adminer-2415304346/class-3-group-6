@@ -1,3 +1,4 @@
+# SZX（第7—8周）：定义Elasticsearch文章和耗时文档；管理器方法会访问索引，不能当纯数据转换模块运行。
 import time
 
 import elasticsearch.client
@@ -7,6 +8,7 @@ from elasticsearch_dsl.connections import connections
 
 from blog.models import Article
 
+# SZX（第7—8周）：此标志只表示配置存在，不代表ES可用；连接参数也仅在启用分支中创建。
 ELASTICSEARCH_ENABLED = hasattr(settings, 'ELASTICSEARCH_DSL')
 
 if ELASTICSEARCH_ENABLED:
@@ -57,6 +59,7 @@ if ELASTICSEARCH_ENABLED:
     es = Elasticsearch(**es_params)
     connections.create_connection(**es_params)
 
+    # SZX（第7—8周）：启用ES时导入即查询GeoIP管道，缺失则创建；这里只捕获NotFoundError。
     # 设置 GeoIP pipeline
     try:
         es.ingest.get_pipeline(id='geoip')
@@ -120,6 +123,7 @@ class ElapsedTimeDocument(Document):
 
 
 class ElaspedTimeDocumentManager:
+    # SZX（第7—8周）：检查performance索引，不存在才初始化；调用者须有ES配置和可用连接。
     @staticmethod
     def build_index():
         from elasticsearch import Elasticsearch
@@ -129,6 +133,7 @@ class ElaspedTimeDocumentManager:
         if not res:
             ElapsedTimeDocument.init()
 
+    # SZX（第7—8周）：删除整个performance索引及其耗时记录；忽略不存在，不屏蔽连接或权限异常。
     @staticmethod
     def delete_index():
         from elasticsearch import Elasticsearch
@@ -138,6 +143,7 @@ class ElaspedTimeDocumentManager:
         except elasticsearch.exceptions.NotFoundError:
             pass
 
+    # SZX（第7—8周）：将请求URL、毫秒耗时、时间、UA及IP写入ES，返回值为空，属于持久化副作用。
     @staticmethod
     def create(url, time_taken, log_datetime, useragent, ip):
         ElaspedTimeDocumentManager.build_index()
@@ -157,6 +163,7 @@ class ElaspedTimeDocumentManager:
         ua.string = useragent.ua_string
         ua.is_bot = useragent.is_bot
 
+        # SZX（第7—8周）：文档ID取当前毫秒；同毫秒并发写入不能据此保证唯一，保存还会调用GeoIP管道。
         doc = ElapsedTimeDocument(
             meta={
                 'id': int(
@@ -171,6 +178,7 @@ class ElaspedTimeDocumentManager:
         doc.save(pipeline="geoip")
 
 
+# SZX（第7—8周）：文章索引冗余作者、分类和标签；IK分析器是ES部署依赖，不是Whoosh的分词配置。
 class ArticleDocument(Document):
     body = Text(analyzer='ik_max_word', search_analyzer='ik_smart')
     title = Text(analyzer='ik_max_word', search_analyzer='ik_smart')
@@ -204,12 +212,15 @@ class ArticleDocument(Document):
 
 class ArticleDocumentManager():
 
+    # SZX（第7—8周）：实例化即初始化索引映射，构造对象会联网；并非等到搜索时才访问ES。
     def __init__(self):
         self.create_index()
 
+    # SZX（第7—8周）：初始化或更新blog索引映射；该方法自身不删除索引，也不装载文章。
     def create_index(self):
         ArticleDocument.init()
 
+    # SZX（第7—8周）：删除整个blog索引；只容忍索引不存在，命令重建失败时不会自动恢复原索引。
     def delete_index(self):
         from elasticsearch import Elasticsearch
         es = Elasticsearch(**es_params)
@@ -218,6 +229,7 @@ class ArticleDocumentManager():
         except elasticsearch.exceptions.NotFoundError:
             pass
 
+    # SZX（第7—8周）：将传入文章转成文档列表，不写ES；读取作者、分类、标签时仍可能触发ORM查询。
     def convert_to_doc(self, articles):
         return [
             ArticleDocument(
@@ -242,13 +254,16 @@ class ArticleDocumentManager():
                 views=article.views,
                 article_order=article.article_order) for article in articles]
 
+    # SZX（第7—8周）：初始化映射后逐篇保存；本方法不负责先删除旧索引，也没有批量事务回滚。
     def rebuild(self, articles=None):
         ArticleDocument.init()
+        # SZX（第7—8周）：空集合也回退全部文章，不筛发布态/类型。
         articles = articles if articles else Article.objects.all()
         docs = self.convert_to_doc(articles)
         for doc in docs:
             doc.save()
 
+    # SZX（第7—8周）：逐个保存传入文档，按相同ID覆盖；发生异常前已保存的文档不会自动回滚。
     def update_docs(self, docs):
         for doc in docs:
             doc.save()

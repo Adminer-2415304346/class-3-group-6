@@ -1,0 +1,630 @@
+{
+  "baseline_commit": "2cc4cc721515258d17fa3168c690d72cb7867b51",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "same_scan_scope_and_rules": true,
+  "scale": {
+    "baseline": {
+      "physical_lines": 2772,
+      "code_token_lines": 2163,
+      "comment_lines": 151,
+      "classes": 53,
+      "functions_and_methods": 130,
+      "files": 22,
+      "nonempty_files": 18
+    },
+    "after": {
+      "physical_lines": 2888,
+      "code_token_lines": 2176,
+      "comment_lines": 256,
+      "classes": 53,
+      "functions_and_methods": 132,
+      "files": 22,
+      "nonempty_files": 18
+    }
+  },
+  "scan_counts": {
+    "baseline": {
+      "ruff_total": 66,
+      "ruff_rules": {
+        "I001": 18,
+        "F401": 14,
+        "F841": 2,
+        "E501": 25,
+        "E722": 1,
+        "E741": 1,
+        "B009": 2,
+        "B010": 1,
+        "C901": 1,
+        "E402": 1
+      },
+      "bandit_total": 45,
+      "bandit_rules": {
+        "B110": 1,
+        "B703": 21,
+        "B308": 22,
+        "B311": 1
+      },
+      "bandit_severity": {
+        "LOW": 2,
+        "MEDIUM": 43
+      },
+      "bandit_errors": []
+    },
+    "after": {
+      "ruff_total": 65,
+      "ruff_rules": {
+        "I001": 17,
+        "F401": 14,
+        "F841": 2,
+        "E501": 25,
+        "E722": 1,
+        "E741": 1,
+        "B009": 2,
+        "B010": 1,
+        "C901": 1,
+        "E402": 1
+      },
+      "bandit_total": 39,
+      "bandit_rules": {
+        "B110": 1,
+        "B703": 18,
+        "B308": 19,
+        "B311": 1
+      },
+      "bandit_severity": {
+        "LOW": 2,
+        "MEDIUM": 37
+      },
+      "bandit_errors": []
+    }
+  },
+  "annotation_marker": "SZX（第7—8周）",
+  "annotations": [
+    {
+      "file": "blog/admin.py",
+      "week78_signed_physical_lines": 6,
+      "line_numbers": [
+        1,
+        22,
+        27,
+        80,
+        90,
+        131
+      ],
+      "week78_annotation_lines_with_new_continuations": 6,
+      "annotation_line_numbers": [
+        1,
+        22,
+        27,
+        80,
+        90,
+        131
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "8a865a8978756299c42c547f78614091d40c04ad93430e9e3c9f70ec7465331d",
+      "after_sha256": "a1414545866cca8cfc9f4868282e43f878656ee659853e8f464b5b0c9504036f",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/apps.py",
+      "week78_signed_physical_lines": 3,
+      "line_numbers": [
+        1,
+        18,
+        28
+      ],
+      "week78_annotation_lines_with_new_continuations": 3,
+      "annotation_line_numbers": [
+        1,
+        18,
+        28
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "e5706e9ea9c828c9be2a16588f5c1c72f86fc9446cd77e6fcdadd9bbf7cede22",
+      "after_sha256": "0fe483a500225e3ba8381f2b85fa954eb0a4b6b1cd4dbe111765992cf1c7639e",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/context_processors.py",
+      "week78_signed_physical_lines": 2,
+      "line_numbers": [
+        1,
+        14
+      ],
+      "week78_annotation_lines_with_new_continuations": 2,
+      "annotation_line_numbers": [
+        1,
+        14
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "4a856a32cc09e715aabba3d113badd8a766d061275fc903077290e38f5656c30",
+      "after_sha256": "5dfdd4e72c8f19919ea580166e0febe15626deca84159d14f10eb991e0a9e133",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/documents.py",
+      "week78_signed_physical_lines": 15,
+      "line_numbers": [
+        1,
+        11,
+        62,
+        126,
+        136,
+        146,
+        166,
+        181,
+        215,
+        219,
+        223,
+        232,
+        257,
+        260,
+        266
+      ],
+      "week78_annotation_lines_with_new_continuations": 15,
+      "annotation_line_numbers": [
+        1,
+        11,
+        62,
+        126,
+        136,
+        146,
+        166,
+        181,
+        215,
+        219,
+        223,
+        232,
+        257,
+        260,
+        266
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "ab1386e17628769829735ab5af24ed5a14746be7b054810bc33557a3c8af3bb6",
+      "after_sha256": "4fe123b9f40f2bafb990f4ced96e2048cb4a78811890c907e8e473f4228b40e4",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/forms.py",
+      "week78_signed_physical_lines": 2,
+      "line_numbers": [
+        1,
+        14
+      ],
+      "week78_annotation_lines_with_new_continuations": 2,
+      "annotation_line_numbers": [
+        1,
+        14
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "783a297dc3ecb228520a0c2d4b76a304153d886e41a66810aa61c3c06e9e14b1",
+      "after_sha256": "be7b9c9cac05fb45e76797687ef24ddbd6344e827956b59b60bde387ea7b2b5e",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/build_index.py",
+      "week78_signed_physical_lines": 3,
+      "line_numbers": [
+        1,
+        12,
+        18
+      ],
+      "week78_annotation_lines_with_new_continuations": 3,
+      "annotation_line_numbers": [
+        1,
+        12,
+        18
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "1ee2498bfa96bac6b8ab95bd15b11cb5732d447f07d915c6667f7696e72b97b8",
+      "after_sha256": "132e751ed85e0187273984d75ab3b3f5ce9239b4b851442adafe206fbd50e6b4",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/build_search_words.py",
+      "week78_signed_physical_lines": 3,
+      "line_numbers": [
+        1,
+        11,
+        13
+      ],
+      "week78_annotation_lines_with_new_continuations": 3,
+      "annotation_line_numbers": [
+        1,
+        11,
+        13
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "ae8524e1ca7c6c0bb0cec3ba2948b35906f4d830c5de74dfccbc9c44e1805e5b",
+      "after_sha256": "c9028381a4f7e69d382a24bcac89589c82e65ee5cfe91fe5f3b5941669f90493",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/clear_cache.py",
+      "week78_signed_physical_lines": 3,
+      "line_numbers": [
+        1,
+        10,
+        12
+      ],
+      "week78_annotation_lines_with_new_continuations": 3,
+      "annotation_line_numbers": [
+        1,
+        10,
+        12
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "2809f034a6ae6e6b35e69f2f4270d400ad1def188d5fd209de1dd0f10c840718",
+      "after_sha256": "ceed25ca562c45ba4f1ac6e4152e0d71259021503f395969a62597dcbfd80f0b",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/create_testdata.py",
+      "week78_signed_physical_lines": 7,
+      "line_numbers": [
+        1,
+        89,
+        94,
+        102,
+        143,
+        147,
+        186
+      ],
+      "week78_annotation_lines_with_new_continuations": 7,
+      "annotation_line_numbers": [
+        1,
+        89,
+        94,
+        102,
+        143,
+        147,
+        186
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "c2baba947a7109c2baee4950878a8e6f7520eeb9de348fb9708e17a3360210e9",
+      "after_sha256": "cf4b7e76ac454322637f03b88b505f14d7045353f38e47b5b42127dcfc845ba2",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/ping_baidu.py",
+      "week78_signed_physical_lines": 6,
+      "line_numbers": [
+        1,
+        8,
+        15,
+        27,
+        32,
+        54
+      ],
+      "week78_annotation_lines_with_new_continuations": 6,
+      "annotation_line_numbers": [
+        1,
+        8,
+        15,
+        27,
+        32,
+        54
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "633d6a34abdd821ea3bd5d750120e9d17799fa02a45285ce0ead4af83d0e1fc6",
+      "after_sha256": "4c624a72e03e2d84471e457a83bf94f38d55fc64c6193d12a47aabe6a6e98034",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/management/commands/sync_user_avatar.py",
+      "week78_signed_physical_lines": 5,
+      "line_numbers": [
+        1,
+        14,
+        22,
+        36,
+        49
+      ],
+      "week78_annotation_lines_with_new_continuations": 5,
+      "annotation_line_numbers": [
+        1,
+        14,
+        22,
+        36,
+        49
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "fc14212d830ff2a7fb021a1a0d35cfe965edb68dc06242d9b685c687c22cf40c",
+      "after_sha256": "af1050bd959c608b0c718aca7f69b80c9e7843ff4abbd6dbc786f53bb3f0d98f",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/middleware.py",
+      "week78_signed_physical_lines": 2,
+      "line_numbers": [
+        1,
+        21
+      ],
+      "week78_annotation_lines_with_new_continuations": 2,
+      "annotation_line_numbers": [
+        1,
+        21
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "68bf6805ed67af8aee446dcd2b9af6a7b3b2b4faf0090734519fa48b0a42be85",
+      "after_sha256": "75162cbe11bc2e1f595000bb1cdd471606135d481146adbe74eafb9dc8d74c9c",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/models.py",
+      "week78_signed_physical_lines": 15,
+      "line_numbers": [
+        1,
+        52,
+        66,
+        148,
+        158,
+        162,
+        166,
+        171,
+        183,
+        190,
+        237,
+        254,
+        284,
+        417,
+        424
+      ],
+      "week78_annotation_lines_with_new_continuations": 15,
+      "annotation_line_numbers": [
+        1,
+        52,
+        66,
+        148,
+        158,
+        162,
+        166,
+        171,
+        183,
+        190,
+        237,
+        254,
+        284,
+        417,
+        424
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "747643980ae5743b7a5ea5f4ba328a8456892cc8bed4640515996e6a784f2204",
+      "after_sha256": "6609a5f70f519aa90de58ce8dd3ea5bbc2a13ffed0f47b2a5702a8175963185e",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/search_indexes.py",
+      "week78_signed_physical_lines": 3,
+      "line_numbers": [
+        1,
+        14,
+        18
+      ],
+      "week78_annotation_lines_with_new_continuations": 3,
+      "annotation_line_numbers": [
+        1,
+        14,
+        18
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "f9b17aee152cd0bb1af194a97c40e2a30f88085e4ebd93ced26623ea0c43648f",
+      "after_sha256": "a75980b99e4b3adeff00b2e2800a36b379b2def6bbe8f607003b3604ea62c715",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/templatetags/blog_tags.py",
+      "week78_signed_physical_lines": 15,
+      "line_numbers": [
+        2,
+        63,
+        99,
+        163,
+        175,
+        265,
+        304,
+        351,
+        475,
+        485,
+        519,
+        528,
+        565,
+        579,
+        604
+      ],
+      "week78_annotation_lines_with_new_continuations": 15,
+      "annotation_line_numbers": [
+        2,
+        63,
+        99,
+        163,
+        175,
+        265,
+        304,
+        351,
+        475,
+        485,
+        519,
+        528,
+        565,
+        579,
+        604
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "a292e452ed30acc5c8ec0fd4aff5892119e925282aee30eb86de0a108a68d185",
+      "after_sha256": "1387d85afd389d3551b67ad59caf25e4743a0c65df51ecfa2ea7888bd82b2a96",
+      "ast_unchanged": false
+    },
+    {
+      "file": "blog/templatetags/vite_tags.py",
+      "week78_signed_physical_lines": 5,
+      "line_numbers": [
+        2,
+        35,
+        80,
+        109,
+        122
+      ],
+      "week78_annotation_lines_with_new_continuations": 5,
+      "annotation_line_numbers": [
+        2,
+        35,
+        80,
+        109,
+        122
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "6ba5c9cdaa54b4dfa0b7201f5e4ff5b3865588ada3a5ec6bfb7bc6ff0ac80fc1",
+      "after_sha256": "ccb936286b6a6bf44d886fefb87094f2c58dc11f2017e8f174de84f9e00288d1",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/urls.py",
+      "week78_signed_physical_lines": 2,
+      "line_numbers": [
+        1,
+        65
+      ],
+      "week78_annotation_lines_with_new_continuations": 2,
+      "annotation_line_numbers": [
+        1,
+        65
+      ],
+      "removed_or_revised_old_szx_lines": [],
+      "baseline_sha256": "dd71176e4fcc498aa2d54d9c795213b254a188d188552271f7661e45d7642d4b",
+      "after_sha256": "71aa429b4c409d61cdda93a6ebc75ba4ed402423290667766489d3105a8f597d",
+      "ast_unchanged": true
+    },
+    {
+      "file": "blog/views.py",
+      "week78_signed_physical_lines": 15,
+      "line_numbers": [
+        1,
+        57,
+        101,
+        106,
+        112,
+        118,
+        135,
+        175,
+        214,
+        265,
+        336,
+        352,
+        392,
+        400,
+        441
+      ],
+      "week78_annotation_lines_with_new_continuations": 16,
+      "annotation_line_numbers": [
+        1,
+        57,
+        101,
+        102,
+        106,
+        112,
+        118,
+        135,
+        175,
+        214,
+        265,
+        336,
+        352,
+        392,
+        400,
+        441
+      ],
+      "removed_or_revised_old_szx_lines": [
+        "# SZX（第六周）：默认 get_queryset() 未筛选发布状态；article_id 是取对象的主键，",
+        "# URL 中的年月日也未在本类重新校验，不能把列表页的筛选规则视为详情页权限。"
+      ],
+      "baseline_sha256": "8a4676fad18623eecd8f991d4c9ab10b02b93aaaa530380041b54a5b05aff8cc",
+      "after_sha256": "b324fe3844d02b06cb17df14e8d51229cd524d104f0acf68c11226ff15924a82",
+      "ast_unchanged": false
+    }
+  ],
+  "week78_signed_business_comment_lines": 112,
+  "week78_business_annotation_lines_with_new_continuations": 113,
+  "revised_old_szx_lines": 2,
+  "comment_only_ast_unchanged": [
+    "blog/admin.py",
+    "blog/apps.py",
+    "blog/context_processors.py",
+    "blog/documents.py",
+    "blog/forms.py",
+    "blog/management/commands/build_index.py",
+    "blog/management/commands/build_search_words.py",
+    "blog/management/commands/clear_cache.py",
+    "blog/management/commands/create_testdata.py",
+    "blog/management/commands/ping_baidu.py",
+    "blog/management/commands/sync_user_avatar.py",
+    "blog/middleware.py",
+    "blog/models.py",
+    "blog/search_indexes.py",
+    "blog/templatetags/vite_tags.py",
+    "blog/urls.py"
+  ],
+  "functional_ast_changed": [
+    "blog/templatetags/blog_tags.py",
+    "blog/views.py"
+  ],
+  "excluded_files": {
+    "baseline": {
+      "migrations": [
+        "blog/migrations/0001_initial.py",
+        "blog/migrations/0002_blogsettings_global_footer_and_more.py",
+        "blog/migrations/0003_blogsettings_comment_need_review.py",
+        "blog/migrations/0004_rename_analyticscode_blogsettings_analytics_code_and_more.py",
+        "blog/migrations/0005_alter_article_options_alter_category_options_and_more.py",
+        "blog/migrations/0006_alter_blogsettings_options.py",
+        "blog/migrations/0007_article_idx_type_status_pub_article_idx_status_views_and_more.py",
+        "blog/migrations/0008_blogsettings_color_scheme.py",
+        "blog/migrations/0009_rename_demo_categories.py",
+        "blog/migrations/0010_refresh_demo_content.py",
+        "blog/migrations/__init__.py"
+      ],
+      "tests": [
+        "blog/test_admin.py",
+        "blog/test_agent_demo_data.py",
+        "blog/test_article_business_logic.py",
+        "blog/test_brand_assets.py",
+        "blog/test_context_processors.py",
+        "blog/test_middleware.py",
+        "blog/test_templatetags.py",
+        "blog/test_views.py",
+        "blog/tests.py"
+      ]
+    },
+    "after": {
+      "migrations": [
+        "blog/migrations/0001_initial.py",
+        "blog/migrations/0002_blogsettings_global_footer_and_more.py",
+        "blog/migrations/0003_blogsettings_comment_need_review.py",
+        "blog/migrations/0004_rename_analyticscode_blogsettings_analytics_code_and_more.py",
+        "blog/migrations/0005_alter_article_options_alter_category_options_and_more.py",
+        "blog/migrations/0006_alter_blogsettings_options.py",
+        "blog/migrations/0007_article_idx_type_status_pub_article_idx_status_views_and_more.py",
+        "blog/migrations/0008_blogsettings_color_scheme.py",
+        "blog/migrations/0009_rename_demo_categories.py",
+        "blog/migrations/0010_refresh_demo_content.py",
+        "blog/migrations/__init__.py"
+      ],
+      "tests": [
+        "blog/test_admin.py",
+        "blog/test_agent_demo_data.py",
+        "blog/test_article_business_logic.py",
+        "blog/test_brand_assets.py",
+        "blog/test_context_processors.py",
+        "blog/test_middleware.py",
+        "blog/test_templatetags.py",
+        "blog/test_views.py",
+        "blog/test_week78_quality.py",
+        "blog/tests.py"
+      ]
+    }
+  },
+  "counting_note": "Code token lines exclude blank/comment-only lines; docstring tokens count as code. Signed lines count COMMENT tokens with the week marker; continuation total also counts new/rewritten unsigned continuation lines, excluding unchanged old text. Counts include revisions, exclude tests/tools. Baseline has legacy szx_comment_lines; after has per-author signed_comment_lines. These metadata fields are not scan rules and do not measure new annotations."
+}

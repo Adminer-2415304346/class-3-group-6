@@ -23,8 +23,8 @@ class ArticleViewTest(BaseTestCase, ViewTestMixin):
         draft_article = self.create_article(title='草稿文章测试', status='d')
         url = draft_article.get_absolute_url()
         response = self.client.get(url)
-        # 草稿可以访问但可能有限制，或者返回 200
-        self.assertIn(response.status_code, [200, 302, 404])
+        # SZX（第7—8周）：匿名访问必须 404，不能用宽泛状态码掩盖草稿泄露。
+        self.assertEqual(response.status_code, 404)
 
     def test_article_detail_increases_views(self):
         """测试访问文章增加浏览量"""
@@ -145,10 +145,10 @@ class ArticlePermissionTest(BaseTestCase, ViewTestMixin):
         response = self.client.get(published.get_absolute_url())
         self.assertEqual(response.status_code, 200)
 
-        # 草稿（草稿可能也可以访问，取决于权限）
+        # SZX（第7—8周）：公开访问不返回草稿正文。
         draft = self.create_article(title='草稿状态测试', status='d')
         response = self.client.get(draft.get_absolute_url())
-        self.assertIn(response.status_code, [200, 302, 404])
+        self.assertEqual(response.status_code, 404)
 
 
 class ErrorHandlingTest(BaseTestCase, ViewTestMixin):

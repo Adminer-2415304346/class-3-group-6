@@ -1,0 +1,1813 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 73,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django import forms\r\nfrom django.contrib import admin\r\nfrom django.contrib.auth import get_user_model\r\nfrom django.urls import reverse\r\nfrom django.utils.html import format_html\r\nfrom django.utils.translation import gettext_lazy as _\r\n\r\n# Register your models here.\r\nfrom .models import Article, BlogSettings, Category, Links, SideBar, Tag\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 38,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from .models import Article, BlogSettings",
+          "end_location": {
+            "column": 73,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 30,
+      "row": 10
+    },
+    "message": "`.models.Category` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 43,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from .models import Article, BlogSettings",
+          "end_location": {
+            "column": 73,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 40,
+      "row": 10
+    },
+    "message": "`.models.Tag` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 50,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from .models import Article, BlogSettings",
+          "end_location": {
+            "column": 73,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 45,
+      "row": 10
+    },
+    "message": "`.models.Links` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 59,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from .models import Article, BlogSettings",
+          "end_location": {
+            "column": 73,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 52,
+      "row": 10
+    },
+    "message": "`.models.SideBar` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 15,
+      "row": 3
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\apps.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.apps import AppConfig\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 5
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 32,
+      "row": 34
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\apps.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 35,
+            "row": 34
+          },
+          "location": {
+            "column": 25,
+            "row": 34
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `manager`"
+    },
+    "location": {
+      "column": 25,
+      "row": 34
+    },
+    "message": "Local variable `manager` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 34,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 119,
+      "row": 48
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\apps.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 48
+    },
+    "message": "Line too long (118 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 119,
+      "row": 52
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\apps.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 52
+    },
+    "message": "Line too long (118 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 52,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 116,
+      "row": 54
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\apps.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 54
+    },
+    "message": "Line too long (115 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 54,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 38,
+      "row": 7
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\context_processors.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.utils import timezone\r\n\r\nfrom djangoblog.utils import cache, get_blog_setting\r\n\r\nfrom .models import Article, Category\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 69,
+      "row": 11
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\context_processors.py",
+    "fix": null,
+    "location": {
+      "column": 61,
+      "row": 11
+    },
+    "message": "Line too long (117 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 11,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 78,
+      "row": 12
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\context_processors.py",
+    "fix": null,
+    "location": {
+      "column": 70,
+      "row": 12
+    },
+    "message": "Line too long (117 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 12,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 32,
+      "row": 9
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\documents.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import time\r\n\r\nimport elasticsearch.client\r\nfrom django.conf import settings\r\nfrom elasticsearch_dsl import (\r\n    Boolean,\r\n    Date,\r\n    Document,\r\n    GeoPoint,\r\n    InnerDoc,\r\n    Integer,\r\n    Keyword,\r\n    Long,\r\n    Object,\r\n    Text,\r\n)\r\nfrom elasticsearch_dsl.connections import connections\r\n\r\nfrom blog.models import Article\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 112,
+      "row": 6
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\documents.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 6
+    },
+    "message": "Line too long (111 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 26,
+      "row": 5
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\build_index.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.core.management.base import BaseCommand\r\n\r\nfrom blog.documents import (\r\n    ELASTICSEARCH_ENABLED,\r\n    ArticleDocumentManager,\r\n    ElapsedTimeDocument,\r\n    ElaspedTimeDocumentManager,\r\n)\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 4
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\build_index.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 4
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 5,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 38,
+      "row": 4
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\build_search_words.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.core.management.base import BaseCommand\r\n\r\nfrom blog.models import Category, Tag\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 36,
+      "row": 13
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\create_testdata.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from datetime import timedelta\r\n\r\nfrom django.contrib.auth import get_user_model\r\nfrom django.core.management.base import BaseCommand, CommandError\r\nfrom django.db import transaction\r\nfrom django.db.models.signals import post_save\r\nfrom django.utils import timezone\r\n\r\nfrom blog.models import Article, BlogSettings, Category, Tag\r\nfrom comments.models import Comment\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 4
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 4
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 4,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 113,
+      "row": 65
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\create_testdata.py",
+    "fix": null,
+    "location": {
+      "column": 57,
+      "row": 65
+    },
+    "message": "Line too long (205 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 65,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 98,
+      "row": 67
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\create_testdata.py",
+    "fix": null,
+    "location": {
+      "column": 57,
+      "row": 67
+    },
+    "message": "Line too long (173 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 67,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 70
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\create_testdata.py",
+    "fix": null,
+    "location": {
+      "column": 58,
+      "row": 70
+    },
+    "message": "Line too long (197 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 70,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 92,
+      "row": 71
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\create_testdata.py",
+    "fix": null,
+    "location": {
+      "column": 56,
+      "row": 71
+    },
+    "message": "Line too long (171 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 71,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 47,
+      "row": 6
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\ping_baidu.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.core.management.base import BaseCommand\r\n\r\nfrom blog.models import Article, Category, Tag\r\nfrom djangoblog.spider_notify import SpiderNotify\r\nfrom djangoblog.utils import get_current_site\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E722",
+    "end_location": {
+      "column": 15,
+      "row": 19
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\management\\commands\\sync_user_avatar.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 19
+    },
+    "message": "Do not use bare `except`",
+    "name": "bare-except",
+    "noqa_row": 19,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/bare-except"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 71,
+      "row": 12
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\middleware.py",
+    "fix": null,
+    "location": {
+      "column": 62,
+      "row": 12
+    },
+    "message": "Line too long (118 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 12,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 77,
+      "row": 13
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\middleware.py",
+    "fix": null,
+    "location": {
+      "column": 72,
+      "row": 13
+    },
+    "message": "Line too long (110 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 13,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 17
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\nimport re\r\nfrom abc import abstractmethod\r\n\r\nfrom django.conf import settings\r\nfrom django.core.exceptions import ValidationError\r\nfrom django.db import models\r\nfrom django.urls import reverse\r\nfrom django.utils.timezone import now\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom mdeditor.fields import MDTextField\r\nfrom uuslug import slugify\r\n\r\nfrom djangoblog.constants import CacheKey, CacheTimeout\r\nfrom djangoblog.utils import cache, cache_decorator, get_current_site\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 19
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E741",
+    "end_location": {
+      "column": 6,
+      "row": 23
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\models.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 23
+    },
+    "message": "Ambiguous variable name: `I`",
+    "name": "ambiguous-variable-name",
+    "noqa_row": 23,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/ambiguous-variable-name"
+  },
+  {
+    "cell": null,
+    "code": "B009",
+    "end_location": {
+      "column": 35,
+      "row": 46
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "self.title",
+          "end_location": {
+            "column": 35,
+            "row": 46
+          },
+          "location": {
+            "column": 24,
+            "row": 45
+          }
+        }
+      ],
+      "message": "Replace `getattr` with attribute access"
+    },
+    "location": {
+      "column": 24,
+      "row": 45
+    },
+    "message": "Do not call `getattr` with a constant attribute value. It is not any safer than normal property access.",
+    "name": "get-attr-with-constant",
+    "noqa_row": 45,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/get-attr-with-constant"
+  },
+  {
+    "cell": null,
+    "code": "B009",
+    "end_location": {
+      "column": 34,
+      "row": 47
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "self.name",
+          "end_location": {
+            "column": 34,
+            "row": 47
+          },
+          "location": {
+            "column": 69,
+            "row": 46
+          }
+        }
+      ],
+      "message": "Replace `getattr` with attribute access"
+    },
+    "location": {
+      "column": 69,
+      "row": 46
+    },
+    "message": "Do not call `getattr` with a constant attribute value. It is not any safer than normal property access.",
+    "name": "get-attr-with-constant",
+    "noqa_row": 46,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/get-attr-with-constant"
+  },
+  {
+    "cell": null,
+    "code": "B010",
+    "end_location": {
+      "column": 53,
+      "row": 48
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "self.slug = slugify(slug)",
+          "end_location": {
+            "column": 53,
+            "row": 48
+          },
+          "location": {
+            "column": 17,
+            "row": 48
+          }
+        }
+      ],
+      "message": "Replace `setattr` with assignment"
+    },
+    "location": {
+      "column": 17,
+      "row": 48
+    },
+    "message": "Do not call `setattr` with a constant attribute value. It is not any safer than normal property access.",
+    "name": "set-attr-with-constant",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/set-attr-with-constant"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 32,
+      "row": 4
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\search_indexes.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from haystack import indexes\r\n\r\nfrom blog.models import Article\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 6
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 80,
+      "row": 6
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\search_indexes.py",
+    "fix": null,
+    "location": {
+      "column": 71,
+      "row": 6
+    },
+    "message": "Line too long (118 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 43,
+      "row": 26
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\r\nimport json\r\nimport logging\r\nimport random\r\nimport re\r\nimport urllib\r\n\r\nfrom django import template\r\nfrom django.conf import settings\r\nfrom django.db.models import Q\r\nfrom django.shortcuts import get_object_or_404\r\nfrom django.template.defaultfilters import stringfilter\r\nfrom django.templatetags.static import static\r\nfrom django.urls import reverse\r\nfrom django.utils.html import escape, format_html, format_html_join\r\nfrom django.utils.safestring import mark_safe\r\n\r\nfrom blog.models import Article, Category, Links, LinkShowType, SideBar, Tag\r\nfrom comments.models import Comment\r\nfrom djangoblog.plugin_manage import hooks\r\nfrom djangoblog.utils import CommonMarkdown, cache, get_current_site, sanitize_html\r\nfrom oauth.models import OAuthUser\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 28
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 15,
+      "row": 3
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 4
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Remove unused import: `hashlib`"
+    },
+    "location": {
+      "column": 8,
+      "row": 3
+    },
+    "message": "`hashlib` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 14,
+      "row": 8
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Remove unused import: `urllib`"
+    },
+    "location": {
+      "column": 8,
+      "row": 8
+    },
+    "message": "`urllib` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 70,
+      "row": 102
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "        from django.template.defaultfilters import truncatechars_html\r\n\r\n        from djangoblog.utils import get_blog_setting\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 103
+          },
+          "location": {
+            "column": 1,
+            "row": 101
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 9,
+      "row": 101
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 101,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 50,
+      "row": 205
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "    from django.template.defaultfilters import truncatechars_html\r\n\r\n    from djangoblog.utils import get_blog_setting\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 206
+          },
+          "location": {
+            "column": 1,
+            "row": 204
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 5,
+      "row": 204
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 204,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 9,
+      "row": 228
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 12,
+            "row": 228
+          },
+          "location": {
+            "column": 5,
+            "row": 228
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `site`"
+    },
+    "location": {
+      "column": 5,
+      "row": 228
+    },
+    "message": "Local variable `site` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 228,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 25,
+      "row": 350
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 350
+    },
+    "message": "`load_pagination_info` is too complex (15 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 350,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 98,
+      "row": 420
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": null,
+    "location": {
+      "column": 79,
+      "row": 420
+    },
+    "message": "Line too long (135 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 420,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 142,
+      "row": 544
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 544
+    },
+    "message": "Line too long (141 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 544,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 111,
+      "row": 551
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 551
+    },
+    "message": "Line too long (110 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 551,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 105,
+      "row": 648
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\blog_tags.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 648
+    },
+    "message": "Line too long (104 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 648,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 91,
+      "row": 3
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\vite_tags.py",
+    "fix": null,
+    "location": {
+      "column": 70,
+      "row": 3
+    },
+    "message": "Line too long (133 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 15,
+      "row": 20
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\templatetags\\vite_tags.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\r\nimport logging\r\nimport os\r\n\r\nfrom django import template\r\nfrom django.conf import settings\r\nfrom django.templatetags.static import static\r\nfrom django.utils.safestring import mark_safe\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 22
+          },
+          "location": {
+            "column": 1,
+            "row": 14
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 14
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 14,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 2,
+      "row": 31
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\nimport os\r\nimport uuid\r\n\r\nfrom django.conf import settings\r\nfrom django.core.paginator import Paginator\r\nfrom django.http import HttpResponse, HttpResponseForbidden\r\nfrom django.shortcuts import get_object_or_404, render\r\nfrom django.templatetags.static import static\r\nfrom django.utils import timezone\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom django.views.decorators.csrf import csrf_exempt, csrf_protect\r\nfrom django.views.decorators.http import require_POST\r\nfrom django.views.generic.detail import DetailView\r\nfrom django.views.generic.list import ListView\r\nfrom haystack.views import SearchView\r\n\r\nfrom blog.models import Article, Category, Links, LinkShowType, Tag\r\nfrom comments.forms import CommentForm\r\nfrom djangoblog.mixins import (\r\n    ArticleListMixin,\r\n    CachedListViewMixin,\r\n    OptimizedArticleQueryMixin,\r\n    PageNumberMixin,\r\n    SlugCachedMixin,\r\n)\r\nfrom djangoblog.plugin_manage import hooks\r\nfrom djangoblog.plugin_manage.hook_constants import ARTICLE_CONTENT_HOOK_NAME\r\nfrom djangoblog.utils import cache, get_blog_setting, get_sha256\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 33
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 47,
+      "row": 9
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Remove unused import: `django.shortcuts.get_object_or_404`"
+    },
+    "location": {
+      "column": 30,
+      "row": 9
+    },
+    "message": "`django.shortcuts.get_object_or_404` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 36,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 10
+          }
+        }
+      ],
+      "message": "Remove unused import: `django.shortcuts.render`"
+    },
+    "location": {
+      "column": 30,
+      "row": 10
+    },
+    "message": "`django.shortcuts.render` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 55,
+      "row": 13
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 14
+          },
+          "location": {
+            "column": 1,
+            "row": 13
+          }
+        }
+      ],
+      "message": "Remove unused import: `django.utils.translation.gettext_lazy`"
+    },
+    "location": {
+      "column": 54,
+      "row": 13
+    },
+    "message": "`django.utils.translation.gettext_lazy` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 13,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 78,
+      "row": 23
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 24
+          },
+          "location": {
+            "column": 1,
+            "row": 23
+          }
+        }
+      ],
+      "message": "Remove unused import: `djangoblog.plugin_manage.hook_constants.ARTICLE_CONTENT_HOOK_NAME`"
+    },
+    "location": {
+      "column": 53,
+      "row": 23
+    },
+    "message": "`djangoblog.plugin_manage.hook_constants.ARTICLE_CONTENT_HOOK_NAME` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 23,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 21,
+      "row": 27
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from djangoblog.mixins import (\r\n    SlugCachedMixin,\r\n    OptimizedArticleQueryMixin,\r\n    CachedListViewMixin,\r\n    PageNumberMixin\r\n)",
+          "end_location": {
+            "column": 2,
+            "row": 31
+          },
+          "location": {
+            "column": 1,
+            "row": 25
+          }
+        }
+      ],
+      "message": "Remove unused import: `djangoblog.mixins.ArticleListMixin`"
+    },
+    "location": {
+      "column": 5,
+      "row": 27
+    },
+    "message": "`djangoblog.mixins.ArticleListMixin` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 27,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 127,
+      "row": 151
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 151
+    },
+    "message": "Line too long (126 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 151,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 127,
+      "row": 154
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 154
+    },
+    "message": "Line too long (126 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 154,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 52,
+      "row": 171
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "        from django.utils.html import strip_tags\r\n        from django.utils.text import Truncator\r\n\r\n        from djangoblog.utils import CommonMarkdown\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 172
+          },
+          "location": {
+            "column": 1,
+            "row": 169
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 9,
+      "row": 169
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 169,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 190
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 190
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 190,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 89,
+      "row": 244
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 87,
+      "row": 244
+    },
+    "message": "Line too long (104 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 244,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 104,
+      "row": 405
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 405
+    },
+    "message": "Line too long (103 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 405,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 119,
+      "row": 408
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 408
+    },
+    "message": "Line too long (118 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 408,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E402",
+    "end_location": {
+      "column": 2,
+      "row": 435
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": null,
+    "location": {
+      "column": 1,
+      "row": 431
+    },
+    "message": "Module level import not at top of file",
+    "name": "module-import-not-at-top-of-file",
+    "noqa_row": 431,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/module-import-not-at-top-of-file"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 2,
+      "row": 435
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from djangoblog.error_views import page_not_found_view, permission_denied_view, server_error_view\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 438
+          },
+          "location": {
+            "column": 1,
+            "row": 431
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 431
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 431,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 24,
+      "row": 432
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 436
+          },
+          "location": {
+            "column": 1,
+            "row": 431
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 5,
+      "row": 432
+    },
+    "message": "`djangoblog.error_views.page_not_found_view` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 432,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 22,
+      "row": 433
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 436
+          },
+          "location": {
+            "column": 1,
+            "row": 431
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 5,
+      "row": 433
+    },
+    "message": "`djangoblog.error_views.server_error_view` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 433,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 27,
+      "row": 434
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 436
+          },
+          "location": {
+            "column": 1,
+            "row": 431
+          }
+        }
+      ],
+      "message": "Remove unused import"
+    },
+    "location": {
+      "column": 5,
+      "row": 434
+    },
+    "message": "`djangoblog.error_views.permission_denied_view` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 434,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  }
+]

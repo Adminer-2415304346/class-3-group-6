@@ -1,3 +1,4 @@
+# SZX（第7—8周）：后台表单、批量操作与展示；实际注册在 djangoblog.admin_site。
 from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -18,10 +19,12 @@ class ArticleForm(forms.ModelForm):
 
 
 def makr_article_publish(modeladmin, request, queryset):
+    # SZX（第7—8周）：批量 update 不走 save/post_save，缓存与索引失效仍需后续协调。
     queryset.update(status='p')
 
 
 def draft_article(modeladmin, request, queryset):
+    # SZX（第7—8周）：仅改发布态，不删除正文，也不修改 comment_status。
     queryset.update(status='d')
 
 
@@ -74,6 +77,7 @@ class ArticlelAdmin(admin.ModelAdmin):
     link_to_category.short_description = _('category')
 
     def get_form(self, request, obj=None, **kwargs):
+        # SZX（第7—8周）：作者可选范围限定超级用户，这一 UI 规则不是模型外键约束。
         form = super(ArticlelAdmin, self).get_form(request, obj, **kwargs)
         form.base_fields['author'].queryset = get_user_model(
         ).objects.filter(is_superuser=True)
@@ -83,6 +87,7 @@ class ArticlelAdmin(admin.ModelAdmin):
         super(ArticlelAdmin, self).save_model(request, obj, form, change)
 
     def get_view_on_site_url(self, obj=None):
+        # SZX（第7—8周）：使用前台详情地址；有效超级用户在详情视图中保留草稿预览。
         if obj:
             url = obj.get_full_url()
             return url
@@ -123,6 +128,7 @@ class BlogSettingsAdmin(admin.ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         """列表页直接跳转到编辑页面"""
+        # SZX（第7—8周）：已有配置跳编辑，没有才跳新增；禁止删除不代表数据库强制单例。
         from django.http import HttpResponseRedirect
         obj = BlogSettings.objects.first()
         if obj:

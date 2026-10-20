@@ -1,3 +1,4 @@
+# SZX（第7—8周）：响应计时中间件；替换耗时占位符并可选写 ES，保留 GCY 原标注。
 import logging
 import time
 
@@ -17,6 +18,7 @@ class OnlineMiddleware(object):
 
     def __call__(self, request):
         ''' page render time '''
+        # SZX（第7—8周）：先完成后续处理链，流式响应不读取或重写 content。
         start_time = time.time()
         response = self.get_response(request)
         http_user_agent = request.META.get('HTTP_USER_AGENT', '')
