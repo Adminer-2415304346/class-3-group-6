@@ -1,3 +1,4 @@
+# SZX（第7—8周）：把 blog 的公开阅读、上传和管理操作映射到视图；名称供 reverse 使用。
 from django.urls import path
 from django.views.decorators.cache import cache_page
 
@@ -61,6 +62,7 @@ urlpatterns = [
         name='upload'),
     path(
         r'clean',
+        # SZX（第7—8周）：路由保持兼容，视图内限制有效超级用户 POST 并验证 CSRF。
         views.clean_cache_view,
         name='clean'),
 ]

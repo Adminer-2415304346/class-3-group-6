@@ -1,3 +1,4 @@
+# SZX（第7—8周）：生成课程演示内容；会写用户/配置/文章/评论并清缓存，不能在业务库试跑。
 """Create repeatable, theme-specific demo content for the course blog."""
 
 from datetime import timedelta
@@ -85,10 +86,12 @@ DEMO_COMMENTS = (
 class Command(BaseCommand):
     help = 'Create repeatable AI Agent engineering demo data (development only)'
 
+    # SZX（第7—8周）：暂断核心保存回调后生成数据，finally恢复连接；不等于停用所有外部副作用。
     def handle(self, *args, **options):
         # The normal post-save handler sends search-engine pings and comment
         # email. Demo creation must have no such external side effects.
         from djangoblog.blog_signals import model_post_save_callback
+        # SZX（第7—8周）：只断开这一接收器；Haystack、Cloudflare等独立post_save接收器仍可能运行。
         was_connected = post_save.disconnect(model_post_save_callback)
         try:
             self.create_demo_data()
@@ -96,6 +99,7 @@ class Command(BaseCommand):
             if was_connected:
                 post_save.connect(model_post_save_callback)
 
+    # SZX（第7—8周）：在数据库事务内复用或更新演示记录；事务不回滚已发生的缓存或外部服务操作。
     @transaction.atomic
     def create_demo_data(self):
         User = get_user_model()
@@ -136,9 +140,11 @@ class Command(BaseCommand):
                 defaults={'parent_category': root, 'index': 10 - index},
             )
 
+        # SZX（第7—8周）：每次取当前时间并覆盖本人演示文章字段，虽避免重复插入，但不是严格状态幂等。
         published_at = timezone.now()
         articles = []
         for index, (category_name, title, intro, tag_names) in enumerate(DEMO_ARTICLES):
+            # SZX（第7—8周）：检测到他人同名文章就报错，保护原内容；本事务数据库写入随异常回滚。
             if Article.objects.filter(title=title).exclude(author=author).exists():
                 raise CommandError(f'演示标题与现有文章冲突，未覆盖原文章：{title}')
             body = (
@@ -177,6 +183,7 @@ class Command(BaseCommand):
                 defaults={'is_enable': True},
             )
 
+        # SZX（第7—8周）：重建展示数据后清整个默认缓存；后续事务若失败，清缓存动作也不会撤销。
         from djangoblog.utils import cache
         cache.clear()
         self.stdout.write(self.style.SUCCESS(
