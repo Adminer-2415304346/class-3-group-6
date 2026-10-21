@@ -147,11 +147,10 @@ class UserAuthenticationTest(TestCase):
         self.user.save()
 
         user = authenticate(username=self.username, password=self.password)
-        # 注意：Django的authenticate()方法会返回用户，但is_active=False
-        # 实际的登录阻止发生在login()时
-        # 这里我们测试用户的is_active状态
-        if user:
-            self.assertFalse(user.is_active)
+        # YFY：修订旧断言：原实现的自定义后端不检查 is_active，authenticate() 会返回未激活用户，
+        # YFY：旧测试用 `if user:` 包住断言，实际无法暴露该问题。第7-8周改进后后端复用
+        # YFY：ModelBackend.user_can_authenticate，这里应直接返回 None。
+        self.assertIsNone(user)
 
     def test_active_user_can_authenticate(self):
         """测试激活的用户可以认证"""
