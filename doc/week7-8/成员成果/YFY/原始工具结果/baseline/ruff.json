@@ -1,0 +1,304 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 29,
+      "row": 7
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib.auth.admin import UserAdmin\r\nfrom django.contrib.auth.forms import AdminUserCreationForm, UserChangeForm, UsernameField\r\n\r\n# Register your models here.\r\nfrom .models import BlogUser\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 83,
+      "row": 10
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\admin.py",
+    "fix": null,
+    "location": {
+      "column": 79,
+      "row": 10
+    },
+    "message": "Line too long (104 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 10,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 29,
+      "row": 8
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\forms.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django import forms\r\nfrom django.contrib.auth import get_user_model, password_validation\r\nfrom django.contrib.auth.forms import AuthenticationForm, UserCreationForm\r\nfrom django.core.exceptions import ValidationError\r\nfrom django.forms import widgets\r\nfrom django.utils.translation import gettext_lazy as _\r\n\r\nfrom . import utils\r\nfrom .models import BlogUser\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 46,
+      "row": 6
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib.auth.models import AbstractUser\r\nfrom django.db import models\r\nfrom django.urls import reverse\r\nfrom django.utils.timezone import now\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom djangoblog.utils import get_current_site\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 9
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 29,
+      "row": 5
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.urls import path, re_path\r\n\r\nfrom . import views\r\nfrom .forms import LoginForm\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 40,
+      "row": 8
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\utils.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import typing\r\nfrom datetime import timedelta\r\n\r\nfrom django.core.cache import cache\r\nfrom django.utils.translation import gettext\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom djangoblog.utils import send_email\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 117,
+      "row": 21
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\utils.py",
+    "fix": null,
+    "location": {
+      "column": 100,
+      "row": 21
+    },
+    "message": "Line too long (117 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 21,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 29,
+      "row": 23
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.conf import settings\r\nfrom django.contrib import auth\r\nfrom django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model, logout\r\nfrom django.contrib.auth.forms import AuthenticationForm\r\nfrom django.contrib.auth.hashers import make_password\r\nfrom django.http import HttpResponseForbidden, HttpResponseRedirect\r\nfrom django.http.request import HttpRequest\r\nfrom django.http.response import HttpResponse\r\nfrom django.shortcuts import get_object_or_404, render\r\nfrom django.urls import reverse\r\nfrom django.utils.http import url_has_allowed_host_and_scheme\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom django.views import View\r\nfrom djangoblog.base_views import LoginFormView, LogoutRedirectView, SecureFormView\r\nfrom djangoblog.utils import (\r\n    delete_sidebar_cache,\r\n    generate_code,\r\n    get_current_site,\r\n    get_sha256,\r\n    send_email,\r\n)\r\n\r\nfrom . import utils\r\nfrom .forms import ForgetPasswordCodeForm, ForgetPasswordForm, LoginForm, RegisterForm\r\nfrom .models import BlogUser\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 25
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 55,
+      "row": 2
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 3
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Remove unused import: `django.utils.translation.gettext_lazy`"
+    },
+    "location": {
+      "column": 54,
+      "row": 2
+    },
+    "message": "`django.utils.translation.gettext_lazy` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 19
+    },
+    "filename": "F:\\软件工程\\class-3-group-6\\src\\DjangoBlog\\accounts\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 19
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 19,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  }
+]

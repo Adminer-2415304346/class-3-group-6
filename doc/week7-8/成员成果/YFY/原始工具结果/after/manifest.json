@@ -1,0 +1,256 @@
+{
+  "app": "accounts",
+  "owner": "YFY",
+  "stage": "after",
+  "timestamp_utc": "2026-10-21T08:22:35.506060+00:00",
+  "base_commit": "7ed4e6c9b94542301828c21f1c1766a01c6b7c36",
+  "python": "3.13.14",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "accounts/migrations/0001_initial.py",
+    "accounts/migrations/0002_alter_bloguser_options_remove_bloguser_created_time_and_more.py",
+    "accounts/migrations/__init__.py",
+    "accounts/test_account_pages.py",
+    "accounts/test_admin.py",
+    "accounts/test_auth_hardening.py",
+    "accounts/test_login_page.py",
+    "accounts/test_user_business_logic.py",
+    "accounts/tests.py"
+  ],
+  "files": [
+    {
+      "path": "accounts/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "accounts/admin.py",
+      "sha256": "c072d46a5dd7ca83ee5e4830f2379a7e23a4b232f00bdd315b8c7b891be52ac7",
+      "physical_lines": 70,
+      "code_token_lines": 49,
+      "comment_lines": 11,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 9,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 5,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "accounts/apps.py",
+      "sha256": "2d338a08be29e1eb9dc2711d356e62925e511e1978aac2bce4913cf91ad89bfb",
+      "physical_lines": 6,
+      "code_token_lines": 3,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 1,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "accounts/forms.py",
+      "sha256": "b83a21d8f9c1dc985f3df87cf1d43c1aa263c3ee8af05a717c114c3307bfee3c",
+      "physical_lines": 135,
+      "code_token_lines": 98,
+      "comment_lines": 18,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 17,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 5,
+      "functions_and_methods": 6
+    },
+    {
+      "path": "accounts/models.py",
+      "sha256": "2a2fe8fbb35db27600d4c50f620b2475ee0d940b5f85f0bec7e214382a12da03",
+      "physical_lines": 45,
+      "code_token_lines": 27,
+      "comment_lines": 11,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 10,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "accounts/templatetags/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "accounts/urls.py",
+      "sha256": "8bfaf3546dcbdf61c76bf8f72b563dbe61ea7e04bfe3de539b264d8b55a83195",
+      "physical_lines": 40,
+      "code_token_lines": 26,
+      "comment_lines": 11,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 11,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "accounts/user_login_backend.py",
+      "sha256": "3ea8839e58fe936b06fef37635057f0ac09ac6cd2c9fa4beb2d6f43da5638c16",
+      "physical_lines": 41,
+      "code_token_lines": 28,
+      "comment_lines": 9,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 9,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "accounts/utils.py",
+      "sha256": "f5971c103eca202364cc50546170af482b7144980308b8fd932803872963505c",
+      "physical_lines": 66,
+      "code_token_lines": 41,
+      "comment_lines": 12,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 12,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "accounts/views.py",
+      "sha256": "564d90002d8582574a722124ff013c2a5401e09310766cf0ee9bcb5b86a90861",
+      "physical_lines": 268,
+      "code_token_lines": 185,
+      "comment_lines": 50,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 43,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 5,
+      "functions_and_methods": 9
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\YFY\\AppData\\Local\\Temp\\yfy-quality-venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "F:\\软件工程\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "F:\\软件工程\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\after\\ruff.json",
+        "accounts/__init__.py",
+        "accounts/admin.py",
+        "accounts/apps.py",
+        "accounts/forms.py",
+        "accounts/models.py",
+        "accounts/templatetags/__init__.py",
+        "accounts/urls.py",
+        "accounts/user_login_backend.py",
+        "accounts/utils.py",
+        "accounts/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "C:\\Users\\YFY\\AppData\\Local\\Temp\\yfy-quality-venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "F:\\软件工程\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "F:\\软件工程\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\after\\bandit.json",
+        "accounts/__init__.py",
+        "accounts/admin.py",
+        "accounts/apps.py",
+        "accounts/forms.py",
+        "accounts/models.py",
+        "accounts/templatetags/__init__.py",
+        "accounts/urls.py",
+        "accounts/user_login_backend.py",
+        "accounts/utils.py",
+        "accounts/views.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: F:\\软件工程\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\after\\bandit.json\r\n"
+    }
+  }
+}
