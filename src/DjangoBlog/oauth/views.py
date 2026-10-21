@@ -1,3 +1,6 @@
+# GZX：本模块是 OAuth 登录的视图层：发起授权(oauthlogin)、回调换号登录(authorize)、
+# 补邮箱(RequireEmailView)、邮件确认(emailconfirm)、结果页(bindsuccess)。
+# 上游是第三方平台回调与模板标签，下游依赖 oauthmanager、OAuthUser 模型与 djangoblog 邮件/信号。
 import logging
 # Create your views here.
 from urllib.parse import urlparse
@@ -28,6 +31,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_redirecturl(request):
+    # GZX：解析 next_url：空值或登录页回退 '/'；用 url_has_allowed_host_and_scheme 做
+    # 同域白名单校验，外链/跨域一律回退 '/'，防开放重定向。require_https 跟随当前请求是否安全。
     nexturl = request.GET.get('next_url', None)
     if not nexturl or nexturl == '/login/' or nexturl == '/login':
         return '/'
@@ -69,6 +74,8 @@ def authorize(request):
     if not manager:
         return HttpResponseRedirect('/')
     code = request.GET.get('code', None)
+    # GZX：换 token 分两类失败：OAuthAccessTokenException 记 warning 回首页；
+    # 其他异常记 error 并把 rsp 置 None，下面用重新发起授权兜底。
     try:
         rsp = manager.get_access_token_by_code(code)
     except OAuthAccessTokenException as e:
@@ -82,8 +89,11 @@ def authorize(request):
         return HttpResponseRedirect(manager.get_authorization_url(nexturl))
     user = manager.get_oauth_userinfo()
     if user:
+        # GZX：昵称为空时用时间戳兜底，避免空昵称落库。
         if not user.nickname or not user.nickname.strip():
             user.nickname = "djangoblog" + timezone.now().strftime('%y%m%d%I%M%S')
+        # GZX：已绑定过的 (type, openid) 命中则刷新头像/元数据/昵称并复用旧记录（含 author 关联）；
+        # 未命中则保留管理器新建的临时对象，稍后落库。
         try:
             temp = OAuthUser.objects.get(type=type, openid=user.openid)
             temp.picture = user.picture
@@ -95,7 +105,11 @@ def authorize(request):
         # facebook的token过长
         if type == 'facebook':
             user.token = ''
+        # GZX：有邮箱走"事务内关联本站用户→发信号→login→跳 nexturl"；
+        # 无邮箱走下方补邮箱分支。
         if user.email:
+            # GZX：事务保证"建/取本站用户 + 挂载 OAuthUser + 保存"一致；
+            # 按 email get_or_create 本站用户，新用户昵称冲突改用时间戳用户名，source 记 authorize。
             with transaction.atomic():
                 author = None
                 try:
@@ -118,6 +132,8 @@ def authorize(request):
                 user.author = author
                 user.save()
 
+                # GZX：发登录信号（后台下载/本地化头像、清缓存）后 login 写会话；
+                # 注意此处按邮箱关联，不校验该邮箱是否已属于其他本地账号。
                 oauth_user_login_signal.send(
                     sender=authorize.__class__, id=user.id)
                 login(request, author)
@@ -147,6 +163,9 @@ def authorize(request):
 
 
 def emailconfirm(request, id, sign):
+    # GZX：签名 = HMAC-SHA256(SECRET_KEY, id)（见 djangoblog.utils.get_sha256），
+    # 只绑定主键 id，不含时效/邮箱/随机数：候选观察——链接不过期、邮箱改后旧链接仍可用，
+    # 且 id 可枚举，需团队评估加时效与一次性。签名不符或缺失返回 403。
     if not sign:
         return HttpResponseForbidden()
     if not get_sha256(settings.SECRET_KEY +
@@ -154,6 +173,7 @@ def emailconfirm(request, id, sign):
                       settings.SECRET_KEY).upper() == sign.upper():
         return HttpResponseForbidden()
     oauthuser = get_object_or_404(OAuthUser, pk=id)
+    # GZX：事务内完成取/建本站用户并挂载 OAuthUser，随后 login、发确认邮件、跳结果页。
     with transaction.atomic():
         if oauthuser.author:
             author = get_user_model().objects.get(pk=oauthuser.author_id)
@@ -208,6 +228,8 @@ class RequireEmailView(FormView):
     template_name = 'oauth/require_email.html'
 
     def get(self, request, *args, **kwargs):
+        # GZX：候选观察：已填邮箱时本应重定向，目前是 pass 空操作（注释掉的跳转未启用），
+        # 已绑定邮箱的记录仍会打开表单页。
         oauthid = self.kwargs['oauthid']
         oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
         if oauthuser.email:
@@ -217,6 +239,7 @@ class RequireEmailView(FormView):
         return super(RequireEmailView, self).get(request, *args, **kwargs)
 
     def get_initial(self):
+        # GZX：把路由里的 oauthid 塞进隐藏字段初始值，邮箱初始为空。
         oauthid = self.kwargs['oauthid']
         return {
             'email': '',
@@ -224,6 +247,7 @@ class RequireEmailView(FormView):
         }
 
     def get_context_data(self, **kwargs):
+        # GZX：把第三方头像传给模板展示，不改变表单数据。
         oauthid = self.kwargs['oauthid']
         oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
         if oauthuser.picture:
@@ -231,6 +255,9 @@ class RequireEmailView(FormView):
         return super(RequireEmailView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
+        # GZX：以表单提交的 oauthid（隐藏字段）取 OAuthUser 并写入邮箱；
+        # 候选观察：未校验该 oauthid 与当前会话/路由一致，隐藏值可被替换（IDOR 面）。
+        # 随后生成 HMAC 确认链接并 send_email，邮件实际由 djangoblog.blog_signals 发送。
         email = form.cleaned_data['email']
         oauthid = form.cleaned_data['oauthid']
         oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
@@ -267,6 +294,8 @@ class RequireEmailView(FormView):
 
 
 def bindsuccess(request, oauthid):
+    # GZX：纯结果展示页：query 参数 type=email 显示"待收邮件"文案，否则显示"绑定成功"；
+    # 不做鉴权与状态变更。
     type = request.GET.get('type', None)
     oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
     if type == 'email':
