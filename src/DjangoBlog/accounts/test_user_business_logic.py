@@ -35,8 +35,9 @@ class UserRegistrationTest(TestCase):
 
         # 密码不应该以明文存储
         self.assertNotEqual(user.password, password)
-        # 密码应该被哈希
-        self.assertTrue(user.password.startswith('pbkdf2_'))
+        # YFY：不绑定具体哈希算法：默认是 PBKDF2，隔离 runner 可能改用 MD5 加速，
+        # YFY：这里用 check_password 验证哈希可校验，避免测试与 hasher 配置耦合。
+        self.assertTrue(user.check_password(password))
 
     def test_user_can_check_password(self):
         """测试用户可以验证密码"""
