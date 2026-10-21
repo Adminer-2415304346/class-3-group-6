@@ -1,0 +1,294 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 42,
+      "row": 8
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\n\nfrom django.contrib import admin\n\n# Register your models here.\nfrom django.urls import reverse\nfrom django.utils.html import format_html\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 48,
+      "row": 13
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\r\nimport logging\r\nimport os\r\nimport urllib.parse\r\nfrom abc import ABCMeta, abstractmethod\r\n\r\nimport requests\r\n\r\nfrom djangoblog.utils import cache_decorator\r\nfrom oauth.models import OAuthConfig, OAuthUser\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 4
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 4
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 4,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 52
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 52
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 52,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 133,
+      "row": 363
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 363
+    },
+    "message": "Line too long (132 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 363,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 121,
+      "row": 439
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 439
+    },
+    "message": "Line too long (120 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 439,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 79,
+      "row": 6
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py",
+    "fix": null,
+    "location": {
+      "column": 75,
+      "row": 6
+    },
+    "message": "Line too long (108 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 73,
+      "row": 28
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\n# Create your views here.\r\nfrom urllib.parse import urlparse\r\n\r\nfrom django.conf import settings\r\nfrom django.contrib.auth import get_user_model, login\r\nfrom django.core.exceptions import ObjectDoesNotExist\r\nfrom django.db import transaction\r\nfrom django.http import HttpResponseForbidden, HttpResponseRedirect\r\nfrom django.shortcuts import get_object_or_404, render\r\nfrom django.urls import reverse\r\nfrom django.utils import timezone\r\nfrom django.utils.http import url_has_allowed_host_and_scheme\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom django.views.generic import FormView\r\n\r\nfrom djangoblog.blog_signals import oauth_user_login_signal\r\nfrom djangoblog.utils import get_current_site, get_sha256, send_email\r\nfrom oauth.forms import RequireEmailForm\r\n\r\nfrom .models import OAuthUser\r\nfrom .oauthmanager import OAuthAccessTokenException, get_manager_by_type\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 30
+          },
+          "location": {
+            "column": 1,
+            "row": 4
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 4
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 4,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 34,
+      "row": 6
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 6
+          }
+        }
+      ],
+      "message": "Remove unused import: `urllib.parse.urlparse`"
+    },
+    "location": {
+      "column": 26,
+      "row": 6
+    },
+    "message": "`urllib.parse.urlparse` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 14,
+      "row": 69
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 69
+    },
+    "message": "`authorize` is too complex (16 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 69,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 117,
+      "row": 209
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 209
+    },
+    "message": "Line too long (116 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 209,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 110,
+      "row": 309
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 309
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 309,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 123,
+      "row": 310
+    },
+    "filename": "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 310
+    },
+    "message": "Line too long (122 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 310,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  }
+]

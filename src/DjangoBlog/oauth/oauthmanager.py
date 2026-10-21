@@ -1,3 +1,6 @@
+# GZX：本模块适配五个 OAuth2 渠道（weibo/google/github/facebook/qq）：
+# 抽象基类定三步骨架，子类只填 URL 常量与字段映射；网络响应文本由本模块返回给 views 解析，
+# 本模块不做本站用户登录。外部依赖：requests、djangoblog.utils.cache_decorator、oauth.models。
 import json
 import logging
 import os
@@ -11,8 +14,13 @@ from oauth.models import OAuthUser, OAuthConfig
 
 logger = logging.getLogger(__name__)
 
+# GZX（本轮改进）：统一 HTTP 超时（秒），避免第三方平台无响应时 requests 一直挂起；
+# 超时按 requests.exceptions.Timeout 抛出，由上层 try/except 兜底走失败分支。
+OAUTH_HTTP_TIMEOUT = 10
+
 
 class OAuthAccessTokenException(Exception):
+    # GZX：code 换 token 失败（平台返回错误或无 access_token）时抛出，由 views 捕获后重定向。
     '''
     oauth授权失败异常
     '''
@@ -60,16 +68,23 @@ class BaseOauthManager(metaclass=ABCMeta):
         pass
 
     def do_get(self, url, params, headers=None):
-        rsp = requests.get(url=url, params=params, headers=headers)
+        # GZX：统一 GET 出口；本轮改进显式传 timeout 防止挂起；
+        # 遗留候选：logger.info 记录完整响应体，可能把 token/邮箱写进日志（见改进计划，未本轮改）。
+        rsp = requests.get(url=url, params=params, headers=headers,
+                           timeout=OAUTH_HTTP_TIMEOUT)
         logger.info(rsp.text)
         return rsp.text
 
     def do_post(self, url, params, headers=None):
-        rsp = requests.post(url, params, headers=headers)
+        # GZX：统一 POST 出口，本轮改进显式传 timeout；返回原始文本交给调用方解析。
+        rsp = requests.post(url, params, headers=headers,
+                            timeout=OAUTH_HTTP_TIMEOUT)
         logger.info(rsp.text)
         return rsp.text
 
     def get_config(self):
+        # GZX：按本渠道 ICON_NAME 取第一条启用配置；filter 不过滤 is_enable，
+        # 也不保证唯一，取 value[0]，多条/禁用配置的边界由调用层与缓存共同决定。
         value = OAuthConfig.objects.filter(type=self.ICON_NAME)
         return value[0] if value else None
 
@@ -101,7 +116,8 @@ class WBOauthManager(BaseOauthManager):
         return url
 
     def get_access_token_by_code(self, code):
-
+        # GZX：入参授权码 code；POST 换 token，成功则把 token/uid 存到 self 并直接取用户信息；
+        # 响应无 access_token 抛 OAuthAccessTokenException；json.loads 异常未单独捕获，向上传播。
         params = {
             'client_id': self.client_id,
             'client_secret': self.client_secret,
@@ -120,6 +136,8 @@ class WBOauthManager(BaseOauthManager):
             raise OAuthAccessTokenException(rsp)
 
     def get_oauth_userinfo(self):
+        # GZX：已授权才请求；把微博字段 avatar_large/screen_name/id 映射到 OAuthUser，
+        # 任一缺字段走 broad except 记日志并返回 None（不抛错）。
         if not self.is_authorized:
             return None
         params = {
@@ -150,6 +168,8 @@ class WBOauthManager(BaseOauthManager):
 
 
 class ProxyManagerMixin:
+    # GZX：为需要翻墙的渠道（google/github/facebook）提供代理出口：
+    # 仅读 HTTP_PROXY 环境变量，未设置则 proxies=None；并重写带 proxies 的 do_get/do_post。
     def __init__(self, *args, **kwargs):
         if os.environ.get("HTTP_PROXY"):
             self.proxies = {
@@ -160,12 +180,16 @@ class ProxyManagerMixin:
             self.proxies = None
 
     def do_get(self, url, params, headers=None):
-        rsp = requests.get(url=url, params=params, headers=headers, proxies=self.proxies)
+        # GZX（本轮改进）：代理出口同样显式传 timeout，避免走代理时无响应挂起。
+        rsp = requests.get(url=url, params=params, headers=headers,
+                           proxies=self.proxies, timeout=OAUTH_HTTP_TIMEOUT)
         logger.info(rsp.text)
         return rsp.text
 
     def do_post(self, url, params, headers=None):
-        rsp = requests.post(url, params, headers=headers, proxies=self.proxies)
+        # GZX（本轮改进）：代理出口 POST 同样显式传 timeout。
+        rsp = requests.post(url, params, headers=headers,
+                            proxies=self.proxies, timeout=OAUTH_HTTP_TIMEOUT)
         logger.info(rsp.text)
         return rsp.text
 
@@ -198,6 +222,8 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
         return url
 
     def get_access_token_by_code(self, code):
+        # GZX：换 token 成功后把 id_token 当作 openid 存self（Google 真正稳定唯一标识是 sub，
+        # 此处沿用现状，未改）；失败抛 OAuthAccessTokenException。
         params = {
             'client_id': self.client_id,
             'client_secret': self.client_secret,
@@ -219,6 +245,8 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
             raise OAuthAccessTokenException(rsp)
 
     def get_oauth_userinfo(self):
+        # GZX：取 userinfo 并映射 picture/name/sub；注意 datas['email'] 直接下标访问，
+        # 缺 email 键会 KeyError，被下方 broad except 吞掉返回 None（候选健壮性问题）。
         if not self.is_authorized:
             return None
         params = {
@@ -277,6 +305,8 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
         return url
 
     def get_access_token_by_code(self, code):
+        # GZX：GitHub token 响应是 form-encoded（非 JSON），用 parse_qs 取 access_token；
+        # 取不到抛 OAuthAccessTokenException。
         params = {
             'client_id': self.client_id,
             'client_secret': self.client_secret,
@@ -296,7 +326,8 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
             raise OAuthAccessTokenException(rsp)
 
     def get_oauth_userinfo(self):
-
+        # GZX：先取 /user 公开资料；公开资料无邮箱时再请求 /user/emails，
+        # 优先取 primary+verified 邮箱，回退第一个 verified 邮箱；二次请求失败仅告警不中断。
         rsp = self.do_get(self.API_URL, params={}, headers={
             "Authorization": "Bearer " + self.access_token
         })
@@ -388,6 +419,8 @@ class FaceBookOauthManager(ProxyManagerMixin, BaseOauthManager):
             raise OAuthAccessTokenException(rsp)
 
     def get_oauth_userinfo(self):
+        # GZX：FB 头像在嵌套 picture.data.url，逐层判空后再取；
+        # 任一结构缺失走 broad except 返回 None。
         params = {
             'access_token': self.access_token,
             'fields': 'id,name,picture,email'
@@ -443,6 +476,8 @@ class QQOauthManager(BaseOauthManager):
         return url
 
     def get_access_token_by_code(self, code):
+        # GZX：QQ token 响应是 querystring；注意响应非空但无 access_token 时不抛异常，
+        # 直接走完函数返回 None（候选：应抛 OAuthAccessTokenException 让 views 走失败分支）。
         params = {
             'grant_type': 'authorization_code',
             'client_id': self.client_id,
@@ -461,6 +496,7 @@ class QQOauthManager(BaseOauthManager):
             raise OAuthAccessTokenException(rsp)
 
     def get_open_id(self):
+        # GZX：QQ /me 返回 JSONP 回调，先剥掉 callback( ) ; 再 json 解析出 openid 存 self。
         if self.is_access_token_set:
             params = {
                 'access_token': self.access_token
@@ -477,6 +513,7 @@ class QQOauthManager(BaseOauthManager):
                 return openid
 
     def get_oauth_userinfo(self):
+        # GZX：先取 open_id 再请求用户资料；openid 为空时函数隐式返回 None。
         openid = self.get_open_id()
         if openid:
             params = {
@@ -506,6 +543,8 @@ class QQOauthManager(BaseOauthManager):
 
 @cache_decorator(expiration=100 * 60)
 def get_oauth_apps():
+    # GZX：筛选 is_enable=True 的渠道配置，实例化对应管理器子类；结果缓存 100 分钟。
+    # 候选观察：缓存期内后台禁用某渠道不会立即生效，需等缓存过期或手动清缓存。
     configs = OAuthConfig.objects.filter(is_enable=True).all()
     if not configs:
         return []
@@ -516,6 +555,8 @@ def get_oauth_apps():
 
 
 def get_manager_by_type(type):
+    # GZX：入参渠道名（大小写不敏感）；从缓存的启用清单里找第一个匹配管理器，
+    # 找不到返回 None，由 views 重定向首页。不复查数据库，受上面 100 分钟缓存影响。
     applications = get_oauth_apps()
     if applications:
         finds = list(

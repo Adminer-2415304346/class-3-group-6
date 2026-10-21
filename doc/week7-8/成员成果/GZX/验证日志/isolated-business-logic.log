@@ -1,0 +1,125 @@
+﻿Found 26 test(s).
+python.exe : Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+所在位置 行:1 字符: 178
++ ... ocation $r; & $pv 'doc\week7-8\tools\run_isolated_tests.py' 'oauth.te ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...che=shared')...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+test_oauth_config_can_be_created (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_can_be_created)
+测试OAuth配置可以被创建 ... ok
+test_oauth_config_has_required_fields (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_has_required_f
+ields)
+测试OAuth配置有必需字段 ... ok
+test_oauth_config_is_enable_field (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_is_enable_field)
+测试OAuth配置的启用字段 ... ok
+test_oauth_config_query_by_type (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_query_by_type)
+测试按类型查询OAuth配置 ... ok
+test_oauth_config_type_uniqueness (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_type_uniqueness)
+测试OAuth配置类型唯一性 ... ok
+test_oauth_user_email_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_email_field)
+测试OAuth用户邮箱字段 ... ok
+test_oauth_user_metadata_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_metadata_field)
+测试OAuth用户元数据字段 ... ok
+test_oauth_token_can_be_updated (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_token_can_be_updat
+ed)
+测试OAuth token可以更新 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_user_token_storage)
+测试OAuth token存储 ... ok
+test_bind_oauth_to_existing_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_bind_oauth_to_existing_user
+)
+测试将OAuth绑定到现有用户 ... ok
+test_change_oauth_binding (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_change_oauth_binding)
+测试更改OAuth绑定 ... ok
+test_unbind_oauth_from_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_unbind_oauth_from_user)
+测试解绑OAuth账号 ... ok
+test_delete_blog_user_cascade_oauth (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_blog_user_cascad
+e_oauth)
+测试删除博客用户级联删除OAuth用户 ... ok
+test_delete_oauth_user (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_oauth_user)
+测试删除OAuth用户 ... ok
+test_query_oauth_user_by_openid (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_openid)
+测试按openid查询OAuth用户 ... ok
+test_query_oauth_user_by_type (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_type)
+测试按类型查询OAuth用户 ... ok
+test_query_oauth_users_by_blog_user (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_users_by_blog_
+user)
+测试按博客用户查询OAuth用户 ... ok
+test_user_can_have_multiple_oauth_accounts (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_user_can_have_multi
+ple_oauth_accounts)
+测试用户可以关联多个OAuth账号 ... ok
+test_oauth_user_can_be_created (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_can_be_created)
+测试OAuth用户可以被创建 ... ok
+test_oauth_user_has_openid (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_openid)
+测试OAuth用户有openid ... ok
+test_oauth_user_has_type (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_type)
+测试OAuth用户有类型 ... ok
+test_oauth_user_links_to_blog_user (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_links_to_blog_user)
+测试OAuth用户关联到博客用户 ... ok
+test_oauth_user_nickname_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_nickname_storage)
+测试OAuth用户昵称存储 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_token_storage)
+测试OAuth用户token存储 ... ok
+test_base_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_base_do_get_post
+_passes_timeout) ... ok
+test_mixin_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_mixin_do_get_po
+st_passes_timeout) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.029s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+ISOLATED_TEST_FAILURES=0
