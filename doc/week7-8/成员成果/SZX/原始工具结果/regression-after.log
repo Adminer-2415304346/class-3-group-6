@@ -1,0 +1,117 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Found 17 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Comment category_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_empty_comments_are_cached_without_second_database_query (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_empty_comments_are_cached_without_second_database_query) ... ok
+test_new_enabled_comment_invalidates_empty_cache (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_new_enabled_comment_invalidates_empty_cache) ... ok
+test_populated_cache_keeps_queryset_and_excludes_disabled_comments (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_populated_cache_keeps_queryset_and_excludes_disabled_comments) ... ok
+E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Week78 category_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_active_superuser_can_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_active_superuser_can_preview_draft) ... ok
+test_anonymous_can_resolve_published_article_and_page (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_can_resolve_published_article_and_page) ... ok
+test_anonymous_draft_is_not_resolved (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_draft_is_not_resolved) ... ok
+test_anonymous_http_request_to_draft_returns_404 (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_http_request_to_draft_returns_404) ... HTTP 404 Error: 没有找到符合查询的 文章
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 53, in get_object
+    obj = queryset.get()
+          ^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 112, in get
+    self.object = self.get_object()
+                  ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 55, in get_object
+    raise Http404(
+django.http.response.Http404: 没有找到符合查询的 文章
+Not Found: /article/2026/10/20/1.html
+ok
+test_inactive_superuser_cannot_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_inactive_superuser_cannot_preview_draft) ... ok
+test_regular_author_cannot_read_draft_from_public_view (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_regular_author_cannot_read_draft_from_public_view) ... ok
+test_staff_without_superuser_privilege_cannot_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_staff_without_superuser_privilege_cannot_preview_draft) ... ok
+test_superuser_http_preview_still_renders (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_superuser_http_preview_still_renders) ... ok
+test_anonymous_post_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_anonymous_post_is_forbidden) ... Forbidden: /clean
+ok
+test_get_never_clears_cache (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_get_never_clears_cache) ... Method Not Allowed (GET): /clean
+ok
+test_regular_user_post_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_regular_user_post_is_forbidden) ... Forbidden: /clean
+ok
+test_superuser_post_clears_cache_once (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_clears_cache_once) ... ok
+test_superuser_post_with_csrf_succeeds (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_with_csrf_succeeds) ... ok
+test_superuser_post_without_csrf_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_without_csrf_is_forbidden) ... Forbidden (CSRF cookie not set.): /clean
+ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 1.681s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+ISOLATED_TEST_FAILURES=0

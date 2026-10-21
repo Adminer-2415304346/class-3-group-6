@@ -1,0 +1,323 @@
+/* SZX：表单不再随大面板缩放横移；分层快照用小幅位移和重叠淡化衔接。 */
+:root {
+    --account-screen-duration: 900ms;
+    --account-response-duration: 220ms;
+    --account-screen-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-account-transition='enter-account'] .launcher-panel {
+    view-transition-name: account-panel;
+}
+
+html[data-account-transition='enter-account'] .launcher-visual {
+    view-transition-name: account-scene;
+}
+
+html[data-account-transition] .launcher-brand-mark,
+html[data-account-transition] .site-brand-mark {
+    view-transition-name: account-brand;
+}
+
+html[data-account-transition='reshape'] .launcher-login-page .launcher-content {
+    view-transition-name: login-form;
+}
+
+html[data-account-transition='reshape'] .launcher-reset-page .launcher-content {
+    view-transition-name: reset-form;
+}
+
+html[data-account-transition='reshape'] .registration-intro {
+    view-transition-name: registration-intro;
+}
+
+html[data-account-transition='reshape'] .registration-form-pane {
+    view-transition-name: registration-form;
+}
+
+/* SZX：进站揭幕已包含首页内容；避免快照捕获透明文字或结束后再入场一次。 */
+html[data-account-entered='site'] .anim-rise,
+html[data-account-entered='site'] .anim-fade-in {
+    animation: none;
+}
+
+html[data-account-transition]::view-transition-group(*) {
+    animation-duration: 560ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html[data-account-transition]::view-transition-group(root) {
+    z-index: 0;
+}
+
+html[data-account-transition]::view-transition-group(account-scene) {
+    z-index: 1;
+}
+
+html[data-account-transition]::view-transition-group(account-panel) {
+    z-index: 2;
+}
+
+html[data-account-transition]::view-transition-group(account-brand) {
+    z-index: 4;
+}
+
+html[data-account-transition]::view-transition-group(account-seam) {
+    z-index: 5;
+}
+
+html[data-account-transition='reshape']::view-transition-old(root) {
+    animation: account-snapshot-out 360ms ease-out both;
+}
+
+html[data-account-transition='reshape']::view-transition-new(root) {
+    animation: account-snapshot-in 500ms ease-out both;
+}
+
+html[data-account-transition='reshape']::view-transition-old(login-form),
+html[data-account-transition='reshape']::view-transition-old(reset-form),
+html[data-account-transition='reshape']::view-transition-old(registration-form),
+html[data-account-transition='reshape']::view-transition-old(registration-intro) {
+    animation: account-content-out 180ms ease-out both;
+}
+
+html[data-account-transition='reshape']::view-transition-new(login-form),
+html[data-account-transition='reshape']::view-transition-new(reset-form),
+html[data-account-transition='reshape']::view-transition-new(registration-form) {
+    animation: account-content-in 420ms 70ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-account-transition='reshape']::view-transition-new(registration-intro) {
+    animation: account-content-in 460ms 20ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-account-transition='enter-site']::view-transition-group(root) {
+    z-index: 3;
+}
+
+html[data-account-transition='enter-site']::view-transition-group(*) {
+    animation-duration: var(--account-screen-duration);
+    animation-timing-function: var(--account-screen-ease);
+}
+
+html[data-account-transition='enter-site']::view-transition-old(root) {
+    animation: account-site-backdrop-out var(--account-screen-duration) ease-out both;
+}
+
+html[data-account-transition='enter-site']::view-transition-new(root) {
+    animation: account-screen-open var(--account-screen-duration) var(--account-screen-ease) both;
+}
+
+html[data-account-transition='enter-site'][data-account-response]::view-transition-new(root) {
+    animation: account-response-open var(--account-screen-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 进站时保留整个旧画面作底层，避免分离面板后 root 快照只剩空白底色。 */
+html[data-account-transition='enter-site']::view-transition-old(root),
+html[data-account-transition='enter-site']::view-transition-new(root) {
+    mix-blend-mode: normal;
+}
+
+html[data-account-transition='enter-account']::view-transition-new(account-panel) {
+    animation: account-content-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.account-entry-fold,
+.account-entry-seam {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    pointer-events: none;
+}
+
+.account-entry-fold {
+    z-index: 4;
+    width: 100vw;
+    overflow: hidden;
+    background: rgb(var(--muted));
+    transform: translateX(calc(-100% + var(--account-wipe-position, 0vw)));
+    will-change: transform;
+}
+
+/* SZX：反向抵消外层的推进位移，让新区域的流线固定在页面坐标中，持续流动而非跟着边界滑走。 */
+.account-entry-flow {
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(calc(100% - var(--account-wipe-position, 0vw)));
+}
+
+/* 只裁切装饰层的横向溢出；回退揭幕不能在手机上撑出额外滚动宽度。 */
+html[data-login-departure],
+html[data-account-arrival='enter-site'][data-account-response] {
+    overflow-x: hidden;
+    overflow-x: clip;
+}
+
+.account-entry-seam {
+    z-index: 5;
+    width: 2px;
+    background: rgb(var(--primary));
+    box-shadow: 0 0 1.5rem rgb(var(--primary) / 0.3);
+    transform: translateX(var(--account-wipe-position, 0vw));
+    will-change: transform;
+}
+
+/* SZX：快照接缝延续等待段的边界，不在响应后从左边重新起跑。 */
+html[data-account-transition='enter-site'][data-login-departure] .account-entry-seam,
+html[data-account-transition='enter-site'][data-account-response] .account-entry-seam {
+    view-transition-name: account-seam;
+}
+
+html[data-account-transition='enter-site'][data-account-response] .account-entry-seam {
+    display: block;
+    transform: translateX(100vw);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    html[data-account-leaving='reshape'] .launcher-content,
+    html[data-account-leaving='reshape'] .registration-body {
+        animation: account-prepare-reshape 220ms ease-out both;
+    }
+
+    html[data-login-departure] .account-entry-seam {
+        display: block;
+        animation: account-seam-in var(--account-response-duration) ease-out both;
+    }
+
+    html[data-login-departure] .account-entry-fold {
+        display: block;
+    }
+
+    html[data-login-departure] .launcher-login-page .launcher-content {
+        animation: account-prepare-login var(--account-response-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-login-departure] .launcher-login-page .launcher-visual-copy {
+        animation: account-prepare-scene var(--account-response-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-login-departure] .launcher-submit-arrow {
+        animation: account-arrow-launch var(--account-response-duration) cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-account-arrival='enter-site'] #page {
+        animation: account-site-arrive var(--account-screen-duration) var(--account-screen-ease) both;
+    }
+
+    /* 不支持原生跨页快照时也只走剩余距离，不增加登录请求或延迟跳转。 */
+    html[data-account-arrival='enter-site'][data-account-response] #page {
+        animation: account-response-arrive var(--account-screen-duration) ease-out both;
+    }
+
+    html[data-account-arrival='enter-site'][data-account-response] .account-entry-fold,
+    html[data-account-arrival='enter-site'][data-account-response] .account-entry-seam {
+        display: block;
+        animation: account-response-edge var(--account-screen-duration) cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    html[data-account-arrival='enter-site'][data-account-response] .account-entry-fold {
+        background: rgb(var(--background));
+    }
+
+    html[data-account-arrival] .registration-board {
+        animation: account-content-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-account-arrival] .registration-intro {
+        animation: account-content-in 450ms 30ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-account-arrival] .registration-form-pane {
+        animation: account-content-in 450ms 70ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    html[data-account-arrival] .launcher-reset-page .launcher-panel,
+    html[data-account-arrival] .launcher-login-page .launcher-panel {
+        animation: account-content-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+}
+
+@keyframes account-snapshot-out {
+    to { opacity: 0; }
+}
+
+@keyframes account-snapshot-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes account-screen-open {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0); }
+}
+
+@keyframes account-response-open {
+    from { clip-path: inset(0 var(--account-screen-remaining, 100%) 0 0); opacity: 0; }
+    to { clip-path: inset(0); opacity: 1; }
+}
+
+@keyframes account-response-edge {
+    from { transform: translateX(var(--account-screen-start, 0vw)); }
+    to { transform: translateX(100vw); }
+}
+
+@keyframes account-response-arrive {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+@keyframes account-site-backdrop-out {
+    to { opacity: 0.75; transform: scale(1.015); }
+}
+
+@keyframes account-content-in {
+    from { opacity: 0; transform: translateY(0.75rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes account-content-out {
+    to { opacity: 0; transform: translateY(-0.5rem); }
+}
+
+@keyframes account-prepare-reshape {
+    to { opacity: 0.7; transform: translateY(-0.375rem); }
+}
+
+@keyframes account-site-arrive {
+    from { opacity: 0.6; transform: translateX(0.625rem); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes account-prepare-login {
+    to { opacity: 0.4; transform: translateX(-1rem); }
+}
+
+@keyframes account-prepare-scene {
+    to { opacity: 0.5; transform: translateX(0.875rem); }
+}
+
+@keyframes account-seam-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes account-arrow-launch {
+    to { transform: translateX(0.375rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[data-account-transition]::view-transition-group(*),
+    html[data-account-transition]::view-transition-old(*),
+    html[data-account-transition]::view-transition-new(*) {
+        animation-duration: 1ms !important;
+        animation-delay: 0ms !important;
+    }
+
+    .account-entry-fold,
+    .account-entry-seam {
+        display: none !important;
+    }
+}

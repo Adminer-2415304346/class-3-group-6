@@ -1,0 +1,3239 @@
+{
+  "meta": {
+    "project": "DjangoBlog",
+    "week": 6,
+    "date": "2026-10-19",
+    "basis": "当前工作区静态源码；不导入Django、不连接业务服务、不读取.env",
+    "scope": "UC01—UC10核心Web业务；机器人/上传/健康检查/RSS等在模块说明中列作扩展"
+  },
+  "architecture": {
+    "title": "DjangoBlog 真实系统架构",
+    "nodes": [
+      {
+        "id": "A1",
+        "label": "浏览器\nDjango HTML + Alpine / HTMX",
+        "kind": "entity",
+        "x": 90,
+        "y": 190,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A2",
+        "label": "Web / WSGI 入口\nDjango 中间件 + URLConf",
+        "kind": "process",
+        "x": 650,
+        "y": 190,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A3",
+        "label": "MVT 应用层\nblog / accounts / comments / oauth / admin",
+        "kind": "process",
+        "x": 1210,
+        "y": 190,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A4",
+        "label": "模板与展示\ntemplates / 模板标签 / Markdown",
+        "kind": "process",
+        "x": 1770,
+        "y": 190,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A5",
+        "label": "业务模型 + Django ORM\n文章 / 用户 / 评论 / 配置",
+        "kind": "process",
+        "x": 1210,
+        "y": 620,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A6",
+        "label": "MySQL\n业务真源 + Session + 日志",
+        "kind": "store",
+        "x": 1770,
+        "y": 620,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A7",
+        "label": "Haystack 检索适配\nWhoosh 默认 / ES 可选",
+        "kind": "process",
+        "x": 90,
+        "y": 620,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A8",
+        "label": "Django Cache\nLocMem 默认 / Redis 可选",
+        "kind": "store",
+        "x": 650,
+        "y": 620,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A9",
+        "label": "插件注册表与 hooks\n8个配置插件",
+        "kind": "process",
+        "x": 90,
+        "y": 1050,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A10",
+        "label": "进程内信号与通知\nblog_signals / SMTP / 缓存",
+        "kind": "process",
+        "x": 650,
+        "y": 1050,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A11",
+        "label": "外部服务\nOAuth / SMTP / 百度 / 可选CF",
+        "kind": "entity",
+        "x": 1210,
+        "y": 1050,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A12",
+        "label": "Vite 构建工具\nTailwind + Alpine + HTMX",
+        "kind": "entity",
+        "x": 90,
+        "y": 1500,
+        "w": 440,
+        "h": 150
+      },
+      {
+        "id": "A13",
+        "label": "静态文件 / 媒体\nmanifest + hash JS/CSS / upload",
+        "kind": "store",
+        "x": 1770,
+        "y": 1500,
+        "w": 440,
+        "h": 150
+      }
+    ],
+    "edges": [
+      {
+        "id": "A01",
+        "from": "A1",
+        "to": "A2",
+        "label": "HTTP / Session / CSRF",
+        "structure": "请求"
+      },
+      {
+        "id": "A02",
+        "from": "A2",
+        "to": "A3",
+        "label": "路由分发",
+        "structure": "URL参数/POST"
+      },
+      {
+        "id": "A03",
+        "from": "A3",
+        "to": "A4",
+        "label": "上下文渲染",
+        "structure": "模板上下文"
+      },
+      {
+        "id": "A04",
+        "from": "A4",
+        "to": "A1",
+        "label": "HTML / JSON / 302",
+        "structure": "响应"
+      },
+      {
+        "id": "A05",
+        "from": "A3",
+        "to": "A5",
+        "label": "查询与保存",
+        "structure": "模型对象"
+      },
+      {
+        "id": "A06",
+        "from": "A5",
+        "to": "A6",
+        "label": "ORM SQL",
+        "structure": "关系数据"
+      },
+      {
+        "id": "A07",
+        "from": "A3",
+        "to": "A7",
+        "label": "q / 分页 / 高亮",
+        "structure": "S29"
+      },
+      {
+        "id": "A08",
+        "from": "A3",
+        "to": "A8",
+        "label": "读取 / 缓存 / 失效",
+        "structure": "S24"
+      },
+      {
+        "id": "A09",
+        "from": "A3",
+        "to": "A9",
+        "label": "Action / Filter / 位置钩子",
+        "structure": "上下文/正文"
+      },
+      {
+        "id": "A10",
+        "from": "A9",
+        "to": "A5",
+        "label": "view_count 更新浏览量",
+        "structure": "S16"
+      },
+      {
+        "id": "A11",
+        "from": "A5",
+        "to": "A10",
+        "label": "模型保存信号",
+        "structure": "S28"
+      },
+      {
+        "id": "A12",
+        "from": "A10",
+        "to": "A7",
+        "label": "实时索引更新",
+        "structure": "S23"
+      },
+      {
+        "id": "A13",
+        "from": "A10",
+        "to": "A8",
+        "label": "清理缓存",
+        "structure": "S26"
+      },
+      {
+        "id": "A14",
+        "from": "A10",
+        "to": "A11",
+        "label": "SMTP / 百度 / CF",
+        "structure": "S11/S13"
+      },
+      {
+        "id": "A15",
+        "from": "A3",
+        "to": "A11",
+        "label": "OAuth token / userinfo",
+        "structure": "S09/S10"
+      },
+      {
+        "id": "A16",
+        "from": "A10",
+        "to": "A6",
+        "label": "写 EmailSendLog",
+        "structure": "S27"
+      },
+      {
+        "id": "A17",
+        "from": "A12",
+        "to": "A13",
+        "label": "vite build / manifest",
+        "structure": "构建产物"
+      },
+      {
+        "id": "A18",
+        "from": "A13",
+        "to": "A1",
+        "label": "静态资源 / 媒体URL",
+        "structure": "文件内容"
+      },
+      {
+        "id": "A19",
+        "from": "A4",
+        "to": "A13",
+        "label": "vite_tags引用manifest",
+        "structure": "资源URL"
+      }
+    ],
+    "width": 2500,
+    "height": 1900
+  },
+  "context": {
+    "title": "上下文数据流图：P0 DjangoBlog核心Web系统",
+    "nodes": [
+      {
+        "id": "E1",
+        "label": "访客 / 注册用户",
+        "kind": "entity",
+        "x": 90,
+        "y": 190,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E2",
+        "label": "后台管理员",
+        "kind": "entity",
+        "x": 90,
+        "y": 1040,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E3",
+        "label": "OAuth 第三方平台",
+        "kind": "entity",
+        "x": 1590,
+        "y": 190,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E4",
+        "label": "SMTP 邮件服务",
+        "kind": "entity",
+        "x": 1590,
+        "y": 630,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E5",
+        "label": "URL 服务（百度 / Cloudflare）",
+        "kind": "entity",
+        "x": 1590,
+        "y": 1050,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "P0",
+        "label": "0 DjangoBlog 核心 Web 系统",
+        "kind": "process",
+        "x": 770,
+        "y": 650,
+        "w": 440,
+        "h": 175
+      }
+    ],
+    "edges": [
+      {
+        "id": "F01",
+        "from": "E1",
+        "to": "P0",
+        "label": "F01",
+        "structure": "S01"
+      },
+      {
+        "id": "F02",
+        "from": "P0",
+        "to": "E1",
+        "label": "F02",
+        "structure": "S02"
+      },
+      {
+        "id": "F03",
+        "from": "E1",
+        "to": "P0",
+        "label": "F03",
+        "structure": "S03"
+      },
+      {
+        "id": "F04",
+        "from": "P0",
+        "to": "E1",
+        "label": "F04",
+        "structure": "S04"
+      },
+      {
+        "id": "F05",
+        "from": "E1",
+        "to": "P0",
+        "label": "F05",
+        "structure": "S05"
+      },
+      {
+        "id": "F06",
+        "from": "P0",
+        "to": "E1",
+        "label": "F06",
+        "structure": "S06"
+      },
+      {
+        "id": "F07",
+        "from": "E2",
+        "to": "P0",
+        "label": "F07",
+        "structure": "S07"
+      },
+      {
+        "id": "F08",
+        "from": "P0",
+        "to": "E2",
+        "label": "F08",
+        "structure": "S08"
+      },
+      {
+        "id": "F09",
+        "from": "P0",
+        "to": "E3",
+        "label": "F09",
+        "structure": "S09"
+      },
+      {
+        "id": "F10",
+        "from": "E3",
+        "to": "P0",
+        "label": "F10",
+        "structure": "S10"
+      },
+      {
+        "id": "F11",
+        "from": "P0",
+        "to": "E4",
+        "label": "F11",
+        "structure": "S11"
+      },
+      {
+        "id": "F12",
+        "from": "E4",
+        "to": "P0",
+        "label": "F12",
+        "structure": "S12"
+      },
+      {
+        "id": "F13",
+        "from": "P0",
+        "to": "E5",
+        "label": "F13",
+        "structure": "S13"
+      },
+      {
+        "id": "F14",
+        "from": "E5",
+        "to": "P0",
+        "label": "F14",
+        "structure": "S14"
+      }
+    ],
+    "width": 2200,
+    "height": 1450
+  },
+  "level1": {
+    "title": "第1层数据流图：四个核心处理过程",
+    "nodes": [
+      {
+        "id": "E1",
+        "label": "访客 / 注册用户",
+        "kind": "entity",
+        "x": 80,
+        "y": 180,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E2",
+        "label": "后台管理员",
+        "kind": "entity",
+        "x": 800,
+        "y": 180,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E3",
+        "label": "OAuth 第三方平台",
+        "kind": "entity",
+        "x": 1520,
+        "y": 180,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E4",
+        "label": "SMTP 邮件服务",
+        "kind": "entity",
+        "x": 440,
+        "y": 400,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "E5",
+        "label": "URL 服务（百度 / Cloudflare）",
+        "kind": "entity",
+        "x": 1160,
+        "y": 400,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "P1",
+        "label": "1 内容浏览与搜索\nUC01—03",
+        "kind": "process",
+        "x": 250,
+        "y": 700,
+        "w": 440,
+        "h": 175
+      },
+      {
+        "id": "P2",
+        "label": "2 账号与身份\nUC04—06 / 09",
+        "kind": "process",
+        "x": 800,
+        "y": 700,
+        "w": 440,
+        "h": 175
+      },
+      {
+        "id": "P3",
+        "label": "3 评论与表情\nUC07—08",
+        "kind": "process",
+        "x": 1350,
+        "y": 700,
+        "w": 440,
+        "h": 175
+      },
+      {
+        "id": "P4",
+        "label": "4 后台与通知\nUC10 / 保存事件",
+        "kind": "process",
+        "x": 1900,
+        "y": 700,
+        "w": 440,
+        "h": 175
+      },
+      {
+        "id": "D1",
+        "label": "D1 内容库",
+        "kind": "store",
+        "x": 180,
+        "y": 1090,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D2",
+        "label": "D2 身份与会话库",
+        "kind": "store",
+        "x": 760,
+        "y": 1090,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D3",
+        "label": "D3 评论互动库",
+        "kind": "store",
+        "x": 1340,
+        "y": 1090,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D4",
+        "label": "D4 站点与渠道配置库",
+        "kind": "store",
+        "x": 1920,
+        "y": 1090,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D5",
+        "label": "D5 全文检索索引",
+        "kind": "store",
+        "x": 470,
+        "y": 1400,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D6",
+        "label": "D6 缓存",
+        "kind": "store",
+        "x": 1050,
+        "y": 1400,
+        "w": 430,
+        "h": 125
+      },
+      {
+        "id": "D7",
+        "label": "D7 邮件与管理日志库",
+        "kind": "store",
+        "x": 1630,
+        "y": 1400,
+        "w": 430,
+        "h": 125
+      }
+    ],
+    "edges": [
+      {
+        "id": "F01",
+        "from": "E1",
+        "to": "P1",
+        "label": "F01",
+        "structure": "S01"
+      },
+      {
+        "id": "F02",
+        "from": "P1",
+        "to": "E1",
+        "label": "F02",
+        "structure": "S02"
+      },
+      {
+        "id": "F03",
+        "from": "E1",
+        "to": "P2",
+        "label": "F03",
+        "structure": "S03"
+      },
+      {
+        "id": "F04",
+        "from": "P2",
+        "to": "E1",
+        "label": "F04",
+        "structure": "S04"
+      },
+      {
+        "id": "F05",
+        "from": "E1",
+        "to": "P3",
+        "label": "F05",
+        "structure": "S05"
+      },
+      {
+        "id": "F06",
+        "from": "P3",
+        "to": "E1",
+        "label": "F06",
+        "structure": "S06"
+      },
+      {
+        "id": "F07",
+        "from": "E2",
+        "to": "P4",
+        "label": "F07",
+        "structure": "S07"
+      },
+      {
+        "id": "F08",
+        "from": "P4",
+        "to": "E2",
+        "label": "F08",
+        "structure": "S08"
+      },
+      {
+        "id": "F09",
+        "from": "P2",
+        "to": "E3",
+        "label": "F09",
+        "structure": "S09"
+      },
+      {
+        "id": "F10",
+        "from": "E3",
+        "to": "P2",
+        "label": "F10",
+        "structure": "S10"
+      },
+      {
+        "id": "F11",
+        "from": "P4",
+        "to": "E4",
+        "label": "F11",
+        "structure": "S11"
+      },
+      {
+        "id": "F12",
+        "from": "E4",
+        "to": "P4",
+        "label": "F12",
+        "structure": "S12"
+      },
+      {
+        "id": "F13",
+        "from": "P4",
+        "to": "E5",
+        "label": "F13",
+        "structure": "S13"
+      },
+      {
+        "id": "F14",
+        "from": "E5",
+        "to": "P4",
+        "label": "F14",
+        "structure": "S14"
+      },
+      {
+        "id": "F15",
+        "from": "D1",
+        "to": "P1",
+        "label": "F15",
+        "structure": "S15"
+      },
+      {
+        "id": "F16",
+        "from": "P1",
+        "to": "D1",
+        "label": "F16",
+        "structure": "S16"
+      },
+      {
+        "id": "F17",
+        "from": "D2",
+        "to": "P2",
+        "label": "F17",
+        "structure": "S17"
+      },
+      {
+        "id": "F18",
+        "from": "P2",
+        "to": "D2",
+        "label": "F18",
+        "structure": "S17"
+      },
+      {
+        "id": "F19",
+        "from": "D3",
+        "to": "P3",
+        "label": "F19",
+        "structure": "S18"
+      },
+      {
+        "id": "F20",
+        "from": "P3",
+        "to": "D3",
+        "label": "F20",
+        "structure": "S18"
+      },
+      {
+        "id": "F21",
+        "from": "D1",
+        "to": "P3",
+        "label": "F21",
+        "structure": "S15"
+      },
+      {
+        "id": "F22",
+        "from": "D4",
+        "to": "P3",
+        "label": "F22",
+        "structure": "S19"
+      },
+      {
+        "id": "F23",
+        "from": "D4",
+        "to": "P1",
+        "label": "F23",
+        "structure": "S19"
+      },
+      {
+        "id": "F24",
+        "from": "D4",
+        "to": "P2",
+        "label": "F24",
+        "structure": "S20"
+      },
+      {
+        "id": "F25",
+        "from": "P4",
+        "to": "D1",
+        "label": "F25",
+        "structure": "S15"
+      },
+      {
+        "id": "F26",
+        "from": "D1",
+        "to": "P4",
+        "label": "F26",
+        "structure": "S15"
+      },
+      {
+        "id": "F27",
+        "from": "P4",
+        "to": "D3",
+        "label": "F27",
+        "structure": "S18"
+      },
+      {
+        "id": "F28",
+        "from": "D3",
+        "to": "P4",
+        "label": "F28",
+        "structure": "S18"
+      },
+      {
+        "id": "F29",
+        "from": "P4",
+        "to": "D4",
+        "label": "F29",
+        "structure": "S21"
+      },
+      {
+        "id": "F30",
+        "from": "D4",
+        "to": "P4",
+        "label": "F30",
+        "structure": "S21"
+      },
+      {
+        "id": "F31",
+        "from": "P4",
+        "to": "D2",
+        "label": "F31",
+        "structure": "S17"
+      },
+      {
+        "id": "F32",
+        "from": "D2",
+        "to": "P4",
+        "label": "F32",
+        "structure": "S17"
+      },
+      {
+        "id": "F33",
+        "from": "D5",
+        "to": "P1",
+        "label": "F33",
+        "structure": "S22"
+      },
+      {
+        "id": "F34",
+        "from": "P4",
+        "to": "D5",
+        "label": "F34",
+        "structure": "S23"
+      },
+      {
+        "id": "F35",
+        "from": "P1",
+        "to": "D6",
+        "label": "F35",
+        "structure": "S24"
+      },
+      {
+        "id": "F36",
+        "from": "D6",
+        "to": "P1",
+        "label": "F36",
+        "structure": "S24"
+      },
+      {
+        "id": "F37",
+        "from": "P2",
+        "to": "D6",
+        "label": "F37",
+        "structure": "S25"
+      },
+      {
+        "id": "F38",
+        "from": "D6",
+        "to": "P2",
+        "label": "F38",
+        "structure": "S25"
+      },
+      {
+        "id": "F39",
+        "from": "P4",
+        "to": "D6",
+        "label": "F39",
+        "structure": "S26"
+      },
+      {
+        "id": "F40",
+        "from": "P4",
+        "to": "D7",
+        "label": "F40",
+        "structure": "S27"
+      },
+      {
+        "id": "F41",
+        "from": "D7",
+        "to": "P4",
+        "label": "F41",
+        "structure": "S27"
+      },
+      {
+        "id": "F42",
+        "from": "P2",
+        "to": "P4",
+        "label": "F42",
+        "structure": "S28"
+      },
+      {
+        "id": "F43",
+        "from": "P3",
+        "to": "P4",
+        "label": "F43",
+        "structure": "S28"
+      },
+      {
+        "id": "F44",
+        "from": "D3",
+        "to": "P1",
+        "label": "F44",
+        "structure": "S18"
+      },
+      {
+        "id": "F45",
+        "from": "P1",
+        "to": "D5",
+        "label": "F45",
+        "structure": "S29"
+      }
+    ],
+    "width": 2500,
+    "height": 1740
+  },
+  "dictionary": {
+    "notation": "+=组成；|=择一；[]=可选；{}*=重复。数据字典区分逻辑数据与物理字段。",
+    "flows": [
+      {
+        "id": "F01",
+        "name": "浏览与搜索条件",
+        "source": "E1",
+        "target": "P1",
+        "structure": "S01",
+        "definition": "GET：路径参数、q、page、comment_page、is_suggest。UC01—03。"
+      },
+      {
+        "id": "F02",
+        "name": "页面与搜索结果",
+        "source": "P1",
+        "target": "E1",
+        "structure": "S02",
+        "definition": "HTML 页面、分页和结果；不存在资源为404。UC01—03。"
+      },
+      {
+        "id": "F03",
+        "name": "账号与绑定请求",
+        "source": "E1",
+        "target": "P2",
+        "structure": "S03",
+        "definition": "注册、激活、登录/退出、重置密码、OAuth入口和补绑邮箱请求。UC04—06/09。"
+      },
+      {
+        "id": "F04",
+        "name": "身份处理结果",
+        "source": "P2",
+        "target": "E1",
+        "structure": "S04",
+        "definition": "表单错误/结果HTML/302以及Session cookie；logged_user仅为UI标记。"
+      },
+      {
+        "id": "F05",
+        "name": "评论与表情请求",
+        "source": "E1",
+        "target": "P3",
+        "structure": "S05",
+        "definition": "POST评论body/parent_comment_id，GET或POST表情，附CSRF及Session。UC07—08。"
+      },
+      {
+        "id": "F06",
+        "name": "评论处理结果",
+        "source": "P3",
+        "target": "E1",
+        "structure": "S06",
+        "definition": "评论锚点302、错误表单，或表情汇总JSON及401/400/404。"
+      },
+      {
+        "id": "F07",
+        "name": "后台维护请求",
+        "source": "E2",
+        "target": "P4",
+        "structure": "S07",
+        "definition": "后台查询、增删改、发布/草稿、评论审核、配置维护请求。UC10。"
+      },
+      {
+        "id": "F08",
+        "name": "后台操作结果",
+        "source": "P4",
+        "target": "E2",
+        "structure": "S08",
+        "definition": "后台列表/表单/错误/成功消息及日志视图；按后台权限控制。"
+      },
+      {
+        "id": "F09",
+        "name": "授权与用户信息请求",
+        "source": "P2",
+        "target": "E3",
+        "structure": "S09",
+        "definition": "逻辑聚合授权URL/浏览器302、服务端code换token和用户资料请求。"
+      },
+      {
+        "id": "F10",
+        "name": "授权回调与身份资料",
+        "source": "E3",
+        "target": "P2",
+        "structure": "S10",
+        "definition": "浏览器回传code/type，平台返回token/openid/nickname/email/picture/metadata。"
+      },
+      {
+        "id": "F11",
+        "name": "邮件投递",
+        "source": "P4",
+        "target": "E4",
+        "structure": "S11",
+        "definition": "收件人、标题、HTML正文：激活、重置验证码、绑定或评论通知。"
+      },
+      {
+        "id": "F12",
+        "name": "投递返回状态",
+        "source": "E4",
+        "target": "P4",
+        "structure": "S12",
+        "definition": "SMTP发送计数或异常；用于EmailSendLog.send_result，非到达/已读回执。"
+      },
+      {
+        "id": "F13",
+        "name": "URL 推送与缓存清理",
+        "source": "P4",
+        "target": "E5",
+        "structure": "S13",
+        "definition": "百度通知URL文本；Cloudflare可选的URL清除请求，二者独立配置。"
+      },
+      {
+        "id": "F14",
+        "name": "URL 服务返回状态",
+        "source": "E5",
+        "target": "P4",
+        "structure": "S14",
+        "definition": "HTTP响应文本/清除success、errors或异常；记录日志。"
+      },
+      {
+        "id": "F15",
+        "name": "文章与目录数据",
+        "source": "D1",
+        "target": "P1",
+        "structure": "S15",
+        "definition": "文章/分类/标签/友情链接/侧边栏及作者关联读取。"
+      },
+      {
+        "id": "F16",
+        "name": "浏览量更新",
+        "source": "P1",
+        "target": "D1",
+        "structure": "S16",
+        "definition": "view_count插件article.viewed→views单字段UPDATE；非独立访问明细。"
+      },
+      {
+        "id": "F17",
+        "name": "账号与绑定记录",
+        "source": "D2",
+        "target": "P2",
+        "structure": "S17",
+        "definition": "BlogUser、OAuthUser、会话读取；不向普通访客返回口令哈希/token。"
+      },
+      {
+        "id": "F18",
+        "name": "身份状态写入",
+        "source": "P2",
+        "target": "D2",
+        "structure": "S17",
+        "definition": "用户注册/激活/重置、OAuth绑定和Django Session写入。"
+      },
+      {
+        "id": "F19",
+        "name": "评论与表情记录",
+        "source": "D3",
+        "target": "P3",
+        "structure": "S18",
+        "definition": "评论公开状态、父评论和表情计数/用户摘要。"
+      },
+      {
+        "id": "F20",
+        "name": "评论与表情变更",
+        "source": "P3",
+        "target": "D3",
+        "structure": "S18",
+        "definition": "评论新增；表情按(comment,user,reaction_type)新增或删除。"
+      },
+      {
+        "id": "F21",
+        "name": "被评论文章",
+        "source": "D1",
+        "target": "P3",
+        "structure": "S15",
+        "definition": "按主键读取文章，检查comment_status；未将发布态保证扩展为既有实现。"
+      },
+      {
+        "id": "F22",
+        "name": "评论审核配置",
+        "source": "D4",
+        "target": "P3",
+        "structure": "S19",
+        "definition": "comment_need_review决定新评论是否直接is_enable=True。"
+      },
+      {
+        "id": "F23",
+        "name": "站点展示配置",
+        "source": "D4",
+        "target": "P1",
+        "structure": "S19",
+        "definition": "SEO、站点名、分页数量、配色和模板开放评论开关。"
+      },
+      {
+        "id": "F24",
+        "name": "OAuth 渠道配置",
+        "source": "D4",
+        "target": "P2",
+        "structure": "S20",
+        "definition": "渠道标识、回调地址、启用状态及服务端凭据（报告不含值）。"
+      },
+      {
+        "id": "F25",
+        "name": "文章与目录维护",
+        "source": "P4",
+        "target": "D1",
+        "structure": "S15",
+        "definition": "管理员通过ModelAdmin增删改文章、分类、标签、链接、侧边栏。"
+      },
+      {
+        "id": "F26",
+        "name": "内容维护查询",
+        "source": "D1",
+        "target": "P4",
+        "structure": "S15",
+        "definition": "后台内容列表/编辑记录。"
+      },
+      {
+        "id": "F27",
+        "name": "评论审核维护",
+        "source": "P4",
+        "target": "D3",
+        "structure": "S18",
+        "definition": "后台修改is_enable或删除评论。"
+      },
+      {
+        "id": "F28",
+        "name": "评论维护查询",
+        "source": "D3",
+        "target": "P4",
+        "structure": "S18",
+        "definition": "后台评论列表/编辑记录。"
+      },
+      {
+        "id": "F29",
+        "name": "站点与渠道配置维护",
+        "source": "P4",
+        "target": "D4",
+        "structure": "S21",
+        "definition": "BlogSettings仅在无记录时允许后台新增，已有配置只能编辑且禁止删除（BlogSettingsAdmin）；OAuthConfig按ModelAdmin权限新增/修改/删除；两者模型clean参与表单校验。"
+      },
+      {
+        "id": "F30",
+        "name": "配置维护查询",
+        "source": "D4",
+        "target": "P4",
+        "structure": "S21",
+        "definition": "后台读取站点参数和OAuth渠道配置。"
+      },
+      {
+        "id": "F31",
+        "name": "账号与绑定维护",
+        "source": "P4",
+        "target": "D2",
+        "structure": "S17",
+        "definition": "后台用户与OAuth绑定维护，受后台权限控制。"
+      },
+      {
+        "id": "F32",
+        "name": "账号维护查询",
+        "source": "D2",
+        "target": "P4",
+        "structure": "S17",
+        "definition": "用户和第三方绑定后台查询。"
+      },
+      {
+        "id": "F33",
+        "name": "索引命中与摘要",
+        "source": "D5",
+        "target": "P1",
+        "structure": "S22",
+        "definition": "Whoosh或Elasticsearch返回命中、得分、高亮/建议。"
+      },
+      {
+        "id": "F34",
+        "name": "文章索引更新",
+        "source": "P4",
+        "target": "D5",
+        "structure": "S23",
+        "definition": "Haystack信号/管理命令派生文档；此为逻辑事件处理归类，不是独立任务队列。"
+      },
+      {
+        "id": "F35",
+        "name": "页面与查询缓存写入",
+        "source": "P1",
+        "target": "D6",
+        "structure": "S24",
+        "definition": "列表/分类树/模板片段/SEO等缓存key、值和TTL。"
+      },
+      {
+        "id": "F36",
+        "name": "缓存命中数据",
+        "source": "D6",
+        "target": "P1",
+        "structure": "S24",
+        "definition": "命中则复用，否则经ORM或索引查询并填充。"
+      },
+      {
+        "id": "F37",
+        "name": "重置验证码写入",
+        "source": "P2",
+        "target": "D6",
+        "structure": "S25",
+        "definition": "以email为key存验证码，TTL 300秒。"
+      },
+      {
+        "id": "F38",
+        "name": "重置验证码读取",
+        "source": "D6",
+        "target": "P2",
+        "structure": "S25",
+        "definition": "核对验证码；当前verify未在成功后删除缓存值。"
+      },
+      {
+        "id": "F39",
+        "name": "缓存失效指令",
+        "source": "P4",
+        "target": "D6",
+        "structure": "S26",
+        "definition": "模型保存、用户登录退出、配置保存等清理缓存；非持久业务真源。"
+      },
+      {
+        "id": "F40",
+        "name": "邮件与管理日志写入",
+        "source": "P4",
+        "target": "D7",
+        "structure": "S27",
+        "definition": "EmailSendLog持久化收件人、标题、正文、发送结果；后台有LogEntry。"
+      },
+      {
+        "id": "F41",
+        "name": "运行日志查询",
+        "source": "D7",
+        "target": "P4",
+        "structure": "S27",
+        "definition": "EmailSendLog等后台查询；仅授权后台可见。"
+      },
+      {
+        "id": "F42",
+        "name": "身份邮件与保存事件",
+        "source": "P2",
+        "target": "P4",
+        "structure": "S28",
+        "definition": "激活/重置/邮箱绑定邮件，以及符合get_full_url条件的保存通知事件。"
+      },
+      {
+        "id": "F43",
+        "name": "公开评论保存事件",
+        "source": "P3",
+        "target": "P4",
+        "structure": "S28",
+        "definition": "post_save中is_enable=True时清缓存并起线程邮件；Cloudflare插件另行接收保存信号。"
+      },
+      {
+        "id": "F44",
+        "name": "公开评论展示",
+        "source": "D3",
+        "target": "P1",
+        "structure": "S18",
+        "definition": "文章详情查询顶层公开评论及子回复，并读取公开评论总数。"
+      },
+      {
+        "id": "F45",
+        "name": "搜索查询",
+        "source": "P1",
+        "target": "D5",
+        "structure": "S29",
+        "definition": "Haystack查询词、分页偏移和是否启用建议/高亮。"
+      }
+    ],
+    "structures": [
+      {
+        "id": "S01",
+        "name": "浏览搜索参数",
+        "definition": "[year,month,day,article_id] + [category_name|author_name|tag_name] + [page] + [q] + [is_suggest] + [comment_page]",
+        "rules": "路由分页page为整数；comment_page被钳制；q由Haystack表单处理；is_suggest=no表示不启用建议。"
+      },
+      {
+        "id": "S02",
+        "name": "内容响应",
+        "definition": "HTTP状态 + (HTML{文章列表/文章/评论/分页/SEO/表单} | 重定向Location)",
+        "rules": "服务端模板渲染；Alpine/HTMX只负责增强交互。"
+      },
+      {
+        "id": "S03",
+        "name": "账号请求族",
+        "definition": "Register{username,email,password1,password2} | Activate{id,sign,type} | Login{username,password,remember,next} | Logout{} | Reset{email,code,new_password1,new_password2} | OAuthStart{type,next_url} | Bind{email,oauthid}",
+        "rules": "口令、验证码、签名只在请求/服务端处理，报告不记录样例值。"
+      },
+      {
+        "id": "S04",
+        "name": "身份响应",
+        "definition": "HTTP状态 + [Location] + [HTML表单/错误/提示] + [sessionid cookie] + [logged_user=true]",
+        "rules": "Session证明身份；logged_user是可由JS读取的界面标记，不能作为授权依据。"
+      },
+      {
+        "id": "S05",
+        "name": "互动请求族",
+        "definition": "Comment{article_id,body,[parent_comment_id]} | Reaction{comment_id,[reaction_type]} + CSRF + Session",
+        "rules": "表情GET不必登录；POST需要登录；CSRF由中间件处理。"
+      },
+      {
+        "id": "S06",
+        "name": "互动响应",
+        "definition": "Comment{302 Location#div-comment-id | HTML错误} | Reaction{success,[action],reactions} | Error{error}",
+        "rules": "表情认证失败401、类型不合法400、目标评论未公开/不存在404；成功action=added/removed。"
+      },
+      {
+        "id": "S07",
+        "name": "后台请求",
+        "definition": "admin路径 + 模型标识 + 操作(CRUD/批处理) + 模型字段 + Session + CSRF",
+        "rules": "当前/admin入口由自定义DjangoBlogAdminSite.has_permission仅检查request.user.is_superuser；具体操作仍由ModelAdmin权限及表单处理，不套用默认staff/active入口判断。Article后台作者下拉限制superuser。"
+      },
+      {
+        "id": "S08",
+        "name": "后台响应",
+        "definition": "HTTP状态 + 后台HTML{列表|变更表单|权限错误|成功消息}",
+        "rules": "不把后台等同于对所有登录用户开放。"
+      },
+      {
+        "id": "S09",
+        "name": "OAuth平台请求",
+        "definition": "授权URL{client_id,redirect_uri,...} | token请求{code,渠道凭据,...} | userinfo请求{token,...}",
+        "rules": "各平台参数由OAuthManager子类适配。授权请求通过浏览器跳转，token/userinfo由服务端调用。"
+      },
+      {
+        "id": "S10",
+        "name": "OAuth平台响应",
+        "definition": "callback{type,code,[next_url]} + token响应 + userinfo{openid,nickname,[email],[picture],[metadata]}",
+        "rules": "平台资料映射OAuthUser；邮箱缺失进入补绑分支。token只描述用途不输出值。"
+      },
+      {
+        "id": "S11",
+        "name": "邮件消息",
+        "definition": "emailto[1..n] + title + content(HTML)",
+        "rules": "来自注册/重置/绑定/公开评论；正文可能含机密临时信息。"
+      },
+      {
+        "id": "S12",
+        "name": "邮件状态",
+        "definition": "send_count(整数) | exception",
+        "rules": "send_result=(send_count>0)，表示SMTP提交成功与否，不保证最终送达。"
+      },
+      {
+        "id": "S13",
+        "name": "URL服务请求",
+        "definition": "Baidu{URLs以换行分隔} | Cloudflare{files:[URL...]}",
+        "rules": "Baidu端点配置含敏感token；CF凭据由服务端附带，按不超过30URL分批。"
+      },
+      {
+        "id": "S14",
+        "name": "URL服务结果",
+        "definition": "HTTP响应文本 | Cloudflare{success,errors} | exception",
+        "rules": "百度函数只记录响应文本；CF捕获异常/失败日志。"
+      },
+      {
+        "id": "S15",
+        "name": "内容集合",
+        "definition": "Article + Category + Tag + [ArticleTag] + [Links] + [SideBar]",
+        "rules": "详细字段见实体数据字典；外键与中间表关系分别记录。"
+      },
+      {
+        "id": "S16",
+        "name": "浏览量更新",
+        "definition": "article_id + views",
+        "rules": "view_count插件调用Article.viewed；BaseModel对update_fields=[views]直接QuerySet.update。"
+      },
+      {
+        "id": "S17",
+        "name": "身份集合",
+        "definition": "BlogUser + [OAuthUser] + [Session] + [Group/Permission]",
+        "rules": "User.username数据库唯一；email仅注册表单去重；OAuthUser允许author为空。"
+      },
+      {
+        "id": "S18",
+        "name": "互动集合",
+        "definition": "Comment + [CommentReaction] + [ReactionSummary]",
+        "rules": "Comment.parent_comment自引用允许空；表情联合唯一。"
+      },
+      {
+        "id": "S19",
+        "name": "站点展示配置",
+        "definition": "site_name + site_description + site_seo_description + site_keywords + 各显示数量 + open_site_comment + comment_need_review + color_scheme + 公共HTML",
+        "rules": "数据库保存BlogSettings。clean限制一行，但无数据库单例约束。"
+      },
+      {
+        "id": "S20",
+        "name": "OAuth渠道配置",
+        "definition": "type + appkey + appsecret + callback_url + is_enable",
+        "rules": "appkey/appsecret属于服务端敏感项，文档不含实际值。"
+      },
+      {
+        "id": "S21",
+        "name": "配置集合",
+        "definition": "BlogSettings + OAuthConfig + Site",
+        "rules": "Site存域名/站点名；当前后台配置与系统环境变量配置分开。"
+      },
+      {
+        "id": "S22",
+        "name": "检索命中",
+        "definition": "{article_id,score,[highlighted{title[],body[]}] }* + hits + [spelling_suggestion]",
+        "rules": "ES返回结构；Whoosh经Haystack统一为SearchResult。"
+      },
+      {
+        "id": "S23",
+        "name": "索引文档",
+        "definition": "article_id + title + body + [author/category/tags] + [pub_time/status/type/... ]",
+        "rules": "Whoosh ArticleIndex批量仅筛status=p；ES查询另筛status=p,type=a。实时索引不能直接等同于访问权限。"
+      },
+      {
+        "id": "S24",
+        "name": "普通缓存项",
+        "definition": "cache_key + value + [TTL秒]",
+        "rules": "列表、模型派生、模板片段及SEO等；默认缓存超时10800秒，业务装饰器可覆盖。"
+      },
+      {
+        "id": "S25",
+        "name": "重置验证码缓存",
+        "definition": "email(key) + code(value) + TTL=300秒",
+        "rules": "与普通页面缓存同用Django缓存后端；默认LocMem跨进程不共享。"
+      },
+      {
+        "id": "S26",
+        "name": "缓存失效操作",
+        "definition": "key删除列表 | template_fragment_key删除 | cache.clear()",
+        "rules": "BlogSettings.save直接clear；各模型保存信号精细清理，不能宣称所有删除/批量更新都失效。"
+      },
+      {
+        "id": "S27",
+        "name": "日志记录",
+        "definition": "EmailSendLog{emailto,title,content,send_result,creation_time} | LogEntry{user,content_type,object_id,action_flag,change_message,...}",
+        "rules": "含邮件地址/正文，后台最小访问。SMTP失败仍保存send_result=False。"
+      },
+      {
+        "id": "S28",
+        "name": "保存/邮件业务事件",
+        "definition": "model_label + instance_id + [is_enable] + [update_fields] + [emailto,title,content]",
+        "rules": "逻辑事件汇聚至P4；实际实现是当前Django进程的signals和回调，不是消息总线。"
+      },
+      {
+        "id": "S29",
+        "name": "检索后端参数",
+        "definition": "query_string + start_offset + end_offset + highlight + is_suggest",
+        "rules": "搜索页传SearchQuerySet.highlight；自定义表单设置后端is_suggest。"
+      },
+      {
+        "id": "S30",
+        "name": "文章记录",
+        "definition": "id + title + body + pub_time + status + comment_status + type + views + author_id + article_order + show_toc + category_id + creation_time + last_modify_time + {tag_id}*",
+        "rules": "title唯一；作者、分类CASCADE；tags可空。"
+      },
+      {
+        "id": "S31",
+        "name": "用户记录",
+        "definition": "AbstractUser字段 + nickname + creation_time + last_modify_time + source",
+        "rules": "继承密码哈希、username、email、is_active/is_staff/is_superuser和权限关系；密码哈希不公开。"
+      },
+      {
+        "id": "S32",
+        "name": "评论记录",
+        "definition": "id + body + creation_time + last_modify_time + author_id + article_id + [parent_comment_id] + is_enable",
+        "rules": "body在ModelForm最多300字符；is_enable无法区分待审与禁用。"
+      },
+      {
+        "id": "S33",
+        "name": "表情记录",
+        "definition": "id + comment_id + user_id + reaction_type + created_at",
+        "rules": "同评论同用户同表情唯一，同一用户可对一条评论使用多种不同表情。"
+      },
+      {
+        "id": "S34",
+        "name": "OAuth绑定记录",
+        "definition": "id + [author_id] + openid + nickname + [token] + [picture] + type + [email] + [metadata] + creation_time + last_modify_time",
+        "rules": "无(type,openid)数据库联合唯一；author可空；与本地账户非一对一。"
+      },
+      {
+        "id": "S35",
+        "name": "表情汇总",
+        "definition": "{emoji: {count,has_reacted,users:[显示名称]}}",
+        "rules": "每表情最多返回10位用户显示名；count为总数，has_reacted针对请求用户。"
+      }
+    ],
+    "elements": [
+      {
+        "id": "DE01",
+        "name": "id / *_id",
+        "type": "整数主键或外键",
+        "rules": "BaseModel显式AutoField；其它业务模型默认BigAutoField（以当前源码settings为准，迁移历史应另核）。FK必须引用目标模型，CASCADE是Django删除收集策略。"
+      },
+      {
+        "id": "DE02",
+        "name": "Article.title",
+        "type": "CharField(200)",
+        "rules": "非空，unique=True；标题同时参与显示/搜索。"
+      },
+      {
+        "id": "DE03",
+        "name": "Article.body",
+        "type": "MDTextField",
+        "rules": "Markdown正文；模型未声明正文长度上限，渲染由Markdown和清理工具处理。"
+      },
+      {
+        "id": "DE04",
+        "name": "Article.status",
+        "type": "CharField(1)",
+        "rules": "d=草稿，p=发布；默认p；choices不是枚举数据库CHECK。"
+      },
+      {
+        "id": "DE05",
+        "name": "Article.comment_status",
+        "type": "CharField(1)",
+        "rules": "o=开放，c=关闭；默认o。"
+      },
+      {
+        "id": "DE06",
+        "name": "Article.type",
+        "type": "CharField(1)",
+        "rules": "a=文章，p=独立页面；默认a。"
+      },
+      {
+        "id": "DE07",
+        "name": "Article.views",
+        "type": "PositiveIntegerField",
+        "rules": "默认0；浏览量计数，非去重访客数，源码read-increment-write有并发丢增可能。"
+      },
+      {
+        "id": "DE08",
+        "name": "Article.author / category",
+        "type": "非空ForeignKey",
+        "rules": "均on_delete=CASCADE；标签为可空ManyToMany，不是逗号文本。"
+      },
+      {
+        "id": "DE09",
+        "name": "pub_time / creation_time / last_modify_time",
+        "type": "DateTimeField",
+        "rules": "pub_time/多数时间默认now；last_modify_time通常不自动刷新。"
+      },
+      {
+        "id": "DE10",
+        "name": "Category.name / Tag.name",
+        "type": "CharField(30)",
+        "rules": "分别唯一；slug为SlugField(60)，blank=True，非unique。"
+      },
+      {
+        "id": "DE11",
+        "name": "Category.parent_category",
+        "type": "可空self ForeignKey",
+        "rules": "根分类为空，CASCADE；未见防分类环的模型clean约束。"
+      },
+      {
+        "id": "DE12",
+        "name": "BlogUser.username",
+        "type": "CharField(150)",
+        "rules": "继承AbstractUser，数据库唯一，有用户名validator；迁移声明可核对。"
+      },
+      {
+        "id": "DE13",
+        "name": "BlogUser.email",
+        "type": "EmailField(254)",
+        "rules": "继承字段blank=True、非unique；RegisterForm.clean_email去重，不能替代并发DB唯一。"
+      },
+      {
+        "id": "DE14",
+        "name": "BlogUser.password",
+        "type": "CharField(128)",
+        "rules": "Django密码哈希存储；原始口令不落入报告，普通公开响应不可携带。"
+      },
+      {
+        "id": "DE15",
+        "name": "nickname / source",
+        "type": "CharField(100)",
+        "rules": "可blank；nickname为展示名，source记录Register/authorize/emailconfirm等来源。"
+      },
+      {
+        "id": "DE16",
+        "name": "is_active / is_staff / is_superuser",
+        "type": "Boolean",
+        "rules": "继承的身份标志默认active=True、staff=False、superuser=False，注册视图主动active=False；当前自定义/admin入口仅检查is_superuser，具体操作仍由ModelAdmin控制，不能套用默认staff/active入口判断。"
+      },
+      {
+        "id": "DE17",
+        "name": "Comment.body",
+        "type": "TextField(max_length=300)",
+        "rules": "ModelForm校验最多300字符，非MySQL TEXT物理300字符约束。"
+      },
+      {
+        "id": "DE18",
+        "name": "Comment.parent_comment",
+        "type": "可空self ForeignKey",
+        "rules": "CASCADE；数据库不保证父子同文章。"
+      },
+      {
+        "id": "DE19",
+        "name": "Comment.is_enable",
+        "type": "Boolean",
+        "rules": "默认False；True代表公开，免审核也直接True，不能单独表示人工已审。"
+      },
+      {
+        "id": "DE20",
+        "name": "CommentReaction.reaction_type",
+        "type": "CharField(10)",
+        "rules": "枚举👍/👎/❤️/😄/🎉/😕/🚀/👀；POST视图显式校验。"
+      },
+      {
+        "id": "DE21",
+        "name": "CommentReaction.(comment,user,reaction_type)",
+        "type": "联合唯一键",
+        "rules": "数据库unique_together；同用户可以对同评论给多种不同表情。"
+      },
+      {
+        "id": "DE22",
+        "name": "ReactionSummary.count/has_reacted/users",
+        "type": "整数/布尔/显示名数组",
+        "rules": "count是总人数，users最多10个，has_reacted按当前请求用户计算。"
+      },
+      {
+        "id": "DE23",
+        "name": "OAuthUser.openid / type / nickname",
+        "type": "CharField(50)",
+        "rules": "无(type,openid)联合唯一；type为渠道标识；nickname非空。"
+      },
+      {
+        "id": "DE24",
+        "name": "OAuthUser.author",
+        "type": "可空ForeignKey",
+        "rules": "CASCADE；未绑本地账号时可为空，并非OneToOne。"
+      },
+      {
+        "id": "DE25",
+        "name": "OAuthUser.token",
+        "type": "CharField(150),可空/可blank",
+        "rules": "第三方访问凭据；Facebook回调将该字段设空；只描述不输出值。"
+      },
+      {
+        "id": "DE26",
+        "name": "OAuthUser.picture / email / metadata",
+        "type": "CharField(350)/CharField(50)/TextField",
+        "rules": "可空/可blank；metadata为原始资料文本，email不是EmailField，需保留类型差异。"
+      },
+      {
+        "id": "DE27",
+        "name": "OAuthConfig.type",
+        "type": "CharField(10)",
+        "rules": "支持weibo/google/github/facebook/qq；源码默认a不在choices内；clean限制同渠道，无数据库unique。"
+      },
+      {
+        "id": "DE28",
+        "name": "OAuthConfig.appkey / appsecret",
+        "type": "CharField(200)",
+        "rules": "渠道认证配置，服务端敏感数据；文档不输出实际值。"
+      },
+      {
+        "id": "DE29",
+        "name": "OAuthConfig.callback_url / is_enable",
+        "type": "CharField(200)/Boolean",
+        "rules": "callback_url非blank默认空字符串；is_enable默认True。"
+      },
+      {
+        "id": "DE30",
+        "name": "BlogSettings.color_scheme",
+        "type": "CharField(20)",
+        "rules": "purple/blue/green/orange/pink/red/indigo/teal，默认purple；选择校验属应用层。"
+      },
+      {
+        "id": "DE31",
+        "name": "BlogSettings.open_site_comment / comment_need_review",
+        "type": "Boolean",
+        "rules": "默认True/False；入口控制与服务端校验需区分。"
+      },
+      {
+        "id": "DE32",
+        "name": "BlogSettings各显示数量",
+        "type": "IntegerField",
+        "rules": "article_sub_length=300，sidebar_article_count=10，sidebar_comment_count=5，article_comment_count=5；源码未声明正数模型约束。"
+      },
+      {
+        "id": "DE33",
+        "name": "BlogSettings公共HTML/统计代码",
+        "type": "TextField",
+        "rules": "global_header/global_footer/analytics_code/广告代码等；应仅管理员可信配置，不在报告重现脚本内容。"
+      },
+      {
+        "id": "DE34",
+        "name": "q / is_suggest / page",
+        "type": "字符串/开关/分页值",
+        "rules": "q为Haystack查询词；is_suggest仅等于no时禁用建议；页数由路由/搜索分页解析，comment_page单独钳制。"
+      },
+      {
+        "id": "DE35",
+        "name": "parent_comment_id",
+        "type": "可选IntegerField",
+        "rules": "来自表单隐藏字段；类型校验不代表父评论存在或同文章。"
+      },
+      {
+        "id": "DE36",
+        "name": "remember / next / next_url",
+        "type": "布尔意图/相对或同域URL",
+        "rules": "remember按POST值存在性判断；登录next做allowed-host校验，OAuth next_url做同域/相对URL校验。"
+      },
+      {
+        "id": "DE37",
+        "name": "code / sign",
+        "type": "敏感临时字符串",
+        "rules": "重置code缓存5分钟；激活/绑定sign由SECRET_KEY与ID派生，当前链接签名未带显式到期时间。"
+      },
+      {
+        "id": "DE38",
+        "name": "sessionid / logged_user",
+        "type": "cookie",
+        "rules": "sessionid用于Django会话；logged_user=true仅前端状态提示，httponly=False，不承担认证。"
+      },
+      {
+        "id": "DE39",
+        "name": "EmailSendLog.send_result",
+        "type": "Boolean",
+        "rules": "默认False；SMTP send计数>0写True，异常写False。"
+      },
+      {
+        "id": "DE40",
+        "name": "EmailSendLog.emailto/title/content",
+        "type": "CharField(300)/CharField(2000)/TextField",
+        "rules": "emailto存逗号拼接收件人；content保留正文，含个人与临时敏感数据。"
+      },
+      {
+        "id": "DE41",
+        "name": "Links.name / link / sequence",
+        "type": "CharField(30)/URLField/IntegerField",
+        "rules": "name唯一，sequence唯一；show_type为i/l/p/a/s；默认i。"
+      },
+      {
+        "id": "DE42",
+        "name": "SideBar.name / content / sequence",
+        "type": "CharField(100)/TextField/IntegerField",
+        "rules": "sequence唯一，is_enable默认True。"
+      },
+      {
+        "id": "DE43",
+        "name": "article_order / show_toc",
+        "type": "IntegerField/BooleanField",
+        "rules": "默认0/False；文章排序为-article_order,-pub_time。"
+      },
+      {
+        "id": "DE44",
+        "name": "HTTP success / action / error",
+        "type": "布尔/枚举/字符串",
+        "rules": "表情成功success=True；action=added/removed；无效类型响应仅error，不强行假设统一错误schema。"
+      }
+    ],
+    "stores": [
+      {
+        "id": "D1",
+        "name": "内容库",
+        "models": [
+          "blog.Article",
+          "blog.Category",
+          "blog.Tag",
+          "blog.Links",
+          "blog.SideBar",
+          "blog_article_tags"
+        ],
+        "description": "MySQL业务主数据；Article标签通过中间表关联。",
+        "key": "各模型主键；Article.title、Category.name、Tag.name、Links.name/sequence、SideBar.sequence唯一"
+      },
+      {
+        "id": "D2",
+        "name": "身份与会话库",
+        "models": [
+          "accounts.BlogUser",
+          "oauth.OAuthUser",
+          "django_session",
+          "用户组/权限中间表"
+        ],
+        "description": "MySQL用户、OAuth绑定、默认数据库Session。",
+        "key": "用户主键；username唯一；email和(type,openid)无数据库唯一约束"
+      },
+      {
+        "id": "D3",
+        "name": "评论互动库",
+        "models": [
+          "comments.Comment",
+          "comments.CommentReaction"
+        ],
+        "description": "MySQL评论树和独立表情记录。",
+        "key": "评论主键；表情(comment,user,reaction_type)联合唯一"
+      },
+      {
+        "id": "D4",
+        "name": "站点与渠道配置库",
+        "models": [
+          "blog.BlogSettings",
+          "oauth.OAuthConfig",
+          "django_site"
+        ],
+        "description": "站点展示/审核参数、渠道配置和Site域名；凭据仅在服务端读取。",
+        "key": "模型主键；单例/渠道唯一只由clean校验"
+      },
+      {
+        "id": "D5",
+        "name": "全文检索索引",
+        "models": [
+          "Whoosh whoosh_index",
+          "Elasticsearch blog (启用时)"
+        ],
+        "description": "由文章派生；默认Whoosh，配置ES后切换后端。索引不是业务真源。",
+        "key": "文章主键映射索引文档id"
+      },
+      {
+        "id": "D6",
+        "name": "缓存",
+        "models": [
+          "Django LocMemCache",
+          "可选 RedisCache"
+        ],
+        "description": "默认进程内缓存，配置Redis时替换；保存查询/片段和5分钟验证码。",
+        "key": "业务key/邮箱key及TTL；缓存丢失可重建派生项，验证码需重发"
+      },
+      {
+        "id": "D7",
+        "name": "邮件与管理日志库",
+        "models": [
+          "servermanager.EmailSendLog",
+          "django_admin_log"
+        ],
+        "description": "MySQL发送记录与后台审计；正文可能含激活链接/验证码，不公开展示。",
+        "key": "自增主键，EmailSendLog按creation_time倒序"
+      }
+    ],
+    "models_ast": [
+      {
+        "model": "blog.BaseModel",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 30,
+        "fields": [
+          {
+            "name": "id",
+            "type": "AutoField",
+            "options": {
+              "primary_key": "True"
+            },
+            "relation": null,
+            "line": 31
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 32
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 33
+          }
+        ]
+      },
+      {
+        "model": "blog.Article",
+        "base_classes": [
+          "BaseModel"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 64,
+        "fields": [
+          {
+            "name": "title",
+            "type": "CharField",
+            "options": {
+              "max_length": "200",
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 78
+          },
+          {
+            "name": "pub_time",
+            "type": "DateTimeField",
+            "options": {
+              "blank": "False",
+              "null": "False",
+              "default": "now"
+            },
+            "relation": null,
+            "line": 80
+          },
+          {
+            "name": "status",
+            "type": "CharField",
+            "options": {
+              "max_length": "1",
+              "choices": "STATUS_CHOICES",
+              "default": "'p'"
+            },
+            "relation": null,
+            "line": 82
+          },
+          {
+            "name": "comment_status",
+            "type": "CharField",
+            "options": {
+              "max_length": "1",
+              "choices": "COMMENT_STATUS",
+              "default": "'o'"
+            },
+            "relation": null,
+            "line": 87
+          },
+          {
+            "name": "type",
+            "type": "CharField",
+            "options": {
+              "max_length": "1",
+              "choices": "TYPE",
+              "default": "'a'"
+            },
+            "relation": null,
+            "line": 92
+          },
+          {
+            "name": "views",
+            "type": "PositiveIntegerField",
+            "options": {
+              "default": "0"
+            },
+            "relation": null,
+            "line": 93
+          },
+          {
+            "name": "author",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('author')",
+              "blank": "False",
+              "null": "False",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "settings.AUTH_USER_MODEL",
+            "line": 95
+          },
+          {
+            "name": "article_order",
+            "type": "IntegerField",
+            "options": {
+              "blank": "False",
+              "null": "False",
+              "default": "0"
+            },
+            "relation": null,
+            "line": 101
+          },
+          {
+            "name": "show_toc",
+            "type": "BooleanField",
+            "options": {
+              "blank": "False",
+              "null": "False",
+              "default": "False"
+            },
+            "relation": null,
+            "line": 103
+          },
+          {
+            "name": "category",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('category')",
+              "on_delete": "models.CASCADE",
+              "blank": "False",
+              "null": "False"
+            },
+            "relation": "'Category'",
+            "line": 104
+          },
+          {
+            "name": "tags",
+            "type": "ManyToManyField",
+            "options": {
+              "verbose_name": "_('tag')",
+              "blank": "True"
+            },
+            "relation": "'Tag'",
+            "line": 110
+          }
+        ]
+      },
+      {
+        "model": "blog.Category",
+        "base_classes": [
+          "BaseModel"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 195,
+        "fields": [
+          {
+            "name": "name",
+            "type": "CharField",
+            "options": {
+              "max_length": "30",
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 197
+          },
+          {
+            "name": "parent_category",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('parent category')",
+              "blank": "True",
+              "null": "True",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "'self'",
+            "line": 199
+          },
+          {
+            "name": "slug",
+            "type": "SlugField",
+            "options": {
+              "default": "'no-slug'",
+              "max_length": "60",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 205
+          },
+          {
+            "name": "index",
+            "type": "IntegerField",
+            "options": {
+              "default": "0",
+              "verbose_name": "_('index')"
+            },
+            "relation": null,
+            "line": 206
+          }
+        ]
+      },
+      {
+        "model": "blog.Tag",
+        "base_classes": [
+          "BaseModel"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 259,
+        "fields": [
+          {
+            "name": "name",
+            "type": "CharField",
+            "options": {
+              "max_length": "30",
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 261
+          },
+          {
+            "name": "slug",
+            "type": "SlugField",
+            "options": {
+              "default": "'no-slug'",
+              "max_length": "60",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 262
+          }
+        ]
+      },
+      {
+        "model": "blog.Links",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 280,
+        "fields": [
+          {
+            "name": "name",
+            "type": "CharField",
+            "options": {
+              "max_length": "30",
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 283
+          },
+          {
+            "name": "link",
+            "type": "URLField",
+            "options": {},
+            "relation": null,
+            "line": 284
+          },
+          {
+            "name": "sequence",
+            "type": "IntegerField",
+            "options": {
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 285
+          },
+          {
+            "name": "is_enable",
+            "type": "BooleanField",
+            "options": {
+              "default": "True",
+              "blank": "False",
+              "null": "False"
+            },
+            "relation": null,
+            "line": 286
+          },
+          {
+            "name": "show_type",
+            "type": "CharField",
+            "options": {
+              "max_length": "1",
+              "choices": "LinkShowType.choices",
+              "default": "LinkShowType.I"
+            },
+            "relation": null,
+            "line": 288
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 293
+          },
+          {
+            "name": "last_mod_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 294
+          }
+        ]
+      },
+      {
+        "model": "blog.SideBar",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 305,
+        "fields": [
+          {
+            "name": "name",
+            "type": "CharField",
+            "options": {
+              "max_length": "100"
+            },
+            "relation": null,
+            "line": 307
+          },
+          {
+            "name": "content",
+            "type": "TextField",
+            "options": {},
+            "relation": null,
+            "line": 308
+          },
+          {
+            "name": "sequence",
+            "type": "IntegerField",
+            "options": {
+              "unique": "True"
+            },
+            "relation": null,
+            "line": 309
+          },
+          {
+            "name": "is_enable",
+            "type": "BooleanField",
+            "options": {
+              "default": "True"
+            },
+            "relation": null,
+            "line": 310
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 311
+          },
+          {
+            "name": "last_mod_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 312
+          }
+        ]
+      },
+      {
+        "model": "blog.BlogSettings",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/blog/models.py",
+        "line": 323,
+        "fields": [
+          {
+            "name": "site_name",
+            "type": "CharField",
+            "options": {
+              "max_length": "200",
+              "null": "False",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 337
+          },
+          {
+            "name": "site_description",
+            "type": "TextField",
+            "options": {
+              "max_length": "1000",
+              "null": "False",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 343
+          },
+          {
+            "name": "site_seo_description",
+            "type": "TextField",
+            "options": {
+              "max_length": "1000",
+              "null": "False",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 349
+          },
+          {
+            "name": "site_keywords",
+            "type": "TextField",
+            "options": {
+              "max_length": "1000",
+              "null": "False",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 351
+          },
+          {
+            "name": "article_sub_length",
+            "type": "IntegerField",
+            "options": {
+              "default": "300"
+            },
+            "relation": null,
+            "line": 357
+          },
+          {
+            "name": "sidebar_article_count",
+            "type": "IntegerField",
+            "options": {
+              "default": "10"
+            },
+            "relation": null,
+            "line": 358
+          },
+          {
+            "name": "sidebar_comment_count",
+            "type": "IntegerField",
+            "options": {
+              "default": "5"
+            },
+            "relation": null,
+            "line": 359
+          },
+          {
+            "name": "article_comment_count",
+            "type": "IntegerField",
+            "options": {
+              "default": "5"
+            },
+            "relation": null,
+            "line": 360
+          },
+          {
+            "name": "show_google_adsense",
+            "type": "BooleanField",
+            "options": {
+              "default": "False"
+            },
+            "relation": null,
+            "line": 361
+          },
+          {
+            "name": "google_adsense_codes",
+            "type": "TextField",
+            "options": {
+              "max_length": "2000",
+              "null": "True",
+              "blank": "True",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 362
+          },
+          {
+            "name": "open_site_comment",
+            "type": "BooleanField",
+            "options": {
+              "default": "True"
+            },
+            "relation": null,
+            "line": 364
+          },
+          {
+            "name": "color_scheme",
+            "type": "CharField",
+            "options": {
+              "max_length": "20",
+              "choices": "COLOR_SCHEMES",
+              "default": "'purple'",
+              "help_text": "_('选择网站的主题配色方案')"
+            },
+            "relation": null,
+            "line": 365
+          },
+          {
+            "name": "global_header",
+            "type": "TextField",
+            "options": {
+              "null": "True",
+              "blank": "True",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 371
+          },
+          {
+            "name": "global_footer",
+            "type": "TextField",
+            "options": {
+              "null": "True",
+              "blank": "True",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 372
+          },
+          {
+            "name": "beian_code",
+            "type": "CharField",
+            "options": {
+              "max_length": "2000",
+              "null": "True",
+              "blank": "True",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 373
+          },
+          {
+            "name": "analytics_code",
+            "type": "TextField",
+            "options": {
+              "max_length": "1000",
+              "null": "False",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 379
+          },
+          {
+            "name": "show_gongan_code",
+            "type": "BooleanField",
+            "options": {
+              "default": "False",
+              "null": "False"
+            },
+            "relation": null,
+            "line": 385
+          },
+          {
+            "name": "gongan_beiancode",
+            "type": "TextField",
+            "options": {
+              "max_length": "2000",
+              "null": "True",
+              "blank": "True",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 387
+          },
+          {
+            "name": "comment_need_review",
+            "type": "BooleanField",
+            "options": {
+              "default": "False",
+              "null": "False"
+            },
+            "relation": null,
+            "line": 393
+          }
+        ]
+      },
+      {
+        "model": "accounts.BlogUser",
+        "base_classes": [
+          "AbstractUser"
+        ],
+        "source": "src/DjangoBlog/accounts/models.py",
+        "line": 12,
+        "fields": [
+          {
+            "name": "nickname",
+            "type": "CharField",
+            "options": {
+              "max_length": "100",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 13
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 14
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 15
+          },
+          {
+            "name": "source",
+            "type": "CharField",
+            "options": {
+              "max_length": "100",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 16
+          }
+        ]
+      },
+      {
+        "model": "comments.Comment",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/comments/models.py",
+        "line": 12,
+        "fields": [
+          {
+            "name": "body",
+            "type": "TextField",
+            "options": {
+              "max_length": "300"
+            },
+            "relation": null,
+            "line": 15
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 17
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 20
+          },
+          {
+            "name": "author",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('author')",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "settings.AUTH_USER_MODEL",
+            "line": 22
+          },
+          {
+            "name": "article",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('article')",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "Article",
+            "line": 27
+          },
+          {
+            "name": "parent_comment",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('parent comment')",
+              "blank": "True",
+              "null": "True",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "'self'",
+            "line": 33
+          },
+          {
+            "name": "is_enable",
+            "type": "BooleanField",
+            "options": {
+              "default": "False",
+              "blank": "False",
+              "null": "False"
+            },
+            "relation": null,
+            "line": 41
+          }
+        ]
+      },
+      {
+        "model": "comments.CommentReaction",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/comments/models.py",
+        "line": 101,
+        "fields": [
+          {
+            "name": "comment",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('comment')",
+              "on_delete": "models.CASCADE",
+              "related_name": "'reactions'"
+            },
+            "relation": "Comment",
+            "line": 117
+          },
+          {
+            "name": "user",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('user')",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "settings.AUTH_USER_MODEL",
+            "line": 124
+          },
+          {
+            "name": "reaction_type",
+            "type": "CharField",
+            "options": {
+              "max_length": "10",
+              "choices": "REACTION_CHOICES"
+            },
+            "relation": null,
+            "line": 131
+          },
+          {
+            "name": "created_at",
+            "type": "DateTimeField",
+            "options": {
+              "auto_now_add": "True"
+            },
+            "relation": null,
+            "line": 137
+          }
+        ]
+      },
+      {
+        "model": "oauth.OAuthUser",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/oauth/models.py",
+        "line": 12,
+        "fields": [
+          {
+            "name": "author",
+            "type": "ForeignKey",
+            "options": {
+              "verbose_name": "_('author')",
+              "blank": "True",
+              "null": "True",
+              "on_delete": "models.CASCADE"
+            },
+            "relation": "settings.AUTH_USER_MODEL",
+            "line": 13
+          },
+          {
+            "name": "openid",
+            "type": "CharField",
+            "options": {
+              "max_length": "50"
+            },
+            "relation": null,
+            "line": 19
+          },
+          {
+            "name": "nickname",
+            "type": "CharField",
+            "options": {
+              "max_length": "50",
+              "verbose_name": "_('nick name')"
+            },
+            "relation": null,
+            "line": 20
+          },
+          {
+            "name": "token",
+            "type": "CharField",
+            "options": {
+              "max_length": "150",
+              "null": "True",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 21
+          },
+          {
+            "name": "picture",
+            "type": "CharField",
+            "options": {
+              "max_length": "350",
+              "blank": "True",
+              "null": "True"
+            },
+            "relation": null,
+            "line": 22
+          },
+          {
+            "name": "type",
+            "type": "CharField",
+            "options": {
+              "blank": "False",
+              "null": "False",
+              "max_length": "50"
+            },
+            "relation": null,
+            "line": 23
+          },
+          {
+            "name": "email",
+            "type": "CharField",
+            "options": {
+              "max_length": "50",
+              "null": "True",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 24
+          },
+          {
+            "name": "metadata",
+            "type": "TextField",
+            "options": {
+              "null": "True",
+              "blank": "True"
+            },
+            "relation": null,
+            "line": 25
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 26
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 27
+          }
+        ]
+      },
+      {
+        "model": "oauth.OAuthConfig",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/oauth/models.py",
+        "line": 41,
+        "fields": [
+          {
+            "name": "type",
+            "type": "CharField",
+            "options": {
+              "max_length": "10",
+              "choices": "TYPE",
+              "default": "'a'"
+            },
+            "relation": null,
+            "line": 49
+          },
+          {
+            "name": "appkey",
+            "type": "CharField",
+            "options": {
+              "max_length": "200",
+              "verbose_name": "'AppKey'"
+            },
+            "relation": null,
+            "line": 50
+          },
+          {
+            "name": "appsecret",
+            "type": "CharField",
+            "options": {
+              "max_length": "200",
+              "verbose_name": "'AppSecret'"
+            },
+            "relation": null,
+            "line": 51
+          },
+          {
+            "name": "callback_url",
+            "type": "CharField",
+            "options": {
+              "max_length": "200",
+              "verbose_name": "_('callback url')",
+              "blank": "False",
+              "default": "''"
+            },
+            "relation": null,
+            "line": 52
+          },
+          {
+            "name": "is_enable",
+            "type": "BooleanField",
+            "options": {
+              "default": "True",
+              "blank": "False",
+              "null": "False"
+            },
+            "relation": null,
+            "line": 57
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 59
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "default": "now"
+            },
+            "relation": null,
+            "line": 60
+          }
+        ]
+      },
+      {
+        "model": "servermanager.commands",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/servermanager/models.py",
+        "line": 5,
+        "fields": [
+          {
+            "name": "title",
+            "type": "CharField",
+            "options": {
+              "max_length": "300"
+            },
+            "relation": null,
+            "line": 6
+          },
+          {
+            "name": "command",
+            "type": "CharField",
+            "options": {
+              "max_length": "2000"
+            },
+            "relation": null,
+            "line": 7
+          },
+          {
+            "name": "describe",
+            "type": "CharField",
+            "options": {
+              "max_length": "300"
+            },
+            "relation": null,
+            "line": 8
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "auto_now_add": "True"
+            },
+            "relation": null,
+            "line": 9
+          },
+          {
+            "name": "last_modify_time",
+            "type": "DateTimeField",
+            "options": {
+              "auto_now": "True"
+            },
+            "relation": null,
+            "line": 10
+          }
+        ]
+      },
+      {
+        "model": "servermanager.EmailSendLog",
+        "base_classes": [
+          "models.Model"
+        ],
+        "source": "src/DjangoBlog/servermanager/models.py",
+        "line": 20,
+        "fields": [
+          {
+            "name": "emailto",
+            "type": "CharField",
+            "options": {
+              "max_length": "300"
+            },
+            "relation": null,
+            "line": 21
+          },
+          {
+            "name": "title",
+            "type": "CharField",
+            "options": {
+              "max_length": "2000"
+            },
+            "relation": null,
+            "line": 22
+          },
+          {
+            "name": "content",
+            "type": "TextField",
+            "options": {},
+            "relation": null,
+            "line": 23
+          },
+          {
+            "name": "send_result",
+            "type": "BooleanField",
+            "options": {
+              "default": "False"
+            },
+            "relation": null,
+            "line": 24
+          },
+          {
+            "name": "creation_time",
+            "type": "DateTimeField",
+            "options": {
+              "auto_now_add": "True"
+            },
+            "relation": null,
+            "line": 25
+          }
+        ]
+      }
+    ]
+  },
+  "modules": [
+    {
+      "id": "M01",
+      "name": "请求入口与安全链",
+      "paths": [
+        "djangoblog/wsgi.py",
+        "djangoblog/urls.py",
+        "djangoblog/settings.py",
+        "djangoblog/base_views.py",
+        "djangoblog/admin_site.py"
+      ],
+      "responsibility": "WSGI→安全/Session/CSRF/认证等中间件→项目URLConf→应用View；复用安全表单基类；自定义/admin入口仅检查is_superuser，具体操作仍由ModelAdmin处理。",
+      "evidence": "settings.py:68-106；urls.py:57-77；admin_site.py:18-26"
+    },
+    {
+      "id": "M02",
+      "name": "blog 内容域",
+      "paths": [
+        "blog/models.py",
+        "blog/views.py",
+        "blog/urls.py",
+        "blog/admin.py",
+        "blog/middleware.py"
+      ],
+      "responsibility": "文章、分类树、标签、归档、详情、友情链接、站点设置、后台内容；OnlineMiddleware记录渲染耗时，ES启用时写performance。",
+      "evidence": "models.py:64-410；views.py:35-356；middleware.py:17-53"
+    },
+    {
+      "id": "M03",
+      "name": "accounts 身份域",
+      "paths": [
+        "accounts/models.py",
+        "accounts/forms.py",
+        "accounts/views.py",
+        "accounts/user_login_backend.py",
+        "accounts/utils.py"
+      ],
+      "responsibility": "自定义BlogUser；用户名/邮箱口令登录、注册激活、退出、邮箱验证码重置密码；默认Django Session。",
+      "evidence": "views.py:29-227；forms.py:20-113；user_login_backend.py:5-26"
+    },
+    {
+      "id": "M04",
+      "name": "comments 互动域",
+      "paths": [
+        "comments/models.py",
+        "comments/forms.py",
+        "comments/views.py",
+        "comments/utils.py"
+      ],
+      "responsibility": "评论/回复树、公开状态、表情切换与统计；公开评论触发通知和缓存清理。",
+      "evidence": "models.py:12-149；views.py:20-137；forms.py:12-20"
+    },
+    {
+      "id": "M05",
+      "name": "oauth 第三方身份域",
+      "paths": [
+        "oauth/models.py",
+        "oauth/oauthmanager.py",
+        "oauth/views.py"
+      ],
+      "responsibility": "weibo/google/github/facebook/qq渠道适配；code换token/资料；按(type,openid)查绑定；有邮箱登录，无邮箱补绑。",
+      "evidence": "models.py:12-73；views.py:50-266"
+    },
+    {
+      "id": "M06",
+      "name": "模板与前端增强",
+      "paths": [
+        "templates/",
+        "blog/templatetags/vite_tags.py",
+        "frontend/src/main.js",
+        "frontend/vite.config.js",
+        "frontend/package.json"
+      ],
+      "responsibility": "Django服务端HTML；Alpine局部状态、HTMX导航与请求、Tailwind样式；Vite编译至Django静态目录并生成manifest。",
+      "evidence": "main.js:6-62；vite.config.js:5-12,82-105；vite_tags.py:28-61,90-135"
+    },
+    {
+      "id": "M07",
+      "name": "检索适配与派生索引",
+      "paths": [
+        "blog/search_indexes.py",
+        "blog/documents.py",
+        "djangoblog/whoosh_cn_backend.py",
+        "djangoblog/elasticsearch_backend.py"
+      ],
+      "responsibility": "Haystack统一搜索；默认中文Whoosh，配置环境后使用ES；提供高亮/建议，文章保存由RealtimeSignalProcessor维护索引。",
+      "evidence": "settings.py:215-258；search_indexes.py:7-16；elasticsearch_backend.py:75-145,195-206"
+    },
+    {
+      "id": "M08",
+      "name": "插件系统",
+      "paths": [
+        "djangoblog/apps.py",
+        "djangoblog/plugin_manage/",
+        "plugins/"
+      ],
+      "responsibility": "启动导入ACTIVE_PLUGINS中的plugin实例，BasePlugin初始化/注册hooks；正文过滤、位置组件和Action Hook扩展版权、阅读时长、外链、浏览量、SEO、懒加载、推荐及CF清缓存。",
+      "evidence": "djangoblog/apps.py:7-11；loader.py:10-40；base_plugin.py:22-31；settings.py:456-467"
+    },
+    {
+      "id": "M09",
+      "name": "信号、邮件和缓存",
+      "paths": [
+        "djangoblog/blog_signals.py",
+        "djangoblog/utils.py",
+        "djangoblog/spider_notify.py",
+        "plugins/cloudflare_cache/"
+      ],
+      "responsibility": "utils.send_email→blog_signals.send_email_signal_handler同步调用SMTP并写servermanager.EmailSendLog；公开评论保存另起线程调用评论邮件辅助函数，邮件仍经同一发送链；保存信号触发缓存和百度URL通知；CF凭据缺失时停用。",
+      "evidence": "blog_signals.py:26-51,68-116；utils.py:129-174；cloudflare_cache/plugin.py:66-81,181-212"
+    },
+    {
+      "id": "M10",
+      "name": "servermanager 扩展域",
+      "paths": [
+        "servermanager/models.py",
+        "servermanager/urls.py",
+        "servermanager/robot.py",
+        "servermanager/api/"
+      ],
+      "responsibility": "提供EmailSendLog/后台命令模型及/robot微信入口；EmailSendLog负责持久化发送结果，SMTP发送由djangoblog.blog_signals处理；机器人搜索/最新文章/管理员指令为已有扩展，本次10用例之外单独说明。",
+      "evidence": "models.py:5-33；urls.py:9-10；robot.py:51-116"
+    }
+  ],
+  "findings": [
+    {
+      "id": "B01",
+      "title": "部署方式",
+      "detail": "当前是同一Django进程内的MVT单体。Vite是构建工具；不是前后端分离SPA，没有从源码证实独立微服务/消息队列/Celery。"
+    },
+    {
+      "id": "B02",
+      "title": "可选依赖",
+      "detail": "默认MySQL+LocMem+Whoosh；DJANGO_REDIS_URL替换缓存，DJANGO_ELASTICSEARCH_HOST切换检索。OAuth需渠道配置，SMTP需有效配置，CF缺少凭据自停用。源码可选配置不等于当前环境已启用。"
+    },
+    {
+      "id": "B03",
+      "title": "数据库与应用校验区分",
+      "detail": "Article.title、Category/Tag.name及表情联合唯一是数据库声明；Comment.body的max_length=300、枚举choices、BlogSettings单例、OAuthConfig渠道唯一及注册邮箱去重依靠表单/clean。普通save不自动full_clean。"
+    },
+    {
+      "id": "B04",
+      "title": "详情和评论的发布态缺口",
+      "detail": "详情按article_id获取Article，未在ArticleDetailView显式限status=p；评论视图检查comment_status=c或status=c，而Article.status只有d/p，不能视为草稿保护。",
+      "source": "blog/views.py:92-99；comments/views.py:54-59"
+    },
+    {
+      "id": "B05",
+      "title": "父评论及站点评论开关",
+      "detail": "CommentForm仅校验body和可选整数parent_comment_id；视图按父ID直接查询，未检查同文章/公开状态。open_site_comment在模板控制入口，CommentPostView未读取此开关。",
+      "source": "comments/forms.py:12-20；comments/views.py:60-75；templates/blog/article_detail.html:55,148"
+    },
+    {
+      "id": "B06",
+      "title": "敏感字段与身份唯一性",
+      "detail": "BlogUser.email无DB unique；OAuthUser(type,openid)无DB联合唯一且author可空，OAuthConfig.type无DB unique。token/appsecret/验证码/签名及邮件正文属于敏感数据，本报告不含凭据。",
+      "source": "accounts/migrations/0001_initial.py:25-30；oauth/models.py:12-65"
+    },
+    {
+      "id": "B07",
+      "title": "通知与缓存一致性边界",
+      "detail": "核心回调监听post_save，不监听删除；后台部分批操作使用QuerySet.update，绕过save信号。不能声称所有删除/批量操作都实时刷新索引、缓存或发送通知。",
+      "source": "djangoblog/blog_signals.py:68-83；blog/admin.py:20-33"
+    },
+    {
+      "id": "B08",
+      "title": "时间戳不是自动更新时间",
+      "detail": "多数last_modify_time使用default=now，仅给初始值；不等于auto_now。servermanager.commands的last_modify_time才声明auto_now=True。",
+      "source": "blog/models.py:30-33；comments/models.py:17-20；servermanager/models.py:9-10"
+    },
+    {
+      "id": "B09",
+      "title": "索引筛选后端差异",
+      "detail": "Whoosh ArticleIndex.index_queryset批量筛status=p，未筛type。ES搜索显式筛status=p/type=a。实时索引与直连详情的公开权限需分别核验。",
+      "source": "blog/search_indexes.py:15-16；djangoblog/elasticsearch_backend.py:88-95"
+    },
+    {
+      "id": "B10",
+      "title": "邮件实现的实际保证",
+      "detail": "邮件信号处理同步发送并记发送结果；公开评论post_save新建线程邮件，无持久队列/自动重试保证。每次保存公开评论均可触发而不限首次发布；投递返回不等于最终到达。",
+      "source": "djangoblog/blog_signals.py:26-51,94-116"
+    },
+    {
+      "id": "B11",
+      "title": "验证码生命周期",
+      "detail": "验证码缓存TTL为300秒，以邮箱作key；核对成功后未删除，未在该辅助函数实现一次性消费或尝试次数限制。默认LocMem跨进程不可共享，部署多进程时需要共享缓存。",
+      "source": "accounts/utils.py:10-49"
+    },
+    {
+      "id": "B12",
+      "title": "外部通知条件",
+      "detail": "百度通知针对含get_full_url的保存对象且非TESTING；不宜简化为只有文章发布时才触发。CF仅启用后监听Article/Comment保存，公开评论才清理，浏览量专用更新跳过。",
+      "source": "djangoblog/blog_signals.py:85-92；plugins/cloudflare_cache/handlers.py:46-76"
+    },
+    {
+      "id": "B13",
+      "title": "源码分析不代表运行确认",
+      "detail": "本数据集通过静态阅读和AST提取生成，未导入Django设置、连接数据库/Redis/ES、调用OAuth或SMTP；没有验证实际迁移应用情况。"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "R01",
+      "module": "请求入口与安全链",
+      "paths": [
+        "src/DjangoBlog/djangoblog/wsgi.py",
+        "src/DjangoBlog/djangoblog/urls.py",
+        "src/DjangoBlog/djangoblog/settings.py",
+        "src/DjangoBlog/djangoblog/base_views.py",
+        "src/DjangoBlog/djangoblog/admin_site.py"
+      ],
+      "evidence": "settings.py:68-106；urls.py:57-77；admin_site.py:18-26"
+    },
+    {
+      "id": "R02",
+      "module": "blog 内容域",
+      "paths": [
+        "src/DjangoBlog/blog/models.py",
+        "src/DjangoBlog/blog/views.py",
+        "src/DjangoBlog/blog/urls.py",
+        "src/DjangoBlog/blog/admin.py",
+        "src/DjangoBlog/blog/middleware.py"
+      ],
+      "evidence": "models.py:64-410；views.py:35-356；middleware.py:17-53"
+    },
+    {
+      "id": "R03",
+      "module": "accounts 身份域",
+      "paths": [
+        "src/DjangoBlog/accounts/models.py",
+        "src/DjangoBlog/accounts/forms.py",
+        "src/DjangoBlog/accounts/views.py",
+        "src/DjangoBlog/accounts/user_login_backend.py",
+        "src/DjangoBlog/accounts/utils.py"
+      ],
+      "evidence": "views.py:29-227；forms.py:20-113；user_login_backend.py:5-26"
+    },
+    {
+      "id": "R04",
+      "module": "comments 互动域",
+      "paths": [
+        "src/DjangoBlog/comments/models.py",
+        "src/DjangoBlog/comments/forms.py",
+        "src/DjangoBlog/comments/views.py",
+        "src/DjangoBlog/comments/utils.py"
+      ],
+      "evidence": "models.py:12-149；views.py:20-137；forms.py:12-20"
+    },
+    {
+      "id": "R05",
+      "module": "oauth 第三方身份域",
+      "paths": [
+        "src/DjangoBlog/oauth/models.py",
+        "src/DjangoBlog/oauth/oauthmanager.py",
+        "src/DjangoBlog/oauth/views.py"
+      ],
+      "evidence": "models.py:12-73；views.py:50-266"
+    },
+    {
+      "id": "R06",
+      "module": "模板与前端增强",
+      "paths": [
+        "src/DjangoBlog/templates/",
+        "src/DjangoBlog/blog/templatetags/vite_tags.py",
+        "src/DjangoBlog/frontend/src/main.js",
+        "src/DjangoBlog/frontend/vite.config.js",
+        "src/DjangoBlog/frontend/package.json"
+      ],
+      "evidence": "main.js:6-62；vite.config.js:5-12,82-105；vite_tags.py:28-61,90-135"
+    },
+    {
+      "id": "R07",
+      "module": "检索适配与派生索引",
+      "paths": [
+        "src/DjangoBlog/blog/search_indexes.py",
+        "src/DjangoBlog/blog/documents.py",
+        "src/DjangoBlog/djangoblog/whoosh_cn_backend.py",
+        "src/DjangoBlog/djangoblog/elasticsearch_backend.py"
+      ],
+      "evidence": "settings.py:215-258；search_indexes.py:7-16；elasticsearch_backend.py:75-145,195-206"
+    },
+    {
+      "id": "R08",
+      "module": "插件系统",
+      "paths": [
+        "src/DjangoBlog/djangoblog/apps.py",
+        "src/DjangoBlog/djangoblog/plugin_manage/",
+        "src/DjangoBlog/plugins/"
+      ],
+      "evidence": "djangoblog/apps.py:7-11；loader.py:10-40；base_plugin.py:22-31；settings.py:456-467"
+    },
+    {
+      "id": "R09",
+      "module": "信号、邮件和缓存",
+      "paths": [
+        "src/DjangoBlog/djangoblog/blog_signals.py",
+        "src/DjangoBlog/djangoblog/utils.py",
+        "src/DjangoBlog/djangoblog/spider_notify.py",
+        "src/DjangoBlog/plugins/cloudflare_cache/"
+      ],
+      "evidence": "blog_signals.py:26-51,68-116；utils.py:129-174；cloudflare_cache/plugin.py:66-81,181-212"
+    },
+    {
+      "id": "R10",
+      "module": "servermanager 扩展域",
+      "paths": [
+        "src/DjangoBlog/servermanager/models.py",
+        "src/DjangoBlog/servermanager/urls.py",
+        "src/DjangoBlog/servermanager/robot.py",
+        "src/DjangoBlog/servermanager/api/"
+      ],
+      "evidence": "models.py:5-33；urls.py:9-10；robot.py:51-116"
+    }
+  ],
+  "balance": {
+    "rule": "上下文图F01—F14与第1层同编号同外部实体、同方向、同结构；只把P0展开为P1—P4。",
+    "external_flow_ids": [
+      "F01",
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06",
+      "F07",
+      "F08",
+      "F09",
+      "F10",
+      "F11",
+      "F12",
+      "F13",
+      "F14"
+    ],
+    "aggregation": "P4是后台维护和进程内保存事件/通知的逻辑归类，不代表额外部署服务；E5聚合两个独立的URL运维服务。",
+    "excluded": "RSS/sitemap/health/媒体上传/微信robot属于既有扩展入口，未纳入本次UC01—UC10核心DFD边界，架构模块仍保留说明。"
+  }
+}

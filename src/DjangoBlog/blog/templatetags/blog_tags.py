@@ -1,7 +1,10 @@
+# SY: 自定义 Django 模板标签与过滤器，在服务端渲染模板时处理数据、生成内容或渲染子模板
+# SZX（第7—8周）：本模块连接模板、文章查询与插件；安全输出需逐条检查数据来源。
 import hashlib
 import json
 import logging
 import random
+import re
 import urllib
 
 from django import template
@@ -11,6 +14,7 @@ from django.shortcuts import get_object_or_404
 from django.template.defaultfilters import stringfilter
 from django.templatetags.static import static
 from django.urls import reverse
+from django.utils.html import escape, format_html, format_html_join
 from django.utils.safestring import mark_safe
 
 from blog.models import Article, Category, Tag, Links, SideBar, LinkShowType
@@ -56,6 +60,7 @@ def custom_markdown(content):
     通用markdown过滤器，应用文章内容插件
     主要用于文章内容处理
     """
+    # SZX（第7—8周）：正文渲染后继续交给插件；mark_safe 本身不会执行 HTML 净化。
     html_content = CommonMarkdown.get_markdown(content)
     
     # 然后应用插件过滤器优化HTML
@@ -91,6 +96,7 @@ def render_article_content(context, article, is_summary=False):
     
     # 如果是摘要模式，先截断内容再应用插件
     if is_summary:
+        # SZX（第7—8周）：摘要先按 HTML 截断再跑插件，插件需自行识别 is_summary。
         # 从配置中获取摘要长度
         from djangoblog.utils import get_blog_setting
         from django.template.defaultfilters import truncatechars_html
@@ -154,6 +160,7 @@ def current_nav_item(request):
 @register.filter()
 @stringfilter
 def comment_markdown(content):
+    # SZX（第7—8周）：评论是非可信输入，Markdown 转换后额外经过 sanitize_html。
     content = CommonMarkdown.get_markdown(content)
     return mark_safe(sanitize_html(content))
 
@@ -165,6 +172,7 @@ def to_json(value):
     使用 ensure_ascii=False 以支持 emoji 等 unicode 字符
     """
     try:
+        # SZX（第7—8周）：JSON 编码不等于 HTML/script 安全编码，需结合模板落点核验。
         return mark_safe(json.dumps(value, ensure_ascii=False))
     except (TypeError, ValueError):
         return mark_safe('{}')
@@ -254,6 +262,7 @@ def load_sidebar(user, linktype):
     加载侧边栏
     :return:
     """
+    # SZX（第7—8周）：侧栏查询按 linktype 共享缓存，每次返回前补本次 user，不缓存身份。
     value = cache.get("sidebar" + linktype)
     if value:
         value['user'] = user
@@ -292,6 +301,7 @@ def load_sidebar(user, linktype):
         # 标签云 — 按文章数排序，取 top 20，size = (count/avg)*5+10
         increment = 5
         tags = Tag.objects.all()
+        # SZX（第7—8周）：每个 Tag 的计数分别访问缓存/数据库，标签多时有查询放大风险。
         sidebar_tags = None
         if tags and len(tags) > 0:
             s = sorted(
@@ -338,6 +348,7 @@ def load_article_metas(article, user):
 
 @register.inclusion_tag('blog/tags/article_pagination.html')
 def load_pagination_info(page_obj, page_type, tag_name):
+    # SZX（第7—8周）：根据页面种类反向路由生成前后页；当前分支复杂度高，列入重构计划。
     previous_url = ''
     next_url = ''
 
@@ -406,6 +417,7 @@ def load_pagination_info(page_obj, page_type, tag_name):
     }
 
 
+# SZX：列表模板将当前 article、isindex 和 user 传入此 inclusion_tag；返回字典用于渲染 article_info.html，不是浏览器额外向后端请求数据。
 @register.inclusion_tag('blog/tags/article_info.html')
 def load_article_detail(article, isindex, user, query=None):
     """
@@ -457,21 +469,26 @@ def highlight_search_term(text, query):
     :param query: 搜索查询词
     :return: 高亮后的HTML
     """
-    if not query or not text:
-        return text
+    return _highlight_plain_text(text, query)
 
-    import re
-    # 分词处理（支持空格分隔的多个词）
-    terms = query.split()
 
-    for term in terms:
-        if len(term) < 2:  # 忽略单字符
-            continue
-        # 使用正则替换，不区分大小写，但保留原文本的大小写
-        pattern = re.compile(r'(' + re.escape(term) + r')', re.IGNORECASE)
-        text = pattern.sub(r'<mark>\1</mark>', text)
-
-    return mark_safe(text)
+# SZX（第7—8周）：仅允许本函数生成 mark 标签；原文和匹配片段均按纯文本转义。
+def _highlight_plain_text(text, query):
+    text = str(text or '')
+    terms = sorted({term for term in (query or '').split() if len(term) >= 2},
+                   key=lambda term: (-len(term), term))
+    if not terms:
+        return escape(text)
+    pattern = re.compile('|'.join(re.escape(term) for term in terms), re.IGNORECASE)
+    parts = []
+    start = 0
+    # SZX（第7—8周）：只扫描原文一次，避免重复词再次匹配刚生成的 HTML 标签。
+    for match in pattern.finditer(text):
+        parts.append(escape(text[start:match.start()]))
+        parts.append(format_html('<mark>{}</mark>', match.group()))
+        start = match.end()
+    parts.append(escape(text[start:]))
+    return format_html_join('', '{}', ((part,) for part in parts))
 
 
 @register.filter
@@ -488,7 +505,6 @@ def highlight_content(html_content, query):
         return html_content
 
     from bs4 import BeautifulSoup
-    import re
 
     # 使用BeautifulSoup解析HTML
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -500,19 +516,8 @@ def highlight_content(html_content, query):
     # 提取纯文本
     text = soup.get_text(separator=' ', strip=True)
 
-    # 分词处理（支持空格分隔的多个词）
-    terms = [term for term in query.split() if len(term) >= 2]
-
-    if not terms:
-        return text
-
-    # 对纯文本进行高亮
-    for term in terms:
-        # 使用正则替换，不区分大小写
-        pattern = re.compile(r'(' + re.escape(term) + r')', re.IGNORECASE)
-        text = pattern.sub(r'<mark>\1</mark>', text)
-
-    return mark_safe(text)
+    # SZX（第7—8周）：HTML 实体可能被解析回尖括号，取纯文本后仍必须转义。
+    return _highlight_plain_text(text, query)
 
 
 # 返回用户头像URL
@@ -520,6 +525,7 @@ def highlight_content(html_content, query):
 @register.filter
 def gravatar_url(email, size=40):
     """获得用户头像 - 优先使用OAuth头像，否则使用默认头像"""
+    # SZX（第7—8周）：查 OAuthUser 头像并按邮箱缓存；size 当前不参与头像来源选择。
     cachekey = 'avatar/' + email
     url = cache.get(cachekey)
     if url:
@@ -556,9 +562,10 @@ def gravatar_url(email, size=40):
 def gravatar(email, size=40):
     """获得用户头像HTML标签"""
     url = gravatar_url(email, size)
-    return mark_safe(
-        '<img src="%s" height="%d" width="%d" class="avatar" alt="用户头像">' %
-        (url, size, size))
+    # SZX（第7—8周）：OAuth 头像 URL 作为属性值转义，避免引号突破 src 属性。
+    return format_html(
+        '<img src="{}" height="{}" width="{}" class="avatar" alt="用户头像">',
+        url, int(size), int(size))
 
 
 @register.simple_tag
@@ -569,6 +576,7 @@ def query(qs, **kwargs):
             ...
           {% endfor %}
     """
+    # SZX（第7—8周）：递归评论模板在此继续筛 QuerySet，因此模型缓存须保持该接口。
     return qs.filter(**kwargs)
 
 
@@ -593,6 +601,7 @@ def render_plugin_widgets(context, position, **kwargs):
     Returns:
         按优先级排序的所有插件HTML内容
     """
+    # SZX（第7—8周）：每个插件故障独立捕获，成功组件按 priority 排序后合并为 HTML。
     from djangoblog.plugin_manage.loader import get_loaded_plugins
     
     widgets = []

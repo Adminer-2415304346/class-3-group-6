@@ -1,3 +1,4 @@
+# SZX（第7—8周）：文章、分类、标签、站点设置的 ORM 模型；保存信号位于 djangoblog。
 import logging
 import re
 from abc import abstractmethod
@@ -26,12 +27,14 @@ class LinkShowType(models.TextChoices):
     S = ('s', _('slide'))
 
 
+# SZX：抽象父模型统一主键和时间字段，不会单独生成一张 BaseModel 数据表。
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
     creation_time = models.DateTimeField(_('creation time'), default=now)
     last_modify_time = models.DateTimeField(_('modify time'), default=now)
 
     def save(self, *args, **kwargs):
+        # SZX：浏览量单字段更新直接执行 UPDATE；其他保存才处理 slug 并走父类 save。
         is_update_views = isinstance(
             self,
             Article) and 'update_fields' in kwargs and kwargs['update_fields'] == ['views']
@@ -46,6 +49,7 @@ class BaseModel(models.Model):
             super().save(*args, **kwargs)
 
     def get_full_url(self):
+        # SZX（第7—8周）：域名取当前 Site，协议固定 HTTPS，调用者不应传入完整外链。
         site = get_current_site().domain
         url = "https://{site}{path}".format(site=site,
                                             path=self.get_absolute_url())
@@ -59,6 +63,7 @@ class BaseModel(models.Model):
         pass
 
 
+# SZX（第7—8周）：status 控制发布，comment_status 控制评论，type 区分文章与独立页面。
 class Article(BaseModel):
     """文章"""
     STATUS_CHOICES = (
@@ -89,6 +94,7 @@ class Article(BaseModel):
         default='o')
     type = models.CharField(_('type'), max_length=1, choices=TYPE, default='a')
     views = models.PositiveIntegerField(_('views'), default=0)
+    # SZX：文章对作者、分类使用外键，对标签使用多对多关系。
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('author'),
@@ -128,6 +134,7 @@ class Article(BaseModel):
             models.Index(fields=['category', 'status'], name='idx_category_status'),
         ]
 
+    # SZX：详情链接由路由名称反向生成，URL 中携带创建日期和文章主键。
     def get_absolute_url(self):
         return reverse('blog:detailbyid', kwargs={
             'article_id': self.id,
@@ -138,6 +145,7 @@ class Article(BaseModel):
 
     @cache_decorator(CacheTimeout.HOUR_10)
     def get_category_tree(self):
+        # SZX（第7—8周）：将分类祖先映射成名称与链接，供面包屑模板使用。
         tree = self.category.get_category_tree()
         names = list(map(lambda c: (c.name, c.get_absolute_url()), tree))
 
@@ -147,16 +155,20 @@ class Article(BaseModel):
         super().save(*args, **kwargs)
 
     def viewed(self):
+        # SZX（第7—8周）：读取后递增再写回存在并发丢失风险，本轮未改计数策略。
         self.views += 1
         self.save(update_fields=['views'])
 
+    # SZX（第7—8周）：返回启用评论的 QuerySet；递归模板依赖 filter，不能改成列表。
     def comment_list(self):
         cache_key = CacheKey.ARTICLE_COMMENTS.format(article_id=self.id)
         value = cache.get(cache_key)
+        # SZX（第7—8周）：保留空集重查；后台批量审核不发保存信号，需防止空缓存滞留。
         if value:
             logger.info(f'Cache HIT: article comments (id={self.id})')
             return value
         else:
+            # SZX（第7—8周）：保存启用评论时外部信号删除此键，下一次读取重新建缓存。
             comments = self.comment_set.filter(is_enable=True).order_by('-id')
             cache.set(cache_key, comments, CacheTimeout.HOUR_10)
             logger.info(f'Cache MISS: article comments (id={self.id})')
@@ -168,12 +180,14 @@ class Article(BaseModel):
 
     @cache_decorator(expiration=CacheTimeout.HOUR_10)
     def next_article(self):
+        # SZX（第7—8周）：按主键找相邻已发布记录；不是按排序权重或发布时间找下一篇。
         # 下一篇
         return Article.objects.filter(
             id__gt=self.id, status='p').order_by('id').first()
 
     @cache_decorator(expiration=CacheTimeout.HOUR_10)
     def prev_article(self):
+        # SZX（第7—8周）：默认 ordering 影响 first 的选择；未在这里指定 id 倒序。
         # 前一篇
         return Article.objects.filter(id__lt=self.id, status='p').first()
 
@@ -191,6 +205,7 @@ class Article(BaseModel):
 class Category(BaseModel):
     """文章分类"""
     name = models.CharField(_('category name'), max_length=30, unique=True)
+    # SZX：分类通过自关联构成树；根分类的 parent_category 为空。
     parent_category = models.ForeignKey(
         'self',
         verbose_name=_('parent category'),
@@ -219,6 +234,7 @@ class Category(BaseModel):
         递归获得分类目录的父级
         :return:
         """
+        # SZX（第7—8周）：沿父指针递归到根；目前没有环检测，应由后续分类校验补足。
         categorys = []
 
         def parse(category):
@@ -235,6 +251,7 @@ class Category(BaseModel):
         获得当前分类目录所有子集
         :return:
         """
+        # SZX（第7—8周）：返回值包含自身；逐层 filter 可能多次查询，暂未批量建树。
         categorys = []
         all_categorys = Category.objects.all()
 
@@ -264,6 +281,7 @@ class Tag(BaseModel):
 
     @cache_decorator(CacheTimeout.HOUR_10)
     def get_article_count(self):
+        # SZX（第7—8周）：distinct 去除多对多重复；当前未筛发布态，不能当公开篇数。
         return Article.objects.filter(tags__name=self.name).distinct().count()
 
     class Meta:
@@ -396,10 +414,12 @@ class BlogSettings(models.Model):
         return self.site_name
 
     def clean(self):
+        # SZX（第7—8周）：单例检查只在 clean 被调用时生效，不是数据库唯一约束。
         if BlogSettings.objects.exclude(id=self.id).count():
             raise ValidationError(_('There can only be one configuration'))
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         from djangoblog.utils import cache
+        # SZX（第7—8周）：站点配置保存后清空共享缓存，影响范围大于单个设置项。
         cache.clear()

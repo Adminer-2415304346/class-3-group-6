@@ -1,235 +1,118 @@
-#!/usr/bin/env python
-"""静态扫描指定 Django App，保存 Ruff/Bandit 原始结果与 manifest。
-
-用法（仓库根目录执行）：
-    python doc/week7-8/tools/scan_app.py accounts baseline
-    python doc/week7-8/tools/scan_app.py accounts after
-
-驱动只读取源码文本并调用 Ruff/Bandit，不导入 Django、不启动项目。
-"""
+"""SZX: Reproducible static scans; never imports or starts the Django project."""
 
 import argparse
 import ast
 import hashlib
+import io
 import json
+import os
+import platform
 import subprocess
 import sys
-from datetime import datetime
+import tokenize
+from collections import Counter
+from datetime import datetime, timezone
+from importlib.metadata import version
 from pathlib import Path
 
-TOOLS_DIR = Path(__file__).resolve().parent
-REPO_ROOT = TOOLS_DIR.parents[2]
-APP_ROOT = REPO_ROOT / "src" / "DjangoBlog"
-RUFF_CONFIG = TOOLS_DIR / "ruff.toml"
-MEMBER = "YFY"
-RAW_DIR = REPO_ROOT / "doc" / "week7-8" / "成员成果" / MEMBER / "原始工具结果"
+ROOT = Path(__file__).resolve().parents[3]
+PROJECT = ROOT / 'src' / 'DjangoBlog'
+TOOLS = Path(__file__).resolve().parent
+OWNERS = {
+    'blog': 'SZX', 'accounts': 'YFY', 'comments': 'WZY',
+    'oauth': 'GZX', 'servermanager': 'SY', 'djangoblog': 'GCY',
+}
 
 
-def sha256_bytes(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def run_git(*args):
-    try:
-        completed = subprocess.run(
-            ["git", *args],
-            cwd=REPO_ROOT,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            check=False,
-        )
-        return completed.stdout.strip()
-    except OSError:
-        return ""
-
-
-def is_excluded(relative_path: Path) -> bool:
-    parts = relative_path.parts
-    if "migrations" in parts or "tests" in parts or "__pycache__" in parts:
-        return True
-    name = relative_path.name
-    return name == "tests.py" or name.startswith("test") and name.endswith(".py")
-
-
-def collect_files(app: str):
-    app_dir = APP_ROOT / app
-    if not app_dir.is_dir():
-        raise SystemExit(f"App 目录不存在：{app_dir}")
-    selected, excluded = [], []
-    for path in sorted(app_dir.rglob("*.py")):
-        relative = path.relative_to(app_dir)
-        if is_excluded(relative):
-            excluded.append(str(relative).replace("\\", "/"))
-        else:
-            selected.append(path)
-    return app_dir, selected, excluded
-
-
-def file_metrics(path: Path):
-    raw = path.read_bytes()
-    text = raw.decode("utf-8", errors="replace")
-    lines = text.splitlines()
-    code_lines = sum(
-        1 for line in lines if line.strip() and not line.lstrip().startswith("#")
-    )
-    try:
-        tree = ast.parse(text)
-        classes = sum(isinstance(node, ast.ClassDef) for node in ast.walk(tree))
-        functions = sum(
-            isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
-            for node in ast.walk(tree)
-        )
-    except SyntaxError:
-        classes = functions = -1
-    return {
-        "physical_lines": len(lines),
-        "code_lines": code_lines,
-        "classes": classes,
-        "functions": functions,
-        "sha256": sha256_bytes(raw),
-    }
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def run(command):
-    completed = subprocess.run(
-        command,
-        cwd=REPO_ROOT,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-        check=False,
-    )
-    return completed
+    environment = {**os.environ, 'PYTHONIOENCODING': 'utf-8'}
+    result = subprocess.run(command, cwd=PROJECT, capture_output=True, env=environment)
+    return {'command': command, 'returncode': result.returncode,
+            'stdout': result.stdout.decode('utf-8', errors='backslashreplace'),
+            'stderr': result.stderr.decode('utf-8', errors='backslashreplace')}
 
 
-def version_of(module: str) -> str:
-    completed = run([sys.executable, "-m", module, "--version"])
-    output = (completed.stdout or completed.stderr).strip().splitlines()
-    return output[0] if output else "unknown"
+def inventory(path):
+    source = path.read_text(encoding='utf-8-sig')
+    tree = ast.parse(source)
+    tokens = list(tokenize.generate_tokens(io.StringIO(source).readline))
+    comments = [token for token in tokens if token.type == tokenize.COMMENT]
+    code_lines = set()
+    for token in tokens:
+        if token.type not in {tokenize.COMMENT, tokenize.NL, tokenize.NEWLINE,
+                              tokenize.INDENT, tokenize.DEDENT, tokenize.ENDMARKER}:
+            code_lines.update(range(token.start[0], token.end[0] + 1))
+    return {
+        'path': path.relative_to(PROJECT).as_posix(), 'sha256': digest(path),
+        'physical_lines': len(source.splitlines()), 'code_token_lines': len(code_lines),
+        'comment_lines': len(comments),
+        'signed_comment_lines': {
+            initial: sum(initial in token.string for token in comments)
+            for initial in OWNERS.values()
+        },
+        'classes': sum(isinstance(node, ast.ClassDef) for node in ast.walk(tree)),
+        'functions_and_methods': sum(isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                                     for node in ast.walk(tree)),
+    }
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Ruff + Bandit 静态扫描驱动")
-    parser.add_argument("app", help="Django App 名称，例如 accounts")
-    parser.add_argument("phase", choices=["baseline", "after"], help="扫描阶段")
-    parser.add_argument("--member", default=MEMBER, help="成员成果目录名")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('app', choices=OWNERS)
+    parser.add_argument('stage', choices=['baseline', 'after'])
     args = parser.parse_args()
-
-    global RAW_DIR
-    RAW_DIR = REPO_ROOT / "doc" / "week7-8" / "成员成果" / args.member / "原始工具结果"
-    out_dir = RAW_DIR / args.phase
-    if out_dir.exists():
-        raise SystemExit(f"证据目录已存在，拒绝覆盖：{out_dir}")
-
-    app_dir, files, excluded = collect_files(args.app)
-    if not files:
-        raise SystemExit("没有可扫描的业务 Python 文件")
-
-    rel_files = [str(path.relative_to(REPO_ROOT)).replace("\\", "/") for path in files]
-    out_dir.mkdir(parents=True)
-
-    started_at = datetime.now().astimezone().isoformat(timespec="seconds")
-    head_sha = run_git("rev-parse", "HEAD")
-    branch = run_git("rev-parse", "--abbrev-ref", "HEAD")
-    dirty = run_git("status", "--porcelain=v1")
-
-    ruff_command = [
-        sys.executable,
-        "-m",
-        "ruff",
-        "check",
-        "--no-cache",
-        "--output-format",
-        "json",
-        "--config",
-        str(RUFF_CONFIG),
-        *rel_files,
-    ]
-    bandit_command = [
-        sys.executable,
-        "-m",
-        "bandit",
-        "-q",
-        "-f",
-        "json",
-        "--ignore-nosec",
-        *rel_files,
-    ]
-
-    ruff_result = run(ruff_command)
-    bandit_result = run(bandit_command)
-
-    (out_dir / "ruff.json").write_text(ruff_result.stdout, encoding="utf-8")
-    (out_dir / "bandit.json").write_text(bandit_result.stdout, encoding="utf-8")
-    (out_dir / "ruff.stderr.txt").write_text(ruff_result.stderr, encoding="utf-8")
-    (out_dir / "bandit.stderr.txt").write_text(bandit_result.stderr, encoding="utf-8")
-
-    try:
-        ruff_findings = json.loads(ruff_result.stdout or "[]")
-    except json.JSONDecodeError:
-        ruff_findings = []
-    try:
-        bandit_payload = json.loads(bandit_result.stdout or "{}")
-        bandit_findings = bandit_payload.get("results", [])
-    except json.JSONDecodeError:
-        bandit_findings = []
-
-    manifest = {
-        "app": args.app,
-        "phase": args.phase,
-        "member": args.member,
-        "started_at": started_at,
-        "repo_root": str(REPO_ROOT),
-        "app_dir": str(app_dir.relative_to(REPO_ROOT)).replace("\\", "/"),
-        "branch": branch,
-        "head_sha": head_sha,
-        "working_tree_dirty": bool(dirty),
-        "working_tree_status": dirty.splitlines(),
-        "python": sys.version.split()[0],
-        "python_executable": sys.executable,
-        "ruff_version": version_of("ruff"),
-        "bandit_version": version_of("bandit"),
-        "config_files": {
-            "ruff": "doc/week7-8/tools/ruff.toml",
-            "driver": "doc/week7-8/tools/scan_app.py",
-        },
-        "config_sha256": sha256_bytes(
-            RUFF_CONFIG.read_bytes() + Path(__file__).read_bytes()
-        ),
-        "selection": {
-            "include": "App 下全部业务 Python（含 commands、templatetags、__init__.py）",
-            "exclude": ["migrations/", "tests/", "test*.py", "tests.py", "__pycache__"],
-        },
-        "excluded_files": excluded,
-        "files": [],
-        "commands": {
-            "ruff": " ".join(ruff_command),
-            "bandit": " ".join(bandit_command),
-        },
-        "exit_codes": {"ruff": ruff_result.returncode, "bandit": bandit_result.returncode},
-        "finding_counts": {"ruff": len(ruff_findings), "bandit": len(bandit_findings)},
-        "outputs": ["ruff.json", "bandit.json", "ruff.stderr.txt", "bandit.stderr.txt"],
-        "metrics_note": "code_lines 为非空且不以 # 开头的物理行；类/函数含嵌套定义。",
+    # Exclude generated migrations and tests, but include commands/template tags and package entries.
+    all_files = sorted((PROJECT / args.app).rglob('*.py'))
+    files = [path for path in all_files if 'migrations' not in path.parts
+             and 'tests' not in path.parts and not path.name.startswith('test')]
+    excluded = [path.relative_to(PROJECT).as_posix() for path in all_files if path not in files]
+    output = ROOT / 'doc' / 'week7-8' / '成员成果' / OWNERS[args.app] / '原始工具结果' / args.stage
+    if output.exists():
+        parser.error(f'Existing evidence is preserved: {output}. Move it explicitly before a new run.')
+    expected = {'ruff': '0.17.1', 'bandit': '1.9.4'}
+    actual = {name: version(name) for name in expected}
+    if actual != expected:
+        parser.error(f'Expected {expected}, installed {actual}')
+    items = [inventory(path) for path in files]
+    output.mkdir(parents=True)
+    relative = [path.relative_to(PROJECT).as_posix() for path in files]
+    commands = {
+        'ruff': [sys.executable, '-m', 'ruff', 'check', '--config', str(TOOLS / 'ruff.toml'),
+                 '--output-format', 'json', '--output-file', str(output / 'ruff.json'), *relative],
+        'bandit': [sys.executable, '-m', 'bandit', '-c', str(TOOLS / 'bandit.yaml'),
+                   '--ignore-nosec', '-f', 'json', '-o', str(output / 'bandit.json'), *relative],
     }
-    for path in files:
-        relative = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
-        manifest["files"].append({"path": relative, **file_metrics(path)})
+    results = {name: run(command) for name, command in commands.items()}
+    commit = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True,
+                            text=True, check=True).stdout.strip()
+    record = {
+        'app': args.app, 'owner': OWNERS[args.app], 'stage': args.stage,
+        'timestamp_utc': datetime.now(timezone.utc).isoformat(), 'base_commit': commit,
+        'python': platform.python_version(), 'tools': actual,
+        'config_sha256': {name: digest(TOOLS / name) for name in ['ruff.toml', 'bandit.yaml']},
+        'scope': 'App Python excluding migrations and test*.py/tests directories; no Django startup',
+        'excluded_files': excluded, 'files': items, 'runs': results,
+    }
+    with (output / 'manifest.json').open('w', encoding='utf-8', newline='\n') as stream:
+        json.dump(record, stream, ensure_ascii=False, indent=2)
+        stream.write('\n')
+    if any(result['returncode'] not in (0, 1) for result in results.values()):
+        print('SCAN_ERROR: inspect manifest.json; tool execution failed')
+        return 2
+    ruff = json.loads((output / 'ruff.json').read_text(encoding='utf-8'))
+    bandit = json.loads((output / 'bandit.json').read_text(encoding='utf-8'))
+    summary = {'app': args.app, 'stage': args.stage, 'files': len(files),
+               'ruff_findings': len(ruff), 'ruff_rules': dict(Counter(item['code'] for item in ruff)),
+               'bandit_findings': len(bandit['results']),
+               'bandit_errors': bandit['errors']}
+    print(json.dumps(summary, ensure_ascii=False))
+    # Findings are evidence, not scanner execution failure. Do not imply they are all resolved.
+    return 2 if bandit['errors'] else 0
 
-    (out_dir / "manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
 
-    print(f"扫描完成：{args.app} / {args.phase}")
-    print(f"工作区基线 SHA：{head_sha}（{branch}，dirty={bool(dirty)}）")
-    print(f"Ruff：{manifest['ruff_version']} 退出码 {ruff_result.returncode}，"
-          f"{len(ruff_findings)} 条")
-    print(f"Bandit：{manifest['bandit_version']} 退出码 {bandit_result.returncode}，"
-          f"{len(bandit_findings)} 条")
-    print(f"原始结果：{out_dir}")
-
-
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    raise SystemExit(main())

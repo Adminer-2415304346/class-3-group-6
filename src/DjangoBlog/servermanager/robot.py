@@ -13,6 +13,8 @@ from servermanager.api.blogapi import BlogApi
 from servermanager.api.commonapi import ChatGPT, CommandHandler
 from .MemcacheStorage import MemcacheStorage
 
+# GZX：WeRoBot 实例是消息分发中枢：@robot.filter 按正则匹配具体命令(?搜索/category/recent/help 等)，
+# 未命中 filter 的消息走 @robot.handler 兜底，进入 MessageHandler 处理管理员指令或转 ChatGPT。
 robot = WeRoBot(token=os.environ.get('DJANGO_WEROBOT_TOKEN')
                       or 'lylinux', enable_session=True)
 memstorage = MemcacheStorage()

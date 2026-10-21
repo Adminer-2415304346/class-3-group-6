@@ -1,0 +1,16 @@
+{
+  "usecases": 10,
+  "sequence_messages": 135,
+  "diagrams": 17,
+  "flows": 45,
+  "structures": 35,
+  "elements": 44,
+  "stores": 7,
+  "external_flows_balanced": 14,
+  "source_ast_unchanged": true,
+  "source_noncomment_tokens_unchanged": true,
+  "new_annotation_groups": 3,
+  "docx_images": 22,
+  "docx_tables": 24,
+  "report_format": "docx"
+}

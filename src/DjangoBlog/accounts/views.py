@@ -9,7 +9,6 @@ from django.contrib import auth
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth import get_user_model
 from django.contrib.auth import logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.http.request import HttpRequest
@@ -126,6 +125,12 @@ class LoginView(LoginFormView):
     success_url = '/'
     redirect_field_name = REDIRECT_FIELD_NAME
 
+    def get_form_kwargs(self):
+        # SZX：首次验证就传入当前请求，保留认证后端依赖的请求上下文。
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
     def get_context_data(self, **kwargs):
         redirect_to = self.request.GET.get(self.redirect_field_name)
         if redirect_to is None:
@@ -134,45 +139,37 @@ class LoginView(LoginFormView):
 
         return super(LoginView, self).get_context_data(**kwargs)
 
-    # YFY：修订旧注释：这里并不是直接使用 FormView 已校验的 LoginForm，而是重新构造
-    # YFY：AuthenticationForm 再做一次认证；因此一次 POST 会走两遍认证后端（密码哈希校验两次）。
-    # YFY：旧注释只写了“登录表单校验成功”，未说明重新实例化带来的重复校验和自定义表单被替换。
-    # YFY：行为后果：LoginForm 的控件样式作用于 GET 与校验失败后的重新渲染；
-    # YFY：成功路径的第二次认证使用基类实例，本身也继承 AuthenticationForm，因此功能上冗余。
+    # YFY：入口：FormView 已用 LoginForm(AuthenticationForm) 完成凭据校验，并把认证结果缓存在
+    # YFY：form.user_cache；合并 develop 后这里直接 auth.login，不再像旧实现那样重新构造
+    # YFY：AuthenticationForm 做第二次认证（旧实现的重复认证已由 SZX 的重构消除）。
+    # YFY：请求上下文：get_form_kwargs 把 request 传给表单，认证后端可以读取请求级信息。
+    # YFY：有效期策略：勾选 remember 用 REMEMBER_ME_LOGIN_TTL（30 天），否则用 SESSION_COOKIE_AGE；
+    # YFY：set_expiry 同时作用于 session 与 cookie。
     def form_valid(self, form):
-        form = AuthenticationForm(data=self.request.POST, request=self.request)
+        # SZX：FormView 已验证 LoginForm；复用其用户缓存，不再重复查询和校验密码。
+        delete_sidebar_cache()
+        logger.info(self.redirect_field_name)
 
-        if form.is_valid():
-            delete_sidebar_cache()
-            logger.info(self.redirect_field_name)
-
-            auth.login(self.request, form.get_user())
-            # YFY：有效期策略：勾选 remember 用 REMEMBER_ME_LOGIN_TTL（30 天），
-            # YFY：否则用 SESSION_COOKIE_AGE（默认 2 周）；set_expiry 同时影响 session 与 cookie。
-            if self.request.POST.get("remember"):
-                self.request.session.set_expiry(settings.REMEMBER_ME_LOGIN_TTL)
-                cookie_max_age = settings.REMEMBER_ME_LOGIN_TTL
-            else:
-                # 使用Django默认的2周
-                self.request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                cookie_max_age = settings.SESSION_COOKIE_AGE
-
-            # YFY：logged_user 设为 httponly=False 供前端 JS 读取；它可被伪造，不能用于权限判断。
-            # 获取响应对象并设置登录标记 cookie
-            response = super(LoginView, self).form_valid(form)
-            response.set_cookie(
-                'logged_user',
-                'true',
-                max_age=cookie_max_age,
-                httponly=False,  # 允许 JavaScript 访问
-                samesite='Lax'
-            )
-            return response
-            # return HttpResponseRedirect('/')
+        auth.login(self.request, form.get_user())
+        # YFY：logged_user 设为 httponly=False 供前端 JS 读取；它可被伪造，不能用于权限判断。
+        if self.request.POST.get("remember"):
+            self.request.session.set_expiry(settings.REMEMBER_ME_LOGIN_TTL)
+            cookie_max_age = settings.REMEMBER_ME_LOGIN_TTL
         else:
-            return self.render_to_response({
-                'form': form
-            })
+            # 使用Django默认的2周
+            self.request.session.set_expiry(settings.SESSION_COOKIE_AGE)
+            cookie_max_age = settings.SESSION_COOKIE_AGE
+
+        # 获取响应对象并设置登录标记 cookie
+        response = super(LoginView, self).form_valid(form)
+        response.set_cookie(
+            'logged_user',
+            'true',
+            max_age=cookie_max_age,
+            httponly=False,  # 允许 JavaScript 访问
+            samesite='Lax'
+        )
+        return response
 
     # YFY：开放重定向防护：只接受同站 host（request.get_host()）的 next；
     # YFY：不合法（含外部域名、协议不匹配）时回退到 success_url='/'。

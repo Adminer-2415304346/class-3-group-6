@@ -3,6 +3,7 @@ import os
 import sys
 
 if __name__ == "__main__":
+    # SZX：管理命令从这里进入；先指定项目配置，再由 Django 解析命令行参数。
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangoblog.settings")
     try:
         from django.core.management import execute_from_command_line

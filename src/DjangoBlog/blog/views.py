@@ -1,3 +1,4 @@
+# SZX（第7—8周）：前台查询与渲染入口；权限、评论分页、插件和上传各有独立边界。
 import logging
 import os
 import uuid
@@ -10,7 +11,8 @@ from django.shortcuts import render
 from django.templatetags.static import static
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+from django.views.decorators.http import require_POST
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from haystack.views import SearchView
@@ -31,6 +33,7 @@ from djangoblog.mixins import (
 logger = logging.getLogger(__name__)
 
 
+# SZX：列表页以 Django ListView 为基础，两个 Mixin 补上查询缓存与页码处理。
 class ArticleListView(CachedListViewMixin, PageNumberMixin, ListView):
     """
     文章列表视图基类（重构版）
@@ -51,6 +54,7 @@ class ArticleListView(CachedListViewMixin, PageNumberMixin, ListView):
     link_type = LinkShowType.L
 
     def get_view_cache_key(self):
+        # SZX（第7—8周）：该方法尚未被仓库调用，request.get 也非标准 GET 接口，列为待办。
         return self.request.get['pages']
 
     def get_context_data(self, **kwargs):
@@ -58,6 +62,7 @@ class ArticleListView(CachedListViewMixin, PageNumberMixin, ListView):
         return super(ArticleListView, self).get_context_data(**kwargs)
 
 
+# SZX：首页只展示已发布的普通文章；查询 Mixin 预加载作者、分类和标签。
 class IndexView(OptimizedArticleQueryMixin, ArticleListView):
     """
     首页视图（重构版）
@@ -86,18 +91,31 @@ class IndexView(OptimizedArticleQueryMixin, ArticleListView):
         return context
 
 
+# SZX：详情页按 article_id 取 Article，并把评论、相邻文章及 SEO 信息交给模板。
 class ArticleDetailView(DetailView):
     '''
     文章详情页面
     '''
     template_name = 'blog/article_detail.html'
     model = Article
+    # SZX（第7—8周）：article_id 定位记录；发布权限在 get_queryset 中检查。
+    # URL 年月日仍未单独校验，不能把日期参数当成访问凭据。
     pk_url_kwarg = 'article_id'
     context_object_name = "article"
+
+    # SZX（第7—8周）：公开详情只读已发布记录；后台超级用户保留“查看站点”预览。
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        if user.is_authenticated and user.is_active and user.is_superuser:
+            return queryset
+        # SZX（第7—8周）：不限定 type，已发布的独立页面也使用同一详情路由。
+        return queryset.filter(status='p')
 
     def get_context_data(self, **kwargs):
         comment_form = CommentForm()
 
+        # SZX（第7—8周）：顶层评论分页；子评论预加载与总评论数查询承担不同用途。
         # 优化：直接查询父评论，减少数据库查询
         from comments.models import Comment
         parent_comments = Comment.objects.filter(
@@ -114,6 +132,7 @@ class ArticleDetailView(DetailView):
         blog_setting = get_blog_setting()
         paginator = Paginator(parent_comments, blog_setting.article_comment_count)
         page = self.request.GET.get('comment_page', '1')
+        # SZX（第7—8周）：非法或越界评论页码收敛到有效页，避免 Paginator 抛边界异常。
         if not page.isnumeric():
             page = 1
         else:
@@ -153,6 +172,7 @@ class ArticleDetailView(DetailView):
         
         # 处理description：markdown -> HTML -> 纯文本，彻底去除格式
         html_content = CommonMarkdown.get_markdown(article.body)
+        # SZX（第7—8周）：SEO 摘要是 Markdown 转 HTML 后去标签的文本，不直接截断源码。
         description = strip_tags(html_content)
         description = ' '.join(description.split())  # 规范化空白字符
         description = Truncator(description).chars(150, truncate='...')
@@ -170,10 +190,13 @@ class ArticleDetailView(DetailView):
         hooks.run_action(ARTICLE_DETAIL_LOAD, article=article, context=context, request=self.request)
         
         # Action Hook, 通知插件"文章详情已获取"
+        # SZX（第六周）：这里只显式触发 Hook；浏览量更新由已注册的 view_count 插件执行，
+        # ArticleDetailView 自身没有直接调用 article.viewed()。
         hooks.run_action('after_article_body_get', article=article, request=self.request)
         return context
 
 
+# SZX：category_name 对应 Category.slug；筛选范围包含当前分类及其子分类。
 class CategoryDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleListView):
     """
     分类目录列表（重构版）
@@ -188,8 +211,11 @@ class CategoryDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleLis
     def get_queryset_data(self):
         # 使用 Mixin 缓存的对象，只查询一次
         category = self.get_slug_object()
+        # SZX（第7—8周）：分类关系按名称集合筛选，包含自身和子分类，页面类型暂不排除。
         categorynames = [c.name for c in category.get_sub_categorys()]
 
+        # SZX（第六周）：此处只限定 status='p'，未像首页同时限定 type='a'；
+        # 分析分类列表时应以该查询为准，不能据首页推断其排除了独立页面。
         return self.get_optimized_article_queryset().filter(
             category__name__in=categorynames, status='p'
         )
@@ -236,6 +262,7 @@ class AuthorDetailView(OptimizedArticleQueryMixin, ArticleListView):
 
     def get_queryset_data(self):
         author_name = self.kwargs['author_name']
+        # SZX（第7—8周）：URL 作者名按 username 精确筛选，缓存键则在另一方法转 slug。
         return self.get_optimized_article_queryset().filter(
             author__username=author_name, type='a', status='p'
         )
@@ -255,6 +282,7 @@ class AuthorDetailView(OptimizedArticleQueryMixin, ArticleListView):
         return super(AuthorDetailView, self).get_context_data(**kwargs)
 
 
+# SZX：标签页先由 slug 取得 Tag，再通过文章与标签的多对多关系筛选文章。
 class TagDetailView(SlugCachedMixin, OptimizedArticleQueryMixin, ArticleListView):
     """
     标签列表页面（重构版）
@@ -305,6 +333,7 @@ class ArchivesView(OptimizedArticleQueryMixin, ArticleListView):
     template_name = 'blog/article_archives.html'
 
     def get_queryset_data(self):
+        # SZX（第7—8周）：归档不分页，当前包括已发布独立页面，与首页筛选范围不同。
         return self.get_optimized_article_queryset().filter(status='p')
 
     def get_queryset_cache_key(self):
@@ -320,6 +349,7 @@ class LinkListView(ListView):
 
 
 class EsSearchView(SearchView):
+    # SZX（第7—8周）：Haystack 提供检索与分页；是否可检索草稿还取决于索引维护链路。
     def build_form(self, form_kwargs=None):
         """Override to enable highlighting"""
         if form_kwargs is None:
@@ -359,6 +389,7 @@ def fileupload(request):
     :return:
     """
     if request.method == 'POST':
+        # SZX（第7—8周）：旧上传协议使用固定签名且免 CSRF，不能等同于账号权限校验。
         sign = request.GET.get('sign', None)
         if not sign:
             return HttpResponseForbidden()
@@ -366,6 +397,7 @@ def fileupload(request):
             return HttpResponseForbidden()
         response = []
         for filename in request.FILES:
+            # SZX（第7—8周）：这里只按字段名猜类型，未验证 MIME/大小；需后续重设计上传。
             timestr = timezone.now().strftime('%Y/%m/%d')
             imgextensions = ['jpg', 'png', 'jpeg', 'bmp']
             fname = u''.join(str(filename))
@@ -403,6 +435,12 @@ from djangoblog.error_views import (
 )
 
 
+@require_POST
+@csrf_protect
 def clean_cache_view(request):
+    # SZX（第7—8周）：清全站缓存是管理操作，需 POST、CSRF 与有效超级用户身份。
+    user = request.user
+    if not (user.is_authenticated and user.is_active and user.is_superuser):
+        return HttpResponseForbidden()
     cache.clear()
     return HttpResponse('ok')

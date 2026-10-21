@@ -1,0 +1,6 @@
+{% if form.non_field_errors %}
+    <div class="launcher-alert" role="alert" aria-live="polite" tabindex="-1" x-ref="errorSummary">
+        <span class="account-alert-icon" aria-hidden="true">!</span>
+        <div>{{ form.non_field_errors }}</div>
+    </div>
+{% endif %}

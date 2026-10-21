@@ -1,3 +1,4 @@
+# SZX（第7—8周）：请求模板上下文处理器提供站点配置、导航和当前年份，保留 GCY 原标注。
 import logging
 
 from django.utils import timezone
@@ -7,8 +8,10 @@ from .models import Category, Article
 
 logger = logging.getLogger(__name__)
 
-
+# GCY：seo_processor 已注册到模板引擎；使用请求上下文渲染模板时提供站点设置与导航数据，并非所有模板渲染都无条件调用。
+# SZX：审校限定调用条件；静态站点数据缓存 10 小时，SITE_BASE_URL 与 CURRENT_YEAR 在缓存命中时仍按当前请求和时间更新。
 def seo_processor(requests):
+    # SZX（第7—8周）：缓存静态站点信息；scheme/host 必须随本次请求重新计算。
     key = 'seo_processor'
     value = cache.get(key)
     if value:

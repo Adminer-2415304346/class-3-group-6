@@ -1,0 +1,5 @@
+{% load static %}
+{# SZX：版本参数让浏览器更新缓存中的旧图标，两种页面共用这一入口。 #}
+<link rel="icon" href="{% static 'blog/favicon-32.png' %}?v=relay-1" type="image/png" sizes="32x32">
+<link rel="icon" href="{% static 'blog/favicon.svg' %}?v=relay-1" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="{% static 'blog/apple-touch-icon.png' %}?v=relay-1" sizes="180x180">

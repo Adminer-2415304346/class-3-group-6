@@ -63,7 +63,8 @@ def oauth_user_login_signal_handler(sender, **kwargs):
 
     delete_sidebar_cache()
 
-
+# GCY：该回调监听 post_save，未限定 sender，因此接收多种模型的保存信号，再按实例类型及属性分支处理；它没有监听删除信号。
+# SZX：审校修正只针对文章及删除时触发的描述；LogEntry、只更新 views 的保存会提前返回，各缓存清理与通知也有自己的执行条件。
 @receiver(post_save)
 def model_post_save_callback(
         sender,

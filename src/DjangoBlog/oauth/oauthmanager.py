@@ -18,6 +18,9 @@ class OAuthAccessTokenException(Exception):
     '''
 
 
+# GZX：BaseOauthManager 抽象出 OAuth2 三步骨架：get_authorization_url → get_access_token_by_code
+# → get_oauth_userinfo；各渠道(微博/Google/GitHub/FB/QQ)子类只需填 URL 常量和字段映射，
+# views 层只面向此抽象编程，不关心具体渠道差异。
 class BaseOauthManager(metaclass=ABCMeta):
     """获取用户授权"""
     AUTH_URL = None

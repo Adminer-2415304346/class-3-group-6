@@ -1,0 +1,43 @@
+{# SZX：复用输入框外观；密码不回填，每个密码框独立控制可见性。 #}
+<div class="launcher-field"{% if field.field.widget.input_type == 'password' %} x-data="{ passwordVisible: false }" @pageshow.window="passwordVisible = false"{% endif %}>
+    <div class="launcher-input-wrap">
+        <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="sr-only">（必填）</span>{% endif %}</label>
+        <input class="launcher-input{% if field.field.widget.input_type == 'password' %} launcher-password{% endif %}"
+               type="{% if field.name == 'email' %}email{% else %}{{ field.field.widget.input_type|default:'text' }}{% endif %}"
+               {% if field.field.widget.input_type == 'password' %}
+                   :type="passwordVisible ? 'text' : 'password'" autocomplete="new-password"
+               {% else %}
+                   value="{{ field.value|default:'' }}"
+                   {% if field.name == 'email' %}autocomplete="email" x-ref="email"{% elif field.name == 'username' %}autocomplete="username"{% elif field.name == 'code' %}autocomplete="one-time-code"{% endif %}
+                   autocapitalize="none" spellcheck="false"
+               {% endif %}
+               name="{{ field.name }}" id="{{ field.id_for_label }}"
+               placeholder="请输入{{ field.label }}"
+               @input="syncFields()" @change="syncFields()"
+               {% if field.field.max_length %}maxlength="{{ field.field.max_length }}"{% endif %}
+               {% if field.field.required %}required{% endif %}
+               {% if field.errors %}aria-invalid="true"{% endif %}
+               {% if field.errors or field.help_text %}aria-describedby="{% if field.errors %}{{ field.id_for_label }}-error{% endif %}{% if field.errors and field.help_text %} {% endif %}{% if field.help_text %}{{ field.id_for_label }}-help{% endif %}"{% endif %}>
+        {% if field.field.widget.input_type == 'password' %}
+            <button class="launcher-password-toggle" type="button" x-cloak
+                    @click="passwordVisible = !passwordVisible" :aria-pressed="passwordVisible.toString()"
+                    :aria-label="passwordVisible ? '隐藏{{ field.label }}' : '显示{{ field.label }}'"
+                    :title="passwordVisible ? '隐藏{{ field.label }}' : '显示{{ field.label }}'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" stroke-linejoin="round" />
+                    <circle cx="12" cy="12" r="2.5" />
+                    <path x-show="passwordVisible" d="m4 3 16 18" stroke-linecap="round" />
+                </svg>
+            </button>
+        {% endif %}
+    </div>
+    {% if field.errors %}
+        <p class="launcher-field-error" id="{{ field.id_for_label }}-error" role="alert">{{ field.errors.0 }}</p>
+    {% endif %}
+    {% if field.help_text %}
+        <details class="launcher-help" id="{{ field.id_for_label }}-help">
+            <summary>{% if field.name == 'username' %}用户名规则{% elif field.name == 'password2' or field.name == 'new_password2' %}确认说明{% elif field.field.widget.input_type == 'password' %}密码要求{% else %}填写说明{% endif %}</summary>
+            <div>{{ field.help_text }}</div>
+        </details>
+    {% endif %}
+</div>

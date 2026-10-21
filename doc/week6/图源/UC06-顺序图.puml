@@ -1,0 +1,27 @@
+@startuml
+skinparam defaultFontName Microsoft YaHei
+title UC06 找回密码
+actor "找回密码用户" as user
+boundary "找回密码界面" as ui
+control "验证码及重设视图" as view
+entity "验证码缓存" as cache
+participant "邮件服务" as mail
+entity "本站用户" as model
+autonumber
+user -> ui : 输入邮箱获取验证码
+ui -> view : POST 获取验证码
+view -> view : 验邮箱格式并生成码
+view -> mail : 请求发送验证码
+view -> cache : 按邮箱存码300秒
+view --> ui : 返回ok
+mail --> user : 投递验证码邮件
+user -> ui : 填写验证码及新密码
+ui -> view : POST 重设表单
+view -> view : 校验两次密码及规则
+view -> model : 检查邮箱存在
+view -> cache : 读取并比较验证码
+cache --> view : 返回比较结果
+view -> model : 保存新密码哈希
+model --> view : 保存完成
+view --> ui : 重定向登录页
+@enduml
