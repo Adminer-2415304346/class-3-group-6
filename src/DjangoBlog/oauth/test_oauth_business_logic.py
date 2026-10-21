@@ -2,10 +2,17 @@
 Test cases for OAuth business logic
 包括OAuth配置、OAuth用户、第三方登录等核心业务逻辑
 """
+from unittest.mock import MagicMock, patch
+
 from django.test import TestCase
 
 from accounts.models import BlogUser
 from oauth.models import OAuthConfig, OAuthUser
+from oauth.oauthmanager import (
+    GitHubOauthManager,
+    OAUTH_HTTP_TIMEOUT,
+    WBOauthManager,
+)
 
 
 class OAuthConfigTest(TestCase):
@@ -510,3 +517,36 @@ class OAuthMetadataTest(TestCase):
         )
 
         self.assertEqual(oauth_user.email, oauth_email)
+
+
+class OauthHttpRequestTimeoutTest(TestCase):
+    """GZX 本轮改进：断言 do_get/do_post 显式携带超时，避免平台无响应挂起。"""
+
+    def test_base_do_get_post_passes_timeout(self):
+        # 基类出口（微博/QQ 共用）：get/post 都应带 timeout=OAUTH_HTTP_TIMEOUT。
+        manager = object.__new__(WBOauthManager)
+        with patch('oauth.oauthmanager.requests.get') as mock_get, \
+                patch('oauth.oauthmanager.requests.post') as mock_post:
+            mock_get.return_value = MagicMock(text='ok')
+            mock_post.return_value = MagicMock(text='ok')
+            manager.do_get('http://example.com/get', {'a': 1})
+            manager.do_post('http://example.com/post', {'b': 2})
+            self.assertEqual(mock_get.call_args.kwargs.get('timeout'),
+                             OAUTH_HTTP_TIMEOUT)
+            self.assertEqual(mock_post.call_args.kwargs.get('timeout'),
+                             OAUTH_HTTP_TIMEOUT)
+
+    def test_mixin_do_get_post_passes_timeout(self):
+        # 代理 Mixin 出口（google/github/facebook 共用）：同样带 timeout。
+        manager = object.__new__(GitHubOauthManager)
+        manager.proxies = None
+        with patch('oauth.oauthmanager.requests.get') as mock_get, \
+                patch('oauth.oauthmanager.requests.post') as mock_post:
+            mock_get.return_value = MagicMock(text='ok')
+            mock_post.return_value = MagicMock(text='ok')
+            manager.do_get('http://example.com/get', {'a': 1})
+            manager.do_post('http://example.com/post', {'b': 2})
+            self.assertEqual(mock_get.call_args.kwargs.get('timeout'),
+                             OAUTH_HTTP_TIMEOUT)
+            self.assertEqual(mock_post.call_args.kwargs.get('timeout'),
+                             OAUTH_HTTP_TIMEOUT)

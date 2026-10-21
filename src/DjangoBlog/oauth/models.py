@@ -16,6 +16,8 @@ class OAuthUser(models.Model):
         blank=True,
         null=True,
         on_delete=models.CASCADE)
+    # GZX：openid 是渠道内唯一标识，但模型未声明 (type, openid) 联合唯一约束，
+    # 唯一性依赖回调里的 get(type, openid) 查询，并发下可能插入重复绑定（列入团队计划）。
     openid = models.CharField(max_length=50)
     nickname = models.CharField(max_length=50, verbose_name=_('nick name'))
     token = models.CharField(max_length=150, null=True, blank=True)
@@ -60,6 +62,8 @@ class OAuthConfig(models.Model):
     last_modify_time = models.DateTimeField(_('last modify time'), default=now)
 
     def clean(self):
+        # GZX：clean() 只在 full_clean/后台表单提交时校验同渠道唯一，
+        # 数据库层没有 unique 约束，直接 ORM create 可绕过；这是应用层校验而非联合唯一索引。
         if OAuthConfig.objects.filter(
                 type=self.type).exclude(id=self.id).count():
             raise ValidationError(_(self.type + _('already exists')))

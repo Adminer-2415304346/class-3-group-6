@@ -1,0 +1,253 @@
+{
+  "app": "oauth",
+  "owner": "GZX",
+  "stage": "baseline",
+  "timestamp_utc": "2026-10-21T09:30:40.386569+00:00",
+  "base_commit": "1351db9316ab5812fb5d353f05ef116ffe5d23de",
+  "python": "3.13.16",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "4f9d1fd60090ca717b2fe58461382171310d6dfc4327dcc0b144808e6cb1029e",
+    "bandit.yaml": "1ffd5f1f6cf748427b66fca2bdc102131cb9fb0fcf02d67716302264015a73ef"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "oauth/migrations/0001_initial.py",
+    "oauth/migrations/0002_alter_oauthconfig_options_alter_oauthuser_options_and_more.py",
+    "oauth/migrations/0003_alter_oauthuser_nickname.py",
+    "oauth/migrations/__init__.py",
+    "oauth/test_oauth_business_logic.py",
+    "oauth/tests.py"
+  ],
+  "files": [
+    {
+      "path": "oauth/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "oauth/admin.py",
+      "sha256": "e6b70f8e789bcdcea9eae4747b8f1418d696d43b53dc1a315d2c153b716a1f5b",
+      "physical_lines": 54,
+      "code_token_lines": 42,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 4
+    },
+    {
+      "path": "oauth/apps.py",
+      "sha256": "ac8d6ab809c53ed3cd34f910fa0b9b89fca167a2d860054dece1ec61b66db60b",
+      "physical_lines": 5,
+      "code_token_lines": 3,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "oauth/forms.py",
+      "sha256": "55b8b9e15877b01fbeaba6f0023d19ea554da20f19fdde31ef45e5a4831aea13",
+      "physical_lines": 12,
+      "code_token_lines": 9,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "oauth/models.py",
+      "sha256": "db98a7c7d18da87246e21d9cd4fc654d9cbdb4b104d0cb1f7a5f408dd8e98b75",
+      "physical_lines": 71,
+      "code_token_lines": 57,
+      "comment_lines": 5,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 2,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 4,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "oauth/oauthmanager.py",
+      "sha256": "cdb1830e39a87b4fba1138e24ad2ebe6f14c198590d754df757b287877c6ed4a",
+      "physical_lines": 527,
+      "code_token_lines": 447,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 8,
+      "functions_and_methods": 41
+    },
+    {
+      "path": "oauth/templatetags/__init__.py",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "physical_lines": 1,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "oauth/templatetags/oauth_tags.py",
+      "sha256": "b1beb489d93efb6deb56fc96286ce1789698679e21035a397754d24dd562619a",
+      "physical_lines": 22,
+      "code_token_lines": 17,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "oauth/urls.py",
+      "sha256": "21160432e7ac2a607cbeaa68e9a10d4d2ce852f07b50f98d148ea2c244a19eb3",
+      "physical_lines": 27,
+      "code_token_lines": 23,
+      "comment_lines": 2,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "oauth/views.py",
+      "sha256": "259a62df11dbe9669cb4111963e14503c6ce7b06671a5f31a8f50e3e49749506",
+      "physical_lines": 286,
+      "code_token_lines": 244,
+      "comment_lines": 16,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 3,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 9
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\quality-tools\\venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\doc\\week7-8\\成员成果\\GZX\\原始工具结果\\baseline\\ruff.json",
+        "oauth/__init__.py",
+        "oauth/admin.py",
+        "oauth/apps.py",
+        "oauth/forms.py",
+        "oauth/models.py",
+        "oauth/oauthmanager.py",
+        "oauth/templatetags/__init__.py",
+        "oauth/templatetags/oauth_tags.py",
+        "oauth/urls.py",
+        "oauth/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\quality-tools\\venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\doc\\week7-8\\成员成果\\GZX\\原始工具结果\\baseline\\bandit.json",
+        "oauth/__init__.py",
+        "oauth/admin.py",
+        "oauth/apps.py",
+        "oauth/forms.py",
+        "oauth/models.py",
+        "oauth/oauthmanager.py",
+        "oauth/templatetags/__init__.py",
+        "oauth/templatetags/oauth_tags.py",
+        "oauth/urls.py",
+        "oauth/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: G:\\软件工程理论与实践\\小组作业\\class-3-group-6\\doc\\week7-8\\成员成果\\GZX\\原始工具结果\\baseline\\bandit.json\r\n"
+    }
+  }
+}
