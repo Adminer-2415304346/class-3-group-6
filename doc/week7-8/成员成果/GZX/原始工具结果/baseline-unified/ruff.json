@@ -1,0 +1,294 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 42,
+      "row": 6
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.contrib import admin\r\n\r\n# Register your models here.\r\nfrom django.urls import reverse\r\nfrom django.utils.html import format_html\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 8
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 48,
+      "row": 10
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\r\nimport logging\r\nimport os\r\nimport urllib.parse\r\nfrom abc import ABCMeta, abstractmethod\r\n\r\nimport requests\r\n\r\nfrom djangoblog.utils import cache_decorator\r\nfrom oauth.models import OAuthConfig, OAuthUser\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 44
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 44
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 44,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 133,
+      "row": 332
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 332
+    },
+    "message": "Line too long (132 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 332,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 121,
+      "row": 406
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\oauthmanager.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 406
+    },
+    "message": "Line too long (120 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 406,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 79,
+      "row": 6
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\urls.py",
+    "fix": null,
+    "location": {
+      "column": 75,
+      "row": 6
+    },
+    "message": "Line too long (108 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 73,
+      "row": 25
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\n# Create your views here.\r\nfrom urllib.parse import urlparse\r\n\r\nfrom django.conf import settings\r\nfrom django.contrib.auth import get_user_model, login\r\nfrom django.core.exceptions import ObjectDoesNotExist\r\nfrom django.db import transaction\r\nfrom django.http import HttpResponseForbidden, HttpResponseRedirect\r\nfrom django.shortcuts import get_object_or_404, render\r\nfrom django.urls import reverse\r\nfrom django.utils import timezone\r\nfrom django.utils.http import url_has_allowed_host_and_scheme\r\nfrom django.utils.translation import gettext_lazy as _\r\nfrom django.views.generic import FormView\r\n\r\nfrom djangoblog.blog_signals import oauth_user_login_signal\r\nfrom djangoblog.utils import get_current_site, get_sha256, send_email\r\nfrom oauth.forms import RequireEmailForm\r\n\r\nfrom .models import OAuthUser\r\nfrom .oauthmanager import OAuthAccessTokenException, get_manager_by_type\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 27
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F401",
+    "end_location": {
+      "column": 34,
+      "row": 3
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 1,
+            "row": 4
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Remove unused import: `urllib.parse.urlparse`"
+    },
+    "location": {
+      "column": 26,
+      "row": 3
+    },
+    "message": "`urllib.parse.urlparse` imported but unused",
+    "name": "unused-import",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-import"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 14,
+      "row": 64
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 64
+    },
+    "message": "`authorize` is too complex (16 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 64,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 117,
+      "row": 189
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 189
+    },
+    "message": "Line too long (116 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 189,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 110,
+      "row": 280
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 280
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 280,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 123,
+      "row": 281
+    },
+    "filename": "C:\\Users\\78756\\DoubaoWork\\chats\\2026-10-21\\new-chat\\wt-baseline\\src\\DjangoBlog\\oauth\\views.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 281
+    },
+    "message": "Line too long (122 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 281,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  }
+]
