@@ -1,34 +1,31 @@
-# -*- coding: utf-8 -*-
 # 模块：comments评论模块 - views.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # Create your views here.
-# 导入Django内置异常、请求响应、查询工具与基础视图类
+from accounts.models import BlogUser
+from blog.models import Article
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-# 导入用户、文章模型
-from accounts.models import BlogUser
-from blog.models import Article
 from djangoblog.base_views import AuthenticatedFormView
-# 导入本地评论表单与模型
+
 from .forms import CommentForm
 from .models import Comment, CommentReaction
+
 
 # WZY: 评论提交视图，继承AuthenticatedFormView，自带登录校验，未登录用户无法提交评论
 class CommentPostView(AuthenticatedFormView):
     """
     评论提交视图
-
     使用 AuthenticatedFormView 基类，自动提供：
     - 登录验证（未登录用户会被重定向）
     - CSRF 保护
     """
     # WZY: 指定表单类CommentForm，用于前端提交评论内容的表单校验
-    form_class = CommentForm # 指定使用评论表单类做数据校验
+    form_class = CommentForm  # 指定使用评论表单类做数据校验
     # WZY: 评论提交失败后，渲染的文章详情页面模板
-    template_name = 'blog/article_detail.html' # 渲染页面模板
+    template_name = 'blog/article_detail.html'  # 渲染页面模板
 
     # WZY: GET请求处理，访问提交评论的路由，直接重定向到文章页面评论区锚点
     def get(self, request, *args, **kwargs):
@@ -57,7 +54,8 @@ class CommentPostView(AuthenticatedFormView):
         # SZX：Article.status 目前仅定义 'd'/'p'；这里不把 'c' 解释成已实现的禁用状态。
         if article.comment_status == 'c' or article.status == 'c':
             raise ValidationError("该文章评论已关闭.")
-        comment = form.save(False) # WZY: save(False)仅构建模型对象，暂不写入数据库，后续手动补充关联字段
+        # WZY: save(False)仅构建模型对象，暂不写入数据库，后续手动补充关联字段
+        comment = form.save(False)
         # WZY: 将评论和当前文章建立外键关联，确定这条评论归属哪一篇文章
         comment.article = article
         from djangoblog.utils import get_blog_setting
@@ -72,7 +70,7 @@ class CommentPostView(AuthenticatedFormView):
             parent_comment = Comment.objects.get(
                 pk=form.cleaned_data['parent_comment_id'])
             comment.parent_comment = parent_comment
-        comment.save(True) # WZY: 将构造完成的评论存入数据库
+        comment.save(True)  # WZY: 将构造完成的评论存入数据库
         return HttpResponseRedirect(
             "%s#div-comment-%d" %
             (article.get_absolute_url(), comment.pk))

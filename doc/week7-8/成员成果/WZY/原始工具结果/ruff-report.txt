@@ -1,0 +1,204 @@
+UP010 [*] Unnecessary `__future__` import `print_function` for target Python version
+  --> usr\share\vim\vim92\tools\demoserver.py:20:1
+   |
+18 | # This requires Python 2.6 or later.
+19 |
+20 | from __future__ import print_function
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+21 | import json
+22 | import socket
+   |
+help: Remove unnecessary `__future__` import
+   |
+19 |
+   - from __future__ import print_function
+20 | import json
+   |
+
+I001 [*] Import block is un-sorted or un-formatted
+  --> usr\share\vim\vim92\tools\demoserver.py:20:1
+   |
+18 |   # This requires Python 2.6 or later.
+19 |
+20 | / from __future__ import print_function
+21 | | import json
+22 | | import socket
+23 | | import sys
+24 | | import threading
+   | |________________^
+25 |
+26 |   try:
+   |
+help: Organize imports
+   |
+20 | from __future__ import print_function
+21 +
+22 | import json
+   |
+
+UP024 [*] Replace aliased errors with `OSError`
+  --> usr\share\vim\vim92\tools\demoserver.py:44:20
+   |
+42 |             try:
+43 |                 data = self.request.recv(4096).decode('utf-8')
+44 |             except socket.error:
+   |                    ^^^^^^^^^^^^
+45 |                 print("=== socket error ===")
+46 |                 break
+   |
+help: Replace `socket.error` with builtin `OSError`
+   |
+43 |                 data = self.request.recv(4096).decode('utf-8')
+   -             except socket.error:
+44 +             except OSError:
+45 |                 print("=== socket error ===")
+   |
+
+UP030 Use implicit references for positional format fields
+  --> usr\share\vim\vim92\tools\demoserver.py:50:19
+   |
+48 |                 print("=== socket closed ===")
+49 |                 break
+50 |             print("received: {0}".format(data))
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+51 |             try:
+52 |                 decoded = json.loads(data)
+   |
+help: Remove explicit positional indices
+   |
+49 |                 break
+   -             print("received: {0}".format(data))
+50 +             print("received: {}".format(data))
+51 |             try:
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+UP032 [*] Use f-string instead of `format` call
+  --> usr\share\vim\vim92\tools\demoserver.py:50:19
+   |
+48 |                 print("=== socket closed ===")
+49 |                 break
+50 |             print("received: {0}".format(data))
+   |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+51 |             try:
+52 |                 decoded = json.loads(data)
+   |
+help: Convert to f-string
+   |
+49 |                 break
+   -             print("received: {0}".format(data))
+50 +             print(f"received: {data}")
+51 |             try:
+   |
+
+UP030 Use implicit references for positional format fields
+  --> usr\share\vim\vim92\tools\demoserver.py:72:23
+   |
+70 |                     id = decoded[0]
+71 |                 encoded = json.dumps([id, response])
+72 |                 print("sending {0}".format(encoded))
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+73 |                 self.request.sendall(encoded.encode('utf-8'))
+74 |         thesocket = None
+   |
+help: Remove explicit positional indices
+   |
+71 |                 encoded = json.dumps([id, response])
+   -                 print("sending {0}".format(encoded))
+72 +                 print("sending {}".format(encoded))
+73 |                 self.request.sendall(encoded.encode('utf-8'))
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+UP032 [*] Use f-string instead of `format` call
+  --> usr\share\vim\vim92\tools\demoserver.py:72:23
+   |
+70 |                     id = decoded[0]
+71 |                 encoded = json.dumps([id, response])
+72 |                 print("sending {0}".format(encoded))
+   |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+73 |                 self.request.sendall(encoded.encode('utf-8'))
+74 |         thesocket = None
+   |
+help: Convert to f-string
+   |
+71 |                 encoded = json.dumps([id, response])
+   -                 print("sending {0}".format(encoded))
+72 +                 print(f"sending {encoded}")
+73 |                 self.request.sendall(encoded.encode('utf-8'))
+   |
+
+UP030 Use implicit references for positional format fields
+  --> usr\share\vim\vim92\tools\demoserver.py:94:11
+   |
+92 |     print("Server loop running in thread: ", server_thread.name)
+93 |
+94 |     print("Listening on port {0}".format(PORT))
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+95 |     while True:
+96 |         typed = sys.stdin.readline()
+   |
+help: Remove explicit positional indices
+   |
+93 |
+   -     print("Listening on port {0}".format(PORT))
+94 +     print("Listening on port {}".format(PORT))
+95 |     while True:
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+UP032 [*] Use f-string instead of `format` call
+  --> usr\share\vim\vim92\tools\demoserver.py:94:11
+   |
+92 |     print("Server loop running in thread: ", server_thread.name)
+93 |
+94 |     print("Listening on port {0}".format(PORT))
+   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+95 |     while True:
+96 |         typed = sys.stdin.readline()
+   |
+help: Convert to f-string
+   |
+93 |
+   -     print("Listening on port {0}".format(PORT))
+94 +     print(f"Listening on port {PORT}")
+95 |     while True:
+   |
+
+UP030 Use implicit references for positional format fields
+   --> usr\share\vim\vim92\tools\demoserver.py:103:19
+    |
+101 |             print("No socket yet")
+102 |         else:
+103 |             print("sending {0}".format(typed))
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+104 |             thesocket.sendall(typed.encode('utf-8'))
+    |
+help: Remove explicit positional indices
+    |
+102 |         else:
+    -             print("sending {0}".format(typed))
+103 +             print("sending {}".format(typed))
+104 |             thesocket.sendall(typed.encode('utf-8'))
+    |
+note: This is an unsafe fix and may change runtime behavior
+
+UP032 [*] Use f-string instead of `format` call
+   --> usr\share\vim\vim92\tools\demoserver.py:103:19
+    |
+101 |             print("No socket yet")
+102 |         else:
+103 |             print("sending {0}".format(typed))
+    |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+104 |             thesocket.sendall(typed.encode('utf-8'))
+    |
+help: Convert to f-string
+    |
+102 |         else:
+    -             print("sending {0}".format(typed))
+103 +             print(f"sending {typed}")
+104 |             thesocket.sendall(typed.encode('utf-8'))
+    |
+
+Found 11 errors.
+[*] 7 fixable with `--fix` (4 unsafe fixes available with `--fix --unsafe-fixes`).

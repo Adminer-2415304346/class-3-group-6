@@ -4,18 +4,18 @@ Comments Views 测试
 """
 from django.test import TransactionTestCase
 from django.urls import reverse
+from djangoblog.test_base import ViewTestMixin
 
 from comments.models import Comment
-from djangoblog.test_base import BaseTestCase, ViewTestMixin
 
 
 class CommentViewTest(TransactionTestCase, ViewTestMixin):
     """测试评论视图"""
 
     def setUp(self):
-        from django.test import Client
         from accounts.models import BlogUser
-        from blog.models import Article, Category, BlogSettings
+        from blog.models import Article, BlogSettings, Category
+        from django.test import Client
         from django.utils import timezone
 
         self.client = Client()
@@ -149,9 +149,9 @@ class CommentSpamTest(TransactionTestCase, ViewTestMixin):
     """测试评论垃圾防护"""
 
     def setUp(self):
-        from django.test import Client
         from accounts.models import BlogUser
-        from blog.models import Article, Category, BlogSettings
+        from blog.models import Article, BlogSettings, Category
+        from django.test import Client
         from django.utils import timezone
 
         self.client = Client()
@@ -212,9 +212,9 @@ class CommentSecurityTest(TransactionTestCase, ViewTestMixin):
     """测试评论安全性"""
 
     def setUp(self):
-        from django.test import Client
         from accounts.models import BlogUser
-        from blog.models import Article, Category, BlogSettings
+        from blog.models import Article, BlogSettings, Category
+        from django.test import Client
         from django.utils import timezone
 
         self.client = Client()

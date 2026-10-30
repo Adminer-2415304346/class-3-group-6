@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
 # 模块：comments评论模块 - forms.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # 导入Django表单相关模块
 from django import forms
 from django.forms import ModelForm
+
 # 导入评论模型
 from .models import Comment
+
 
 # WZY: 评论表单类，继承ModelForm，绑定Comment模型，用来接收、校验前端提交的评论内容
 class CommentForm(ModelForm):

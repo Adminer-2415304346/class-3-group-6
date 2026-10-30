@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # 模块：comments/templatetags/comments_tags.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保持不变
