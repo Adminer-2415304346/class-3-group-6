@@ -11,8 +11,8 @@ from django.test import Client, RequestFactory, TestCase
 from django.urls import reverse
 
 from blog.models import Article, Category
-from blog.views import ArticleDetailView
 from blog.templatetags.blog_tags import gravatar, highlight_content, highlight_search_term
+from blog.views import ArticleDetailView
 from comments.models import Comment
 from djangoblog.constants import CacheKey
 
@@ -72,7 +72,8 @@ class ArticleVisibilityRegressionTest(TestCase):
             self.resolve_article(self.draft, self.author)
 
     def test_staff_without_superuser_privilege_cannot_preview_draft(self):
-        user = SimpleNamespace(is_authenticated=True, is_active=True, is_staff=True, is_superuser=False)
+        user = SimpleNamespace(
+            is_authenticated=True, is_active=True, is_staff=True, is_superuser=False)
         with self.assertRaises(Http404):
             self.resolve_article(self.draft, user)
 
@@ -130,7 +131,8 @@ class ArticleCommentCacheRegressionTest(TestCase):
     def test_populated_cache_keeps_queryset_and_excludes_disabled_comments(self):
         visible = Comment.objects.create(
             article=self.article, author=self.author, body='Visible', is_enable=True)
-        Comment.objects.create(article=self.article, author=self.author, body='Hidden', is_enable=False)
+        Comment.objects.create(
+            article=self.article, author=self.author, body='Hidden', is_enable=False)
         with self.assertNumQueries(1):
             self.assertEqual(list(self.article.comment_list()), [visible])
         with self.assertNumQueries(0):
@@ -142,8 +144,11 @@ class ArticleCommentCacheRegressionTest(TestCase):
         list(self.article.comment_list())
         key = CacheKey.ARTICLE_COMMENTS.format(article_id=self.article.pk)
         self.assertIsNotNone(cache.get(key))
-        visible = Comment.objects.create(
-            article=self.article, author=self.author, body='New comment', is_enable=True)
+        # SZX：真实事务提交前保留缓存；TestCase 用 captureOnCommitCallbacks 模拟提交。
+        with self.captureOnCommitCallbacks(execute=True):
+            visible = Comment.objects.create(
+                article=self.article, author=self.author, body='New comment', is_enable=True)
+            self.assertIsNotNone(cache.get(key))
         self.assertIsNone(cache.get(key))
         self.assertEqual(list(self.article.comment_list()), [visible])
 
@@ -154,7 +159,8 @@ class CacheClearPermissionRegressionTest(TestCase):
         cls.user = get_user_model().objects.create_user(
             username='week78-user', email='user@example.invalid')
         cls.admin = get_user_model().objects.create_superuser(
-            username='week78-cache-admin', email='cache-admin@example.invalid', password='example-password')
+            username='week78-cache-admin', email='cache-admin@example.invalid',
+            password='example-password')
 
     def test_get_never_clears_cache(self):
         with patch('blog.views.cache.clear') as clear:

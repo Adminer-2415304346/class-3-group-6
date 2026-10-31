@@ -1,0 +1,89 @@
+{
+  "operator": "SZX",
+  "source_commit": "216432a017e259e9624dc655d90d0faa0b5ec058",
+  "timestamp_utc": "2026-10-31T11:14:04.219590+00:00",
+  "python": "3.12.7",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "cwd": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog",
+  "ruff_files": [
+    "src/DjangoBlog/blog/comment_cache.py",
+    "src/DjangoBlog/blog/urls.py",
+    "src/DjangoBlog/djangoblog/blog_signals.py",
+    "src/DjangoBlog/blog/test_comment_lifecycle.py",
+    "src/DjangoBlog/blog/test_week78_quality.py",
+    "src/DjangoBlog/comments/test_reaction_snapshot.py",
+    "src/DjangoBlog/comments/test_quality_r45.py",
+    "doc/week7-8/tools/scan_app.py",
+    "doc/week7-8/tools/verify_comment_lifecycle.py"
+  ],
+  "bandit_files": [
+    "src/DjangoBlog/blog/comment_cache.py",
+    "src/DjangoBlog/blog/urls.py",
+    "src/DjangoBlog/djangoblog/blog_signals.py"
+  ],
+  "source_sha256": {
+    "src/DjangoBlog/blog/comment_cache.py": "d9e183e00389049cea4a8b714ebe2c7c63bbacde54896447336b07bb5f191e18",
+    "src/DjangoBlog/blog/urls.py": "122305a179a0966b2861ad2fab6e49a6375f1398c0a405e806946571ef7bcb0c",
+    "src/DjangoBlog/djangoblog/blog_signals.py": "38e804e6cdd316827238a87a7502c125089129e41a9e6fc0a7c51b4e24788367",
+    "src/DjangoBlog/blog/test_comment_lifecycle.py": "6f027d678d6bac895824dae46f34210848591558b4c6a71f8f157e59f5161c8d",
+    "src/DjangoBlog/blog/test_week78_quality.py": "1f0db436a4f6cf62b611fb560dad1a6308cd08337a003dd75aa3ac7b93846a44",
+    "src/DjangoBlog/comments/test_reaction_snapshot.py": "ee05b38fdae4d6acb2ebe1e2bb86fe72d971dfdda84c5cb89c90ce3fcf775bf0",
+    "src/DjangoBlog/comments/test_quality_r45.py": "22a1f3cba601f560cfed938f27c6b2c97b0b145f2453c4f9a70a68c3411b7254",
+    "doc/week7-8/tools/scan_app.py": "9245fd4049905cad402ac5833c37ac851b96d6a42a90d06faefdf2ef8ea9c2e0",
+    "doc/week7-8/tools/verify_comment_lifecycle.py": "51c04ff49564d47de834f635fcc6e5cce599749d6b6aef5dbbe2a37cf8b266c3"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SZX\\集成修复\\2026-10-31\\quality-shared\\ruff.json",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\comment_cache.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\test_comment_lifecycle.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\test_week78_quality.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\test_reaction_snapshot.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\test_quality_r45.py",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\scan_app.py",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\verify_comment_lifecycle.py"
+      ],
+      "returncode": 0
+    },
+    "bandit": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SZX\\集成修复\\2026-10-31\\quality-shared\\bandit.json",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\comment_cache.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py",
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py"
+      ],
+      "returncode": 0
+    }
+  },
+  "ruff_findings": 0,
+  "bandit_findings": 0,
+  "bandit_errors": []
+}

@@ -7,6 +7,13 @@ from django.template.loader import render_to_string
 logger = logging.getLogger(__name__)
 
 
+# GCY（模块层）：插件抽象基类。每个插件继承 BasePlugin 并实现元数据
+# 与钩子方法；Django 进程内通过 loader 实例化（自动校验元数据、定位
+# 插件目录/标识、调 init_plugin 与 register_hooks）。位置渲染按
+# position 分发到 render_<position>_widget，模板与静态资源统一走插件
+# 目录命名空间。执行边界：本文件只定义契约，不扫描插件、不触发
+# 业务调用；真实执行由业务代码通过 hooks.run_action/apply_filters 显式
+# 触发（见 blog/templatetags/blog_tags.py 与 blog/views.py）。
 class BasePlugin:
     # 插件元数据
     PLUGIN_NAME = None

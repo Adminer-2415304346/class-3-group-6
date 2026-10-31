@@ -1,11 +1,12 @@
 # 模块：comments评论模块 - models.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
-from blog.models import Article
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+
+from blog.models import Article
 
 
 # Create your models here.
@@ -75,39 +76,23 @@ class Comment(models.Model):
             ...
         }
         """
-        from django.db.models import Count
-        # WZY: 查询1：按表情分组统计精确数量（count 是记录总数，不等同于 tooltip 名单长度）
-        counts = dict(
-            CommentReaction.objects.filter(comment=self)
-            .values('reaction_type')
-            .annotate(count=Count('id'))
-            .values_list('reaction_type', 'count')
-        )
         viewer_id = user.pk if (user is not None and user.is_authenticated) else None
-        # WZY: 查询2：一次流式读取全部 reaction，仅保留每表情前10个用户名与查看者是否参与
-        # 内存边界：高参与量下该评论的 reaction 结果集需全量扫过，但 Python 侧只留存
-        # O(表情数*10+1) 的状态，不随点赞人数线性膨胀；极端规模可改窗口函数/分页。
-        users_by_emoji = {emoji: [] for emoji in counts}
-        viewer_reacted = {emoji: False for emoji in counts}
-        for reaction in (
-            CommentReaction.objects.filter(comment=self)
-            .select_related('user')
-            .order_by('id')
-            .iterator()
-        ):
-            emoji = reaction.reaction_type
-            if len(users_by_emoji[emoji]) < 10:
-                users_by_emoji[emoji].append(
-                    reaction.user.nickname or reaction.user.username)
-            if viewer_id is not None and reaction.user_id == viewer_id:
-                viewer_reacted[emoji] = True
+        # WZY 原优化保留每表情前10个用户名；SZX：计数、名单、参与态改由同一个 SELECT 得出。
+        # SZX：避免聚合后新增 emoji 导致 KeyError，也避免取消反应后仍返回旧计数。
+        # 仅取必要列；应用层统计状态有界，但 MySQL 驱动仍可能缓冲整个结果集。
         result = {}
-        for emoji, count in counts.items():
-            result[emoji] = {
-                'count': count,
-                'has_reacted': viewer_reacted[emoji],
-                'users': users_by_emoji[emoji],
-            }
+        for emoji, user_id, nickname, username in (
+            CommentReaction.objects.filter(comment=self)
+            .order_by('id')
+            .values_list('reaction_type', 'user_id', 'user__nickname', 'user__username')
+            .iterator(chunk_size=2000)
+        ):
+            data = result.setdefault(emoji, {'count': 0, 'has_reacted': False, 'users': []})
+            data['count'] += 1
+            if len(data['users']) < 10:
+                data['users'].append(nickname or username)
+            if viewer_id is not None and user_id == viewer_id:
+                data['has_reacted'] = True
         return result
 # 评论表情互动模型，记录用户对评论的emoji点赞/反馈
 class CommentReaction(models.Model):

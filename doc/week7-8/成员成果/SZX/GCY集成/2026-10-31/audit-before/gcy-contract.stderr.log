@@ -1,0 +1,70 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_public_home_page_returns_200 (djangoblog.test_gcy_review.CacheContractTests.test_public_home_page_returns_200) ... ⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_real_get_current_site_still_works (djangoblog.test_gcy_review.CacheContractTests.test_real_get_current_site_still_works) ... ERROR
+test_saving_public_comment_does_not_raise (djangoblog.test_gcy_review.CacheContractTests.test_saving_public_comment_does_not_raise) ... E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Review category_1'
+  warnings.warn(warning, CacheKeyWarning)
+ERROR
+test_zero_argument_cached_function_still_works_and_caches (djangoblog.test_gcy_review.CacheContractTests.test_zero_argument_cached_function_still_works_and_caches) ... ERROR
+test_handler403_resolves_to_custom_callback (djangoblog.test_gcy_review.NewFixTests.test_handler403_resolves_to_custom_callback) ... ok
+test_spider_notify_has_five_second_timeout (djangoblog.test_gcy_review.NewFixTests.test_spider_notify_has_five_second_timeout) ... ok
+
+======================================================================
+ERROR: test_real_get_current_site_still_works (djangoblog.test_gcy_review.CacheContractTests.test_real_get_current_site_still_works)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_gcy_review.py", line 29, in test_real_get_current_site_still_works
+    self.assertTrue(get_current_site().domain)
+                    ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_saving_public_comment_does_not_raise (djangoblog.test_gcy_review.CacheContractTests.test_saving_public_comment_does_not_raise)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_gcy_review.py", line 38, in test_saving_public_comment_does_not_raise
+    comment = Comment.objects.create(body='Public comment', author=user, article=article,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 665, in create
+    obj.save(force_insert=True, using=self.db)
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\base.py", line 902, in save
+    self.save_base(
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\base.py", line 1023, in save_base
+    post_save.send(
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\blog_signals.py", line 102, in model_post_save_callback
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_zero_argument_cached_function_still_works_and_caches (djangoblog.test_gcy_review.CacheContractTests.test_zero_argument_cached_function_still_works_and_caches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_gcy_review.py", line 24, in test_zero_argument_cached_function_still_works_and_caches
+    self.assertEqual(value(), 'cached value')
+                     ^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.236s
+
+FAILED (errors=3)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

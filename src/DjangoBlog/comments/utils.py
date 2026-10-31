@@ -1,6 +1,7 @@
 import logging
 
 from django.utils.translation import gettext_lazy as _
+
 from djangoblog.utils import get_current_site, send_email
 
 logger = logging.getLogger(__name__)
