@@ -1,0 +1,615 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_utils (djangoblog.tests.DjangoBlogTest.test_utils) ... ok
+test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)
+测试版权声明已添加 ... Error applying filter hook 'head_meta' callback 'dispatch_seo_generation': tuple index out of range
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 185, in dispatch_seo_generation
+    seo_data = self._get_article_seo_data(context, request, blog_setting)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 37, in _get_article_seo_data
+    article_url = article.get_full_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /article/2026/10/31/1.html
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+ERROR
+test_copyright_plugin_loaded (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_plugin_loaded)
+测试版权插件已加载 ... ok
+test_plugin_config (djangoblog.test_plugins.BasePluginTest.test_plugin_config)
+测试插件配置 ... ok
+test_plugin_get_context (djangoblog.test_plugins.BasePluginTest.test_plugin_get_context)
+测试获取插件信息 ... ok
+test_plugin_initialization (djangoblog.test_plugins.BasePluginTest.test_plugin_initialization)
+测试插件初始化 ... ok
+test_plugin_register_hooks (djangoblog.test_plugins.BasePluginTest.test_plugin_register_hooks)
+测试插件注册钩子 ... ok
+test_external_links_plugin_loaded (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_plugin_loaded)
+测试外部链接插件已加载 ... ok
+test_external_links_processing (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_processing)
+测试外部链接处理 ... ok
+test_apply_filters (djangoblog.test_plugins.PluginHooksTest.test_apply_filters)
+测试应用过滤器 ... ok
+test_hook_error_handling (djangoblog.test_plugins.PluginHooksTest.test_hook_error_handling)
+测试钩子错误处理 ... Error applying filter hook 'the_content' callback 'error_hook': Hook error
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_plugins.py", line 78, in error_hook
+    raise Exception("Hook error")
+Exception: Hook error
+ok
+test_multiple_hooks (djangoblog.test_plugins.PluginHooksTest.test_multiple_hooks)
+测试多个钩子 ... ok
+test_register_hook (djangoblog.test_plugins.PluginHooksTest.test_register_hook)
+测试注册钩子 ... ok
+test_run_action (djangoblog.test_plugins.PluginHooksTest.test_run_action)
+测试运行动作钩子 ... ok
+test_load_plugins (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins)
+测试加载插件 ... ok
+test_load_plugins_handles_errors (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins_handles_errors)
+测试插件加载错误处理 ... ok
+test_calculate_reading_time (djangoblog.test_plugins.ReadingTimePluginTest.test_calculate_reading_time)
+测试计算阅读时间 ... ok
+test_reading_time_plugin_loaded (djangoblog.test_plugins.ReadingTimePluginTest.test_reading_time_plugin_loaded)
+测试阅读时间插件已加载 ... ok
+test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)
+测试 SEO meta 标签 ... Error applying filter hook 'head_meta' callback 'dispatch_seo_generation': tuple index out of range
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 185, in dispatch_seo_generation
+    seo_data = self._get_article_seo_data(context, request, blog_setting)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 37, in _get_article_seo_data
+    article_url = article.get_full_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /article/2026/10/31/1.html
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+ERROR
+test_seo_optimizer_plugin_loaded (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_optimizer_plugin_loaded)
+测试 SEO 优化插件已加载 ... ok
+test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)
+测试浏览次数增加 ... Error applying filter hook 'head_meta' callback 'dispatch_seo_generation': tuple index out of range
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 185, in dispatch_seo_generation
+    seo_data = self._get_article_seo_data(context, request, blog_setting)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 37, in _get_article_seo_data
+    article_url = article.get_full_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+Error applying filter hook 'head_meta' callback 'dispatch_seo_generation': tuple index out of range
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 185, in dispatch_seo_generation
+    seo_data = self._get_article_seo_data(context, request, blog_setting)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\plugins\seo_optimizer\plugin.py", line 37, in _get_article_seo_data
+    article_url = article.get_full_url()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /article/2026/10/31/1.html
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+ERROR
+test_view_count_plugin_loaded (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_plugin_loaded)
+测试浏览次数插件已加载 ... ok
+
+======================================================================
+ERROR: test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)
+测试版权声明已添加
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_plugins.py", line 227, in test_copyright_notice_added
+    response = self.client.get(self.article.get_absolute_url())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1127, in get
+    response = super().get(
+               ^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 475, in get
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)
+测试 SEO meta 标签
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_plugins.py", line 210, in test_seo_meta_tags
+    response = self.client.get(self.article.get_absolute_url())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1127, in get
+    response = super().get(
+               ^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 475, in get
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)
+测试浏览次数增加
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_plugins.py", line 190, in test_view_count_increment
+    self.client.get(self.article.get_absolute_url())
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1127, in get
+    response = super().get(
+               ^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 475, in get
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+               ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 172, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\test\utils.py", line 114, in instrumented_test_render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1018, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 979, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 1077, in render
+    output = self.filter_expression.resolve(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 723, in resolve
+    obj = self.var.resolve(context)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 856, in resolve
+    value = self._resolve_lookup(context)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\template\base.py", line 927, in _resolve_lookup
+    current = current()
+              ^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog\models.py", line 49, in get_full_url
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+----------------------------------------------------------------------
+Ran 22 tests in 1.872s
+
+FAILED (errors=3)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

@@ -1,0 +1,593 @@
+{
+  "gcy_ref": "aba11d2075ed3ab561a6440e74a0e81f95f4c68a",
+  "baseline_ref": "d48f54d6872904c1ed3321014f1350e0c357d224",
+  "timestamp_utc": "2026-10-31T13:07:42.982635+00:00",
+  "tests": {
+    "baseline": {
+      "returncode": 0,
+      "labels": [
+        "djangoblog.test_gcy_review.CacheContractTests"
+      ],
+      "ran": [
+        [
+          "4",
+          "1.680"
+        ]
+      ],
+      "failures": [
+        "0"
+      ],
+      "errors": [],
+      "failed_tests": []
+    },
+    "gcy": {
+      "returncode": 1,
+      "labels": [
+        "djangoblog.test_gcy_review"
+      ],
+      "ran": [
+        [
+          "6",
+          "0.236"
+        ]
+      ],
+      "failures": [
+        "3"
+      ],
+      "errors": [
+        "test_real_get_current_site_still_works (djangoblog.test_gcy_review.CacheContractTests.test_real_get_current_site_still_works)\r",
+        "test_saving_public_comment_does_not_raise (djangoblog.test_gcy_review.CacheContractTests.test_saving_public_comment_does_not_raise)\r",
+        "test_zero_argument_cached_function_still_works_and_caches (djangoblog.test_gcy_review.CacheContractTests.test_zero_argument_cached_function_still_works_and_caches)\r"
+      ],
+      "failed_tests": []
+    },
+    "provided": {
+      "returncode": 1,
+      "labels": [
+        "djangoblog.tests",
+        "djangoblog.test_plugins"
+      ],
+      "ran": [
+        [
+          "22",
+          "1.872"
+        ]
+      ],
+      "failures": [
+        "3"
+      ],
+      "errors": [
+        "test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)\r",
+        "test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)\r",
+        "test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)\r"
+      ],
+      "failed_tests": []
+    },
+    "baseline_provided": {
+      "ran": [
+        [
+          "22",
+          "0.438"
+        ]
+      ],
+      "failures": [
+        "0"
+      ]
+    }
+  },
+  "scans": {
+    "baseline": {
+      "files": 22,
+      "ruff_findings": 72,
+      "ruff_rules": {
+        "F403": 9,
+        "F405": 24,
+        "I001": 10,
+        "C901": 6,
+        "E501": 15,
+        "E722": 1,
+        "F401": 3,
+        "B904": 1,
+        "B007": 1,
+        "F841": 2
+      },
+      "bandit_findings": 8,
+      "bandit_rules": {
+        "B110": 1,
+        "B703": 2,
+        "B308": 2,
+        "B113": 1,
+        "B311": 1,
+        "B101": 1
+      },
+      "bandit_errors": [],
+      "runs": {
+        "ruff": {
+          "command": [
+            "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+            "-m",
+            "ruff",
+            "check",
+            "--config",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\baseline\\doc\\week7-8\\tools\\ruff.toml",
+            "--output-format",
+            "json",
+            "--output-file",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\unified-baseline\\ruff.json",
+            "djangoblog/__init__.py",
+            "djangoblog/admin_site.py",
+            "djangoblog/apps.py",
+            "djangoblog/base_views.py",
+            "djangoblog/blog_signals.py",
+            "djangoblog/constants.py",
+            "djangoblog/elasticsearch_backend.py",
+            "djangoblog/error_views.py",
+            "djangoblog/feeds.py",
+            "djangoblog/logentryadmin.py",
+            "djangoblog/mixins.py",
+            "djangoblog/plugin_manage/base_plugin.py",
+            "djangoblog/plugin_manage/hook_constants.py",
+            "djangoblog/plugin_manage/hooks.py",
+            "djangoblog/plugin_manage/loader.py",
+            "djangoblog/settings.py",
+            "djangoblog/sitemap.py",
+            "djangoblog/spider_notify.py",
+            "djangoblog/urls.py",
+            "djangoblog/utils.py",
+            "djangoblog/whoosh_cn_backend.py",
+            "djangoblog/wsgi.py"
+          ],
+          "returncode": 1
+        },
+        "bandit": {
+          "command": [
+            "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+            "-m",
+            "bandit",
+            "-c",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\baseline\\doc\\week7-8\\tools\\bandit.yaml",
+            "--ignore-nosec",
+            "-f",
+            "json",
+            "-o",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\unified-baseline\\bandit.json",
+            "djangoblog/__init__.py",
+            "djangoblog/admin_site.py",
+            "djangoblog/apps.py",
+            "djangoblog/base_views.py",
+            "djangoblog/blog_signals.py",
+            "djangoblog/constants.py",
+            "djangoblog/elasticsearch_backend.py",
+            "djangoblog/error_views.py",
+            "djangoblog/feeds.py",
+            "djangoblog/logentryadmin.py",
+            "djangoblog/mixins.py",
+            "djangoblog/plugin_manage/base_plugin.py",
+            "djangoblog/plugin_manage/hook_constants.py",
+            "djangoblog/plugin_manage/hooks.py",
+            "djangoblog/plugin_manage/loader.py",
+            "djangoblog/settings.py",
+            "djangoblog/sitemap.py",
+            "djangoblog/spider_notify.py",
+            "djangoblog/urls.py",
+            "djangoblog/utils.py",
+            "djangoblog/whoosh_cn_backend.py",
+            "djangoblog/wsgi.py"
+          ],
+          "returncode": 1
+        }
+      },
+      "source_sha256": {
+        "djangoblog/__init__.py": "32a91fa2bf9dd7f9f17cb9bcb0b4650fb9e2957bfd4c0119fefb71624fda6698",
+        "djangoblog/admin_site.py": "b11e8b860354c7fd6cd949530bde723993f8770f2d54e16f2279d684f663c19b",
+        "djangoblog/apps.py": "e61517e5e1d84ee015da8df2b4fb1ef5d45cd212b3fa6be075fd584c3599bc2b",
+        "djangoblog/base_views.py": "beb7cd76457c00273ec33d8d59ada655abe57272c3070f4162767cde166b2930",
+        "djangoblog/blog_signals.py": "914160a00e2baa544e02f877e64e49d379d5191efdf686c4a950139607bcdc46",
+        "djangoblog/constants.py": "e00b05d08f3c4227e606917cc5d35a6917c8debd3732320aa7819025870dab8d",
+        "djangoblog/elasticsearch_backend.py": "de60437ed31176e43c84eb85cc49c6f8fbe1a8dc7c4a7c2c819dbecfe53f8408",
+        "djangoblog/error_views.py": "ce556000f79d00ae0865909a5c7ce11e781a1d08a33a89e3247656136f0dca15",
+        "djangoblog/feeds.py": "48dfc4cb476658cc49a3eb972deec1dc07b1ab77bcc96f65c63c2d6bb243fb33",
+        "djangoblog/logentryadmin.py": "dd121718a58367fef91b2463c89375d1bead6ff8919c0fe01ea969326219ce05",
+        "djangoblog/mixins.py": "8c93ce85ac5c0b1a76021edc90dde0ba786f26bf6d05c95a16a7949508b1b0ee",
+        "djangoblog/plugin_manage/base_plugin.py": "072e5e25ee1c3ec6fb14aa8b3999e8e981fd02f88b88f4d096c0cd3a57abcebc",
+        "djangoblog/plugin_manage/hook_constants.py": "3b9e4aba04571e6a2054b14d3298c1f15071daf294925e06b6036b02a8db0aa1",
+        "djangoblog/plugin_manage/hooks.py": "1e1efc8e873fb7c9a9f292550e5179d062bfcc48b2979213fa604e9fbf02f75d",
+        "djangoblog/plugin_manage/loader.py": "83f8a7cdf06cd27dd451479eb2be7851a4d4c5df7c9da2ba09b24a9b2829d743",
+        "djangoblog/settings.py": "a71093e9eaa458864d59f728ef3223791cd04c6306267491752750c2f86ee383",
+        "djangoblog/sitemap.py": "3c9b450585375355b26aacc0603cddb4b064dd35c7aca140828dc767cd6df21e",
+        "djangoblog/spider_notify.py": "2564c50cddc284eb1c8ed2ba7417155057216e79af5c03fd55b251917215168b",
+        "djangoblog/urls.py": "320a2417d997f83d895a3b2d02ebe925fc85d960d7fa067ab429ef7a40311e19",
+        "djangoblog/utils.py": "b5cfc2dcf7f36db5bb79c4d683886450f7722d2ffea46bef47d1b28ae06d0108",
+        "djangoblog/whoosh_cn_backend.py": "b0a15234891caf4931804ba2ac4a65aa60307b5fe9765e4223c0a46bfe90e185",
+        "djangoblog/wsgi.py": "4509ffebbe35cf3d8c1aac73e471a3dea44d0c3f8e8a255dbbcbf6a6779043ff"
+      }
+    },
+    "gcy": {
+      "files": 22,
+      "ruff_findings": 34,
+      "ruff_rules": {
+        "I001": 11,
+        "C901": 6,
+        "E501": 15,
+        "B904": 1,
+        "B007": 1
+      },
+      "bandit_findings": 7,
+      "bandit_rules": {
+        "B110": 1,
+        "B703": 2,
+        "B308": 2,
+        "B311": 1,
+        "B101": 1
+      },
+      "bandit_errors": [],
+      "runs": {
+        "ruff": {
+          "command": [
+            "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+            "-m",
+            "ruff",
+            "check",
+            "--config",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\gcy\\doc\\week7-8\\tools\\ruff.toml",
+            "--output-format",
+            "json",
+            "--output-file",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\unified-gcy\\ruff.json",
+            "djangoblog/__init__.py",
+            "djangoblog/admin_site.py",
+            "djangoblog/apps.py",
+            "djangoblog/base_views.py",
+            "djangoblog/blog_signals.py",
+            "djangoblog/constants.py",
+            "djangoblog/elasticsearch_backend.py",
+            "djangoblog/error_views.py",
+            "djangoblog/feeds.py",
+            "djangoblog/logentryadmin.py",
+            "djangoblog/mixins.py",
+            "djangoblog/plugin_manage/base_plugin.py",
+            "djangoblog/plugin_manage/hook_constants.py",
+            "djangoblog/plugin_manage/hooks.py",
+            "djangoblog/plugin_manage/loader.py",
+            "djangoblog/settings.py",
+            "djangoblog/sitemap.py",
+            "djangoblog/spider_notify.py",
+            "djangoblog/urls.py",
+            "djangoblog/utils.py",
+            "djangoblog/whoosh_cn_backend.py",
+            "djangoblog/wsgi.py"
+          ],
+          "returncode": 1
+        },
+        "bandit": {
+          "command": [
+            "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+            "-m",
+            "bandit",
+            "-c",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\gcy\\doc\\week7-8\\tools\\bandit.yaml",
+            "--ignore-nosec",
+            "-f",
+            "json",
+            "-o",
+            "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-gcy-review-20261031-wmdr194h\\unified-gcy\\bandit.json",
+            "djangoblog/__init__.py",
+            "djangoblog/admin_site.py",
+            "djangoblog/apps.py",
+            "djangoblog/base_views.py",
+            "djangoblog/blog_signals.py",
+            "djangoblog/constants.py",
+            "djangoblog/elasticsearch_backend.py",
+            "djangoblog/error_views.py",
+            "djangoblog/feeds.py",
+            "djangoblog/logentryadmin.py",
+            "djangoblog/mixins.py",
+            "djangoblog/plugin_manage/base_plugin.py",
+            "djangoblog/plugin_manage/hook_constants.py",
+            "djangoblog/plugin_manage/hooks.py",
+            "djangoblog/plugin_manage/loader.py",
+            "djangoblog/settings.py",
+            "djangoblog/sitemap.py",
+            "djangoblog/spider_notify.py",
+            "djangoblog/urls.py",
+            "djangoblog/utils.py",
+            "djangoblog/whoosh_cn_backend.py",
+            "djangoblog/wsgi.py"
+          ],
+          "returncode": 1
+        }
+      },
+      "source_sha256": {
+        "djangoblog/__init__.py": "32a91fa2bf9dd7f9f17cb9bcb0b4650fb9e2957bfd4c0119fefb71624fda6698",
+        "djangoblog/admin_site.py": "3e567add8c3a877ead2a4dfea6040a26e2600a4023632ed8fad85847976350d7",
+        "djangoblog/apps.py": "d5f6123741e4d08e408a64a17db3efc78ab7ead13649f7f615b31cb12d8aa9d9",
+        "djangoblog/base_views.py": "9f3f249c47c62cc36d2886a1c6a69a3417dd7eced6e19e51829f1bdfe3f81911",
+        "djangoblog/blog_signals.py": "6774ec12b585b998c1629897bbae58287abcc83e364e4078c1027edc15fcd668",
+        "djangoblog/constants.py": "acc64776478e8bc6bcab68c522b11cea200b2fa6c8182e270cb443b0a35c2685",
+        "djangoblog/elasticsearch_backend.py": "06c9a4cbeb18465a4c7c7e56c785140f185d5c329cefd96478f35e844f336089",
+        "djangoblog/error_views.py": "08b8da2898bf1249fd42c894fde160f0e6c099f4e67ef61ff0576df35e05bb74",
+        "djangoblog/feeds.py": "29b047fa67eb1fc441569065dc1b33bf070777fffe99cf9cad00a01a2b7b0b9f",
+        "djangoblog/logentryadmin.py": "2b778e6880d25a125810e558a7c96a0370f69d75ab67b718751463e0391f4d84",
+        "djangoblog/mixins.py": "4dd23a630298612fbb9d6d0c44deb925c2b926be074b22d759e454ac5c47751f",
+        "djangoblog/plugin_manage/base_plugin.py": "9941f155f55bb47867d78e94354d2ae14b9701c346adc2d22a26384d0cfa856f",
+        "djangoblog/plugin_manage/hook_constants.py": "503405306594e37bff266e4986c24a6f444291142e1f0a3a37669ddb6a64fbe4",
+        "djangoblog/plugin_manage/hooks.py": "bce558cbee39e826906c4792a4954579e447a4bee09c08a70e7a4c56e2f9c8ba",
+        "djangoblog/plugin_manage/loader.py": "8490e29ff4cfc087d921fca49eab631b582d4513cc2bd1a20c9bdb17d12b442f",
+        "djangoblog/settings.py": "38ae53c1a9f63fcf01d9194100c7819b6e4e768fb845f54e8e4ecf4ea3e8028d",
+        "djangoblog/sitemap.py": "3d34b5cbc15641e5e22da5b4b57c610a73793b5eda94b00b9e12dc3335f95a1a",
+        "djangoblog/spider_notify.py": "de57f16117b0d0cb78dc69c6507529c07f805c2e1c5face8c18a5df350c3299f",
+        "djangoblog/urls.py": "a0f6bce120efa537bb0eb1f608da65e75fff0132c9839de5ef5ff4c80bcfdf34",
+        "djangoblog/utils.py": "311ce4ce6ab349ca89a9e4bdbaf7b284c2bfa6368b6ce7584d9202939d6d5422",
+        "djangoblog/whoosh_cn_backend.py": "9fcb9c932c0d21e3caeabd797cec85eb2cfad366af95da3fb1b373175c620255",
+        "djangoblog/wsgi.py": "3b136059f9f4d8cabb35a284857addf74d995108297dd13c1c4b86f13834b831"
+      }
+    }
+  },
+  "submitted_bandit_scope": {
+    "metric_files": 27,
+    "test_files": [
+      "test_base.py",
+      "test_email_integration.py",
+      "test_email_integration_complete.py"
+    ],
+    "test_findings": 31,
+    "test_rules": {
+      "B107": 4,
+      "B106": 26,
+      "B105": 1
+    }
+  },
+  "comment_stats": [
+    {
+      "path": "src/DjangoBlog/djangoblog/admin_site.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 7
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/apps.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 5
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/base_views.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 9
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/blog_signals.py",
+      "before": {
+        "blocks": 1,
+        "physical_lines": 1
+      },
+      "after": {
+        "blocks": 3,
+        "physical_lines": 10
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/constants.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 5
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/elasticsearch_backend.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 9
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/error_views.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 6
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/feeds.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 6
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/logentryadmin.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 6
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/mixins.py",
+      "before": {
+        "blocks": 3,
+        "physical_lines": 3
+      },
+      "after": {
+        "blocks": 5,
+        "physical_lines": 16
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/plugin_manage/base_plugin.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 7
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/plugin_manage/hook_constants.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 4
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/plugin_manage/hooks.py",
+      "before": {
+        "blocks": 1,
+        "physical_lines": 1
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 6
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/plugin_manage/loader.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 6
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/settings.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 3,
+        "physical_lines": 16
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/sitemap.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 4
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/spider_notify.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 7
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/urls.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 7
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/utils.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 4,
+        "physical_lines": 23
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/whoosh_cn_backend.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 2,
+        "physical_lines": 9
+      }
+    },
+    {
+      "path": "src/DjangoBlog/djangoblog/wsgi.py",
+      "before": {
+        "blocks": 0,
+        "physical_lines": 0
+      },
+      "after": {
+        "blocks": 1,
+        "physical_lines": 4
+      }
+    }
+  ],
+  "merge_conflicts": {
+    "develop": [
+      "src/DjangoBlog/djangoblog/plugin_manage/hooks.py",
+      "src/DjangoBlog/djangoblog/urls.py"
+    ],
+    "szx_branch_PR37": [
+      "src/DjangoBlog/djangoblog/blog_signals.py",
+      "src/DjangoBlog/djangoblog/plugin_manage/hooks.py",
+      "src/DjangoBlog/djangoblog/urls.py"
+    ]
+  },
+  "environment": {
+    "python": "3.12.7",
+    "django": "5.2.17",
+    "ruff": "0.17.1",
+    "bandit": "1.9.4",
+    "ruff_target": "py312",
+    "isolation": "SQLite memory; LocMem cache/mail; blocked HTTP/socket; no external services"
+  },
+  "reproducer_sha256": "c7ef9478ba85c59adf2754b44cf1a0459a1f91cf69274015b1ddee2361ddd34c"
+}

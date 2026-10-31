@@ -1,0 +1,225 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_custom_method_cache_key_remains_supported (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_custom_method_cache_key_remains_supported) ... ok
+test_errors_inside_business_function_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_business_function_propagate) ... ERROR
+test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) ... 
+  test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) (error=<class 'AttributeError'>) ... FAIL
+  test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) (error=<class 'TypeError'>) ... FAIL
+test_keyword_only_none_result_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_keyword_only_none_result_is_cached) ... ERROR
+test_noncallable_optional_cache_key_uses_fallback (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_noncallable_optional_cache_key_uses_fallback) ... ok
+test_plain_arguments_have_separate_cache_entries (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_plain_arguments_have_separate_cache_entries) ... ERROR
+test_public_comment_and_article_detail_still_work (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_public_comment_and_article_detail_still_work) ... ERROR
+test_real_site_helper_works_without_arguments (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_real_site_helper_works_without_arguments) ... ERROR
+test_zero_argument_function_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_zero_argument_function_is_cached) ... ERROR
+test_permission_denied_renders_real_custom_403_page (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_permission_denied_renders_real_custom_403_page) ... HTTP 403 Error: GCY error-handler regression
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Forbidden (Permission denied): /__gcy_denied__/
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+ok
+test_project_resolves_custom_403_handler (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_project_resolves_custom_403_handler) ... ok
+test_action_error_without_callback_name_does_not_block_next_action (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_action_error_without_callback_name_does_not_block_next_action) ... ERROR
+test_filter_error_without_callback_name_does_not_block_next_filter (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_filter_error_without_callback_name_does_not_block_next_filter) ... ERROR
+test_reset_code_keeps_six_ascii_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_keeps_six_ascii_digits) ... ok
+test_reset_code_preserves_leading_zero_and_repeated_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_preserves_leading_zero_and_repeated_digits) ... FAIL
+test_spider_notify_sends_urls_with_five_second_timeout (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spider_notify_sends_urls_with_five_second_timeout) ... ok
+test_spider_timeout_is_logged_without_raising (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spider_timeout_is_logged_without_raising) ... ok
+
+======================================================================
+ERROR: test_errors_inside_business_function_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_business_function_propagate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 114, in test_errors_inside_business_function_propagate
+    value()
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_keyword_only_none_result_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_keyword_only_none_result_is_cached)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 62, in test_keyword_only_none_result_is_cached
+    self.assertIsNone(value(number=4))
+                      ^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_plain_arguments_have_separate_cache_entries (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_plain_arguments_have_separate_cache_entries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 52, in test_plain_arguments_have_separate_cache_entries
+    self.assertEqual(value(number=4), 8)
+                     ^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_public_comment_and_article_detail_still_work (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_public_comment_and_article_detail_still_work)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 125, in test_public_comment_and_article_detail_still_work
+    comment = Comment.objects.create(
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 665, in create
+    obj.save(force_insert=True, using=self.db)
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\base.py", line 902, in save
+    self.save_base(
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\base.py", line 1023, in save_base
+    post_save.send(
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\dispatch\dispatcher.py", line 189, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\blog_signals.py", line 102, in model_post_save_callback
+    site = get_current_site().domain
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_real_site_helper_works_without_arguments (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_real_site_helper_works_without_arguments)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 117, in test_real_site_helper_works_without_arguments
+    self.assertTrue(get_current_site().domain)
+                    ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_zero_argument_function_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_zero_argument_function_is_cached)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 41, in test_zero_argument_function_is_cached
+    self.assertEqual(value(), 'cached value')
+                     ^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\utils.py", line 48, in news
+    view = args[0]
+           ~~~~^^^
+IndexError: tuple index out of range
+
+======================================================================
+ERROR: test_action_error_without_callback_name_does_not_block_next_action (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_action_error_without_callback_name_does_not_block_next_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 32, in run_action
+    callback(*args, **kwargs)
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+ValueError: expected plugin failure
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 146, in test_action_error_without_callback_name_does_not_block_next_action
+    hooks.run_action('gcy-action', 'payload')
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 34, in run_action
+    logger.error(f"Error running action hook '{hook_name}' callback '{callback.__name__}': {e}", exc_info=True)
+                                                                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 662, in __getattr__
+    raise AttributeError(name)
+AttributeError: __name__
+
+======================================================================
+ERROR: test_filter_error_without_callback_name_does_not_block_next_filter (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_filter_error_without_callback_name_does_not_block_next_filter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 46, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+ValueError: expected plugin failure
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 139, in test_filter_error_without_callback_name_does_not_block_next_filter
+    self.assertEqual(hooks.apply_filters('gcy-filter', 'value'), 'value!')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 48, in apply_filters
+    logger.error(f"Error applying filter hook '{hook_name}' callback '{callback.__name__}': {e}", exc_info=True)
+                                                                       ^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Programs\Python\Python312\Lib\unittest\mock.py", line 662, in __getattr__
+    raise AttributeError(name)
+AttributeError: __name__
+
+======================================================================
+FAIL: test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) (error=<class 'AttributeError'>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 105, in test_errors_inside_custom_key_factory_propagate
+    with self.assertRaises(error):
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: AttributeError not raised
+
+======================================================================
+FAIL: test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) (error=<class 'TypeError'>)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 105, in test_errors_inside_custom_key_factory_propagate
+    with self.assertRaises(error):
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: TypeError not raised
+
+======================================================================
+FAIL: test_reset_code_preserves_leading_zero_and_repeated_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_preserves_leading_zero_and_repeated_digits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\gcy\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 169, in test_reset_code_preserves_leading_zero_and_repeated_digits
+    self.assertEqual(generate_code(), '001122')
+AssertionError: '573061' != '001122'
+- 573061
++ 001122
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.201s
+
+FAILED (failures=3, errors=8)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

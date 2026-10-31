@@ -1,0 +1,7 @@
+[main]	INFO	profile include tests: None
+[main]	INFO	profile exclude tests: None
+[main]	INFO	cli include tests: None
+[main]	INFO	cli exclude tests: None
+[warnings]	WARNING	invalid escape sequence '\d'
+
+[json]	INFO	JSON output written to file: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\unified-baseline\bandit.json
