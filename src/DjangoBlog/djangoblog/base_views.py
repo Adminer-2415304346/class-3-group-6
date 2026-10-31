@@ -29,6 +29,11 @@ class SecureFormView(FormView):
                 # 处理表单数据
                 return super().form_valid(form)
     """
+    # GCY（类/函数层）：公共表单视图基类，调用方为 accounts/comments
+    # 等 app 的表单视图。通过重写 dispatch 统一叠加装饰器，子类无需
+    # 重复声明。约定：子类只实现 form_class/template_name 与
+    # form_valid 即可，dispatch 的签名（含 *args, **kwargs）保持不变，
+    # 以保证 method_decorator 能正确包裹任何 HTTP 方法。
 
     @method_decorator(csrf_protect)
     def dispatch(self, *args, **kwargs):
@@ -97,6 +102,10 @@ class LogoutRedirectView(RedirectView):
                 logout(request)
                 return super().get(request, *args, **kwargs)
     """
+    # GCY（类/函数层）：登出视图基类。never_cache 保证登出响应带
+    # Cache-Control: no-cache，防止浏览器回退后仍显示已登录页面。
+    # 子类 get 中应先执行 logout(request) 再调用父类重定向，父类
+    # dispatch 不感知具体登出逻辑，只负责缓存策略。
 
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):

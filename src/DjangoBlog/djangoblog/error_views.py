@@ -32,6 +32,12 @@ def render_error_page(request, status_code, message, exception=None):
         def my_error_handler(request, exception):
             return render_error_page(request, 404, "Page not found", exception)
     """
+    # GCY（关键逻辑）：统一错误页出口，四个 Django 标准错误处理
+    # （400/403/404/500）都收敛到这里。exception 存在时才写 error
+    # 日志并带 exc_info 与请求上下文；渲染固定用
+    # blog/error_page.html 并回传 status_code。注意：本函数被
+    # urls.py 的 handler404/handler500 引用，而 handler403 因
+    # urls.py 中拼写为 handle403 未真正挂载（见 urls.py 注释）。
     if exception:
         logger.error(
             f'HTTP {status_code} Error: {exception}',

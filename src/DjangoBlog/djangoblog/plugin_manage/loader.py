@@ -12,6 +12,12 @@ def load_plugins():
     Dynamically loads and initializes plugins from the 'plugins' directory.
     This function is intended to be called when the Django app registry is ready.
     """
+    # GCY（关键逻辑）：插件加载器。按 settings.ACTIVE_PLUGINS 顺序遍历，
+    # 仅当目录存在且含 plugin.py 时才 __import__ 并取模块级 'plugin'
+    # 实例；单个插件 ImportError/AttributeError 都被捕获并记 error，继续
+    # 加载其余插件，避免一个坏插件拖垮整个应用。限制：异常只记录不
+    # 回滚已加载实例；插件实例是模块级单例，测试间需自行清理
+    # _loaded_plugins（见 test_plugins 的 setUp）。
     global _loaded_plugins
     _loaded_plugins = []
 

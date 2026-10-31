@@ -77,6 +77,11 @@ def model_post_save_callback(
         return
 
     # 检查是否只更新了浏览量
+    # GCY（关键逻辑）：update_fields == {'views'} 表示本次保存只改了
+    # 浏览量（浏览计数接口用 update_fields 局部更新），此时无需清理
+    # 各类列表/详情缓存，提前返回可避免高频访问把缓存全部击穿。
+    # 限制：批量 QuerySet.update() 不触发 post_save 信号，因此批量
+    # 改动文章不会走这里的缓存清理，需另行在业务层处理。
     is_update_views = update_fields == {'views'}
     if is_update_views:
         return  # 浏览量更新不需要清理缓存
@@ -113,6 +118,10 @@ def model_post_save_callback(
             cache.delete('seo_processor')
 
             _thread.start_new_thread(send_comment_email, (instance,))
+        # GCY（关键逻辑）：评论通知用 _thread.start_new_thread 开原生线程
+        # 发邮件，避免 SMTP 阻塞请求线程；这是"尽力而为"通知——线程
+        # 未 join、异常由 send_comment_email 内部消化，不能保证邮件一定
+        # 送达，测试与生产都不可依赖其同步完成。
 
     # 文章相关的精细化缓存清理
     elif 'get_full_url' in dir(instance):

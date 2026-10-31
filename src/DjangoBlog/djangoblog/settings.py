@@ -9,6 +9,13 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
+# GCY（模块层）：本项目共用层的全局配置入口。职责是把环境变量翻译为
+# Django/Haystack/Compressor 的运行参数，决定：①检索后端（Whoosh 或
+# Elasticsearch，见下方 HAYSTACK_CONNECTIONS 分支）；②缓存后端（默认
+# LocMem，设置 DJANGO_REDIS_URL 后切换为 Redis）；③邮件后端与静态资源
+# 压缩行为。输入主要是 os.environ，输出是一组模块级配置常量，被 urls、
+# blog、accounts 等模块在 import 时读取。执行边界：本文件不发起任何
+# 网络或数据库连接，只做配置装配。
 import os
 import sys
 from pathlib import Path
@@ -233,6 +240,11 @@ if os.environ.get('DJANGO_ELASTICSEARCH_HOST'):
     ELASTICSEARCH_DSL = {'default': _es_config}
 
 # === Haystack 配置 ===
+# GCY（关键逻辑）：检索后端的选择依赖模块级局部变量 ELASTICSEARCH_DSL
+# 是否被定义（上方仅有 DJANGO_ELASTICSEARCH_HOST 环境变量时才定义），
+# 而不是显式的布尔开关。读取时若未定义则回退 Whoosh（本地文件索引）。
+# 注意该判断在 import 时刻执行，运行时再修改环境变量不会生效；这是
+# 配置装配期的隐式分支，改动需在 settings 加载前完成。
 if 'ELASTICSEARCH_DSL' in locals():
     # 使用 Elasticsearch
     HAYSTACK_CONNECTIONS = {
@@ -299,6 +311,10 @@ if os.environ.get("DJANGO_REDIS_URL"):
             'LOCATION': f'redis://{os.environ.get("DJANGO_REDIS_URL")}',
         }
     }
+# GCY（关键逻辑）：缓存后端默认 LocMem（进程内、多进程/多实例不共享），
+# 生产环境须通过 DJANGO_REDIS_URL 切换 Redis 才能让信号清理、列表缓存等
+# 在多个 worker 间一致生效；否则不同进程各持一份缓存，删除操作只会
+# 命中当前进程，属于部署相关约束而非代码缺陷。
 
 SITE_ID = 1
 BAIDU_NOTIFY_URL = os.environ.get('DJANGO_BAIDU_NOTIFY_URL') \
