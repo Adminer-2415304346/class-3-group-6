@@ -1,0 +1,20 @@
+{
+  "phase": "ssr-before",
+  "timestamp_utc": "2026-10-31T09:53:40.688441+00:00",
+  "base_commit": "e4c7d3d1311b3a22c0133c4d18d8e9386c6ba479",
+  "command": [
+    "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+    "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names"
+  ],
+  "returncode": 1,
+  "test_count": 1,
+  "reaction_query_counts": null,
+  "source_sha256": {
+    "src/DjangoBlog/blog/comment_cache.py": "d9e183e00389049cea4a8b714ebe2c7c63bbacde54896447336b07bb5f191e18",
+    "src/DjangoBlog/blog/test_comment_interfaces.py": "9fe8d3e175d78de425442233a59838224e15c956b675588375920cc8d4e89b66",
+    "src/DjangoBlog/templates/comments/tags/comment_item_modern.html": "59bd1beffe77f44f748222a8d04362bce3a41c6820a43b7a62920bc95a51d1b3"
+  },
+  "isolation": "SQLite memory; LocMem cache/mail; SimpleEngine; no ES/cloudflare; HTTP/socket blocked; comment-mail callback synchronous. Not live integration.",
+  "scope_note": "Provider optimisation and production admin/signal wiring remain WZY/GCY work."
+}

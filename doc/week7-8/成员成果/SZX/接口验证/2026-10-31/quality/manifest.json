@@ -1,0 +1,64 @@
+{
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "scope": {
+    "ruff": [
+      "src/DjangoBlog/blog/comment_cache.py",
+      "src/DjangoBlog/blog/test_comment_interfaces.py",
+      "doc/week7-8/tools/verify_comment_interfaces.py"
+    ],
+    "bandit": [
+      "src/DjangoBlog/blog/comment_cache.py"
+    ]
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "doc/week7-8/tools/ruff.toml",
+        "--output-format",
+        "json",
+        "src/DjangoBlog/blog/comment_cache.py",
+        "src/DjangoBlog/blog/test_comment_interfaces.py",
+        "doc/week7-8/tools/verify_comment_interfaces.py"
+      ],
+      "returncode": 0,
+      "findings": 0
+    },
+    "bandit": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "doc/week7-8/tools/bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "src/DjangoBlog/blog/comment_cache.py"
+      ],
+      "returncode": 0,
+      "findings": 0
+    }
+  },
+  "syntax_files": [
+    "src/DjangoBlog/blog/comment_cache.py",
+    "src/DjangoBlog/blog/test_comment_interfaces.py",
+    "doc/week7-8/tools/verify_comment_interfaces.py"
+  ],
+  "diff_check": {
+    "returncode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "phase": "after",
+  "timestamp_utc": "2026-10-31T09:57:39.126451+00:00",
+  "base_commit": "e4c7d3d1311b3a22c0133c4d18d8e9386c6ba479",
+  "command": [
+    "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+    "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "blog.test_comment_interfaces",
+    "blog.test_week78_quality",
+    "blog.test_views",
+    "blog.test_templatetags",
+    "comments.tests",
+    "comments.test_views",
+    "comments.test_comment_business_logic"
+  ],
+  "returncode": 0,
+  "test_count": 114,
+  "reaction_query_counts": {
+    "anonymous": 9,
+    "authenticated": 17
+  },
+  "source_sha256": {
+    "src/DjangoBlog/blog/comment_cache.py": "1fd2bbcd5ef5f4d51c8f4b391eae2d9105e42fb30b9739003408f22ce323ef34",
+    "src/DjangoBlog/blog/test_comment_interfaces.py": "f85f54d8e97e911a41cc801faca2a4b3defef091db72b73022b0dc94a6d782ce",
+    "src/DjangoBlog/templates/comments/tags/comment_item_modern.html": "12c26eb0dfdec7aced75a54c2370271ecc7e61a79fb4d11e951a5ac0c9635b9b"
+  },
+  "isolation": "SQLite memory; LocMem cache/mail; SimpleEngine; no ES/cloudflare; HTTP/socket blocked; synchronous comment-mail callback; no live services.",
+  "scope_note": "Provider optimisation and admin/signal wiring remain WZY/GCY work."
+}
