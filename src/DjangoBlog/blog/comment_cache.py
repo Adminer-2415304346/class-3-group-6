@@ -5,9 +5,9 @@ from collections.abc import Iterable
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db import DEFAULT_DB_ALIAS, transaction
-from djangoblog.constants import CacheKey
 
 from blog.models import LinkShowType
+from djangoblog.constants import CacheKey
 
 
 def invalidate_comment_caches(

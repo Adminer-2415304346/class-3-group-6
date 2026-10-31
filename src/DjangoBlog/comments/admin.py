@@ -1,37 +1,33 @@
-from blog.comment_cache import invalidate_comment_caches
 from django.contrib import admin
 from django.db import transaction
-from django.db.models import Q
 from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
+from blog.comment_cache import invalidate_comment_caches
+
 from .models import Comment, CommentReaction
 
 
-def _comment_article_ids(queryset):
-    """WZY/R5: 在更新/删除前捕获受影响文章ID，供提交后失效评论与侧栏缓存。"""
-    return list(
-        queryset.order_by().values_list('article_id', flat=True).distinct()
-    )
+def _set_comment_status(queryset, *, enabled):
+    """SZX：固定并锁定待改主键，文章ID快照与实际批量写入使用同一组记录。"""
+    using = queryset.db
+    with transaction.atomic(using=using):
+        rows = list(queryset.select_for_update().order_by('pk').values_list('pk', 'article_id'))
+        if not rows:
+            return
+        Comment.objects.using(using).filter(pk__in=[pk for pk, _ in rows]).update(is_enable=enabled)
+        invalidate_comment_caches([article_id for _, article_id in rows], using=using)
 
 
 def disable_commentstatus(modeladmin, request, queryset):
     # WZY/R5: 先捕获文章ID，再批量禁用；失效登记在事务提交后执行，不逐条 save()
-    using = queryset.db
-    with transaction.atomic(using=using):
-        article_ids = _comment_article_ids(queryset)
-        queryset.update(is_enable=False)
-        invalidate_comment_caches(article_ids, using=using)
+    _set_comment_status(queryset, enabled=False)
 
 
 def enable_commentstatus(modeladmin, request, queryset):
     # WZY/R5: 先捕获文章ID，再批量启用；失效登记在事务提交后执行，不逐条 save()
-    using = queryset.db
-    with transaction.atomic(using=using):
-        article_ids = _comment_article_ids(queryset)
-        queryset.update(is_enable=True)
-        invalidate_comment_caches(article_ids, using=using)
+    _set_comment_status(queryset, enabled=True)
 
 
 disable_commentstatus.short_description = _('Disable comments')
@@ -71,36 +67,8 @@ class CommentAdmin(admin.ModelAdmin):
     link_to_userinfo.short_description = _('User')
     link_to_article.short_description = _('Article')
 
-    def save_model(self, request, obj, form, change):
-        # WZY/R5: 修改评论（含启用/禁用、改归属文章）后失效缓存；覆盖旧、新两个文章ID
-        old_article_id = None
-        if change:
-            old_article_id = Comment.objects.filter(pk=obj.pk).values_list(
-                'article_id', flat=True).first()
-        using = obj._state.db or 'default'
-        with transaction.atomic(using=using):
-            super().save_model(request, obj, form, change)
-            invalidate_comment_caches(
-                [aid for aid in (old_article_id, obj.article_id) if aid],
-                using=using)
-
-    def delete_model(self, request, obj):
-        # WZY/R5: 删除前捕获本文及其直接子回复所属文章（级联子回复同文章，R1 归属校验）
-        using = obj._state.db or 'default'
-        article_ids = list(Comment.objects.filter(
-            Q(pk=obj.pk) | Q(parent_comment_id=obj.pk)
-        ).values_list('article_id', flat=True).distinct())
-        with transaction.atomic(using=using):
-            super().delete_model(request, obj)
-            invalidate_comment_caches(article_ids, using=using)
-
-    def delete_queryset(self, request, queryset):
-        # WZY/R5: 批量删除前捕获文章ID（删除后不能从原QuerySet再取值）
-        using = queryset.db
-        article_ids = _comment_article_ids(queryset)
-        with transaction.atomic(using=using):
-            super().delete_queryset(request, queryset)
-            invalidate_comment_caches(article_ids, using=using)
+    # SZX：WZY 原后台保存/删除入口统一交给共享 pre_save/post_save/post_delete 信号。
+    # 删除信号覆盖每个实际被级联删除的 Comment，不假设所有后代仍属于同一文章。
 
 
 class CommentReactionAdmin(admin.ModelAdmin):

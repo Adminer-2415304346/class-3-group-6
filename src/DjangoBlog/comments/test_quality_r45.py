@@ -2,22 +2,22 @@
 
 对应 2026-10-31 的 WZY-SZX R4/R5 接口约定 v1：
 - R4：get_reactions_summary 恒 ≤2 次查询，返回结构不变（emoji键/count/has_reacted/users≤10）。
-- R5：comments/admin.py 启/禁用、单条修改、删除、批量删除接入 invalidate_comment_caches。
+- R5：后台启/禁用显式失效，普通修改、删除、级联删除经共享信号失效。
 SZX 侧的消费方兼容与失效入口验证位于 blog.test_comment_interfaces，本文件只补 WZY 侧断言。
 """
 
+from django.contrib import admin as django_admin
+from django.contrib.auth import get_user_model
+from django.core.cache import cache
+from django.test import TestCase
+
+from blog.models import Article, Category
 from comments.admin import (
     CommentAdmin,
     disable_commentstatus,
     enable_commentstatus,
 )
 from comments.models import Comment, CommentReaction
-
-from blog.models import Article, Category
-from django.contrib import admin as django_admin
-from django.contrib.auth import get_user_model
-from django.core.cache import cache
-from django.test import TestCase
 from djangoblog.constants import CacheKey
 
 
@@ -33,7 +33,7 @@ def _make_article_and_comment(users):
 
 
 class ReactionSummaryOptimizationTests(TestCase):
-    """R4：get_reactions_summary 优化为恒 2 次查询并保持返回契约。"""
+    """R4：SZX 集成修复后为一次读取，仍满足 WZY/SZX 的 ≤2 次查询预算。"""
 
     @classmethod
     def setUpTestData(cls):
@@ -51,10 +51,10 @@ class ReactionSummaryOptimizationTests(TestCase):
             for emoji, _ in CommentReaction.REACTION_CHOICES for user in cls.users
         ])
 
-    def test_optimized_summary_is_exactly_two_queries(self):
-        with self.assertNumQueries(2):
+    def test_optimized_summary_uses_one_query(self):
+        with self.assertNumQueries(1):
             self.comment.get_reactions_summary(None)
-        with self.assertNumQueries(2):
+        with self.assertNumQueries(1):
             summary = self.comment.get_reactions_summary(self.viewer)
         self.assertEqual(len(summary), 8)
 

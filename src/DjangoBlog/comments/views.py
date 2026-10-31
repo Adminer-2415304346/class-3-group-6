@@ -2,11 +2,12 @@
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # Create your views here.
-from accounts.models import BlogUser
-from blog.models import Article
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
+
+from accounts.models import BlogUser
+from blog.models import Article
 from djangoblog.base_views import AuthenticatedFormView
 
 from .forms import CommentForm
