@@ -1,0 +1,2854 @@
+{
+  "compiled_date": "2026-10-31",
+  "source_ref": "e52f5d0f3ed5a58110c9abf29fd4cb1e0b74c9bb",
+  "purpose": "Course Word review drafts with confirmed content; not final group acceptance.",
+  "meeting_confirmed": {
+    "date": "2026-10-23",
+    "start": "19:00",
+    "end": "19:30",
+    "mode": "线下",
+    "place": "宿舍",
+    "attendance": "全员出席（6人）",
+    "absent": "无",
+    "chair": "石兆翔",
+    "recorder": "石兆翔",
+    "confirmation": "组长在本轮对话确认会议事实，并确认结论沿用已沟通的任务安排",
+    "conclusions": [
+      "六人分别主责blog、accounts、comments、oauth、servermanager、djangoblog，沿用既有分工，不重复占用同一App。",
+      "第七周侧重源码阅读、三层署名注释、人工分析与工具基线；第八周侧重适当改进、回归验证、同配置复扫及互查。",
+      "互查配对为SZX与GCY、YFY与GZX、WZY与SY；成员本人确认复核结论，不能代填。",
+      "采用统一静态工具、隔离验证和证据记录口径；结合源码核实问题，不把扫描告警直接等同于业务缺陷。",
+      "个人分支提交并集成到develop；所有成员完成后由组长负责develop到main的最终合并。",
+      "个人提交源码、四份分析素材及原始证据；组长汇总编码规范与质量分析Word，下一步优化计划明确优先级、责任人和验收条件。"
+    ]
+  },
+  "plan_dates": {
+    "start_date": null,
+    "end_date": null,
+    "deadline": null,
+    "date_status": "待组长确认；不推算日历日期"
+  },
+  "test_evidence": {
+    "test_count": 357,
+    "failure_count": 0,
+    "verified_code_commit": "11800587aff13e2c91e40a38f53f9f50d635d794"
+  },
+  "inputs_sha256": {
+    "doc/week7-8/content/week78_confirmed_facts.json": "7e85df3455e84bc1ff47db41f792a8b7f0cdc4e6576ad3704e712e8e6a477d74",
+    "doc/week7-8/tools/build_week78_documents.py": "604e60c20798e8e44acf98978d00f5622d21d75945e91c2e53dd229fb6bb42bd",
+    "doc/week7-8/模板/编码规范.docx": "995df739a854eb46449858a5d90e9031e4c986b87d3d463e483b385c47ba78e7",
+    "doc/week7-8/模板/质量分析报告.docx": "a15484cd2cd51222bd56e05e11a8adc7ef73a2a42dfb9c70bccf3e8c4b8cb028",
+    "doc/week7-8/成员成果/SZX/GCY集成/2026-10-31/after/manifest.json": "1dd60cc2e19ae82364c0ac6a17828adb15588ff637c5cb679459a382cf12f4bd",
+    "doc/week7-8/tools/ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "doc/week7-8/tools/bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "inventory": {
+    "blog": [
+      {
+        "path": "src/DjangoBlog/blog/__init__.py",
+        "relative": "blog/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/blog/admin.py",
+        "relative": "blog/admin.py",
+        "category": "production",
+        "physical_lines": 149,
+        "nonempty_lines": 114,
+        "classes": 8,
+        "functions": 12,
+        "comment_lines": 10,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "a1414545866cca8cfc9f4868282e43f878656ee659853e8f464b5b0c9504036f"
+      },
+      {
+        "path": "src/DjangoBlog/blog/apps.py",
+        "relative": "blog/apps.py",
+        "category": "production",
+        "physical_lines": 58,
+        "nonempty_lines": 50,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 9,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "0fe483a500225e3ba8381f2b85fa954eb0a4b6b1cd4dbe111765992cf1c7639e"
+      },
+      {
+        "path": "src/DjangoBlog/blog/comment_cache.py",
+        "relative": "blog/comment_cache.py",
+        "category": "production",
+        "physical_lines": 45,
+        "nonempty_lines": 37,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "d9e183e00389049cea4a8b714ebe2c7c63bbacde54896447336b07bb5f191e18"
+      },
+      {
+        "path": "src/DjangoBlog/blog/context_processors.py",
+        "relative": "blog/context_processors.py",
+        "category": "production",
+        "physical_lines": 56,
+        "nonempty_lines": 50,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 8,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "5dfdd4e72c8f19919ea580166e0febe15626deca84159d14f10eb991e0a9e133"
+      },
+      {
+        "path": "src/DjangoBlog/blog/documents.py",
+        "relative": "blog/documents.py",
+        "category": "production",
+        "physical_lines": 269,
+        "nonempty_lines": 224,
+        "classes": 11,
+        "functions": 9,
+        "comment_lines": 26,
+        "signed": {
+          "SZX": 15,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "4fe123b9f40f2bafb990f4ced96e2048cb4a78811890c907e8e473f4228b40e4"
+      },
+      {
+        "path": "src/DjangoBlog/blog/forms.py",
+        "relative": "blog/forms.py",
+        "category": "production",
+        "physical_lines": 21,
+        "nonempty_lines": 15,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 2,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "be7b9c9cac05fb45e76797687ef24ddbd6344e827956b59b60bde387ea7b2b5e"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/__init__.py",
+        "relative": "blog/management/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/__init__.py",
+        "relative": "blog/management/commands/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/build_index.py",
+        "relative": "blog/management/commands/build_index.py",
+        "category": "production",
+        "physical_lines": 21,
+        "nonempty_lines": 17,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "132e751ed85e0187273984d75ab3b3f5ce9239b4b851442adafe206fbd50e6b4"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/build_search_words.py",
+        "relative": "blog/management/commands/build_search_words.py",
+        "category": "production",
+        "physical_lines": 16,
+        "nonempty_lines": 12,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "c9028381a4f7e69d382a24bcac89589c82e65ee5cfe91fe5f3b5941669f90493"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/clear_cache.py",
+        "relative": "blog/management/commands/clear_cache.py",
+        "category": "production",
+        "physical_lines": 14,
+        "nonempty_lines": 10,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "ceed25ca562c45ba4f1ac6e4152e0d71259021503f395969a62597dcbfd80f0b"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/create_testdata.py",
+        "relative": "blog/management/commands/create_testdata.py",
+        "category": "production",
+        "physical_lines": 193,
+        "nonempty_lines": 175,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 14,
+        "signed": {
+          "SZX": 7,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "cf4b7e76ac454322637f03b88b505f14d7045353f38e47b5b42127dcfc845ba2"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/ping_baidu.py",
+        "relative": "blog/management/commands/ping_baidu.py",
+        "category": "production",
+        "physical_lines": 56,
+        "nonempty_lines": 47,
+        "classes": 1,
+        "functions": 3,
+        "comment_lines": 6,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "4c624a72e03e2d84471e457a83bf94f38d55fc64c6193d12a47aabe6a6e98034"
+      },
+      {
+        "path": "src/DjangoBlog/blog/management/commands/sync_user_avatar.py",
+        "relative": "blog/management/commands/sync_user_avatar.py",
+        "category": "production",
+        "physical_lines": 52,
+        "nonempty_lines": 47,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 5,
+        "signed": {
+          "SZX": 5,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "af1050bd959c608b0c718aca7f69b80c9e7843ff4abbd6dbc786f53bb3f0d98f"
+      },
+      {
+        "path": "src/DjangoBlog/blog/middleware.py",
+        "relative": "blog/middleware.py",
+        "category": "production",
+        "physical_lines": 45,
+        "nonempty_lines": 39,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "75162cbe11bc2e1f595000bb1cdd471606135d481146adbe74eafb9dc8d74c9c"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0001_initial.py",
+        "relative": "blog/migrations/0001_initial.py",
+        "category": "migration",
+        "physical_lines": 137,
+        "nonempty_lines": 131,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "9125c4b3fa4843f508c7c9aa0140b9d24f6788041431a72c704d39994c0b28cf"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0002_blogsettings_global_footer_and_more.py",
+        "relative": "blog/migrations/0002_blogsettings_global_footer_and_more.py",
+        "category": "migration",
+        "physical_lines": 23,
+        "nonempty_lines": 18,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "d2b697b4eaab3fee44778847218cac0d76e7ee54f0d91c886b972c73e414d8c1"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0003_blogsettings_comment_need_review.py",
+        "relative": "blog/migrations/0003_blogsettings_comment_need_review.py",
+        "category": "migration",
+        "physical_lines": 17,
+        "nonempty_lines": 13,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "0ea588c88e88743afffed28c162133941959b35e27f6eec9cb0bd286f6f7f6f8"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0004_rename_analyticscode_blogsettings_analytics_code_and_more.py",
+        "relative": "blog/migrations/0004_rename_analyticscode_blogsettings_analytics_code_and_more.py",
+        "category": "migration",
+        "physical_lines": 27,
+        "nonempty_lines": 23,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "bd9f2f1ec3a4b606ea5ff09bac531930b24cd1d6576ddb3eb0ca473ed6a62194"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0005_alter_article_options_alter_category_options_and_more.py",
+        "relative": "blog/migrations/0005_alter_article_options_alter_category_options_and_more.py",
+        "category": "migration",
+        "physical_lines": 300,
+        "nonempty_lines": 295,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "2c2f104a78025d6e4390dee0ac0a240517ea104d1737a0430daee908f7427ac2"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0006_alter_blogsettings_options.py",
+        "relative": "blog/migrations/0006_alter_blogsettings_options.py",
+        "category": "migration",
+        "physical_lines": 17,
+        "nonempty_lines": 12,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "25c72269c9b081a8f51fd93df09cf3d24f089b60e4d8ba0310a37bf1bdf2959b"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0007_article_idx_type_status_pub_article_idx_status_views_and_more.py",
+        "relative": "blog/migrations/0007_article_idx_type_status_pub_article_idx_status_views_and_more.py",
+        "category": "migration",
+        "physical_lines": 31,
+        "nonempty_lines": 26,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "52640251bca6e15e70814140219db85717236cf9d43be510f345e3cafd4fb93b"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0008_blogsettings_color_scheme.py",
+        "relative": "blog/migrations/0008_blogsettings_color_scheme.py",
+        "category": "migration",
+        "physical_lines": 18,
+        "nonempty_lines": 13,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "84cb3e9d9680ffc42e3bfa033a13f597eb609ec7116deaa201683542f25596a2"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0009_rename_demo_categories.py",
+        "relative": "blog/migrations/0009_rename_demo_categories.py",
+        "category": "migration",
+        "physical_lines": 42,
+        "nonempty_lines": 32,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "23898efb13a99a69697358faf67a8215ac81e51db51f9d59ba954780e1d65371"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/0010_refresh_demo_content.py",
+        "relative": "blog/migrations/0010_refresh_demo_content.py",
+        "category": "migration",
+        "physical_lines": 93,
+        "nonempty_lines": 78,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "eb944cfe4cda2f79112825fc8ccbf93325d4912a22d8493acab820f888bdf450"
+      },
+      {
+        "path": "src/DjangoBlog/blog/migrations/__init__.py",
+        "relative": "blog/migrations/__init__.py",
+        "category": "migration",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/blog/models.py",
+        "relative": "blog/models.py",
+        "category": "production",
+        "physical_lines": 425,
+        "nonempty_lines": 365,
+        "classes": 15,
+        "functions": 28,
+        "comment_lines": 26,
+        "signed": {
+          "SZX": 20,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6609a5f70f519aa90de58ce8dd3ea5bbc2a13ffed0f47b2a5702a8175963185e"
+      },
+      {
+        "path": "src/DjangoBlog/blog/search_indexes.py",
+        "relative": "blog/search_indexes.py",
+        "category": "production",
+        "physical_lines": 19,
+        "nonempty_lines": 15,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 5,
+        "signed": {
+          "SZX": 4,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "a75980b99e4b3adeff00b2e2800a36b379b2def6bbe8f607003b3604ea62c715"
+      },
+      {
+        "path": "src/DjangoBlog/blog/templatetags/__init__.py",
+        "relative": "blog/templatetags/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/blog/templatetags/blog_tags.py",
+        "relative": "blog/templatetags/blog_tags.py",
+        "category": "production",
+        "physical_lines": 742,
+        "nonempty_lines": 598,
+        "classes": 0,
+        "functions": 35,
+        "comment_lines": 52,
+        "signed": {
+          "SZX": 16,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 1,
+          "GCY": 0
+        },
+        "sha256": "1387d85afd389d3551b67ad59caf25e4743a0c65df51ecfa2ea7888bd82b2a96"
+      },
+      {
+        "path": "src/DjangoBlog/blog/templatetags/vite_tags.py",
+        "relative": "blog/templatetags/vite_tags.py",
+        "category": "production",
+        "physical_lines": 238,
+        "nonempty_lines": 185,
+        "classes": 0,
+        "functions": 7,
+        "comment_lines": 20,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 1,
+          "GCY": 0
+        },
+        "sha256": "ccb936286b6a6bf44d886fefb87094f2c58dc11f2017e8f174de84f9e00288d1"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_admin.py",
+        "relative": "blog/test_admin.py",
+        "category": "test",
+        "physical_lines": 143,
+        "nonempty_lines": 118,
+        "classes": 3,
+        "functions": 15,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "23df19d47a430ffb4a47ae1ade3c3c653cc0b387971c7b39cda910e876b06e14"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_agent_demo_data.py",
+        "relative": "blog/test_agent_demo_data.py",
+        "category": "test",
+        "physical_lines": 43,
+        "nonempty_lines": 35,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "87b675ae78a045d3b651e0409a7ecb3adac8c77e414603d800ef999d7be7c8c4"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_article_business_logic.py",
+        "relative": "blog/test_article_business_logic.py",
+        "category": "test",
+        "physical_lines": 607,
+        "nonempty_lines": 505,
+        "classes": 7,
+        "functions": 35,
+        "comment_lines": 41,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "29cef590dafc900d951d3b5120a391ade90477f5ae6f01db9e3b72c69400cd19"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_brand_assets.py",
+        "relative": "blog/test_brand_assets.py",
+        "category": "test",
+        "physical_lines": 54,
+        "nonempty_lines": 45,
+        "classes": 1,
+        "functions": 6,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "defd50b7cc006a19c81cb438ea299f538c25213a8cfe5c9be5bbbf0f991e6baf"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_comment_interfaces.py",
+        "relative": "blog/test_comment_interfaces.py",
+        "category": "test",
+        "physical_lines": 227,
+        "nonempty_lines": 203,
+        "classes": 3,
+        "functions": 18,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "f85f54d8e97e911a41cc801faca2a4b3defef091db72b73022b0dc94a6d782ce"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_comment_lifecycle.py",
+        "relative": "blog/test_comment_lifecycle.py",
+        "category": "test",
+        "physical_lines": 264,
+        "nonempty_lines": 237,
+        "classes": 1,
+        "functions": 23,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6f027d678d6bac895824dae46f34210848591558b4c6a71f8f157e59f5161c8d"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_context_processors.py",
+        "relative": "blog/test_context_processors.py",
+        "category": "test",
+        "physical_lines": 374,
+        "nonempty_lines": 302,
+        "classes": 1,
+        "functions": 21,
+        "comment_lines": 53,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "619998217112777cd2ddc205eb3ea04f218823fbd632006a1fdea46560b020b4"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_middleware.py",
+        "relative": "blog/test_middleware.py",
+        "category": "test",
+        "physical_lines": 282,
+        "nonempty_lines": 217,
+        "classes": 1,
+        "functions": 23,
+        "comment_lines": 35,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "3d2cdac4cde3d7ffff898668d91967ffbe5ae911f5afe00d5d5fc9a9d318cd73"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_templatetags.py",
+        "relative": "blog/test_templatetags.py",
+        "category": "test",
+        "physical_lines": 201,
+        "nonempty_lines": 161,
+        "classes": 6,
+        "functions": 20,
+        "comment_lines": 12,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "0b7fd93eb4c882859a89e7ee2817063e428bd7b0150a659e26fdb4c92dd1b82e"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_views.py",
+        "relative": "blog/test_views.py",
+        "category": "test",
+        "physical_lines": 184,
+        "nonempty_lines": 152,
+        "classes": 4,
+        "functions": 20,
+        "comment_lines": 16,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "1e8dedf158bfb42e1ffd284ad8be385994c697b2b439511d5d774fa7492a3827"
+      },
+      {
+        "path": "src/DjangoBlog/blog/test_week78_quality.py",
+        "relative": "blog/test_week78_quality.py",
+        "category": "test",
+        "physical_lines": 205,
+        "nonempty_lines": 170,
+        "classes": 4,
+        "functions": 27,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "1f0db436a4f6cf62b611fb560dad1a6308cd08337a003dd75aa3ac7b93846a44"
+      },
+      {
+        "path": "src/DjangoBlog/blog/tests.py",
+        "relative": "blog/tests.py",
+        "category": "test",
+        "physical_lines": 305,
+        "nonempty_lines": 255,
+        "classes": 2,
+        "functions": 10,
+        "comment_lines": 15,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "fac0f3f87c6c277ab2a35e687664284e327200cf503e271b0cb3782ce89610bc"
+      },
+      {
+        "path": "src/DjangoBlog/blog/urls.py",
+        "relative": "blog/urls.py",
+        "category": "production",
+        "physical_lines": 66,
+        "nonempty_lines": 64,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 6,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "d1f44e145f6ffa6e404a09c5e287f33ed5cf10c5794ee22a1b4592aa91b5c98c"
+      },
+      {
+        "path": "src/DjangoBlog/blog/views.py",
+        "relative": "blog/views.py",
+        "category": "production",
+        "physical_lines": 446,
+        "nonempty_lines": 364,
+        "classes": 9,
+        "functions": 23,
+        "comment_lines": 52,
+        "signed": {
+          "SZX": 22,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "b324fe3844d02b06cb17df14e8d51229cd524d104f0acf68c11226ff15924a82"
+      }
+    ],
+    "accounts": [
+      {
+        "path": "src/DjangoBlog/accounts/__init__.py",
+        "relative": "accounts/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/admin.py",
+        "relative": "accounts/admin.py",
+        "category": "production",
+        "physical_lines": 70,
+        "nonempty_lines": 59,
+        "classes": 5,
+        "functions": 2,
+        "comment_lines": 11,
+        "signed": {
+          "SZX": 0,
+          "YFY": 9,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "c072d46a5dd7ca83ee5e4830f2379a7e23a4b232f00bdd315b8c7b891be52ac7"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/apps.py",
+        "relative": "accounts/apps.py",
+        "category": "production",
+        "physical_lines": 6,
+        "nonempty_lines": 4,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 1,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "2d338a08be29e1eb9dc2711d356e62925e511e1978aac2bce4913cf91ad89bfb"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/forms.py",
+        "relative": "accounts/forms.py",
+        "category": "production",
+        "physical_lines": 135,
+        "nonempty_lines": 116,
+        "classes": 5,
+        "functions": 6,
+        "comment_lines": 18,
+        "signed": {
+          "SZX": 0,
+          "YFY": 17,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "b83a21d8f9c1dc985f3df87cf1d43c1aa263c3ee8af05a717c114c3307bfee3c"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/migrations/0001_initial.py",
+        "relative": "accounts/migrations/0001_initial.py",
+        "category": "migration",
+        "physical_lines": 49,
+        "nonempty_lines": 43,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "09e76cb4688d4aa6f124f89bcdc77f5ea41cba9116504ba1b5cbb51a8654ebe9"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/migrations/0002_alter_bloguser_options_remove_bloguser_created_time_and_more.py",
+        "relative": "accounts/migrations/0002_alter_bloguser_options_remove_bloguser_created_time_and_more.py",
+        "category": "migration",
+        "physical_lines": 46,
+        "nonempty_lines": 41,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "ace04dbde7769890d324f8e0879fce79c6c4171905790b1b4aee903ba13168a4"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/migrations/__init__.py",
+        "relative": "accounts/migrations/__init__.py",
+        "category": "migration",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/models.py",
+        "relative": "accounts/models.py",
+        "category": "production",
+        "physical_lines": 45,
+        "nonempty_lines": 38,
+        "classes": 2,
+        "functions": 3,
+        "comment_lines": 11,
+        "signed": {
+          "SZX": 0,
+          "YFY": 10,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "2a2fe8fbb35db27600d4c50f620b2475ee0d940b5f85f0bec7e214382a12da03"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/templatetags/__init__.py",
+        "relative": "accounts/templatetags/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/test_account_pages.py",
+        "relative": "accounts/test_account_pages.py",
+        "category": "test",
+        "physical_lines": 158,
+        "nonempty_lines": 143,
+        "classes": 1,
+        "functions": 10,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "bcc448b66c145de0d1e5b55f0a6b7d2fbd74d4addbf883e4028efabf46d60956"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/test_admin.py",
+        "relative": "accounts/test_admin.py",
+        "category": "test",
+        "physical_lines": 137,
+        "nonempty_lines": 120,
+        "classes": 1,
+        "functions": 13,
+        "comment_lines": 2,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "73edd87b760c152d653e722b562dd99b8e230acb134d67148af3256f0824f1ab"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/test_auth_hardening.py",
+        "relative": "accounts/test_auth_hardening.py",
+        "category": "test",
+        "physical_lines": 101,
+        "nonempty_lines": 80,
+        "classes": 2,
+        "functions": 10,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "be43c03e24deb7b5f5bb518d9f847224692d94023fc1cd343c9a250f2b3a1d60"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/test_login_page.py",
+        "relative": "accounts/test_login_page.py",
+        "category": "test",
+        "physical_lines": 201,
+        "nonempty_lines": 177,
+        "classes": 2,
+        "functions": 19,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6305dc221f1e354b2fdcb2485b97bf32af7157cfe5075c52c04d9652a5f15383"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/test_user_business_logic.py",
+        "relative": "accounts/test_user_business_logic.py",
+        "category": "test",
+        "physical_lines": 510,
+        "nonempty_lines": 404,
+        "classes": 8,
+        "functions": 39,
+        "comment_lines": 35,
+        "signed": {
+          "SZX": 0,
+          "YFY": 5,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "bb8644308928bc177b238a0a31b4357f6acba01cc023d31c4877e9f03a3da35f"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/tests.py",
+        "relative": "accounts/tests.py",
+        "category": "test",
+        "physical_lines": 207,
+        "nonempty_lines": 174,
+        "classes": 1,
+        "functions": 9,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "94e8b6f4350eda4c992a35c923f07e37ef0dce399bb79f7fd7ed07007aafc260"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/urls.py",
+        "relative": "accounts/urls.py",
+        "category": "production",
+        "physical_lines": 40,
+        "nonempty_lines": 37,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 11,
+        "signed": {
+          "SZX": 0,
+          "YFY": 11,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "8bfaf3546dcbdf61c76bf8f72b563dbe61ea7e04bfe3de539b264d8b55a83195"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/user_login_backend.py",
+        "relative": "accounts/user_login_backend.py",
+        "category": "production",
+        "physical_lines": 41,
+        "nonempty_lines": 37,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 9,
+        "signed": {
+          "SZX": 0,
+          "YFY": 9,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "3ea8839e58fe936b06fef37635057f0ac09ac6cd2c9fa4beb2d6f43da5638c16"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/utils.py",
+        "relative": "accounts/utils.py",
+        "category": "production",
+        "physical_lines": 66,
+        "nonempty_lines": 53,
+        "classes": 0,
+        "functions": 5,
+        "comment_lines": 12,
+        "signed": {
+          "SZX": 0,
+          "YFY": 12,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "f5971c103eca202364cc50546170af482b7144980308b8fd932803872963505c"
+      },
+      {
+        "path": "src/DjangoBlog/accounts/views.py",
+        "relative": "accounts/views.py",
+        "category": "production",
+        "physical_lines": 268,
+        "nonempty_lines": 228,
+        "classes": 5,
+        "functions": 9,
+        "comment_lines": 50,
+        "signed": {
+          "SZX": 3,
+          "YFY": 43,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "564d90002d8582574a722124ff013c2a5401e09310766cf0ee9bcb5b86a90861"
+      }
+    ],
+    "comments": [
+      {
+        "path": "src/DjangoBlog/comments/__init__.py",
+        "relative": "comments/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/comments/admin.py",
+        "relative": "comments/admin.py",
+        "category": "production",
+        "physical_lines": 103,
+        "nonempty_lines": 80,
+        "classes": 2,
+        "functions": 7,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 1,
+          "YFY": 0,
+          "WZY": 3,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "386842f2202df51339b1a5c2683cfc1c04f6fad2e55b4fc170652ed6644d4633"
+      },
+      {
+        "path": "src/DjangoBlog/comments/apps.py",
+        "relative": "comments/apps.py",
+        "category": "production",
+        "physical_lines": 5,
+        "nonempty_lines": 3,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "38f91b8e3ac943ac67e7a197bd530036c3dd8b52a76891022f12979354bcaa5e"
+      },
+      {
+        "path": "src/DjangoBlog/comments/comments_tags.py",
+        "relative": "comments/comments_tags.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/comments/forms.py",
+        "relative": "comments/forms.py",
+        "category": "production",
+        "physical_lines": 21,
+        "nonempty_lines": 17,
+        "classes": 2,
+        "functions": 0,
+        "comment_lines": 10,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 7,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "399aa96a44d288a5c183ee038010c79858e8b0ea01f51e859fe6a42ce048c65d"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/0001_initial.py",
+        "relative": "comments/migrations/0001_initial.py",
+        "category": "migration",
+        "physical_lines": 38,
+        "nonempty_lines": 32,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "c246cc556b32ef783528776acdd882fc30edaf2740d6860dc2044986b42a9544"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/0002_alter_comment_is_enable.py",
+        "relative": "comments/migrations/0002_alter_comment_is_enable.py",
+        "category": "migration",
+        "physical_lines": 18,
+        "nonempty_lines": 13,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "d59dc4d1d49ae5149ef8b13f3aa428d0e1c6d5ac03a71f836c55e81114f25592"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/0003_alter_comment_options_remove_comment_created_time_and_more.py",
+        "relative": "comments/migrations/0003_alter_comment_options_remove_comment_created_time_and_more.py",
+        "category": "migration",
+        "physical_lines": 60,
+        "nonempty_lines": 55,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "aa4b753a230729dbd6b7d9de56b7c879671053e2004703b82f16d9260bae9c36"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/0004_comment_idx_art_parent_enable_comment_idx_enable_id.py",
+        "relative": "comments/migrations/0004_comment_idx_art_parent_enable_comment_idx_enable_id.py",
+        "category": "migration",
+        "physical_lines": 24,
+        "nonempty_lines": 19,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "f3c0f7abc7be4bbcc3b22775b092d6051991b386ac3bea718356a38d421befa5"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/0005_commentreaction.py",
+        "relative": "comments/migrations/0005_commentreaction.py",
+        "category": "migration",
+        "physical_lines": 32,
+        "nonempty_lines": 27,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "5ce7f2f47d4eb99f2e41dfabbbc8c9b7da0091293a52c5a7319c8e44f8df5b9c"
+      },
+      {
+        "path": "src/DjangoBlog/comments/migrations/__init__.py",
+        "relative": "comments/migrations/__init__.py",
+        "category": "migration",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/comments/models.py",
+        "relative": "comments/models.py",
+        "category": "production",
+        "physical_lines": 153,
+        "nonempty_lines": 150,
+        "classes": 4,
+        "functions": 3,
+        "comment_lines": 37,
+        "signed": {
+          "SZX": 7,
+          "YFY": 0,
+          "WZY": 17,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "1adead189f7f4b3aa3a81096a7ca64c60973d03e749bd5d286fab7ba7064c4ce"
+      },
+      {
+        "path": "src/DjangoBlog/comments/templatetags/__init__.py",
+        "relative": "comments/templatetags/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/comments/templatetags/comments_tags.py",
+        "relative": "comments/templatetags/comments_tags.py",
+        "category": "production",
+        "physical_lines": 41,
+        "nonempty_lines": 38,
+        "classes": 0,
+        "functions": 3,
+        "comment_lines": 15,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 14,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "5d5748135e8700f8e86aefa3bf4b8e9e6b158cab7e940abf21e0399239e5a914"
+      },
+      {
+        "path": "src/DjangoBlog/comments/test_comment_business_logic.py",
+        "relative": "comments/test_comment_business_logic.py",
+        "category": "test",
+        "physical_lines": 688,
+        "nonempty_lines": 572,
+        "classes": 6,
+        "functions": 29,
+        "comment_lines": 42,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6ad57c2288159855d3931eacb65f0298f9b414abf118f225483e3d1347f760f7"
+      },
+      {
+        "path": "src/DjangoBlog/comments/test_quality_r45.py",
+        "relative": "comments/test_quality_r45.py",
+        "category": "test",
+        "physical_lines": 136,
+        "nonempty_lines": 116,
+        "classes": 2,
+        "functions": 12,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "a43ab5978ab431e4e55401c274523bf93232e8743e3717e4548438de5a3a13a6"
+      },
+      {
+        "path": "src/DjangoBlog/comments/test_reaction_snapshot.py",
+        "relative": "comments/test_reaction_snapshot.py",
+        "category": "test",
+        "physical_lines": 73,
+        "nonempty_lines": 62,
+        "classes": 1,
+        "functions": 6,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 1,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "ee05b38fdae4d6acb2ebe1e2bb86fe72d971dfdda84c5cb89c90ce3fcf775bf0"
+      },
+      {
+        "path": "src/DjangoBlog/comments/test_views.py",
+        "relative": "comments/test_views.py",
+        "category": "test",
+        "physical_lines": 374,
+        "nonempty_lines": 325,
+        "classes": 4,
+        "functions": 23,
+        "comment_lines": 21,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "310a17daa7558ee56e077020f47fba1b2db084cf57fa0f3faea8e7232fb3357e"
+      },
+      {
+        "path": "src/DjangoBlog/comments/tests.py",
+        "relative": "comments/tests.py",
+        "category": "test",
+        "physical_lines": 108,
+        "nonempty_lines": 84,
+        "classes": 1,
+        "functions": 3,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e185ba0e8d308ec5bc7163c5cd0f63c0e6d2f531b31064718720aad6f4b4be0e"
+      },
+      {
+        "path": "src/DjangoBlog/comments/urls.py",
+        "relative": "comments/urls.py",
+        "category": "production",
+        "physical_lines": 24,
+        "nonempty_lines": 22,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 9,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 6,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "759122cc4d4e681ede2720dcb26f674812781eea89b7d401963f54ecb9118b4d"
+      },
+      {
+        "path": "src/DjangoBlog/comments/utils.py",
+        "relative": "comments/utils.py",
+        "category": "production",
+        "physical_lines": 44,
+        "nonempty_lines": 40,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "0b53eb080fc0d2d2599cb0f8e1606e81c363b64785c3fbba36b9004c1c4c03cc"
+      },
+      {
+        "path": "src/DjangoBlog/comments/views.py",
+        "relative": "comments/views.py",
+        "category": "production",
+        "physical_lines": 141,
+        "nonempty_lines": 132,
+        "classes": 2,
+        "functions": 5,
+        "comment_lines": 33,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 19,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "de19e216f82c75c9febd057c769ddfc3ab0e5ff73c0cb08387fb0796ed55bdea"
+      }
+    ],
+    "oauth": [
+      {
+        "path": "src/DjangoBlog/oauth/__init__.py",
+        "relative": "oauth/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/admin.py",
+        "relative": "oauth/admin.py",
+        "category": "production",
+        "physical_lines": 63,
+        "nonempty_lines": 52,
+        "classes": 2,
+        "functions": 4,
+        "comment_lines": 10,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 7,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "7b2f981e0c6dd667606684ae3ed0ff9c793c12bb864c7e3d8f80de7ec290f932"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/apps.py",
+        "relative": "oauth/apps.py",
+        "category": "production",
+        "physical_lines": 6,
+        "nonempty_lines": 4,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 1,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "949fea9e9069551263d408c400ca3a734b3f5e691726de630655a760476f8ac1"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/forms.py",
+        "relative": "oauth/forms.py",
+        "category": "production",
+        "physical_lines": 17,
+        "nonempty_lines": 14,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 5,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 3,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "ee642ab55967599887fce3ddc57b09f07d055bfd89d8e60651649c9eb3d88e70"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/migrations/0001_initial.py",
+        "relative": "oauth/migrations/0001_initial.py",
+        "category": "migration",
+        "physical_lines": 57,
+        "nonempty_lines": 51,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "fc95bafbd1f08f28621eda91593139a88e47eb3a1272bb1558a8b8bbe39680b5"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/migrations/0002_alter_oauthconfig_options_alter_oauthuser_options_and_more.py",
+        "relative": "oauth/migrations/0002_alter_oauthconfig_options_alter_oauthuser_options_and_more.py",
+        "category": "migration",
+        "physical_lines": 86,
+        "nonempty_lines": 81,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6e0470b509bc1ec7384baa14d7c665158e7c262aa8991df9f717c25b854a0a08"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/migrations/0003_alter_oauthuser_nickname.py",
+        "relative": "oauth/migrations/0003_alter_oauthuser_nickname.py",
+        "category": "migration",
+        "physical_lines": 18,
+        "nonempty_lines": 13,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "d1973078061ad99311f9c53fa601bfcff04eed1a7a01da7d6ff585104538c22f"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/migrations/__init__.py",
+        "relative": "oauth/migrations/__init__.py",
+        "category": "migration",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/models.py",
+        "relative": "oauth/models.py",
+        "category": "production",
+        "physical_lines": 77,
+        "nonempty_lines": 68,
+        "classes": 4,
+        "functions": 3,
+        "comment_lines": 11,
+        "signed": {
+          "SZX": 2,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 4,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "4abae356fdfe8bdb958f5a2c36b552b7e31b1cf0e52a91e67b7928bc5b892a78"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/oauthmanager.py",
+        "relative": "oauth/oauthmanager.py",
+        "category": "production",
+        "physical_lines": 568,
+        "nonempty_lines": 497,
+        "classes": 8,
+        "functions": 41,
+        "comment_lines": 45,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 22,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "24fc4066f8cfee2b72a11b256555161ef236fc4ec07dda5ffe88188bae414aaa"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/templatetags/__init__.py",
+        "relative": "oauth/templatetags/__init__.py",
+        "category": "production",
+        "physical_lines": 1,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/templatetags/oauth_tags.py",
+        "relative": "oauth/templatetags/oauth_tags.py",
+        "category": "production",
+        "physical_lines": 25,
+        "nonempty_lines": 20,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 2,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "c291de7c23f649760824bfdcae561623fcca11149f24a063e399655e7e17a17b"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/test_oauth_business_logic.py",
+        "relative": "oauth/test_oauth_business_logic.py",
+        "category": "test",
+        "physical_lines": 552,
+        "nonempty_lines": 455,
+        "classes": 8,
+        "functions": 32,
+        "comment_lines": 30,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "adad4da304f4f0cc2cbe4af9ce410898dd79ac86dbf2a12cd78fcbf1e40aaf04"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/tests.py",
+        "relative": "oauth/tests.py",
+        "category": "test",
+        "physical_lines": 299,
+        "nonempty_lines": 261,
+        "classes": 2,
+        "functions": 13,
+        "comment_lines": 9,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "4d5f22433d286c84de7200e6cc91a4f6a699e09e47c0b3653fe5515827cc5fd4"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/urls.py",
+        "relative": "oauth/urls.py",
+        "category": "production",
+        "physical_lines": 32,
+        "nonempty_lines": 30,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 7,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 6,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "54cf3ce98d5ac7d2edcef4a7572f14c1e920ac47ef3b5824fe8594cd5304800a"
+      },
+      {
+        "path": "src/DjangoBlog/oauth/views.py",
+        "relative": "oauth/views.py",
+        "category": "production",
+        "physical_lines": 315,
+        "nonempty_lines": 285,
+        "classes": 1,
+        "functions": 9,
+        "comment_lines": 45,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 18,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "2791782933f1930a9cd12e43fe6a060a39f12d27ac7af770dcb4ccf77c627131"
+      }
+    ],
+    "servermanager": [
+      {
+        "path": "src/DjangoBlog/servermanager/MemcacheStorage.py",
+        "relative": "servermanager/MemcacheStorage.py",
+        "category": "production",
+        "physical_lines": 32,
+        "nonempty_lines": 24,
+        "classes": 1,
+        "functions": 6,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "11d9109cecabd9fda6226431bb015abc913e620b6ea977a7882b77f0812a72cb"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/__init__.py",
+        "relative": "servermanager/__init__.py",
+        "category": "production",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/admin.py",
+        "relative": "servermanager/admin.py",
+        "category": "production",
+        "physical_lines": 19,
+        "nonempty_lines": 14,
+        "classes": 2,
+        "functions": 1,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "c96ca9e6b234e69cf007e6b44054a8732fb738ba3c328f293c867b74a2ba2d54"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/__init__.py",
+        "relative": "servermanager/api/__init__.py",
+        "category": "production",
+        "physical_lines": 1,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/blogapi.py",
+        "relative": "servermanager/api/blogapi.py",
+        "category": "production",
+        "physical_lines": 27,
+        "nonempty_lines": 20,
+        "classes": 1,
+        "functions": 5,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "9676c9fd95096c22b6245b00a5258559a8a4b4eac56e02e98eefa9e4529a8d6d"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/commonapi.py",
+        "relative": "servermanager/api/commonapi.py",
+        "category": "production",
+        "physical_lines": 64,
+        "nonempty_lines": 50,
+        "classes": 2,
+        "functions": 5,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "faefcf2570649b2c586c554fe1a467c8e7d0ca7448c5833a2b2b42b4ed04dfeb"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/apps.py",
+        "relative": "servermanager/apps.py",
+        "category": "production",
+        "physical_lines": 5,
+        "nonempty_lines": 3,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "507029a79f0272e1497bd0afa7be3b483bdc453c1d6bbaf42f2f9ea61d650c1b"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/migrations/0001_initial.py",
+        "relative": "servermanager/migrations/0001_initial.py",
+        "category": "migration",
+        "physical_lines": 45,
+        "nonempty_lines": 39,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "7e81d89a5e5ceb9f0a9b8d9be4f2c1c674fdff6877baf7c1a43551c6fd0f82d8"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/migrations/0002_alter_emailsendlog_options_and_more.py",
+        "relative": "servermanager/migrations/0002_alter_emailsendlog_options_and_more.py",
+        "category": "migration",
+        "physical_lines": 32,
+        "nonempty_lines": 27,
+        "classes": 1,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "2d61dcabdb066b03f1ed006e79e7985b36fe58ec0d753a4565af1a1bdb27e9de"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/migrations/__init__.py",
+        "relative": "servermanager/migrations/__init__.py",
+        "category": "migration",
+        "physical_lines": 0,
+        "nonempty_lines": 0,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/models.py",
+        "relative": "servermanager/models.py",
+        "category": "production",
+        "physical_lines": 33,
+        "nonempty_lines": 25,
+        "classes": 4,
+        "functions": 2,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "cb9a8ad4838f49db45a1986c2d20666f551ef1bd20bf856a84c3a2ef4d99d40d"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/robot.py",
+        "relative": "servermanager/robot.py",
+        "category": "production",
+        "physical_lines": 189,
+        "nonempty_lines": 159,
+        "classes": 2,
+        "functions": 14,
+        "comment_lines": 2,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 1,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "19407466952c407d5a7cb352ce1bce396a821bd62c7678d9c92e90842b808ab5"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/tests.py",
+        "relative": "servermanager/tests.py",
+        "category": "test",
+        "physical_lines": 79,
+        "nonempty_lines": 67,
+        "classes": 1,
+        "functions": 3,
+        "comment_lines": 3,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "47145c53aaf98fe0333dc50bf31a9252a6c602e1e44d54e52b76365fe34769f8"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/urls.py",
+        "relative": "servermanager/urls.py",
+        "category": "production",
+        "physical_lines": 12,
+        "nonempty_lines": 9,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 2,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 1,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "3a95c0f49c0abfa401e62eb60f5da1461206f1a3bc51fecae22f04d235c7f2d5"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/views.py",
+        "relative": "servermanager/views.py",
+        "category": "production",
+        "physical_lines": 1,
+        "nonempty_lines": 1,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 1,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "81098e390420b7948c782fe13b385a70ab913c32db7157cda9444b84fd0cd54e"
+      }
+    ],
+    "djangoblog": [
+      {
+        "path": "src/DjangoBlog/djangoblog/__init__.py",
+        "relative": "djangoblog/__init__.py",
+        "category": "production",
+        "physical_lines": 1,
+        "nonempty_lines": 1,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "dc2bb60d7b62ff61eb1828a75d33f23bd9691f9cbd74de7e3515dd1ba7268514"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/admin_site.py",
+        "relative": "djangoblog/admin_site.py",
+        "category": "production",
+        "physical_lines": 76,
+        "nonempty_lines": 60,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 16,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "363691817a86c29236361874421e38e56b143fc3a26660082672741924984f13"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/apps.py",
+        "relative": "djangoblog/apps.py",
+        "category": "production",
+        "physical_lines": 16,
+        "nonempty_lines": 14,
+        "classes": 1,
+        "functions": 1,
+        "comment_lines": 6,
+        "signed": {
+          "SZX": 1,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "1e5c631e22e643154150249a6a82a404e219f4f0a71614556693a15134731d38"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/base_views.py",
+        "relative": "djangoblog/base_views.py",
+        "category": "production",
+        "physical_lines": 132,
+        "nonempty_lines": 102,
+        "classes": 5,
+        "functions": 5,
+        "comment_lines": 11,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "9f3f249c47c62cc36d2886a1c6a69a3417dd7eced6e19e51829f1bdfe3f81911"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/blog_signals.py",
+        "relative": "djangoblog/blog_signals.py",
+        "category": "production",
+        "physical_lines": 196,
+        "nonempty_lines": 163,
+        "classes": 0,
+        "functions": 9,
+        "comment_lines": 21,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 3
+        },
+        "sha256": "932f368ebf70c7f4a7ca49d67578642af30d00e0dced523ad176cba0c15ae7aa"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/constants.py",
+        "relative": "djangoblog/constants.py",
+        "category": "production",
+        "physical_lines": 98,
+        "nonempty_lines": 80,
+        "classes": 4,
+        "functions": 0,
+        "comment_lines": 21,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "acc64776478e8bc6bcab68c522b11cea200b2fa6c8182e270cb443b0a35c2685"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/elasticsearch_backend.py",
+        "relative": "djangoblog/elasticsearch_backend.py",
+        "category": "production",
+        "physical_lines": 215,
+        "nonempty_lines": 169,
+        "classes": 4,
+        "functions": 17,
+        "comment_lines": 20,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "06c9a4cbeb18465a4c7c7e56c785140f185d5c329cefd96478f35e844f336089"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/error_views.py",
+        "relative": "djangoblog/error_views.py",
+        "category": "production",
+        "physical_lines": 145,
+        "nonempty_lines": 115,
+        "classes": 0,
+        "functions": 5,
+        "comment_lines": 8,
+        "signed": {
+          "SZX": 1,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "c7e9203c8c0f5f49a0e46525f04e83357ade10dd8ef208573be27a161e40491a"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/feeds.py",
+        "relative": "djangoblog/feeds.py",
+        "category": "production",
+        "physical_lines": 46,
+        "nonempty_lines": 34,
+        "classes": 1,
+        "functions": 8,
+        "comment_lines": 6,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "29b047fa67eb1fc441569065dc1b33bf070777fffe99cf9cad00a01a2b7b0b9f"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/logentryadmin.py",
+        "relative": "djangoblog/logentryadmin.py",
+        "category": "production",
+        "physical_lines": 97,
+        "nonempty_lines": 83,
+        "classes": 1,
+        "functions": 7,
+        "comment_lines": 8,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "2b778e6880d25a125810e558a7c96a0370f69d75ab67b718751463e0391f4d84"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/mixins.py",
+        "relative": "djangoblog/mixins.py",
+        "category": "production",
+        "physical_lines": 303,
+        "nonempty_lines": 239,
+        "classes": 7,
+        "functions": 8,
+        "comment_lines": 29,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 5
+        },
+        "sha256": "303915bbd899faff6db9ac431e4e87b197e8d9fe6dce4e98edeee010f5ab00e0"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/plugin_manage/base_plugin.py",
+        "relative": "djangoblog/plugin_manage/base_plugin.py",
+        "category": "production",
+        "physical_lines": 213,
+        "nonempty_lines": 171,
+        "classes": 1,
+        "functions": 22,
+        "comment_lines": 19,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "9941f155f55bb47867d78e94354d2ae14b9701c346adc2d22a26384d0cfa856f"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/plugin_manage/hook_constants.py",
+        "relative": "djangoblog/plugin_manage/hook_constants.py",
+        "category": "production",
+        "physical_lines": 25,
+        "nonempty_lines": 22,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 6,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "7cf169ab41414c6af8297f0d35c2d5fd70d9ceab3efe0d0d3af527c34aee9223"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/plugin_manage/hooks.py",
+        "relative": "djangoblog/plugin_manage/hooks.py",
+        "category": "production",
+        "physical_lines": 57,
+        "nonempty_lines": 50,
+        "classes": 0,
+        "functions": 3,
+        "comment_lines": 8,
+        "signed": {
+          "SZX": 1,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "67be1604a32cecce762553d6a3c5ee89b9ed92a2e9f41d3250fe0c920b3ddeb2"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/plugin_manage/loader.py",
+        "relative": "djangoblog/plugin_manage/loader.py",
+        "category": "production",
+        "physical_lines": 72,
+        "nonempty_lines": 60,
+        "classes": 0,
+        "functions": 6,
+        "comment_lines": 9,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "0ff6b33c0a4fe8c4b4475902a8954a68b3d2a2a9b0c771b170b6243fbabd32c3"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/settings.py",
+        "relative": "djangoblog/settings.py",
+        "category": "production",
+        "physical_lines": 483,
+        "nonempty_lines": 412,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 125,
+        "signed": {
+          "SZX": 6,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 3
+        },
+        "sha256": "bebc5be94ab10d1d1dcd21a3999ded3d8c5336eae2720ad0c162094b5a45c989"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/sitemap.py",
+        "relative": "djangoblog/sitemap.py",
+        "category": "production",
+        "physical_lines": 63,
+        "nonempty_lines": 42,
+        "classes": 5,
+        "functions": 10,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "3d34b5cbc15641e5e22da5b4b57c610a73793b5eda94b00b9e12dc3335f95a1a"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/spider_notify.py",
+        "relative": "djangoblog/spider_notify.py",
+        "category": "production",
+        "physical_lines": 28,
+        "nonempty_lines": 23,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 7,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "de57f16117b0d0cb78dc69c6507529c07f805c2e1c5face8c18a5df350c3299f"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/test_base.py",
+        "relative": "djangoblog/test_base.py",
+        "category": "test",
+        "physical_lines": 284,
+        "nonempty_lines": 241,
+        "classes": 5,
+        "functions": 29,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "4d65906aafd03e1d19b4c2f71ffef7464f1aad3291e4a2be44374e0964b766df"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/test_email_integration.py",
+        "relative": "djangoblog/test_email_integration.py",
+        "category": "test",
+        "physical_lines": 625,
+        "nonempty_lines": 528,
+        "classes": 5,
+        "functions": 20,
+        "comment_lines": 90,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "7bfccde32f0a06c297c608da7dc9cdb3bc5515cd01129689dcf96c1d5ca41e86"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/test_email_integration_complete.py",
+        "relative": "djangoblog/test_email_integration_complete.py",
+        "category": "test",
+        "physical_lines": 605,
+        "nonempty_lines": 495,
+        "classes": 4,
+        "functions": 11,
+        "comment_lines": 87,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "02de79f5430de692462118eb3e46c9814782ca37e7a98830a1d7d42e88e48cf8"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/test_plugins.py",
+        "relative": "djangoblog/test_plugins.py",
+        "category": "test",
+        "physical_lines": 249,
+        "nonempty_lines": 191,
+        "classes": 9,
+        "functions": 30,
+        "comment_lines": 17,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6115bc51e97fcccca056823f11a551cebcf2d183a6f42693f16efef8140b4adc"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/test_week78_gcy_quality.py",
+        "relative": "djangoblog/test_week78_gcy_quality.py",
+        "category": "test",
+        "physical_lines": 180,
+        "nonempty_lines": 139,
+        "classes": 6,
+        "functions": 28,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "6b8a90abdf06ca51c0f8335ebaf8037f4ca769b69318e83fffce04ae3921f111"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/tests.py",
+        "relative": "djangoblog/tests.py",
+        "category": "test",
+        "physical_lines": 32,
+        "nonempty_lines": 23,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "b061a79b70d89fb77f8eb26a4b8e50c9acb435819ddcd7695b59850f39bd02f3"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/urls.py",
+        "relative": "djangoblog/urls.py",
+        "category": "production",
+        "physical_lines": 94,
+        "nonempty_lines": 85,
+        "classes": 0,
+        "functions": 1,
+        "comment_lines": 10,
+        "signed": {
+          "SZX": 3,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "c763ce5caee896a78531c8cde4e648045c15f80da7de0d4c22dacfb1f1d083f4"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/utils.py",
+        "relative": "djangoblog/utils.py",
+        "category": "production",
+        "physical_lines": 313,
+        "nonempty_lines": 263,
+        "classes": 1,
+        "functions": 20,
+        "comment_lines": 41,
+        "signed": {
+          "SZX": 5,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 4
+        },
+        "sha256": "25df8f5086037cc0ac258ea84eff16f8b81996cef4f8ebb690b33c2622b71027"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/whoosh_cn_backend.py",
+        "relative": "djangoblog/whoosh_cn_backend.py",
+        "category": "production",
+        "physical_lines": 1092,
+        "nonempty_lines": 898,
+        "classes": 4,
+        "functions": 18,
+        "comment_lines": 91,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 2
+        },
+        "sha256": "9fcb9c932c0d21e3caeabd797cec85eb2cfad366af95da3fb1b373175c620255"
+      },
+      {
+        "path": "src/DjangoBlog/djangoblog/wsgi.py",
+        "relative": "djangoblog/wsgi.py",
+        "category": "production",
+        "physical_lines": 20,
+        "nonempty_lines": 14,
+        "classes": 0,
+        "functions": 0,
+        "comment_lines": 4,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 1
+        },
+        "sha256": "3b136059f9f4d8cabb35a284857addf74d995108297dd13c1c4b86f13834b831"
+      }
+    ]
+  },
+  "source_parse_warnings": [
+    "src/DjangoBlog/djangoblog/whoosh_cn_backend.py: invalid escape sequence '\\d'"
+  ],
+  "outputs": {
+    "coding": {
+      "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
+      "sha256": "f51386dea9a5874e456e5e6daec496a023cd4463cc992c638289b22d5b83a26c"
+    },
+    "quality": {
+      "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
+      "sha256": "298a6307a420c8df57e49b51e56123a171b4c6d8dcf69d4947a573334481252c"
+    }
+  },
+  "rendering": {
+    "engine": "Microsoft Word / XPS",
+    "pdf_generated": false,
+    "page_counts": [
+      4,
+      11
+    ]
+  }
+}

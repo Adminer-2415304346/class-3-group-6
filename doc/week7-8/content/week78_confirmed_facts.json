@@ -1,0 +1,40 @@
+{
+  "compiled_date": "2026-10-31",
+  "group": "24级软件工程3班第6组",
+  "project": "DjangoBlog",
+  "meeting": {
+    "date": "2026-10-23",
+    "start": "19:00",
+    "end": "19:30",
+    "mode": "线下",
+    "place": "宿舍",
+    "attendance": "全员出席（6人）",
+    "absent": "无",
+    "chair": "石兆翔",
+    "recorder": "石兆翔",
+    "confirmation": "组长在本轮对话确认会议事实，并确认结论沿用已沟通的任务安排",
+    "conclusions": [
+      "六人分别主责blog、accounts、comments、oauth、servermanager、djangoblog，沿用既有分工，不重复占用同一App。",
+      "第七周侧重源码阅读、三层署名注释、人工分析与工具基线；第八周侧重适当改进、回归验证、同配置复扫及互查。",
+      "互查配对为SZX与GCY、YFY与GZX、WZY与SY；成员本人确认复核结论，不能代填。",
+      "采用统一静态工具、隔离验证和证据记录口径；结合源码核实问题，不把扫描告警直接等同于业务缺陷。",
+      "个人分支提交并集成到develop；所有成员完成后由组长负责develop到main的最终合并。",
+      "个人提交源码、四份分析素材及原始证据；组长汇总编码规范与质量分析Word，下一步优化计划明确优先级、责任人和验收条件。"
+    ]
+  },
+  "plan": {
+    "start_date": null,
+    "end_date": null,
+    "deadline": null,
+    "date_status": "待组长确认；不推算日历日期"
+  },
+  "review_status": "统一验收清单由组长授权整理；成员本人复核记录与签署分别确认",
+  "members": [
+    {"name": "石兆翔", "id": "2415304346", "tag": "SZX", "app": "blog", "branch": "szx_branch", "peer": "GCY", "status": "已集成，组长承担汇总与集成补修"},
+    {"name": "喻飞扬", "id": "2415304347", "tag": "YFY", "app": "accounts", "branch": "yfy_branch", "peer": "GZX", "status": "已集成；统一口径baseline及互查闭环待补"},
+    {"name": "王子扬", "id": "2415304348", "tag": "WZY", "app": "comments", "branch": "wzy_branch", "peer": "SY", "status": "已集成；SZX补修后通过，SY本人复核待补"},
+    {"name": "顾梓鑫", "id": "2415304345", "tag": "GZX", "app": "oauth", "branch": "gzx_branch", "peer": "YFY", "status": "已集成；双方已有单侧核查，回填确认待统一"},
+    {"name": "宋洋", "id": "2415304330", "tag": "SY", "app": "servermanager", "branch": "sy", "peer": "WZY", "status": "远端未见本轮个人成果，待提交"},
+    {"name": "郭曹钰", "id": "2415304331", "tag": "GCY", "app": "djangoblog", "branch": "gcy_branch", "peer": "SZX", "status": "已集成；SZX补修后通过，对SZX反向互查待确认"}
+  ]
+}
