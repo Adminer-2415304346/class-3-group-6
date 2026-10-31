@@ -1,0 +1,142 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 45,
+      "row": 9
+    },
+    "filename": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-wzy-review-20261031-_vv0qmlc\\snapshot\\src\\DjangoBlog\\comments\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib import admin\nfrom django.db import transaction\nfrom django.db.models import Q\nfrom django.urls import reverse\nfrom django.utils.html import format_html\nfrom django.utils.translation import gettext_lazy as _\n\nfrom blog.comment_cache import invalidate_comment_caches\n\nfrom .models import Comment, CommentReaction\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 12
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 8
+    },
+    "filename": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-wzy-review-20261031-_vv0qmlc\\snapshot\\src\\DjangoBlog\\comments\\models.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.conf import settings\nfrom django.db import models\nfrom django.utils.timezone import now\nfrom django.utils.translation import gettext_lazy as _\n\nfrom blog.models import Article\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 4
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 4
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 4,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 58,
+      "row": 4
+    },
+    "filename": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-wzy-review-20261031-_vv0qmlc\\snapshot\\src\\DjangoBlog\\comments\\utils.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\n\nfrom django.utils.translation import gettext_lazy as _\n\nfrom djangoblog.utils import get_current_site, send_email\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 6
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 45,
+      "row": 13
+    },
+    "filename": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-wzy-review-20261031-_vv0qmlc\\snapshot\\src\\DjangoBlog\\comments\\views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.http import HttpResponseRedirect, JsonResponse\nfrom django.shortcuts import get_object_or_404\nfrom django.views import View\n\nfrom accounts.models import BlogUser\nfrom blog.models import Article\nfrom djangoblog.base_views import AuthenticatedFormView\n\nfrom .forms import CommentForm\nfrom .models import Comment, CommentReaction\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 5
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 5
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 5,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]
