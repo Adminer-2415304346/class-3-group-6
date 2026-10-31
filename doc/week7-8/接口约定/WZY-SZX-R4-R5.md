@@ -138,7 +138,14 @@ with transaction.atomic(using=using):
 | 确认方 | 当前状态 | 待完成 |
 | --- | --- | --- |
 | SZX侧 | 已确认消费结构并提供失效入口，14条新增回归及114条相关回归通过 | 归档整页缓存策略与共享信号接入仍需联调 |
-| WZY侧 | 未代为确认，R4/R5业务改造仍为待办 | 同步develop，确认结构/预算、接入入口、补性能与集成证据，在本文件追加实际意见和提交号 |
+| WZY侧 | 已确认结构/预算并接入入口，提交 `c47b944` | 归档整页缓存与共享信号接入仍需与 SZX/GCY 联调，R5 最终验收待完成 |
 | GCY侧 | 未代为确认 | 确认信号/删除/旧新归属处理和整页缓存方案，实施后追加证据 |
+
+### WZY 侧确认（2026-10-31，提交 `c47b944`）
+
+- R4：保持 `get_reactions_summary(user=None)` 入口与返回结构，改为「1 次聚合计数 + 1 次流式读全部 reaction」，匿名/登录均恒 2 次查询；`R4_QUERY_COUNTS={"anonymous":2,"authenticated":2}`（优化前登录 17 / 匿名 9）。has_reacted 对名单外查看者仍正确；users 按 reaction 主键升序取前 10，暴露昵称/用户名，不含邮箱与用户 ID；内存边界见改进计划 P4（高参与量只留存 O(表情数×10+1)）。
+- R5：`comments/admin.py` 的启/禁用动作、单条修改（`save_model` 覆盖旧/新文章 ID）、单条删除（`delete_model` 含直接子回复）、批量删除（`delete_queryset` 先捕获 ID）均已接入 `invalidate_comment_caches`，`transaction.on_commit` 后失效，不逐条 save()。
+- 回归：新增 `comments/test_quality_r45.py`（R4 断言 4 + R5 失效 4）；`blog.test_comment_interfaces` 14 条保持通过；完整 comments+SZX 共 61 tests OK、`ISOLATED_TEST_FAILURES=0`。
+- 未完成（非 WZY 侧）：GCY 共享信号收敛（普通禁用/删除、post_delete、改归属旧新 ID）与 SZX/GCY 归档整页缓存方案未接入，故 R5 最终验收仍为待完成。
 
 成员按个人分支提交并合入develop。main的最终合并由组长在全组完成后执行。
