@@ -34,12 +34,23 @@ def get_sha256(value):
 
 
 def cache_decorator(expiration=3 * 60):
+    # GCY（类/函数层）：通用函数缓存装饰器，调用方覆盖 get_current_site、
+    # get_blog_setting 等高频只读函数。优先使用视图/对象的 get_cache_key()
+    # 作为缓存键，取不到时退化为以 (func, args, kwargs) 的 repr 做 sha256，
+    # 保证不同参数产生不同键。返回 None 的结果用哨兵字符串
+    # '__default_cache_value__' 占位，使"函数确实返回了空值"与"缓存未
+    # 命中"可区分，避免空结果导致的缓存穿透；缓存 TTL 由 expiration 控制。
+    # 限制：repr(args) 中若含不可哈希对象会构造失败，需调用方保证参数
+    # 可 repr。
     def wrapper(func):
         def news(*args, **kwargs):
             try:
                 view = args[0]
                 key = view.get_cache_key()
-            except:
+            # GCY（改进说明）：原 bare except 改为仅捕获视图无
+            # get_cache_key 时的 AttributeError/TypeError，避免吞掉
+            # 缓存实现自身的真实异常（E722 告警修复）。
+            except (AttributeError, TypeError):
                 key = None
             if not key:
                 unique_str = repr((func, args, kwargs))
@@ -148,6 +159,11 @@ def parse_dict_to_url(dict):
 
 
 def get_blog_setting():
+    # GCY（关键逻辑）：博客全局设置读取。首次调用且表为空时先写入一份
+    # 默认设置再缓存，避免前端反复访问未初始化表；之后把单例设置对象
+    # 整体缓存（无 TTL，依赖 blog_signals 在设置保存时清理
+    # 'seo_processor' 等键）。注意这里缓存的是模型实例而非 JSON，Redis
+    # 后端下可 pickle；若字段变更需同步清理缓存键，否则读到旧值。
     value = cache.get('get_blog_setting')
     if value:
         return value
@@ -276,6 +292,13 @@ def sanitize_html(html):
     安全的HTML清理函数
     使用bleach库进行白名单过滤，防止XSS攻击
     """
+    # GCY（关键逻辑）：输出侧 XSS 防护。策略是"白名单放行"而非黑名单：
+    # tags/attributes/protocols 三张白名单（见上方 ALLOWED_* 常量）只允许
+    # markdown 渲染常见的标签与属性，class 属性经 class_filter 二次过滤
+    # 到代码高亮专用值；strip=True 丢弃非法标签、strip_comments 去掉注释。
+    # 末尾正则移除空 style 属性属兜底清理。适用条件：所有将用户 markdown
+    # 转 HTML 后回显的路径；限制：白名单是静态列表，新增富文本能力时
+    # 需同步评估放行面。
     cleaned = bleach.clean(
         html, 
         tags=ALLOWED_TAGS, 

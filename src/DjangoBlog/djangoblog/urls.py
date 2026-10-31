@@ -40,7 +40,10 @@ sitemaps = {
 
 handler404 = 'blog.views.page_not_found_view'
 handler500 = 'blog.views.server_error_view'
-handle403 = 'blog.views.permission_denied_view'
+# GCY（改进说明）：原拼写 handle403 是笔误，Django 不识别该属性，
+# 403 处理函数实际未挂载；改为 Django 约定的 handler403 后，
+# permission_denied_view 才真正生效。
+handler403 = 'blog.views.permission_denied_view'
 
 
 def health_check(request):
@@ -53,6 +56,10 @@ def health_check(request):
         'timestamp': time.time()
     })
 
+# GCY（模块层）：应用级 URL 配置。i18n_patterns 为绝大多数路由加上
+# 语言前缀（prefix_default_language=False 表示默认语言不带前缀），所以
+# 各 app 的 urls 在非默认语言下都挂在 /<lang>/ 之下；sitemap/feed/search
+# 是共用层直接暴露的检索与内容出口。health_check 不经语言前缀，供探活。
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('health/', health_check, name='health_check'),
