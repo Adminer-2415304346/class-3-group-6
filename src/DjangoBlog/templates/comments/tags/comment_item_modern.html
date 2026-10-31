@@ -71,7 +71,7 @@
 
                 <!-- Emoji Reactions -->
                 <div x-data="reactionPicker({{ comment_item.pk }})"
-                     data-reactions='{{ comment_item|get_reactions_for_user:user|to_json }}'
+                     data-reactions='{{ comment_item|get_reactions_for_user:user|to_json|force_escape }}'
                      class="flex items-center">
 
                     <!-- Reactions 显示区 -->

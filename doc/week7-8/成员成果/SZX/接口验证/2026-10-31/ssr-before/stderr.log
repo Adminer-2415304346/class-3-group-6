@@ -1,0 +1,22 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names) ... FAIL
+
+======================================================================
+FAIL: test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_comment_interfaces.py", line 120, in test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names
+    self.assertEqual(set(elements[0]), {'x-data', 'data-reactions', 'class'})
+AssertionError: Items in the first set but not the second:
+'src'
+'<img'
+'reilly'
+'onerror'
+Items in the second set but not the first:
+'class'
+
+----------------------------------------------------------------------
+Ran 1 test in 1.560s
+
+FAILED (failures=1)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
