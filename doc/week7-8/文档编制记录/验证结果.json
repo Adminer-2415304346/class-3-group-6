@@ -1,0 +1,156 @@
+{
+  "content_and_input_checks": "passed",
+  "docx_zip_integrity": "passed",
+  "template_placeholders": "none",
+  "pdf_generated": false,
+  "documents": [
+    {
+      "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
+      "sha256": "f51386dea9a5874e456e5e6daec496a023cd4463cc992c638289b22d5b83a26c",
+      "pages": 4,
+      "tables": 2,
+      "page_details": [
+        {
+          "page": 1,
+          "characters": 934,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-1-page-01.png"
+        },
+        {
+          "page": 2,
+          "characters": 1184,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-1-page-02.png"
+        },
+        {
+          "page": 3,
+          "characters": 1258,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-1-page-03.png"
+        },
+        {
+          "page": 4,
+          "characters": 1181,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-1-page-04.png"
+        }
+      ],
+      "contact_sheets": [
+        "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-1-sheet-1.png"
+      ],
+      "text_outside_page": []
+    },
+    {
+      "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
+      "sha256": "298a6307a420c8df57e49b51e56123a171b4c6d8dcf69d4947a573334481252c",
+      "pages": 11,
+      "tables": 21,
+      "page_details": [
+        {
+          "page": 1,
+          "characters": 961,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-01.png"
+        },
+        {
+          "page": 2,
+          "characters": 975,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-02.png"
+        },
+        {
+          "page": 3,
+          "characters": 1330,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-03.png"
+        },
+        {
+          "page": 4,
+          "characters": 1307,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-04.png"
+        },
+        {
+          "page": 5,
+          "characters": 1604,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-05.png"
+        },
+        {
+          "page": 6,
+          "characters": 1246,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-06.png"
+        },
+        {
+          "page": 7,
+          "characters": 650,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-07.png"
+        },
+        {
+          "page": 8,
+          "characters": 1315,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-08.png"
+        },
+        {
+          "page": 9,
+          "characters": 1266,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-09.png"
+        },
+        {
+          "page": 10,
+          "characters": 854,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-10.png"
+        },
+        {
+          "page": 11,
+          "characters": 1022,
+          "image": "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-page-11.png"
+        }
+      ],
+      "contact_sheets": [
+        "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-sheet-1.png",
+        "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-sheet-2.png",
+        "C:\\Users\\LENOVO\\AppData\\Local\\Temp\\week78-word-preview-daaef9b4ea8546d19ab424cfbed4a6ae\\pages\\document-2-sheet-3.png"
+      ],
+      "text_outside_page": []
+    }
+  ],
+  "visual_review": "passed",
+  "schema_validation": "passed",
+  "visual_review_details": {
+    "scope": "All 15 pages inspected on 4 contact sheets; coding page 4 and quality page 3 additionally inspected at full size.",
+    "checks": [
+      "Page numbers updated by Microsoft Word",
+      "Repeated table headers",
+      "No lone header or lone final row",
+      "No clipped text or page overflow",
+      "Code samples and marked pending items readable"
+    ],
+    "text_outside_page": 0
+  },
+  "schema_validation_details": {
+    "validator": "DOCX skill scripts/office/validate.py",
+    "phase": "After Microsoft Word saved updated page fields",
+    "result": "All validations PASSED for both DOCX files; validator exit code 0.",
+    "import_resolution": "Canonical Dublin Core and W3C schemas cached unchanged through HTTPS and resolved with a temporary XML catalog after direct HTTP import failures; no schema or document checks skipped.",
+    "official_xsd_sources": [
+      {
+        "url": "https://www.dublincore.org/schemas/xmls/qdc/2003/04/02/dc.xsd",
+        "sha256": "bc1d454db1bb20dfb1867a3fe0cf007775fc4afa33a5df425c12d854f049f1f6"
+      },
+      {
+        "url": "https://www.dublincore.org/schemas/xmls/qdc/2003/04/02/dcterms.xsd",
+        "sha256": "6328c8b574c166f8ebc28d07231e6ee47121e9791689b70c3afa665f22099fed"
+      },
+      {
+        "url": "https://www.dublincore.org/schemas/xmls/qdc/2003/04/02/dcmitype.xsd",
+        "sha256": "4980845d0bedcf45e707fa64eb47492ae4f95ac4ae42f5c3c68b58c0bc9e8e49"
+      },
+      {
+        "url": "https://www.w3.org/2001/03/xml.xsd",
+        "sha256": "0ed94db44402526e7a683424d0bd4b65e5bc50e65d9b9a762b11b30bae06d0c8"
+      }
+    ]
+  },
+  "new_tool_checks": {
+    "ruff_rules": "E9,F",
+    "files": [
+      "tools/build_week78_documents.py",
+      "tools/verify_week78_documents.py"
+    ],
+    "result": "passed"
+  },
+  "original_templates": "Original files unchanged; portable copies match original SHA-256.",
+  "business_code": "No business code changed in this document update. Existing 357-test evidence was bound by source hashes; tests were not rerun for formatting changes."
+}

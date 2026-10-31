@@ -1,0 +1,12 @@
+2026-10-31 | DOCX schema validation after native Word field update
+Canonical XSD imports resolved with a temporary local XML catalog.
+
+doc/week7-8/AI Agent工程实践-Python语言编码规范.docx
+SHA256=f51386dea9a5874e456e5e6daec496a023cd4463cc992c638289b22d5b83a26c
+Paragraphs: 0 → 110 (+110)
+All validations PASSED!
+
+doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx
+SHA256=298a6307a420c8df57e49b51e56123a171b4c6d8dcf69d4947a573334481252c
+Paragraphs: 0 → 729 (+729)
+All validations PASSED!
