@@ -271,3 +271,104 @@ class CommentSecurityTest(TransactionTestCase, ViewTestMixin):
 
         # 验证表仍然存在
         self.assertTrue(Comment.objects.exists())
+
+
+class CommentReplyValidationTest(TransactionTestCase, ViewTestMixin):
+    """评论回复与提交的视图层校验回归（R1/R2/R3）"""
+
+    def setUp(self):
+        from accounts.models import BlogUser
+        from blog.models import Article, BlogSettings, Category
+        from django.test import Client
+        from django.utils import timezone
+
+        self.client = Client()
+        self.user = BlogUser.objects.create_user(
+            username='testuser',
+            email='test@test.com',
+            password='testpass123'
+        )
+        self.category = Category.objects.create(
+            name='测试分类',
+            creation_time=timezone.now(),
+            last_modify_time=timezone.now()
+        )
+        self.article = Article.objects.create(
+            title='测试文章',
+            body='测试内容',
+            author=self.user,
+            category=self.category,
+            type='a',
+            status='p',
+            comment_status='o'
+        )
+        # 第二篇文章，用于验证跨文章回复被拒绝
+        self.other_article = Article.objects.create(
+            title='另一篇文章',
+            body='另一篇内容',
+            author=self.user,
+            category=self.category,
+            type='a',
+            status='p',
+            comment_status='o'
+        )
+        self.blog_settings, _ = BlogSettings.objects.get_or_create(
+            id=1,
+            defaults={'comment_need_review': False}
+        )
+
+    def login_user(self):
+        return self.client.login(username='testuser', password='testpass123')
+
+    def test_cross_article_reply_rejected(self):
+        """R1：跨文章回复应被拒绝，不得在目标文章下创建回复"""
+        self.login_user()
+        parent = Comment.objects.create(
+            body='属于文章A的父评论',
+            author=self.user,
+            article=self.article,
+            is_enable=True
+        )
+        url = reverse('comments:postcomment',
+                      kwargs={'article_id': self.other_article.id})
+        response = self.client.post(url, {
+            'body': '跨文章回复',
+            'parent_comment_id': parent.id,
+        })
+        # 应为表单错误回显（200），而非 302 成功或 500
+        self.assertEqual(response.status_code, 200)
+        # 目标文章下不应新增评论
+        self.assertEqual(
+            Comment.objects.filter(article=self.other_article).count(), 0)
+
+    def test_invalid_parent_comment_id_rejected(self):
+        """R2：无效父评论 ID 应返回表单错误，而非 500"""
+        self.login_user()
+        url = reverse('comments:postcomment',
+                      kwargs={'article_id': self.article.id})
+        response = self.client.post(url, {
+            'body': '回复不存在的父评论',
+            'parent_comment_id': 999999,
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            Comment.objects.filter(article=self.article).count(), 0)
+
+    def test_closed_article_returns_form_error(self):
+        """R3：关闭评论的文章提交应回显表单错误，而非 500"""
+        from blog.models import Article
+        self.login_user()
+        closed = Article.objects.create(
+            title='关闭评论的文章',
+            body='内容',
+            author=self.user,
+            category=self.category,
+            type='a',
+            status='p',
+            comment_status='c'
+        )
+        url = reverse('comments:postcomment',
+                      kwargs={'article_id': closed.id})
+        response = self.client.post(url, {'body': '对关闭文章评论'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Comment.objects.filter(article=closed).count(), 0)

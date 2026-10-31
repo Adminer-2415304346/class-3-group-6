@@ -75,4 +75,5 @@ class CommentReactionAdmin(admin.ModelAdmin):
     link_to_comment.short_description = _('Comment')
     link_to_user.short_description = _('User')
 
-admin.site.register(Comment, CommentReaction)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(CommentReaction, CommentReactionAdmin)
