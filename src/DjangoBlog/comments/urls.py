@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 # 模块：comments评论模块 - urls.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # 导入Django路由path工具
 from django.urls import path
+
 # 导入当前app下的视图文件
 from . import views
 

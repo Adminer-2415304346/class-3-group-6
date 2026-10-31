@@ -1,34 +1,30 @@
-# -*- coding: utf-8 -*-
 # 模块：comments评论模块 - views.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # Create your views here.
-# 导入Django内置异常、请求响应、查询工具与基础视图类
-from django.core.exceptions import ValidationError
+from accounts.models import BlogUser
+from blog.models import Article
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-# 导入用户、文章模型
-from accounts.models import BlogUser
-from blog.models import Article
 from djangoblog.base_views import AuthenticatedFormView
-# 导入本地评论表单与模型
+
 from .forms import CommentForm
 from .models import Comment, CommentReaction
+
 
 # WZY: 评论提交视图，继承AuthenticatedFormView，自带登录校验，未登录用户无法提交评论
 class CommentPostView(AuthenticatedFormView):
     """
     评论提交视图
-
     使用 AuthenticatedFormView 基类，自动提供：
     - 登录验证（未登录用户会被重定向）
     - CSRF 保护
     """
     # WZY: 指定表单类CommentForm，用于前端提交评论内容的表单校验
-    form_class = CommentForm # 指定使用评论表单类做数据校验
+    form_class = CommentForm  # 指定使用评论表单类做数据校验
     # WZY: 评论提交失败后，渲染的文章详情页面模板
-    template_name = 'blog/article_detail.html' # 渲染页面模板
+    template_name = 'blog/article_detail.html'  # 渲染页面模板
 
     # WZY: GET请求处理，访问提交评论的路由，直接重定向到文章页面评论区锚点
     def get(self, request, *args, **kwargs):
@@ -53,11 +49,13 @@ class CommentPostView(AuthenticatedFormView):
         author = BlogUser.objects.get(pk=user.pk)
         article_id = self.kwargs['article_id']
         article = get_object_or_404(Article, pk=article_id)
-        # WZY: 当前条件在 comment_status 或 status 为 'c' 时拒绝提交评论
-        # SZX：Article.status 目前仅定义 'd'/'p'；这里不把 'c' 解释成已实现的禁用状态。
-        if article.comment_status == 'c' or article.status == 'c':
-            raise ValidationError("该文章评论已关闭.")
-        comment = form.save(False) # WZY: save(False)仅构建模型对象，暂不写入数据库，后续手动补充关联字段
+        # WZY: 文章评论关闭时，把错误挂到表单并回显页面，而不是抛 500
+        # SZX：Article.status 目前仅定义 'd'/'p'；这里只检查真实存在的 comment_status。
+        if article.comment_status == 'c':
+            form.add_error(None, '该文章评论已关闭.')
+            return self.form_invalid(form)
+        # WZY: save(False)仅构建模型对象，暂不写入数据库，后续手动补充关联字段
+        comment = form.save(False)
         # WZY: 将评论和当前文章建立外键关联，确定这条评论归属哪一篇文章
         comment.article = article
         from djangoblog.utils import get_blog_setting
@@ -67,12 +65,17 @@ class CommentPostView(AuthenticatedFormView):
             comment.is_enable = True
         # WZY: 绑定评论作者，建立Comment与BlogUser外键关系，标记是谁发布的评论
         comment.author = author
-        # WZY: 判断是否存在父评论ID，存在则设置父评论，实现评论回复嵌套关系
-        if form.cleaned_data['parent_comment_id']:
-            parent_comment = Comment.objects.get(
-                pk=form.cleaned_data['parent_comment_id'])
+        # WZY: 有父评论ID时，校验其存在且属于当前文章，否则报错（防跨文章回复）
+        parent_comment_id = form.cleaned_data.get('parent_comment_id')
+        if parent_comment_id:
+            try:
+                parent_comment = Comment.objects.get(
+                    pk=parent_comment_id, article_id=article_id)
+            except Comment.DoesNotExist:
+                form.add_error('parent_comment_id', '父评论不存在或不属于当前文章.')
+                return self.form_invalid(form)
             comment.parent_comment = parent_comment
-        comment.save(True) # WZY: 将构造完成的评论存入数据库
+        comment.save(True)  # WZY: 将构造完成的评论存入数据库
         return HttpResponseRedirect(
             "%s#div-comment-%d" %
             (article.get_absolute_url(), comment.pk))
