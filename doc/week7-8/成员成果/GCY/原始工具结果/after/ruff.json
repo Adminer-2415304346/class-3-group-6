@@ -1,0 +1,945 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 56,
+      "row": 23
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\admin_site.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from accounts.admin import BlogUserAdmin\r\nfrom accounts.models import BlogUser\r\nfrom blog.admin import (\r\n    ArticlelAdmin,\r\n    BlogSettingsAdmin,\r\n    CategoryAdmin,\r\n    LinksAdmin,\r\n    SideBarAdmin,\r\n    TagAdmin,\r\n)\r\nfrom blog.models import Article, BlogSettings, Category, Links, SideBar, Tag\r\nfrom comments.admin import CommentAdmin\r\nfrom comments.models import Comment\r\nfrom django.contrib.admin import AdminSite\r\nfrom django.contrib.admin.models import LogEntry\r\nfrom django.contrib.sites.admin import SiteAdmin\r\nfrom django.contrib.sites.models import Site\r\nfrom oauth.admin import OAuthConfigAdmin, OAuthUserAdmin\r\nfrom oauth.models import OAuthConfig, OAuthUser\r\nfrom servermanager.admin import CommandsAdmin, EmailSendLogAdmin\r\nfrom servermanager.models import EmailSendLog, commands\r\n\r\nfrom djangoblog.logentryadmin import LogEntryAdmin\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 24
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 34,
+      "row": 1
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\apps.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.apps import AppConfig\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 3
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 35,
+      "row": 17
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import _thread\r\nimport logging\r\n\r\nimport django.dispatch\r\nfrom comments.models import Comment\r\nfrom comments.utils import send_comment_email\r\nfrom django.conf import settings\r\nfrom django.contrib.admin.models import LogEntry\r\nfrom django.contrib.auth.signals import user_logged_in, user_logged_out\r\nfrom django.core.mail import EmailMultiAlternatives\r\nfrom django.db.models.signals import post_save\r\nfrom django.dispatch import receiver\r\nfrom oauth.models import OAuthUser\r\n\r\nfrom djangoblog.spider_notify import SpiderNotify\r\nfrom djangoblog.utils import (\r\n    cache,\r\n    delete_sidebar_cache,\r\n    delete_view_cache,\r\n    expire_view_cache,\r\n    get_current_site,\r\n)\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 19
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 29,
+      "row": 68
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 68
+    },
+    "message": "`model_post_save_callback` is too complex (17 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 68,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 32,
+      "row": 14
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\elasticsearch_backend.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from blog.documents import ArticleDocument, ArticleDocumentManager\r\nfrom blog.models import Article\r\nfrom django.utils.encoding import force_str\r\nfrom elasticsearch_dsl import Q\r\nfrom haystack.backends import BaseEngine, BaseSearchBackend, BaseSearchQuery, log_query\r\nfrom haystack.forms import ModelSearchForm\r\nfrom haystack.models import SearchResult\r\nfrom haystack.utils import log as logging\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 6
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 6
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 6,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 11
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\error_views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.shortcuts import render\r\nfrom django.utils.translation import gettext_lazy as _\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 9
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 44,
+      "row": 7
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\feeds.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from blog.models import Article\r\nfrom django.contrib.auth import get_user_model\r\nfrom django.contrib.syndication.views import Feed\r\nfrom django.utils import timezone\r\nfrom django.utils.feedgenerator import Rss201rev2Feed\r\n\r\nfrom djangoblog.utils import CommonMarkdown\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 10
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 8
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib import admin\r\nfrom django.contrib.admin.models import DELETION\r\nfrom django.contrib.contenttypes.models import ContentType\r\nfrom django.urls import NoReverseMatch, reverse\r\nfrom django.utils.encoding import force_str\r\nfrom django.utils.html import escape\r\nfrom django.utils.safestring import mark_safe\r\nfrom django.utils.translation import gettext_lazy as _\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 13
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\n\r\nfrom django.db import models\r\nfrom django.shortcuts import get_object_or_404\r\nfrom django.utils.timezone import now\r\nfrom django.utils.translation import gettext_lazy as _\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 9
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 115,
+      "row": 31
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\base_plugin.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 31
+    },
+    "message": "Line too long (114 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 31,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 124,
+      "row": 34
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\hooks.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 34
+    },
+    "message": "Line too long (123 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 34,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 125,
+      "row": 48
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\hooks.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 48
+    },
+    "message": "Line too long (124 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 48,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 33,
+      "row": 3
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\loader.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\nimport os\r\n\r\nfrom django.conf import settings\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 5
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 110,
+      "row": 35
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\loader.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 35
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 35,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 111,
+      "row": 352
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\settings.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 352
+    },
+    "message": "Line too long (110 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 352,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 47,
+      "row": 4
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\sitemap.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from blog.models import Article, Category, Tag\r\nfrom django.contrib.sitemaps import Sitemap\r\nfrom django.urls import reverse\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 107,
+      "row": 30
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\urls.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import time\r\n\r\nfrom blog.views import EsSearchView\r\nfrom django.conf import settings\r\nfrom django.conf.urls.i18n import i18n_patterns\r\nfrom django.conf.urls.static import static\r\nfrom django.contrib.sitemaps.views import sitemap\r\nfrom django.http import JsonResponse\r\nfrom django.urls import include, path, re_path\r\nfrom haystack.views import search_view_factory\r\n\r\nfrom djangoblog.admin_site import admin_site\r\nfrom djangoblog.elasticsearch_backend import ElasticSearchModelSearchForm\r\nfrom djangoblog.feeds import DjangoBlogFeed\r\nfrom djangoblog.sitemap import (\r\n    ArticleSiteMap,\r\n    CategorySiteMap,\r\n    StaticViewSitemap,\r\n    TagSiteMap,\r\n    UserSiteMap,\r\n)\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 32
+          },
+          "location": {
+            "column": 1,
+            "row": 16
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 16
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 16,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 30
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\urls.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 30
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 30,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 110,
+      "row": 78
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\urls.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 78
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 78,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 103,
+      "row": 81
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\urls.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 81
+    },
+    "message": "Line too long (102 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 81,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 46,
+      "row": 19
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\utils.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import hashlib\r\nimport hmac\r\nimport logging\r\nimport os\r\nimport random\r\nimport string\r\nimport uuid\r\n\r\nimport bleach\r\nimport markdown\r\nimport requests\r\nfrom django.conf import settings\r\nfrom django.contrib.sites.models import Site\r\nfrom django.core.cache import cache\r\nfrom django.templatetags.static import static\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 21
+          },
+          "location": {
+            "column": 1,
+            "row": 5
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 5
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 5,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 39,
+      "row": 38
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import absolute_import, division, print_function, unicode_literals\r\n\r\nimport json\r\nimport os\r\nimport re\r\nimport shutil\r\nimport threading\r\nimport warnings\r\nfrom datetime import datetime\r\n\r\nimport six\r\nfrom django.conf import settings\r\nfrom django.core.exceptions import ImproperlyConfigured\r\nfrom django.utils.encoding import force_str\r\nfrom haystack.backends import (\r\n    BaseEngine,\r\n    BaseSearchBackend,\r\n    BaseSearchQuery,\r\n    EmptyResults,\r\n    log_query,\r\n)\r\nfrom haystack.constants import DJANGO_CT, DJANGO_ID, ID\r\nfrom haystack.exceptions import MissingDependency, SearchBackendError, SkipDocument\r\nfrom haystack.inputs import Clean, Exact, PythonData, Raw\r\nfrom haystack.models import SearchResult\r\nfrom haystack.utils import get_identifier, get_model_ct\r\nfrom haystack.utils import log as logging\r\nfrom haystack.utils.app_loading import haystack_get_model\r\nfrom jieba.analyse import ChineseAnalyzer\r\nfrom whoosh import index\r\nfrom whoosh.fields import (\r\n    BOOLEAN,\r\n    DATETIME,\r\n    IDLIST,\r\n    KEYWORD,\r\n    NGRAM,\r\n    NGRAMWORDS,\r\n    NUMERIC,\r\n    TEXT,\r\n    Schema,\r\n)\r\nfrom whoosh.fields import ID as WHOOSH_ID\r\nfrom whoosh.filedb.filestore import FileStorage, RamStorage\r\nfrom whoosh.highlight import HtmlFormatter\r\nfrom whoosh.qparser import QueryParser\r\nfrom whoosh.searching import ResultsPage\r\nfrom whoosh.writing import AsyncWriter\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 39
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 22
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 22
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 22,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 103,
+      "row": 32
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 32
+    },
+    "message": "Line too long (102 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 32,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "B904",
+    "end_location": {
+      "column": 106,
+      "row": 47
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 46
+    },
+    "message": "Within an `except` clause, raise exceptions with `raise ... from err` or `raise ... from None` to distinguish them from errors in exception handling",
+    "name": "raise-without-from-inside-except",
+    "noqa_row": 46,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/raise-without-from-inside-except"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 106,
+      "row": 47
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 47
+    },
+    "message": "Line too long (105 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 47,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 21,
+      "row": 153
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 153
+    },
+    "message": "`build_schema` is too complex (12 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 153,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "B007",
+    "end_location": {
+      "column": 23,
+      "row": 164
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_field_name",
+          "end_location": {
+            "column": 23,
+            "row": 164
+          },
+          "location": {
+            "column": 13,
+            "row": 164
+          }
+        }
+      ],
+      "message": "Rename unused `field_name` to `_field_name`"
+    },
+    "location": {
+      "column": 13,
+      "row": 164
+    },
+    "message": "Loop control variable `field_name` not used within loop body",
+    "name": "unused-loop-control-variable",
+    "noqa_row": 164,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-loop-control-variable"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 189
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 189
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 189,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 156,
+      "row": 193
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 193
+    },
+    "message": "Line too long (155 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 193,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 195
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 195
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 195,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 112,
+      "row": 204
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 204
+    },
+    "message": "Line too long (111 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 204,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 15,
+      "row": 355
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 355
+    },
+    "message": "`search` is too complex (33 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 355,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 23,
+      "row": 569
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 569
+    },
+    "message": "`more_like_this` is too complex (19 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 569,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 25,
+      "row": 680
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 680
+    },
+    "message": "`_process_results` is too complex (23 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 680,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 68,
+      "row": 754
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "                        import re\r\n\r\n                        from djangoblog.utils import CommonMarkdown\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 755
+          },
+          "location": {
+            "column": 1,
+            "row": 753
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 25,
+      "row": 753
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 753,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 29,
+      "row": 953
+    },
+    "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 953
+    },
+    "message": "`build_query_fragment` is too complex (27 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 953,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  }
+]

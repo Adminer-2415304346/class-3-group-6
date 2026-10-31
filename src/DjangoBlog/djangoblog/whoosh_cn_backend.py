@@ -1,5 +1,10 @@
 # encoding: utf-8
-
+# GCY（模块层）：Whoosh 中文检索后端（基于 Haystack 的 whoosh_backend
+# 改造）。核心差异有三：①文本字段统一使用 jieba 的 ChineseAnalyzer
+# 分词（见 build_schema），支持中文检索；②高亮改用正则按查询词
+# 直接包裹 <mark>，避免 whoosh 原生高亮对中文切词不稳；③存储可选
+# 文件（FileStorage，默认 PATH=whoosh_index）或内存（RamStorage）。
+# 依赖 whoosh/jieba 库，离线可运行，是未配置 ES 时的默认后端。
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import json
@@ -24,15 +29,16 @@ from haystack.utils import log as logging
 from haystack.utils.app_loading import haystack_get_model
 from jieba.analyse import ChineseAnalyzer
 from whoosh import index
-from whoosh.analysis import StemmingAnalyzer
 from whoosh.fields import BOOLEAN, DATETIME, IDLIST, KEYWORD, NGRAM, NGRAMWORDS, NUMERIC, Schema, TEXT
 from whoosh.fields import ID as WHOOSH_ID
 from whoosh.filedb.filestore import FileStorage, RamStorage
-from whoosh.highlight import ContextFragmenter, HtmlFormatter
-from whoosh.highlight import highlight as whoosh_highlight
+from whoosh.highlight import HtmlFormatter
 from whoosh.qparser import QueryParser
 from whoosh.searching import ResultsPage
 from whoosh.writing import AsyncWriter
+# GCY（改进说明）：删除未使用的 StemmingAnalyzer、ContextFragmenter、
+# whoosh_highlight 三个导入（F401 告警修复）；WhooshHtmlFormatter 仍
+# 依赖 HtmlFormatter，故保留。
 
 try:
     import whoosh
@@ -573,10 +579,6 @@ class WhooshSearchBackend(BaseSearchBackend):
         if not self.setup_complete:
             self.setup()
 
-        # Deferred models will have a different class ("RealClass_Deferred_fieldname")
-        # which won't be in our registry:
-        model_klass = model_instance._meta.concrete_model
-
         field_name = self.content_field_name
         narrow_queries = set()
         narrowed_results = None
@@ -727,9 +729,6 @@ class WhooshSearchBackend(BaseSearchBackend):
                 del (additional_fields[DJANGO_ID])
 
                 if highlight:
-                    # 使用中文分词器
-                    ca = ChineseAnalyzer()
-
                     highlighted = {}
 
                     # 高亮标题（如果存在）

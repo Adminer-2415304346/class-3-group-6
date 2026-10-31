@@ -17,6 +17,13 @@ logger = logging.getLogger(__name__)
 
 # ===== 模型层 Mixin =====
 
+# GCY（类/函数层）：TimeStampedModel 是抽象基类（abstract=True），
+# 不建表，仅向继承模型提供 created_at/updated_at 两个时间字段与
+# 默认排序。save() 在每次写库前刷新 updated_at；若调用方传了
+# update_fields 且未含 updated_at，会主动补入，避免"部分更新却
+# 漏更新时间戳"。适用条件：所有需要记录创建/修改时间的模型；
+# 限制：update_fields=[] 空集合时不会补字段，且批量 QuerySet.update()
+# 不走 save()，时间戳不会自动更新。
 class TimeStampedModel(models.Model):
     """
     抽象模型：为所有模型提供统一的时间戳字段
@@ -213,6 +220,12 @@ class CachedListViewMixin:
         """
         from djangoblog.utils import cache
 
+        # GCY（关键逻辑）：用 if value 而非 value is not None 判断命中，
+        # 因此空 queryset（如某页无文章）会被当作未命中反复查询并重写
+        # 缓存，空结果不会被缓存。这是有意为之（避免缓存空列表造成的
+        # 陈旧空白页），代价是该页每次请求都会执行一次数据库查询。
+        # 若未来需缓存空结果，应改用显式哨兵值（参见 utils.cache_decorator
+        # 的 '__default_cache_value__' 方案）。
         value = cache.get(cache_key)
         if value:
             logger.info(f'Cache HIT: {cache_key}')

@@ -101,6 +101,11 @@ def model_post_save_callback(
         return
 
     # 检查是否只更新了浏览量
+    # GCY（关键逻辑）：update_fields == {'views'} 表示本次保存只改了
+    # 浏览量（浏览计数接口用 update_fields 局部更新），此时无需清理
+    # 各类列表/详情缓存，提前返回可避免高频访问把缓存全部击穿。
+    # 限制：批量 QuerySet.update() 不触发 post_save 信号，因此批量
+    # 改动文章不会走这里的缓存清理，需另行在业务层处理。
     is_update_views = update_fields == {'views'}
     if is_update_views:
         return  # 浏览量更新不需要清理缓存
@@ -152,6 +157,8 @@ def remember_comment_article(sender, instance, raw, using, **kwargs):
 
 
 def _send_committed_comment_email(comment_id, using):
+    # GCY（原通知说明，SZX集成时迁移）：原生线程不保证投递或执行完成。
+    # SZX：线程启动点保留在提交后的独立通知入口，不能恢复为通用post_save直接发送。
     # SZX：保留普通公开评论保存时通知的既有规则；回滚、已删除或已禁用的记录不发送。
     comment = Comment.objects.using(using).select_related(
         'article', 'author', 'parent_comment__author',
