@@ -1,3 +1,6 @@
 * text=auto eol=lf
 *.docx binary
 *.png binary
+# Preserve verbatim test stderr, including runner/SDK whitespace, as raw evidence.
+"成员成果/SY/原始工具结果/2026-11-02-szx-takeover/**/tests.stderr.log" -text -whitespace
+"最终检查/2026-11-02/tests.stderr.log" -text -whitespace

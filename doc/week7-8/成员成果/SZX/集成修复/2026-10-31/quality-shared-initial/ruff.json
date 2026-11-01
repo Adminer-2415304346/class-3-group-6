@@ -1,0 +1,37 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 37,
+      "row": 10
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\comment_cache.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from collections.abc import Iterable\n\nfrom django.core.cache import cache\nfrom django.core.cache.utils import make_template_fragment_key\nfrom django.db import DEFAULT_DB_ALIAS, transaction\n\nfrom blog.models import LinkShowType\nfrom djangoblog.constants import CacheKey\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 3
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 3
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 3,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

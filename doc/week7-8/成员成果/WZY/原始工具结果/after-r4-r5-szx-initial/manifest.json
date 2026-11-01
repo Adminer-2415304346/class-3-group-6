@@ -1,0 +1,277 @@
+{
+  "app": "comments",
+  "owner": "WZY",
+  "stage": "after",
+  "timestamp_utc": "2026-10-31T11:09:30.303178+00:00",
+  "base_commit": "4fea1a31132eb28138408bc9b1f124b6ad07c4c9",
+  "python": "3.12.7",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "comments/migrations/0001_initial.py",
+    "comments/migrations/0002_alter_comment_is_enable.py",
+    "comments/migrations/0003_alter_comment_options_remove_comment_created_time_and_more.py",
+    "comments/migrations/0004_comment_idx_art_parent_enable_comment_idx_enable_id.py",
+    "comments/migrations/0005_commentreaction.py",
+    "comments/migrations/__init__.py",
+    "comments/test_comment_business_logic.py",
+    "comments/test_quality_r45.py",
+    "comments/test_reaction_snapshot.py",
+    "comments/test_views.py",
+    "comments/tests.py"
+  ],
+  "files": [
+    {
+      "path": "comments/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/admin.py",
+      "sha256": "6ab4c17e831b549805c59079d7f14db927ee32bdd4f21226264a69936571a7f3",
+      "physical_lines": 103,
+      "code_token_lines": 76,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 3,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 7
+    },
+    {
+      "path": "comments/apps.py",
+      "sha256": "38f91b8e3ac943ac67e7a197bd530036c3dd8b52a76891022f12979354bcaa5e",
+      "physical_lines": 5,
+      "code_token_lines": 3,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/comments_tags.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/forms.py",
+      "sha256": "399aa96a44d288a5c183ee038010c79858e8b0ea01f51e859fe6a42ce048c65d",
+      "physical_lines": 21,
+      "code_token_lines": 9,
+      "comment_lines": 10,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 7,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/models.py",
+      "sha256": "d34064b1e5a6803a7bfdcc82fe6634a93192f9b84d1b70be5d03021147aa0390",
+      "physical_lines": 153,
+      "code_token_lines": 113,
+      "comment_lines": 37,
+      "signed_comment_lines": {
+        "SZX": 7,
+        "YFY": 0,
+        "WZY": 17,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 4,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "comments/templatetags/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/templatetags/comments_tags.py",
+      "sha256": "5d5748135e8700f8e86aefa3bf4b8e9e6b158cab7e940abf21e0399239e5a914",
+      "physical_lines": 41,
+      "code_token_lines": 23,
+      "comment_lines": 15,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 14,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "comments/urls.py",
+      "sha256": "759122cc4d4e681ede2720dcb26f674812781eea89b7d401963f54ecb9118b4d",
+      "physical_lines": 24,
+      "code_token_lines": 13,
+      "comment_lines": 9,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 6,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "comments/utils.py",
+      "sha256": "2fbcc563914eeab46528740bba9bc042bd6a71e928d5a3e0e41d6e471d635394",
+      "physical_lines": 44,
+      "code_token_lines": 40,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "comments/views.py",
+      "sha256": "3f08a825eaf9d884ca11588db207da3e9b5ec22dde0c996a122b2105e0d40bea",
+      "physical_lines": 141,
+      "code_token_lines": 102,
+      "comment_lines": 33,
+      "signed_comment_lines": {
+        "SZX": 2,
+        "YFY": 0,
+        "WZY": 19,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 5
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\WZY\\原始工具结果\\after-r4-r5-szx\\ruff.json",
+        "comments/__init__.py",
+        "comments/admin.py",
+        "comments/apps.py",
+        "comments/comments_tags.py",
+        "comments/forms.py",
+        "comments/models.py",
+        "comments/templatetags/__init__.py",
+        "comments/templatetags/comments_tags.py",
+        "comments/urls.py",
+        "comments/utils.py",
+        "comments/views.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\WZY\\原始工具结果\\after-r4-r5-szx\\bandit.json",
+        "comments/__init__.py",
+        "comments/admin.py",
+        "comments/apps.py",
+        "comments/comments_tags.py",
+        "comments/forms.py",
+        "comments/models.py",
+        "comments/templatetags/__init__.py",
+        "comments/templatetags/comments_tags.py",
+        "comments/urls.py",
+        "comments/utils.py",
+        "comments/views.py"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\WZY\\原始工具结果\\after-r4-r5-szx\\bandit.json\r\n"
+    }
+  }
+}

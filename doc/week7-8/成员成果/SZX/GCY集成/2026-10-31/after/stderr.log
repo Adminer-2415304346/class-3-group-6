@@ -1,0 +1,965 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_custom_method_cache_key_remains_supported (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_custom_method_cache_key_remains_supported) ... ok
+test_errors_inside_business_function_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_business_function_propagate) ... ok
+test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_errors_inside_custom_key_factory_propagate) ... ok
+test_keyword_only_none_result_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_keyword_only_none_result_is_cached) ... ok
+test_noncallable_optional_cache_key_uses_fallback (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_noncallable_optional_cache_key_uses_fallback) ... ok
+test_plain_arguments_have_separate_cache_entries (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_plain_arguments_have_separate_cache_entries) ... ok
+test_public_comment_and_article_detail_still_work (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_public_comment_and_article_detail_still_work) ... ok
+test_real_site_helper_works_without_arguments (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_real_site_helper_works_without_arguments) ... ok
+test_zero_argument_function_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_zero_argument_function_is_cached) ... ok
+test_permission_denied_renders_real_custom_403_page (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_permission_denied_renders_real_custom_403_page) ... HTTP 403 Error: GCY error-handler regression
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+Forbidden (Permission denied): /__gcy_denied__/
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+ok
+test_project_resolves_custom_403_handler (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_project_resolves_custom_403_handler) ... ok
+test_new_emoji_before_rows_are_read_does_not_raise (comments.test_reaction_snapshot.ReactionSnapshotTests.test_new_emoji_before_rows_are_read_does_not_raise) ... ok
+test_removed_reaction_does_not_leave_a_count_from_an_earlier_read (comments.test_reaction_snapshot.ReactionSnapshotTests.test_removed_reaction_does_not_leave_a_count_from_an_earlier_read) ... ok
+test_zero_one_and_eight_types_use_one_query_and_exclude_other_comments (comments.test_reaction_snapshot.ReactionSnapshotTests.test_zero_one_and_eight_types_use_one_query_and_exclude_other_comments) ... ok
+test_admin_bulk_delete_covers_reply_left_in_old_article_after_move (blog.test_comment_lifecycle.CommentLifecycleTests.test_admin_bulk_delete_covers_reply_left_in_old_article_after_move) ... ok
+test_admin_single_delete_covers_moved_grandchild (blog.test_comment_lifecycle.CommentLifecycleTests.test_admin_single_delete_covers_moved_grandchild) ... ok
+test_archive_sidebar_refreshes_across_hosts_ports_languages_and_https (blog.test_comment_lifecycle.CommentLifecycleTests.test_archive_sidebar_refreshes_across_hosts_ports_languages_and_https) ... ok
+test_article_cascade_clears_reply_in_another_article (blog.test_comment_lifecycle.CommentLifecycleTests.test_article_cascade_clears_reply_in_another_article) ... ok
+test_bulk_action_rollback_preserves_database_cache_and_mail (blog.test_comment_lifecycle.CommentLifecycleTests.test_bulk_action_rollback_preserves_database_cache_and_mail) ... ok
+test_bulk_actions_and_deletion_do_not_generate_notification_emails (blog.test_comment_lifecycle.CommentLifecycleTests.test_bulk_actions_and_deletion_do_not_generate_notification_emails) ... ok
+test_bulk_disable_covers_multiple_articles_and_preserves_unrelated_keys (blog.test_comment_lifecycle.CommentLifecycleTests.test_bulk_disable_covers_multiple_articles_and_preserves_unrelated_keys) ... ok
+test_delete_rollback_keeps_cached_rows (blog.test_comment_lifecycle.CommentLifecycleTests.test_delete_rollback_keeps_cached_rows) ... ok
+test_first_pending_comment_is_visible_after_bulk_approval (blog.test_comment_lifecycle.CommentLifecycleTests.test_first_pending_comment_is_visible_after_bulk_approval) ... ok
+test_normal_save_schedules_one_notification_after_commit (blog.test_comment_lifecycle.CommentLifecycleTests.test_normal_save_schedules_one_notification_after_commit) ... ok
+test_plain_disable_waits_for_commit_and_refreshes_nonempty_cache (blog.test_comment_lifecycle.CommentLifecycleTests.test_plain_disable_waits_for_commit_and_refreshes_nonempty_cache) ... ok
+test_plain_move_invalidates_old_and_new_articles (blog.test_comment_lifecycle.CommentLifecycleTests.test_plain_move_invalidates_old_and_new_articles) ... ok
+test_plain_queryset_delete_covers_deeper_cross_article_cascades (blog.test_comment_lifecycle.CommentLifecycleTests.test_plain_queryset_delete_covers_deeper_cross_article_cascades) ... ok
+test_save_rollback_does_not_invalidate_or_send_mail (blog.test_comment_lifecycle.CommentLifecycleTests.test_save_rollback_does_not_invalidate_or_send_mail) ... ok
+test_user_cascade_clears_descendant_article_without_deleting_articles (blog.test_comment_lifecycle.CommentLifecycleTests.test_user_cascade_clears_descendant_article_without_deleting_articles) ... ok
+E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Comment category_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_bulk_review_of_first_comment_is_immediately_visible (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_bulk_review_of_first_comment_is_immediately_visible) ... ok
+test_empty_comments_are_requeried_until_bulk_review_invalidates_cache (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_empty_comments_are_requeried_until_bulk_review_invalidates_cache) ... ok
+test_new_enabled_comment_invalidates_empty_cache (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_new_enabled_comment_invalidates_empty_cache) ... ok
+test_populated_cache_keeps_queryset_and_excludes_disabled_comments (blog.test_week78_quality.ArticleCommentCacheRegressionTest.test_populated_cache_keeps_queryset_and_excludes_disabled_comments) ... ok
+E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Week78 category_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_active_superuser_can_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_active_superuser_can_preview_draft) ... ok
+test_anonymous_can_resolve_published_article_and_page (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_can_resolve_published_article_and_page) ... ok
+test_anonymous_draft_is_not_resolved (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_draft_is_not_resolved) ... ok
+test_anonymous_http_request_to_draft_returns_404 (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_anonymous_http_request_to_draft_returns_404) ... HTTP 404 Error: 没有找到符合查询的 文章
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 53, in get_object
+    obj = queryset.get()
+          ^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 112, in get
+    self.object = self.get_object()
+                  ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 55, in get_object
+    raise Http404(
+django.http.response.Http404: 没有找到符合查询的 文章
+Not Found: /article/2026/10/31/1.html
+ok
+test_inactive_superuser_cannot_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_inactive_superuser_cannot_preview_draft) ... ok
+test_regular_author_cannot_read_draft_from_public_view (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_regular_author_cannot_read_draft_from_public_view) ... ok
+test_staff_without_superuser_privilege_cannot_preview_draft (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_staff_without_superuser_privilege_cannot_preview_draft) ... ok
+test_superuser_http_preview_still_renders (blog.test_week78_quality.ArticleVisibilityRegressionTest.test_superuser_http_preview_still_renders) ... ok
+test_anonymous_post_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_anonymous_post_is_forbidden) ... Forbidden: /clean
+ok
+test_get_never_clears_cache (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_get_never_clears_cache) ... Method Not Allowed (GET): /clean
+ok
+test_regular_user_post_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_regular_user_post_is_forbidden) ... Forbidden: /clean
+ok
+test_superuser_post_clears_cache_once (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_clears_cache_once) ... ok
+test_superuser_post_with_csrf_succeeds (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_with_csrf_succeeds) ... ok
+test_superuser_post_without_csrf_is_forbidden (blog.test_week78_quality.CacheClearPermissionRegressionTest.test_superuser_post_without_csrf_is_forbidden) ... Forbidden (CSRF cookie not set.): /clean
+ok
+test_avatar_url_cannot_inject_attributes (blog.test_week78_quality.TemplateEscapingRegressionTest.test_avatar_url_cannot_inject_attributes) ... ok
+test_content_highlight_escapes_decoded_html_entities (blog.test_week78_quality.TemplateEscapingRegressionTest.test_content_highlight_escapes_decoded_html_entities) ... ok
+test_repeated_terms_do_not_highlight_generated_tags (blog.test_week78_quality.TemplateEscapingRegressionTest.test_repeated_terms_do_not_highlight_generated_tags) ... ok
+test_title_highlight_escapes_untrusted_html (blog.test_week78_quality.TemplateEscapingRegressionTest.test_title_highlight_escapes_untrusted_html) ... ok
+test_article_status_visibility (blog.test_views.ArticlePermissionTest.test_article_status_visibility)
+测试不同状态文章的可见性 ... HTTP 404 Error: 没有找到符合查询的 文章
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 53, in get_object
+    obj = queryset.get()
+          ^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 112, in get
+    self.object = self.get_object()
+                  ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 55, in get_object
+    raise Http404(
+django.http.response.Http404: 没有找到符合查询的 文章
+Not Found: /article/2026/10/31/3.html
+ok
+test_only_author_can_edit (blog.test_views.ArticlePermissionTest.test_only_author_can_edit)
+测试只有作者可以编辑 ... ok
+test_article_archive_by_year (blog.test_views.ArticleViewTest.test_article_archive_by_year)
+测试按年归档 ... ok
+test_article_archive_by_year_month (blog.test_views.ArticleViewTest.test_article_archive_by_year_month)
+测试按年月归档 ... ok
+test_article_archive_view (blog.test_views.ArticleViewTest.test_article_archive_view)
+测试文章归档页 ... ok
+test_article_detail_increases_views (blog.test_views.ArticleViewTest.test_article_detail_increases_views)
+测试访问文章增加浏览量 ... ok
+test_article_detail_view (blog.test_views.ArticleViewTest.test_article_detail_view)
+测试文章详情页 ... ok
+test_article_detail_view_draft (blog.test_views.ArticleViewTest.test_article_detail_view_draft)
+测试草稿文章无法访问 ... HTTP 404 Error: 没有找到符合查询的 文章
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 53, in get_object
+    obj = queryset.get()
+          ^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 112, in get
+    self.object = self.get_object()
+                  ^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\detail.py", line 55, in get_object
+    raise Http404(
+django.http.response.Http404: 没有找到符合查询的 文章
+Not Found: /article/2026/10/31/2.html
+ok
+test_author_view (blog.test_views.ArticleViewTest.test_author_view)
+测试作者页 ... ok
+test_category_view (blog.test_views.ArticleViewTest.test_category_view)
+测试分类页 ... ok
+test_category_view_invalid_slug (blog.test_views.ArticleViewTest.test_category_view_invalid_slug)
+测试无效分类 slug ... HTTP 404 Error: No Category matches the given query.
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 90, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Category.DoesNotExist: Category matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 158, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\mixins.py", line 246, in get_queryset
+    key = self.get_queryset_cache_key()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 225, in get_queryset_cache_key
+    category = self.get_slug_object()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\mixins.py", line 120, in get_slug_object
+    self._slug_object = get_object_or_404(self.slug_model, slug=slug)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 92, in get_object_or_404
+    raise Http404(
+django.http.response.Http404: No Category matches the given query.
+Not Found: /category/invalid.html
+ok
+test_index_view (blog.test_views.ArticleViewTest.test_index_view)
+测试首页 ... ok
+test_index_view_pagination (blog.test_views.ArticleViewTest.test_index_view_pagination)
+测试首页分页 ... ok
+test_tag_view (blog.test_views.ArticleViewTest.test_tag_view)
+测试标签页 ... ok
+test_tag_view_invalid_slug (blog.test_views.ArticleViewTest.test_tag_view_invalid_slug)
+测试无效标签 slug ... HTTP 404 Error: No Tag matches the given query.
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 90, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Tag.DoesNotExist: Tag matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 158, in get
+    self.object_list = self.get_queryset()
+                       ^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\mixins.py", line 246, in get_queryset
+    key = self.get_queryset_cache_key()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 306, in get_queryset_cache_key
+    tag = self.get_slug_object()
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\mixins.py", line 120, in get_slug_object
+    self._slug_object = get_object_or_404(self.slug_model, slug=slug)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 92, in get_object_or_404
+    raise Http404(
+django.http.response.Http404: No Tag matches the given query.
+Not Found: /tag/invalid.html
+ok
+test_404_page (blog.test_views.ErrorHandlingTest.test_404_page)
+测试 404 页面 ... HTTP 404 Error: {'tried': [[<URLResolver <module 'django.conf.urls.i18n' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Lib\\site-packages\\django\\conf\\urls\\i18n.py'> (None:None) 'i18n/'>], [<URLPattern 'health/' [name='health_check']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern '' [name='index']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'page/<int:page>/' [name='index_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'article/<int:year>/<int:month>/<int:day>/<int:article_id>.html' [name='detailbyid']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'category/<slug:category_name>.html' [name='category_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'category/<slug:category_name>/<int:page>.html' [name='category_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'author/<author_name>.html' [name='author_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'author/<author_name>/<int:page>.html' [name='author_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'tag/<slug:tag_name>.html' [name='tag_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'tag/<slug:tag_name>/<int:page>.html' [name='tag_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'archives.html' [name='archives']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'links.html' [name='links']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'upload' [name='upload']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'clean' [name='clean']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'mdeditor.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Lib\\site-packages\\mdeditor\\urls.py'> (None:None) 'mdeditor/'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'comments.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\urls.py'> (comments:comment) ''>, <URLPattern 'article/<int:article_id>/postcomment' [name='postcomment']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'comments.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\urls.py'> (comments:comment) ''>, <URLPattern 'comment/<int:comment_id>/react' [name='comment_react']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^login/$' [name='login']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^register/$' [name='register']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^logout/$' [name='logout']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern 'account/result.html' [name='result']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^forget_password/$' [name='forget_password']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^forget_password_code/$' [name='forget_password_code']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/authorize'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/requireemail/<int:oauthid>.html' [name='require_email']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/emailconfirm/<int:id>/<sign>.html' [name='email_confirm']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/bindsuccess/<int:oauthid>.html' [name='bindsuccess']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/oauthlogin' [name='oauthlogin']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^sitemap\.xml$' [name='django.contrib.sitemaps.views.sitemap']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^feed/$'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^rss/$'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^search' [name='search']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'servermanager.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\servermanager\\urls.py'> (servermanager:servermanager) ''>, <URLPattern 'robot'>]], 'path': 'nonexistent-page/'}
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 181, in _get_response
+    callback, callback_args, callback_kwargs = self.resolve_request(request)
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 313, in resolve_request
+    resolver_match = resolver.resolve(request.path_info)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\urls\resolvers.py", line 705, in resolve
+    raise Resolver404({"tried": tried, "path": new_path})
+django.urls.exceptions.Resolver404: {'tried': [[<URLResolver <module 'django.conf.urls.i18n' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Lib\\site-packages\\django\\conf\\urls\\i18n.py'> (None:None) 'i18n/'>], [<URLPattern 'health/' [name='health_check']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <URLPattern list> (admin:admin) '^admin/'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern '' [name='index']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'page/<int:page>/' [name='index_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'article/<int:year>/<int:month>/<int:day>/<int:article_id>.html' [name='detailbyid']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'category/<slug:category_name>.html' [name='category_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'category/<slug:category_name>/<int:page>.html' [name='category_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'author/<author_name>.html' [name='author_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'author/<author_name>/<int:page>.html' [name='author_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'tag/<slug:tag_name>.html' [name='tag_detail']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'tag/<slug:tag_name>/<int:page>.html' [name='tag_detail_page']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'archives.html' [name='archives']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'links.html' [name='links']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'upload' [name='upload']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'blog.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\blog\\urls.py'> (blog:blog) ''>, <URLPattern 'clean' [name='clean']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'mdeditor.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Lib\\site-packages\\mdeditor\\urls.py'> (None:None) 'mdeditor/'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'comments.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\urls.py'> (comments:comment) ''>, <URLPattern 'article/<int:article_id>/postcomment' [name='postcomment']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'comments.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\comments\\urls.py'> (comments:comment) ''>, <URLPattern 'comment/<int:comment_id>/react' [name='comment_react']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^login/$' [name='login']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^register/$' [name='register']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^logout/$' [name='logout']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern 'account/result.html' [name='result']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^forget_password/$' [name='forget_password']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'accounts.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\accounts\\urls.py'> (accounts:account) ''>, <URLPattern '^forget_password_code/$' [name='forget_password_code']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/authorize'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/requireemail/<int:oauthid>.html' [name='require_email']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/emailconfirm/<int:id>/<sign>.html' [name='email_confirm']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/bindsuccess/<int:oauthid>.html' [name='bindsuccess']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'oauth.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\oauth\\urls.py'> (oauth:oauth) ''>, <URLPattern 'oauth/oauthlogin' [name='oauthlogin']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^sitemap\.xml$' [name='django.contrib.sitemaps.views.sitemap']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^feed/$'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^rss/$'>], [<URLResolver <URLResolver list> (None:None) ''>, <URLPattern '^search' [name='search']>], [<URLResolver <URLResolver list> (None:None) ''>, <URLResolver <module 'servermanager.urls' from 'E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\servermanager\\urls.py'> (servermanager:servermanager) ''>, <URLPattern 'robot'>]], 'path': 'nonexistent-page/'}
+Not Found: /nonexistent-page/
+ok
+test_article_404 (blog.test_views.ErrorHandlingTest.test_article_404)
+测试不存在的文章 ... ok
+test_invalid_page_number (blog.test_views.ErrorHandlingTest.test_invalid_page_number)
+测试无效页码 ... HTTP 404 Error: 页面不是最后一页，也不能被转为整数型
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 64, in paginate_queryset
+    page_number = int(page)
+                  ^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'invalid'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 85, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 62, in get_context_data
+    return super(ArticleListView, self).get_context_data(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 69, in paginate_queryset
+    raise Http404(
+django.http.response.Http404: 页面不是最后一页，也不能被转为整数型
+Not Found: /
+ok
+test_page_out_of_range (blog.test_views.ErrorHandlingTest.test_page_out_of_range)
+测试页码超出范围 ... HTTP 404 Error: 非法页面 (99999): 本页结果为空
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 73, in paginate_queryset
+    page = paginator.page(page_number)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\paginator.py", line 71, in validate_number
+    raise EmptyPage(self.error_messages["no_results"])
+django.core.paginator.EmptyPage: 本页结果为空
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 178, in get
+    context = self.get_context_data()
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 85, in get_context_data
+    context = super().get_context_data(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 62, in get_context_data
+    return super(ArticleListView, self).get_context_data(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 128, in get_context_data
+    paginator, page, queryset, is_paginated = self.paginate_queryset(
+                                              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\list.py", line 76, in paginate_queryset
+    raise Http404(
+django.http.response.Http404: 非法页面 (99999): 本页结果为空
+Not Found: /
+ok
+test_search_view_accessible (blog.test_views.SearchViewTest.test_search_view_accessible)
+测试搜索页面可访问 ... ok
+test_article_body_rendering (blog.test_templatetags.BlogTagsTest.test_article_body_rendering)
+测试文章内容渲染 ... ok
+test_custom_markdown (blog.test_templatetags.BlogTagsTest.test_custom_markdown)
+测试自定义 Markdown 渲染 ... ok
+test_highlight_content (blog.test_templatetags.BlogTagsTest.test_highlight_content)
+测试内容高亮 ... ok
+test_highlight_search_term (blog.test_templatetags.BlogTagsTest.test_highlight_search_term)
+测试搜索关键词高亮 ... ok
+test_highlight_search_term_empty_query (blog.test_templatetags.BlogTagsTest.test_highlight_search_term_empty_query)
+测试空搜索词 ... ok
+test_highlight_search_term_no_match (blog.test_templatetags.BlogTagsTest.test_highlight_search_term_no_match)
+测试搜索关键词不匹配 ... ok
+test_load_articletags (blog.test_templatetags.BlogTagsTest.test_load_articletags)
+测试加载文章标签 ... ok
+test_load_pagination_info (blog.test_templatetags.BlogTagsTest.test_load_pagination_info)
+测试加载分页信息 ... ok
+test_load_pagination_info_last_page (blog.test_templatetags.BlogTagsTest.test_load_pagination_info_last_page)
+测试最后一页的分页信息 ... ok
+test_cache_operations (blog.test_templatetags.CacheTagsTest.test_cache_operations)
+测试缓存操作 ... ok
+test_date_format_filter (blog.test_templatetags.CustomFiltersTest.test_date_format_filter)
+测试日期格式化过滤器 ... ok
+test_strip_tags_filter (blog.test_templatetags.CustomFiltersTest.test_strip_tags_filter)
+测试去除 HTML 标签过滤器 ... ok
+test_url_encode_filter (blog.test_templatetags.CustomFiltersTest.test_url_encode_filter)
+测试 URL 编码过滤器 ... ok
+test_auto_link (blog.test_templatetags.MarkdownExtensionsTest.test_auto_link)
+测试自动链接 ... ok
+test_code_highlight (blog.test_templatetags.MarkdownExtensionsTest.test_code_highlight)
+测试代码高亮 ... ok
+test_strikethrough (blog.test_templatetags.MarkdownExtensionsTest.test_strikethrough)
+测试删除线 ... ok
+test_table_support (blog.test_templatetags.MarkdownExtensionsTest.test_table_support)
+测试表格支持 ... ok
+test_sidebar_data_exists (blog.test_templatetags.SidebarTagsTest.test_sidebar_data_exists)
+测试侧边栏数据存在 ... ok
+test_vite_module_exists (blog.test_templatetags.ViteTagsTest.test_vite_module_exists)
+测试 Vite 模块存在 ... ok
+test_processor_cache_expiration (blog.test_context_processors.SeoProcessorTest.test_processor_cache_expiration)
+测试缓存过期 ... E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Test Category_1'
+  warnings.warn(warning, CacheKeyWarning)
+ok
+test_processor_caching (blog.test_context_processors.SeoProcessorTest.test_processor_caching)
+测试上下文处理器的缓存机制 ... ok
+test_processor_color_scheme_setting (blog.test_context_processors.SeoProcessorTest.test_processor_color_scheme_setting)
+测试COLOR_SCHEME设置 ... ok
+test_processor_current_year (blog.test_context_processors.SeoProcessorTest.test_processor_current_year)
+测试CURRENT_YEAR是当前年份 ... ok
+test_processor_dynamic_values_not_cached (blog.test_context_processors.SeoProcessorTest.test_processor_dynamic_values_not_cached)
+测试动态值不被缓存（SITE_BASE_URL和CURRENT_YEAR） ... ok
+test_processor_excludes_articles_from_nav_pages (blog.test_context_processors.SeoProcessorTest.test_processor_excludes_articles_from_nav_pages)
+测试nav_pages不包含文章（只包含页面） ... ok
+test_processor_handles_empty_settings (blog.test_context_processors.SeoProcessorTest.test_processor_handles_empty_settings)
+测试处理器处理空设置 ... ok
+test_processor_logs_cache_miss (blog.test_context_processors.SeoProcessorTest.test_processor_logs_cache_miss)
+测试缓存未命中时记录日志 ... ok
+test_processor_multiple_categories (blog.test_context_processors.SeoProcessorTest.test_processor_multiple_categories)
+测试多个分类的情况 ... E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Category 2_1'
+  warnings.warn(warning, CacheKeyWarning)
+E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Category 3_1'
+  warnings.warn(warning, CacheKeyWarning)
+ok
+test_processor_multiple_pages (blog.test_context_processors.SeoProcessorTest.test_processor_multiple_pages)
+测试多个页面的情况 ... ok
+test_processor_nav_category_list (blog.test_context_processors.SeoProcessorTest.test_processor_nav_category_list)
+测试导航分类列表 ... ok
+test_processor_nav_pages (blog.test_context_processors.SeoProcessorTest.test_processor_nav_pages)
+测试导航页面列表 ... ok
+test_processor_only_shows_published_pages (blog.test_context_processors.SeoProcessorTest.test_processor_only_shows_published_pages)
+测试上下文处理器只显示已发布的页面 ... ok
+test_processor_returns_required_variables (blog.test_context_processors.SeoProcessorTest.test_processor_returns_required_variables)
+测试上下文处理器返回必需的变量 ... ok
+test_processor_site_base_url_with_different_hosts (blog.test_context_processors.SeoProcessorTest.test_processor_site_base_url_with_different_hosts)
+测试不同主机名的SITE_BASE_URL ... ok
+test_processor_with_anonymous_user (blog.test_context_processors.SeoProcessorTest.test_processor_with_anonymous_user)
+测试匿名用户访问时的上下文处理器 ... ok
+test_processor_with_custom_blog_settings (blog.test_context_processors.SeoProcessorTest.test_processor_with_custom_blog_settings)
+测试使用自定义博客设置 ... ok
+test_processor_with_http_request (blog.test_context_processors.SeoProcessorTest.test_processor_with_http_request)
+测试HTTP请求的SITE_BASE_URL ... ok
+test_processor_with_https_request (blog.test_context_processors.SeoProcessorTest.test_processor_with_https_request)
+测试HTTPS请求的SITE_BASE_URL ... ok
+test_middleware_calculates_page_render_time (blog.test_middleware.OnlineMiddlewareTest.test_middleware_calculates_page_render_time)
+测试中间件计算页面渲染时间 ... ok
+test_middleware_elasticsearch_integration_disabled (blog.test_middleware.OnlineMiddlewareTest.test_middleware_elasticsearch_integration_disabled)
+测试Elasticsearch集成禁用时的行为 ... ok
+test_middleware_elasticsearch_integration_enabled (blog.test_middleware.OnlineMiddlewareTest.test_middleware_elasticsearch_integration_enabled)
+测试Elasticsearch集成启用时的行为 ... ok
+test_middleware_handles_content_replace_exception (blog.test_middleware.OnlineMiddlewareTest.test_middleware_handles_content_replace_exception)
+测试中间件处理内容替换异常 ... ok
+test_middleware_handles_elasticsearch_exception (blog.test_middleware.OnlineMiddlewareTest.test_middleware_handles_elasticsearch_exception)
+测试中间件处理Elasticsearch异常 ... Error OnlineMiddleware: Elasticsearch connection failed
+ok
+test_middleware_handles_missing_user_agent (blog.test_middleware.OnlineMiddlewareTest.test_middleware_handles_missing_user_agent)
+测试中间件处理缺失的User-Agent ... ok
+test_middleware_handles_streaming_response (blog.test_middleware.OnlineMiddlewareTest.test_middleware_handles_streaming_response)
+测试中间件处理流式响应 ... ok
+test_middleware_initialization (blog.test_middleware.OnlineMiddlewareTest.test_middleware_initialization)
+测试中间件初始化 ... ok
+test_middleware_ip_detection (blog.test_middleware.OnlineMiddlewareTest.test_middleware_ip_detection)
+测试IP地址检测 ... ok
+test_middleware_logs_exceptions (blog.test_middleware.OnlineMiddlewareTest.test_middleware_logs_exceptions)
+测试中间件记录异常日志 ... ok
+test_middleware_preserves_response_headers (blog.test_middleware.OnlineMiddlewareTest.test_middleware_preserves_response_headers)
+测试中间件保留响应头 ... ok
+test_middleware_processes_request_normally (blog.test_middleware.OnlineMiddlewareTest.test_middleware_processes_request_normally)
+测试中间件正常处理请求 ... ok
+test_middleware_time_format (blog.test_middleware.OnlineMiddlewareTest.test_middleware_time_format)
+测试中间件时间格式化 ... ok
+test_middleware_user_agent_parsing (blog.test_middleware.OnlineMiddlewareTest.test_middleware_user_agent_parsing)
+测试User-Agent解析 ... ok
+test_middleware_uses_correct_timezone (blog.test_middleware.OnlineMiddlewareTest.test_middleware_uses_correct_timezone)
+测试中间件使用正确的时区 ... ok
+test_middleware_with_multiple_requests (blog.test_middleware.OnlineMiddlewareTest.test_middleware_with_multiple_requests)
+测试中间件处理多个请求 ... ok
+test_article_belongs_to_category (blog.test_article_business_logic.ArticleCategoryTagTest.test_article_belongs_to_category)
+测试文章属于分类 ... ok
+test_article_can_change_category (blog.test_article_business_logic.ArticleCategoryTagTest.test_article_can_change_category)
+测试文章可以更改分类 ... E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_New Category_1'
+  warnings.warn(warning, CacheKeyWarning)
+ok
+test_category_has_articles (blog.test_article_business_logic.ArticleCategoryTagTest.test_category_has_articles)
+测试分类包含文章 ... ok
+test_article_comment_can_be_closed (blog.test_article_business_logic.ArticleCommentStatusTest.test_article_comment_can_be_closed)
+测试可以关闭文章评论 ... ok
+test_article_comment_open_by_default (blog.test_article_business_logic.ArticleCommentStatusTest.test_article_comment_open_by_default)
+测试文章评论默认开放 ... ok
+test_closed_comment_article_status (blog.test_article_business_logic.ArticleCommentStatusTest.test_closed_comment_article_status)
+测试关闭评论的文章状态正确 ... ok
+test_article_created_as_draft_by_default (blog.test_article_business_logic.ArticleLifecycleTest.test_article_created_as_draft_by_default)
+测试文章创建时默认为草稿状态 ... ok
+test_article_draft_to_published_transition (blog.test_article_business_logic.ArticleLifecycleTest.test_article_draft_to_published_transition)
+测试文章从草稿到发布的状态转换 ... ok
+test_article_published_to_draft_transition (blog.test_article_business_logic.ArticleLifecycleTest.test_article_published_to_draft_transition)
+测试文章从发布到草稿的状态转换 ... ok
+test_article_views_counter_increases (blog.test_article_business_logic.ArticleLifecycleTest.test_article_views_counter_increases)
+测试文章浏览量计数器增加 ... ok
+test_article_views_multiple_increments (blog.test_article_business_logic.ArticleLifecycleTest.test_article_views_multiple_increments)
+测试文章多次浏览时浏览量正确累加 ... ok
+test_draft_article_not_in_public_list (blog.test_article_business_logic.ArticleLifecycleTest.test_draft_article_not_in_public_list)
+测试草稿文章不在公开列表中 ... ok
+test_published_article_is_publicly_accessible (blog.test_article_business_logic.ArticleLifecycleTest.test_published_article_is_publicly_accessible)
+测试已发布文章对所有人可见 ... ok
+test_admin_can_edit_any_article (blog.test_article_business_logic.ArticlePermissionTest.test_admin_can_edit_any_article)
+测试管理员可以编辑任何文章（超级用户权限） ... ok
+test_admin_has_superuser_privilege (blog.test_article_business_logic.ArticlePermissionTest.test_admin_has_superuser_privilege)
+测试管理员有超级用户权限 ... ok
+test_article_author_can_edit (blog.test_article_business_logic.ArticlePermissionTest.test_article_author_can_edit)
+测试文章作者可以编辑（权限检查逻辑） ... ok
+test_author_is_article_owner (blog.test_article_business_logic.ArticlePermissionTest.test_author_is_article_owner)
+测试作者是文章的所有者 ... ok
+test_normal_user_no_staff_privilege (blog.test_article_business_logic.ArticlePermissionTest.test_normal_user_no_staff_privilege)
+测试普通用户没有staff权限 ... ok
+test_other_user_cannot_edit (blog.test_article_business_logic.ArticlePermissionTest.test_other_user_cannot_edit)
+测试其他用户不能编辑（权限检查逻辑） ... ok
+test_other_user_is_not_article_owner (blog.test_article_business_logic.ArticlePermissionTest.test_other_user_is_not_article_owner)
+测试其他用户不是文章的所有者 ... ok
+test_article_absolute_url (blog.test_article_business_logic.ArticleSlugTest.test_article_absolute_url)
+测试文章绝对URL生成 ... ok
+test_article_has_id (blog.test_article_business_logic.ArticleSlugTest.test_article_has_id)
+测试文章有ID（用于URL生成） ... ok
+test_article_has_creation_time (blog.test_article_business_logic.ArticleTimestampTest.test_article_has_creation_time)
+测试文章有创建时间 ... ok
+test_article_has_last_mod_time (blog.test_article_business_logic.ArticleTimestampTest.test_article_has_last_mod_time)
+测试文章有最后修改时间 ... ok
+test_article_last_mod_time_updates (blog.test_article_business_logic.ArticleTimestampTest.test_article_last_mod_time_updates)
+测试文章修改后最后修改时间更新 ... ok
+test_article_type_is_article (blog.test_article_business_logic.ArticleTypeTest.test_article_type_is_article)
+测试文章类型为article ... ok
+test_article_type_is_page (blog.test_article_business_logic.ArticleTypeTest.test_article_type_is_page)
+测试文章类型为page ... ok
+test_articles_and_pages_are_separate (blog.test_article_business_logic.ArticleTypeTest.test_articles_and_pages_are_separate)
+测试文章和页面分开查询 ... ok
+test_article_ids_are_copied_before_the_commit_callback (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_article_ids_are_copied_before_the_commit_callback) ... ok
+test_documented_bulk_write_example_refreshes_an_article (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_documented_bulk_write_example_refreshes_an_article) ... ok
+test_empty_input_does_not_invalidate_global_display_entries (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_empty_input_does_not_invalidate_global_display_entries) ... ok
+test_invalid_article_ids_are_rejected_before_scheduling (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_invalid_article_ids_are_rejected_before_scheduling) ... ok
+test_invalidation_waits_for_commit_and_preserves_unrelated_entries (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_invalidation_waits_for_commit_and_preserves_unrelated_entries) ... ok
+test_repeated_invalidation_is_safe (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_repeated_invalidation_is_safe) ... ok
+test_rollback_preserves_cache (blog.test_comment_interfaces.CommentCacheInvalidationInterfaceTests.test_rollback_preserves_cache) ... ok
+test_anonymous_summary_does_not_inherit_another_users_activity (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_anonymous_summary_does_not_inherit_another_users_activity) ... ok
+test_current_query_cost_is_measured_without_freezing_the_old_algorithm (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_current_query_cost_is_measured_without_freezing_the_old_algorithm) ... ok
+test_empty_summary_is_an_object (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_empty_summary_is_an_object) ... ok
+test_post_toggle_keeps_action_and_summary_fields (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_post_toggle_keeps_action_and_summary_fields) ... ok
+test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_real_ssr_attribute_round_trips_quotes_and_html_in_user_names) ... ok
+test_schema_counts_and_viewer_membership_are_preserved (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_schema_counts_and_viewer_membership_are_preserved) ... ok
+test_ssr_and_get_api_keep_the_same_payload (blog.test_comment_interfaces.ReactionSummaryInterfaceTests.test_ssr_and_get_api_keep_the_same_payload) ... ok
+test_active_user_still_authenticates (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_active_user_still_authenticates) ... ok
+test_inactive_user_is_rejected_by_email (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_inactive_user_is_rejected_by_email) ... ok
+test_inactive_user_is_rejected_by_username (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_inactive_user_is_rejected_by_username) ... ok
+test_missing_username_returns_none_instead_of_raising (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_missing_username_returns_none_instead_of_raising) ... ok
+test_code_cannot_be_replayed_after_successful_reset (accounts.test_auth_hardening.PasswordResetCodeLifecycleTest.test_code_cannot_be_replayed_after_successful_reset) ... ok
+test_code_is_deleted_after_successful_reset (accounts.test_auth_hardening.PasswordResetCodeLifecycleTest.test_code_is_deleted_after_successful_reset) ... ok
+test_forget_password_email_code_error (accounts.tests.AccountTest.test_forget_password_email_code_error) ... ok
+test_forget_password_email_code_fail (accounts.tests.AccountTest.test_forget_password_email_code_fail) ... ok
+test_forget_password_email_code_success (accounts.tests.AccountTest.test_forget_password_email_code_success) ... ok
+test_forget_password_email_not_user (accounts.tests.AccountTest.test_forget_password_email_not_user) ... ok
+test_forget_password_email_success (accounts.tests.AccountTest.test_forget_password_email_success) ... ok
+test_validate_account (accounts.tests.AccountTest.test_validate_account) ... ok
+test_validate_register (accounts.tests.AccountTest.test_validate_register) ... ok
+test_verify_email_code (accounts.tests.AccountTest.test_verify_email_code) ... ok
+test_user_can_be_deactivated (accounts.test_user_business_logic.UserActivationTest.test_user_can_be_deactivated)
+测试用户可以被停用 ... ok
+test_user_can_be_reactivated (accounts.test_user_business_logic.UserActivationTest.test_user_can_be_reactivated)
+测试用户可以被重新激活 ... ok
+test_active_user_can_authenticate (accounts.test_user_business_logic.UserAuthenticationTest.test_active_user_can_authenticate)
+测试激活的用户可以认证 ... ok
+test_inactive_user_cannot_authenticate (accounts.test_user_business_logic.UserAuthenticationTest.test_inactive_user_cannot_authenticate)
+测试未激活的用户不能认证 ... ok
+test_user_can_authenticate_with_correct_credentials (accounts.test_user_business_logic.UserAuthenticationTest.test_user_can_authenticate_with_correct_credentials)
+测试用户可以用正确的凭据认证 ... ok
+test_user_cannot_authenticate_with_wrong_password (accounts.test_user_business_logic.UserAuthenticationTest.test_user_cannot_authenticate_with_wrong_password)
+测试用户不能用错误的密码认证 ... ok
+test_user_cannot_authenticate_with_wrong_username (accounts.test_user_business_logic.UserAuthenticationTest.test_user_cannot_authenticate_with_wrong_username)
+测试用户不能用错误的用户名认证 ... ok
+test_delete_user_cascade_effects (accounts.test_user_business_logic.UserDeletionTest.test_delete_user_cascade_effects)
+测试删除用户的级联效果 ... ok
+test_user_can_be_deleted (accounts.test_user_business_logic.UserDeletionTest.test_user_can_be_deleted)
+测试用户可以被删除 ... ok
+test_password_change_requires_save (accounts.test_user_business_logic.UserPasswordManagementTest.test_password_change_requires_save)
+测试密码修改需要保存 ... ok
+test_set_unusable_password (accounts.test_user_business_logic.UserPasswordManagementTest.test_set_unusable_password)
+测试设置不可用的密码 ... ok
+test_user_can_change_password (accounts.test_user_business_logic.UserPasswordManagementTest.test_user_can_change_password)
+测试用户可以修改密码 ... ok
+test_create_superuser_method (accounts.test_user_business_logic.UserPermissionTest.test_create_superuser_method)
+测试创建超级用户的方法 ... ok
+test_normal_user_has_no_special_privileges (accounts.test_user_business_logic.UserPermissionTest.test_normal_user_has_no_special_privileges)
+测试普通用户没有特殊权限 ... ok
+test_staff_user_is_staff (accounts.test_user_business_logic.UserPermissionTest.test_staff_user_is_staff)
+测试staff用户有staff权限 ... ok
+test_superuser_has_all_privileges (accounts.test_user_business_logic.UserPermissionTest.test_superuser_has_all_privileges)
+测试超级用户有所有权限 ... ok
+test_user_can_be_promoted_to_staff (accounts.test_user_business_logic.UserPermissionTest.test_user_can_be_promoted_to_staff)
+测试用户可以提升为staff ... ok
+test_user_can_be_promoted_to_superuser (accounts.test_user_business_logic.UserPermissionTest.test_user_can_be_promoted_to_superuser)
+测试用户可以提升为超级用户 ... ok
+test_user_can_update_email (accounts.test_user_business_logic.UserProfileTest.test_user_can_update_email)
+测试用户可以更新邮箱 ... ok
+test_user_has_email (accounts.test_user_business_logic.UserProfileTest.test_user_has_email)
+测试用户有邮箱 ... ok
+test_user_has_username (accounts.test_user_business_logic.UserProfileTest.test_user_has_username)
+测试用户有用户名 ... ok
+test_user_string_representation (accounts.test_user_business_logic.UserProfileTest.test_user_string_representation)
+测试用户字符串表示 ... ok
+test_query_active_users (accounts.test_user_business_logic.UserQueryTest.test_query_active_users)
+测试查询激活的用户 ... ok
+test_query_staff_users (accounts.test_user_business_logic.UserQueryTest.test_query_staff_users)
+测试查询staff用户 ... ok
+test_query_superusers (accounts.test_user_business_logic.UserQueryTest.test_query_superusers)
+测试查询超级用户 ... ok
+test_query_user_by_email (accounts.test_user_business_logic.UserQueryTest.test_query_user_by_email)
+测试按邮箱查询用户 ... ok
+test_query_user_by_username (accounts.test_user_business_logic.UserQueryTest.test_query_user_by_username)
+测试按用户名查询用户 ... ok
+test_email_is_stored_correctly (accounts.test_user_business_logic.UserRegistrationTest.test_email_is_stored_correctly)
+测试邮箱正确存储 ... ok
+test_user_can_be_created (accounts.test_user_business_logic.UserRegistrationTest.test_user_can_be_created)
+测试用户可以被创建 ... ok
+test_user_can_check_password (accounts.test_user_business_logic.UserRegistrationTest.test_user_can_check_password)
+测试用户可以验证密码 ... ok
+test_user_is_active_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_active_by_default)
+测试用户默认是激活状态 ... ok
+test_user_is_not_staff_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_not_staff_by_default)
+测试用户默认不是staff ... ok
+test_user_is_not_superuser_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_not_superuser_by_default)
+测试用户默认不是超级用户 ... ok
+test_user_password_is_hashed (accounts.test_user_business_logic.UserRegistrationTest.test_user_password_is_hashed)
+测试用户密码被哈希存储 ... ok
+test_username_must_be_unique (accounts.test_user_business_logic.UserRegistrationTest.test_username_must_be_unique)
+测试用户名必须唯一 ... ok
+test_admin_add_user (accounts.test_admin.BlogUserAdminTest.test_admin_add_user)
+测试通过后台新增用户 ... ok
+test_admin_add_user_page (accounts.test_admin.BlogUserAdminTest.test_admin_add_user_page)
+测试新增用户页面可正常打开（回归：Django 5.1+ 的 usable_password 字段） ... ok
+test_admin_add_user_without_usable_password (accounts.test_admin.BlogUserAdminTest.test_admin_add_user_without_usable_password)
+测试后台新增用户时禁用密码登录（usable_password=false） ... ok
+test_admin_change_user (accounts.test_admin.BlogUserAdminTest.test_admin_change_user)
+测试修改用户 ... ok
+test_admin_filter_by_is_staff (accounts.test_admin.BlogUserAdminTest.test_admin_filter_by_is_staff)
+测试按员工状态过滤 ... ok
+test_admin_forbidden_for_normal_user (accounts.test_admin.BlogUserAdminTest.test_admin_forbidden_for_normal_user)
+测试普通用户无法访问 ... ok
+test_admin_list_display (accounts.test_admin.BlogUserAdminTest.test_admin_list_display)
+测试列表显示字段 ... ok
+test_admin_requires_login (accounts.test_admin.BlogUserAdminTest.test_admin_requires_login)
+测试需要登录才能访问 ... ok
+test_admin_search (accounts.test_admin.BlogUserAdminTest.test_admin_search)
+测试搜索功能 ... ok
+test_get_list_filter (accounts.test_admin.BlogUserAdminTest.test_get_list_filter)
+测试获取列表过滤器 ... ok
+test_get_readonly_fields_for_staff (accounts.test_admin.BlogUserAdminTest.test_get_readonly_fields_for_staff)
+测试员工用户看到的只读字段 ... ok
+test_get_readonly_fields_for_superuser (accounts.test_admin.BlogUserAdminTest.test_get_readonly_fields_for_superuser)
+测试超级管理员看到的只读字段 ... ok
+test_oauth_config_can_be_created (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_can_be_created)
+测试OAuth配置可以被创建 ... ok
+test_oauth_config_has_required_fields (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_has_required_fields)
+测试OAuth配置有必需字段 ... ok
+test_oauth_config_is_enable_field (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_is_enable_field)
+测试OAuth配置的启用字段 ... ok
+test_oauth_config_query_by_type (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_query_by_type)
+测试按类型查询OAuth配置 ... ok
+test_oauth_config_type_uniqueness (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_type_uniqueness)
+测试OAuth配置类型唯一性 ... ok
+test_oauth_user_email_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_email_field)
+测试OAuth用户邮箱字段 ... ok
+test_oauth_user_metadata_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_metadata_field)
+测试OAuth用户元数据字段 ... ok
+test_oauth_token_can_be_updated (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_token_can_be_updated)
+测试OAuth token可以更新 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_user_token_storage)
+测试OAuth token存储 ... ok
+test_bind_oauth_to_existing_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_bind_oauth_to_existing_user)
+测试将OAuth绑定到现有用户 ... ok
+test_change_oauth_binding (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_change_oauth_binding)
+测试更改OAuth绑定 ... ok
+test_unbind_oauth_from_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_unbind_oauth_from_user)
+测试解绑OAuth账号 ... ok
+test_delete_blog_user_cascade_oauth (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_blog_user_cascade_oauth)
+测试删除博客用户级联删除OAuth用户 ... ok
+test_delete_oauth_user (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_oauth_user)
+测试删除OAuth用户 ... ok
+test_query_oauth_user_by_openid (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_openid)
+测试按openid查询OAuth用户 ... ok
+test_query_oauth_user_by_type (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_type)
+测试按类型查询OAuth用户 ... ok
+test_query_oauth_users_by_blog_user (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_users_by_blog_user)
+测试按博客用户查询OAuth用户 ... ok
+test_user_can_have_multiple_oauth_accounts (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_user_can_have_multiple_oauth_accounts)
+测试用户可以关联多个OAuth账号 ... ok
+test_oauth_user_can_be_created (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_can_be_created)
+测试OAuth用户可以被创建 ... ok
+test_oauth_user_has_openid (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_openid)
+测试OAuth用户有openid ... ok
+test_oauth_user_has_type (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_type)
+测试OAuth用户有类型 ... ok
+test_oauth_user_links_to_blog_user (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_links_to_blog_user)
+测试OAuth用户关联到博客用户 ... ok
+test_oauth_user_nickname_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_nickname_storage)
+测试OAuth用户昵称存储 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_token_storage)
+测试OAuth用户token存储 ... ok
+test_base_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_base_do_get_post_passes_timeout) ... ok
+test_mixin_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_mixin_do_get_post_passes_timeout) ... ok
+test_can_comment_on_open_comment_article (comments.test_comment_business_logic.CommentArticleStatusTest.test_can_comment_on_open_comment_article)
+测试可以在开放评论的文章上评论 ... ok
+test_comment_status_closed_validation (comments.test_comment_business_logic.CommentArticleStatusTest.test_comment_status_closed_validation)
+测试关闭评论的文章状态 ... ok
+test_comments_belong_to_correct_article (comments.test_comment_business_logic.CommentArticleStatusTest.test_comments_belong_to_correct_article)
+测试评论属于正确的文章 ... ok
+test_comment_article_relationship (comments.test_comment_business_logic.CommentCreationTest.test_comment_article_relationship)
+测试评论与文章的关系 ... ok
+test_comment_author_is_correct (comments.test_comment_business_logic.CommentCreationTest.test_comment_author_is_correct)
+测试评论作者正确 ... ok
+test_comment_created_with_required_fields (comments.test_comment_business_logic.CommentCreationTest.test_comment_created_with_required_fields)
+测试评论创建包含必需字段 ... ok
+test_comment_has_creation_time (comments.test_comment_business_logic.CommentCreationTest.test_comment_has_creation_time)
+测试评论有创建时间 ... ok
+test_comment_can_be_deleted (comments.test_comment_business_logic.CommentDeletionTest.test_comment_can_be_deleted)
+测试评论可以被删除 ... ok
+test_deleting_parent_comment_with_replies (comments.test_comment_business_logic.CommentDeletionTest.test_deleting_parent_comment_with_replies)
+测试删除有回复的父评论 ... ok
+test_comment_approved_directly_when_no_review_required (comments.test_comment_business_logic.CommentModerationTest.test_comment_approved_directly_when_no_review_required)
+测试不需要审核时评论直接通过 ... ok
+test_comment_can_be_approved (comments.test_comment_business_logic.CommentModerationTest.test_comment_can_be_approved)
+测试评论可以被批准 ... ok
+test_comment_can_be_rejected (comments.test_comment_business_logic.CommentModerationTest.test_comment_can_be_rejected)
+测试评论可以被拒绝 ... ok
+test_comment_pending_by_default_when_review_required (comments.test_comment_business_logic.CommentModerationTest.test_comment_pending_by_default_when_review_required)
+测试需要审核时评论默认为待审状态 ... ok
+test_only_approved_comments_in_public_list (comments.test_comment_business_logic.CommentModerationTest.test_only_approved_comments_in_public_list)
+测试只有已批准的评论在公开列表中 ... ok
+test_comment_ordering (comments.test_comment_business_logic.CommentQueryTest.test_comment_ordering)
+测试评论排序 ... ok
+test_query_comments_by_article (comments.test_comment_business_logic.CommentQueryTest.test_query_comments_by_article)
+测试按文章查询评论 ... ok
+test_query_comments_by_author (comments.test_comment_business_logic.CommentQueryTest.test_query_comments_by_author)
+测试按作者查询评论 ... ok
+test_query_root_comments_only (comments.test_comment_business_logic.CommentQueryTest.test_query_root_comments_only)
+测试只查询根评论（无父评论的评论） ... ok
+test_comment_can_have_no_parent (comments.test_comment_business_logic.CommentReplyTest.test_comment_can_have_no_parent)
+测试评论可以没有父评论（根评论） ... ok
+test_comment_can_have_parent (comments.test_comment_business_logic.CommentReplyTest.test_comment_can_have_parent)
+测试评论可以有父评论（回复） ... ok
+test_multiple_replies_to_same_comment (comments.test_comment_business_logic.CommentReplyTest.test_multiple_replies_to_same_comment)
+测试同一评论的多个回复 ... ok
+test_nested_comment_structure (comments.test_comment_business_logic.CommentReplyTest.test_nested_comment_structure)
+测试嵌套评论结构 ... ok
+test_parent_comment_has_replies (comments.test_comment_business_logic.CommentReplyTest.test_parent_comment_has_replies)
+测试父评论有回复 ... ok
+test_delete_model_invalidates_after_delete (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_delete_model_invalidates_after_delete) ... ok
+test_delete_queryset_captures_ids_before_delete (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_delete_queryset_captures_ids_before_delete) ... ok
+test_disable_action_invalidates_after_commit (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_disable_action_invalidates_after_commit) ... ok
+test_enable_action_invalidates_after_commit (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_enable_action_invalidates_after_commit) ... ok
+test_anonymous_has_reacted_is_false (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_anonymous_has_reacted_is_false) ... ok
+test_counts_and_top10_users_are_preserved (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_counts_and_top10_users_are_preserved) ... ok
+test_empty_comment_returns_empty_object (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_empty_comment_returns_empty_object) ... ok
+test_optimized_summary_uses_one_query (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_optimized_summary_uses_one_query) ... ok
+test_utils (djangoblog.tests.DjangoBlogTest.test_utils) ... ok
+test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)
+测试版权声明已添加 ... ok
+test_copyright_plugin_loaded (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_plugin_loaded)
+测试版权插件已加载 ... ok
+test_plugin_config (djangoblog.test_plugins.BasePluginTest.test_plugin_config)
+测试插件配置 ... ok
+test_plugin_get_context (djangoblog.test_plugins.BasePluginTest.test_plugin_get_context)
+测试获取插件信息 ... ok
+test_plugin_initialization (djangoblog.test_plugins.BasePluginTest.test_plugin_initialization)
+测试插件初始化 ... ok
+test_plugin_register_hooks (djangoblog.test_plugins.BasePluginTest.test_plugin_register_hooks)
+测试插件注册钩子 ... ok
+test_external_links_plugin_loaded (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_plugin_loaded)
+测试外部链接插件已加载 ... ok
+test_external_links_processing (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_processing)
+测试外部链接处理 ... ok
+test_apply_filters (djangoblog.test_plugins.PluginHooksTest.test_apply_filters)
+测试应用过滤器 ... ok
+test_hook_error_handling (djangoblog.test_plugins.PluginHooksTest.test_hook_error_handling)
+测试钩子错误处理 ... Error applying filter hook 'the_content' callback 'error_hook': Hook error
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 51, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\test_plugins.py", line 78, in error_hook
+    raise Exception("Hook error")
+Exception: Hook error
+ok
+test_multiple_hooks (djangoblog.test_plugins.PluginHooksTest.test_multiple_hooks)
+测试多个钩子 ... ok
+test_register_hook (djangoblog.test_plugins.PluginHooksTest.test_register_hook)
+测试注册钩子 ... ok
+test_run_action (djangoblog.test_plugins.PluginHooksTest.test_run_action)
+测试运行动作钩子 ... ok
+test_load_plugins (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins)
+测试加载插件 ... ok
+test_load_plugins_handles_errors (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins_handles_errors)
+测试插件加载错误处理 ... ok
+test_calculate_reading_time (djangoblog.test_plugins.ReadingTimePluginTest.test_calculate_reading_time)
+测试计算阅读时间 ... ok
+test_reading_time_plugin_loaded (djangoblog.test_plugins.ReadingTimePluginTest.test_reading_time_plugin_loaded)
+测试阅读时间插件已加载 ... ok
+test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)
+测试 SEO meta 标签 ... ok
+test_seo_optimizer_plugin_loaded (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_optimizer_plugin_loaded)
+测试 SEO 优化插件已加载 ... ok
+test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)
+测试浏览次数增加 ... ok
+test_view_count_plugin_loaded (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_plugin_loaded)
+测试浏览次数插件已加载 ... ok
+test_action_error_without_callback_name_does_not_block_next_action (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_action_error_without_callback_name_does_not_block_next_action) ... ok
+test_filter_error_without_callback_name_does_not_block_next_filter (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_filter_error_without_callback_name_does_not_block_next_filter) ... ok
+test_reset_code_keeps_six_ascii_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_keeps_six_ascii_digits) ... ok
+test_reset_code_preserves_leading_zero_and_repeated_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_preserves_leading_zero_and_repeated_digits) ... ok
+test_spider_notify_sends_urls_with_five_second_timeout (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spider_notify_sends_urls_with_five_second_timeout) ... ok
+test_spider_timeout_is_logged_without_raising (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spider_timeout_is_logged_without_raising) ... ok
+test_both_icon_formats_and_touch_icon_use_versioned_asset_urls (blog.test_brand_assets.BrandAssetTests.test_both_icon_formats_and_touch_icon_use_versioned_asset_urls) ... ok
+test_favicon_is_self_contained_and_has_a_reusable_mark (blog.test_brand_assets.BrandAssetTests.test_favicon_is_self_contained_and_has_a_reusable_mark) ... ok
+test_page_mark_reuses_the_same_svg_and_is_decorative (blog.test_brand_assets.BrandAssetTests.test_page_mark_reuses_the_same_svg_and_is_decorative) ... ok
+test_png_fallback_and_touch_icon_have_declared_dimensions (blog.test_brand_assets.BrandAssetTests.test_png_fallback_and_touch_icon_have_declared_dimensions) ... ok
+test_relay_mark_preserves_the_approved_b_geometry (blog.test_brand_assets.BrandAssetTests.test_relay_mark_preserves_the_approved_b_geometry) ... ok
+test_external_return_target_still_falls_back_to_home (accounts.test_login_page.LoginPageTests.test_external_return_target_still_falls_back_to_home) ... ok
+test_failed_authentication_does_not_log_in_or_clear_sidebar_cache (accounts.test_login_page.LoginPageTests.test_failed_authentication_does_not_log_in_or_clear_sidebar_cache) ... ok
+test_failed_post_preserves_remember_selection (accounts.test_login_page.LoginPageTests.test_failed_post_preserves_remember_selection) ... ok
+test_initial_authentication_form_receives_the_request (accounts.test_login_page.LoginPageTests.test_initial_authentication_form_receives_the_request) ... ok
+test_invalid_credentials_keep_username_but_never_render_password (accounts.test_login_page.LoginPageTests.test_invalid_credentials_keep_username_but_never_render_password) ... ok
+test_login_uses_an_immediate_nonblocking_bridge_not_a_loading_spinner (accounts.test_login_page.LoginPageTests.test_login_uses_an_immediate_nonblocking_bridge_not_a_loading_spinner) ... ok
+test_missing_fields_have_accessible_inline_errors (accounts.test_login_page.LoginPageTests.test_missing_fields_have_accessible_inline_errors) ... ok
+test_native_form_keeps_csrf_required_fields_and_password_fallback (accounts.test_login_page.LoginPageTests.test_native_form_keeps_csrf_required_fields_and_password_fallback) ... ok
+test_native_post_still_requires_csrf (accounts.test_login_page.LoginPageTests.test_native_post_still_requires_csrf) ... Forbidden (CSRF cookie not set.): /login/
+ok
+test_only_configured_oauth_provider_links_are_rendered (accounts.test_login_page.LoginPageTests.test_only_configured_oauth_provider_links_are_rendered) ... ok
+test_other_account_pages_share_the_launcher_layout (accounts.test_login_page.LoginPageTests.test_other_account_pages_share_the_launcher_layout) ... ok
+test_return_target_is_encoded_in_action_and_kept_in_hidden_field (accounts.test_login_page.LoginPageTests.test_return_target_is_encoded_in_action_and_kept_in_hidden_field) ... ok
+test_return_target_survives_failed_post_context (accounts.test_login_page.LoginPageTests.test_return_target_survives_failed_post_context) ... ok
+test_successful_login_keeps_native_redirect_session_and_remember_cookie (accounts.test_login_page.LoginPageTests.test_successful_login_keeps_native_redirect_session_and_remember_cookie) ... ok
+test_account_links_use_full_navigation_not_body_swaps (accounts.test_account_pages.AccountLauncherPageTests.test_account_links_use_full_navigation_not_body_swaps) ... ok
+test_account_pages_have_distinct_layouts_and_labelled_wide_actions (accounts.test_account_pages.AccountLauncherPageTests.test_account_pages_have_distinct_layouts_and_labelled_wide_actions) ... ok
+test_code_button_uses_the_existing_endpoint_and_real_async_feedback (accounts.test_account_pages.AccountLauncherPageTests.test_code_button_uses_the_existing_endpoint_and_real_async_feedback) ... ok
+test_forms_keep_native_post_csrf_field_names_order_and_required_flags (accounts.test_account_pages.AccountLauncherPageTests.test_forms_keep_native_post_csrf_field_names_order_and_required_flags) ... ok
+test_passwords_are_native_masked_without_javascript_and_never_prefilled (accounts.test_account_pages.AccountLauncherPageTests.test_passwords_are_native_masked_without_javascript_and_never_prefilled) ... ok
+test_register_errors_preserve_safe_nonsecret_fields_and_help_associations (accounts.test_account_pages.AccountLauncherPageTests.test_register_errors_preserve_safe_nonsecret_fields_and_help_associations) ... ok
+test_register_has_one_board_with_grouped_fields_and_accessible_flow_control (accounts.test_account_pages.AccountLauncherPageTests.test_register_has_one_board_with_grouped_fields_and_accessible_flow_control) ... ok
+test_reset_errors_keep_email_and_code_without_passwords (accounts.test_account_pages.AccountLauncherPageTests.test_reset_errors_keep_email_and_code_without_passwords) ... ok
+test_transition_bootstrap_is_early_and_seam_is_decorative (accounts.test_account_pages.AccountLauncherPageTests.test_transition_bootstrap_is_early_and_seam_is_decorative) ... ok
+test_validate_comment (comments.tests.CommentsTest.test_validate_comment) ... ok
+test_closed_article_returns_form_error (comments.test_views.CommentReplyValidationTest.test_closed_article_returns_form_error)
+R3：关闭评论的文章提交应回显表单错误，而非 500 ... ok
+test_cross_article_reply_rejected (comments.test_views.CommentReplyValidationTest.test_cross_article_reply_rejected)
+R1：跨文章回复应被拒绝，不得在目标文章下创建回复 ... ok
+test_invalid_parent_comment_id_rejected (comments.test_views.CommentReplyValidationTest.test_invalid_parent_comment_id_rejected)
+R2：无效父评论 ID 应返回表单错误，而非 500 ... ok
+test_sql_injection_protection (comments.test_views.CommentSecurityTest.test_sql_injection_protection)
+测试 SQL 注入防护 ... ok
+test_xss_protection (comments.test_views.CommentSecurityTest.test_xss_protection)
+测试 XSS 防护 ... ok
+test_comment_rate_limit (comments.test_views.CommentSpamTest.test_comment_rate_limit)
+测试评论频率限制 ... ok
+test_duplicate_comment (comments.test_views.CommentSpamTest.test_duplicate_comment)
+测试重复评论 ... ok
+test_comment_display_on_article (comments.test_views.CommentViewTest.test_comment_display_on_article)
+测试评论在文章页显示 ... ok
+test_comment_moderation (comments.test_views.CommentViewTest.test_comment_moderation)
+测试评论审核 ... ok
+test_disabled_comment_not_display (comments.test_views.CommentViewTest.test_disabled_comment_not_display)
+测试未启用的评论不显示 ... ok
+test_post_comment_authenticated (comments.test_views.CommentViewTest.test_post_comment_authenticated)
+测试已登录用户发表评论 ... ok
+test_post_comment_empty_body (comments.test_views.CommentViewTest.test_post_comment_empty_body)
+测试提交空评论 ... ok
+test_post_comment_invalid_article (comments.test_views.CommentViewTest.test_post_comment_invalid_article)
+测试对不存在的文章评论 ... HTTP 404 Error: No Article matches the given query.
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 90, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\djangoblog\base_views.py", line 61, in dispatch
+    return super().dispatch(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\comments\views.py", line 52, in form_valid
+    article = get_object_or_404(Article, pk=article_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\软件工程方法学\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 92, in get_object_or_404
+    raise Http404(
+django.http.response.Http404: No Article matches the given query.
+Not Found: /article/99999/postcomment
+ok
+test_post_comment_unauthenticated (comments.test_views.CommentViewTest.test_post_comment_unauthenticated)
+测试未登录用户发表评论 ... ok
+test_post_reply_comment (comments.test_views.CommentViewTest.test_post_reply_comment)
+测试回复评论 ... ok
+
+----------------------------------------------------------------------
+Ran 357 tests in 4.247s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

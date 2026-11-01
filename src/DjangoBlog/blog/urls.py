@@ -1,6 +1,6 @@
 # SZX（第7—8周）：把 blog 的公开阅读、上传和管理操作映射到视图；名称供 reverse 使用。
 from django.urls import path
-from django.views.decorators.cache import cache_page
+from django.views.decorators.cache import never_cache
 
 from . import views
 
@@ -45,12 +45,10 @@ urlpatterns = [
         r'tag/<slug:tag_name>/<int:page>.html',
         views.TagDetailView.as_view(),
         name='tag_detail_page'),
-    # SZX：归档视图外层的 cache_page 将页面响应缓存一小时。
+    # SZX：归档保留 archives 文章数据缓存，HTML 每次渲染，侧栏不受旧整页响应遮挡。
     path(
         'archives.html',
-        cache_page(
-            60 * 60)(
-            views.ArchivesView.as_view()),
+        never_cache(views.ArchivesView.as_view()),
         name='archives'),
     path(
         'links.html',

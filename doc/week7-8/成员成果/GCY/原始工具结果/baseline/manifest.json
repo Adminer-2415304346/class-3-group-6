@@ -1,0 +1,35 @@
+{
+  "phase": "baseline",
+  "app": "djangoblog",
+  "scan_dir": "src\\DjangoBlog\\djangoblog",
+  "start_time": "2026-10-31 20:41:06",
+  "commands": [
+    {
+      "tool": "ruff",
+      "command": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\.venv-quality\\Scripts\\ruff.exe check E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog --select E,F,I,B,C90 --config line-length = 100 --config lint.mccabe.max-complexity = 10 --exclude **/migrations/**,**/tests/**,**/test_*.py,**/tests.py --output-format json",
+      "returncode": 1,
+      "elapsed_sec": 0.1,
+      "output": "ruff.json"
+    },
+    {
+      "tool": "bandit",
+      "command": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\.venv-quality\\Scripts\\bandit.exe -r E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog --ignore-nosec -x djangoblog/migrations,djangoblog/tests,djangoblog/tests.py,djangoblog/test_*.py -f json",
+      "returncode": 1,
+      "elapsed_sec": 0.56,
+      "output": "bandit.json"
+    },
+    {
+      "tool": "ruff",
+      "version_cmd": true,
+      "returncode": 0,
+      "version_output": "ruff 0.17.1"
+    },
+    {
+      "tool": "bandit",
+      "version_cmd": true,
+      "returncode": 0,
+      "version_output": "python.exe E:\\新建文件夹 (5)\\Git\\class-3-group-6\\.venv-quality\\Scripts\\bandit 1.9.4\n  python version = 3.14.7 (main, Aug 25 2026, 14:01:25) [MSC v.1944 64 bit (AMD64)]"
+    }
+  ],
+  "end_time": "2026-10-31 20:41:07"
+}

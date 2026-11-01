@@ -1,0 +1,30 @@
+{
+  "phase": "before",
+  "timestamp_utc": "2026-10-31T11:00:42.289285+00:00",
+  "base_commit": "11e677cfbf326567be8ea395d65b6e60dc595594",
+  "python": "3.12.7",
+  "command": [
+    "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+    "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "comments.test_reaction_snapshot",
+    "blog.test_comment_lifecycle"
+  ],
+  "returncode": 1,
+  "test_count": 18,
+  "failure_count": 20,
+  "reaction_query_counts": null,
+  "source_sha256": {
+    "src/DjangoBlog/comments/models.py": "b223ec20209bd929e9f2f412239e4f397885e2f31a7800a6ef872a8234e9d25a",
+    "src/DjangoBlog/comments/admin.py": "b040c694922539e3c53fe7427f0b790906fb0a8ff15f9b64cfc56504699f3fc4",
+    "src/DjangoBlog/comments/test_quality_r45.py": "ccb15aae1ae5744b0e32d06151b673493d5ca595c4a94674badc2dcb67423d8c",
+    "src/DjangoBlog/comments/test_reaction_snapshot.py": "8d23ad52f02df5efe7e5b3a6f8724ace749f78d018c9dfa6195bc869d9c11069",
+    "src/DjangoBlog/blog/comment_cache.py": "1fd2bbcd5ef5f4d51c8f4b391eae2d9105e42fb30b9739003408f22ce323ef34",
+    "src/DjangoBlog/blog/urls.py": "71aa429b4c409d61cdda93a6ebc75ba4ed402423290667766489d3105a8f597d",
+    "src/DjangoBlog/blog/test_comment_lifecycle.py": "65ff7a7f45339a2674b6338a646f1d563f8dea27e0c062965754322cb6427c8e",
+    "src/DjangoBlog/blog/test_week78_quality.py": "aa0dc1921c81555df29c888c9ea4d4fd7647856ec3eab0a696b8b0e037f1a658",
+    "src/DjangoBlog/djangoblog/blog_signals.py": "55d65f9baeae032780b7ec4ce88f0ebfe91e6a9252fd4775d2bb685b4bc5c85b",
+    "doc/week7-8/tools/run_isolated_tests.py": "9f0f03d82d30ce78ae4522c0daf9a85046f9dea8af032fd93eac685d190cbc8b"
+  },
+  "isolation": "SQLite memory; LocMem cache/mail; SimpleEngine; no ES/cloudflare; HTTP/socket blocked; synchronous mail thread adapter; no live services.",
+  "scope_note": "App integration and controlled interleaving, not MySQL/Redis/CDN validation."
+}

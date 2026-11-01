@@ -1,3 +1,8 @@
+# GCY（模块层）：Elasticsearch 检索后端（Haystack 适配层）。settings
+# 检测到 DJANGO_ELASTICSEARCH_HOST 时启用本引擎；把 haystack 的
+# update/search 调用转译为 elasticsearch-dsl 的 ArticleDocument 操作。
+# 依赖外部 ES 集群与 blog.documents 中的文档映射；离线/测试环境不提供
+# ES 时不应启用本引擎。
 from django.utils.encoding import force_str
 from elasticsearch_dsl import Q
 from haystack.backends import BaseEngine, BaseSearchBackend, BaseSearchQuery, log_query
@@ -93,6 +98,10 @@ class ElasticSearchBackend(BaseSearchBackend):
                      .query('bool', filter=[q]) \
                      .filter('term', status='p') \
                      .filter('term', type='a')
+        # GCY（关键逻辑）：ES 侧可见性过滤固定为 status='p' 且 type='a'
+        # （仅发布状态的文章），与 Whoosh 后端"依赖索引时的数据范围、
+        # 页面过滤由调用方负责"的策略不同——两个后端对"哪些文档可被
+        # 检索"的执行位置不一致，是后端差异点，改动需两侧同步。
 
         # 添加高亮配置
         if highlight:

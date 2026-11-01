@@ -1,0 +1,124 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Found 22 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+test_utils (djangoblog.tests.DjangoBlogTest.test_utils) ... ok
+test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)
+测试版权声明已添加 ... ⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_copyright_plugin_loaded (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_plugin_loaded)
+测试版权插件已加载 ... ok
+test_plugin_config (djangoblog.test_plugins.BasePluginTest.test_plugin_config)
+测试插件配置 ... ok
+test_plugin_get_context (djangoblog.test_plugins.BasePluginTest.test_plugin_get_context)
+测试获取插件信息 ... ok
+test_plugin_initialization (djangoblog.test_plugins.BasePluginTest.test_plugin_initialization)
+测试插件初始化 ... ok
+test_plugin_register_hooks (djangoblog.test_plugins.BasePluginTest.test_plugin_register_hooks)
+测试插件注册钩子 ... ok
+test_external_links_plugin_loaded (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_plugin_loaded)
+测试外部链接插件已加载 ... ok
+test_external_links_processing (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_processing)
+测试外部链接处理 ... ok
+test_apply_filters (djangoblog.test_plugins.PluginHooksTest.test_apply_filters)
+测试应用过滤器 ... ok
+test_hook_error_handling (djangoblog.test_plugins.PluginHooksTest.test_hook_error_handling)
+测试钩子错误处理 ... Error applying filter hook 'the_content' callback 'error_hook': Hook error
+Traceback (most recent call last):
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 41, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\djangoblog\test_plugins.py", line 78, in error_hook
+    raise Exception("Hook error")
+Exception: Hook error
+ok
+test_multiple_hooks (djangoblog.test_plugins.PluginHooksTest.test_multiple_hooks)
+测试多个钩子 ... ok
+test_register_hook (djangoblog.test_plugins.PluginHooksTest.test_register_hook)
+测试注册钩子 ... ok
+test_run_action (djangoblog.test_plugins.PluginHooksTest.test_run_action)
+测试运行动作钩子 ... ok
+test_load_plugins (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins)
+测试加载插件 ... ok
+test_load_plugins_handles_errors (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins_handles_errors)
+测试插件加载错误处理 ... ok
+test_calculate_reading_time (djangoblog.test_plugins.ReadingTimePluginTest.test_calculate_reading_time)
+测试计算阅读时间 ... ok
+test_reading_time_plugin_loaded (djangoblog.test_plugins.ReadingTimePluginTest.test_reading_time_plugin_loaded)
+测试阅读时间插件已加载 ... ok
+test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)
+测试 SEO meta 标签 ... ⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_seo_optimizer_plugin_loaded (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_optimizer_plugin_loaded)
+测试 SEO 优化插件已加载 ... ok
+test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)
+测试浏览次数增加 ... ⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\LENOVO\AppData\Local\Temp\week78-gcy-review-20261031-wmdr194h\baseline\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_view_count_plugin_loaded (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_plugin_loaded)
+测试浏览次数插件已加载 ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.438s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+ISOLATED_TEST_FAILURES=0

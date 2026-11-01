@@ -64,15 +64,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('app', choices=OWNERS)
     parser.add_argument('stage', choices=['baseline', 'after'])
+    parser.add_argument('--output-dir', type=Path,
+                        help='New evidence directory, absolute or relative to the repository root')
     args = parser.parse_args()
-    # Exclude generated migrations and tests, but include commands/template tags and package entries.
+    # Exclude generated migrations/tests; include commands, template tags and package entries.
     all_files = sorted((PROJECT / args.app).rglob('*.py'))
     files = [path for path in all_files if 'migrations' not in path.parts
              and 'tests' not in path.parts and not path.name.startswith('test')]
     excluded = [path.relative_to(PROJECT).as_posix() for path in all_files if path not in files]
     output = ROOT / 'doc' / 'week7-8' / '成员成果' / OWNERS[args.app] / '原始工具结果' / args.stage
+    if args.output_dir is not None:
+        output = (ROOT / args.output_dir).resolve()
     if output.exists():
-        parser.error(f'Existing evidence is preserved: {output}. Move it explicitly before a new run.')
+        parser.error(f'Existing evidence is preserved: {output}. Choose a new directory.')
     expected = {'ruff': '0.17.1', 'bandit': '1.9.4'}
     actual = {name: version(name) for name in expected}
     if actual != expected:
@@ -94,7 +98,8 @@ def main():
         'timestamp_utc': datetime.now(timezone.utc).isoformat(), 'base_commit': commit,
         'python': platform.python_version(), 'tools': actual,
         'config_sha256': {name: digest(TOOLS / name) for name in ['ruff.toml', 'bandit.yaml']},
-        'scope': 'App Python excluding migrations and test*.py/tests directories; no Django startup',
+        'scope': ('App Python excluding migrations and test*.py/tests directories; '
+                  'no Django startup'),
         'excluded_files': excluded, 'files': items, 'runs': results,
     }
     with (output / 'manifest.json').open('w', encoding='utf-8', newline='\n') as stream:
@@ -106,7 +111,8 @@ def main():
     ruff = json.loads((output / 'ruff.json').read_text(encoding='utf-8'))
     bandit = json.loads((output / 'bandit.json').read_text(encoding='utf-8'))
     summary = {'app': args.app, 'stage': args.stage, 'files': len(files),
-               'ruff_findings': len(ruff), 'ruff_rules': dict(Counter(item['code'] for item in ruff)),
+               'ruff_findings': len(ruff),
+               'ruff_rules': dict(Counter(item['code'] for item in ruff)),
                'bandit_findings': len(bandit['results']),
                'bandit_errors': bandit['errors']}
     print(json.dumps(summary, ensure_ascii=False))

@@ -1,0 +1,153 @@
+{
+  "operator": "SZX",
+  "app_owner": "YFY",
+  "stage": "after",
+  "source_commit": "3f8c7a2555751dfafc412f27904eb52328786d8a",
+  "timestamp_utc": "2026-11-01T16:18:51.063888+00:00",
+  "python": "3.12.14",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "accounts production Python only; full Python package layout retained for import classification; migrations/tests excluded; no Django startup",
+  "files": [
+    {
+      "path": "accounts/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_comparison": "exact"
+    },
+    {
+      "path": "accounts/admin.py",
+      "sha256": "fc73699f07e977fde9231d44cf8b9b4cf547ffaf4d2a1fc090c84cec08fbbabb",
+      "original_sha256": "c072d46a5dd7ca83ee5e4830f2379a7e23a4b232f00bdd315b8c7b891be52ac7",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/apps.py",
+      "sha256": "8cea912c6e9b5d1b784ef8d72ee8cc59a46a369b0e2af143fe1f77a1665bbaf9",
+      "original_sha256": "2d338a08be29e1eb9dc2711d356e62925e511e1978aac2bce4913cf91ad89bfb",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/forms.py",
+      "sha256": "9421ea6020acfa060c52e258a1bdc889334b9e3455fd158e643c677e0d8a0e11",
+      "original_sha256": "b83a21d8f9c1dc985f3df87cf1d43c1aa263c3ee8af05a717c114c3307bfee3c",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/models.py",
+      "sha256": "72debeb8979e07350757f7b6dfc7bcf3a0eccf3603ad95f0b11ac4c3b562ee1f",
+      "original_sha256": "2a2fe8fbb35db27600d4c50f620b2475ee0d940b5f85f0bec7e214382a12da03",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/templatetags/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_comparison": "exact"
+    },
+    {
+      "path": "accounts/urls.py",
+      "sha256": "25fb1a0229df2fad0967b1c56f8634b20136ae6b1e665fb13446bb477ae1fa49",
+      "original_sha256": "8bfaf3546dcbdf61c76bf8f72b563dbe61ea7e04bfe3de539b264d8b55a83195",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/user_login_backend.py",
+      "sha256": "c9bc1e19a9bde7596dac3c156bfc8b121eb3265d87fb3b2636cdfa60a3844ce2",
+      "original_sha256": "3ea8839e58fe936b06fef37635057f0ac09ac6cd2c9fa4beb2d6f43da5638c16",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/utils.py",
+      "sha256": "0d9b80590bbec9f0eca0b10bcfcf204a8c664ca5e36e0430f635791c1760a8da",
+      "original_sha256": "f5971c103eca202364cc50546170af482b7144980308b8fd932803872963505c",
+      "original_comparison": "LF/CRLF only"
+    },
+    {
+      "path": "accounts/views.py",
+      "sha256": "fd1d53630051d33cfc383096303ebef34622da92bb74cd616fbc8ef58dd567f0",
+      "original_sha256": "564d90002d8582574a722124ff013c2a5401e09310766cf0ee9bcb5b86a90861",
+      "original_comparison": "LF/CRLF only"
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\2026-11-02-szx-same-config\\after\\ruff.json",
+        "accounts/__init__.py",
+        "accounts/admin.py",
+        "accounts/apps.py",
+        "accounts/forms.py",
+        "accounts/models.py",
+        "accounts/templatetags/__init__.py",
+        "accounts/urls.py",
+        "accounts/user_login_backend.py",
+        "accounts/utils.py",
+        "accounts/views.py"
+      ],
+      "cwd": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-accounts-same-config-_qpj0wyf\\after\\src\\DjangoBlog",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\2026-11-02-szx-same-config\\after\\bandit.json",
+        "accounts/__init__.py",
+        "accounts/admin.py",
+        "accounts/apps.py",
+        "accounts/forms.py",
+        "accounts/models.py",
+        "accounts/templatetags/__init__.py",
+        "accounts/urls.py",
+        "accounts/user_login_backend.py",
+        "accounts/utils.py",
+        "accounts/views.py"
+      ],
+      "cwd": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-accounts-same-config-_qpj0wyf\\after\\src\\DjangoBlog",
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\YFY\\原始工具结果\\2026-11-02-szx-same-config\\after\\bandit.json\r\n"
+    }
+  },
+  "summary": {
+    "files": 10,
+    "ruff": 8,
+    "bandit": 0,
+    "ruff_rules": {
+      "I001": 4,
+      "E501": 3,
+      "F401": 1
+    },
+    "bandit_errors": 0
+  },
+  "tool_json_raw_sha256": {
+    "ruff": "4843c1cb2a408f9264585d83a4daf01daaaceb910bf1c90fd84fab3c06787b80",
+    "bandit": "867b29128253ca3cdcd1666b7d1a4a16ea1b3636ce73d328134ea6aa6e368020"
+  },
+  "text_storage": "UTF-8 LF; only JSON formatting newlines normalized for Git storage."
+}

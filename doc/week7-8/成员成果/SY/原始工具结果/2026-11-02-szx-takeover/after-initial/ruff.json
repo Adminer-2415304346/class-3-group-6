@@ -1,0 +1,21 @@
+[
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 71
+    },
+    "filename": "D:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\servermanager\\api\\commonapi.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 71
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 71,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  }
+]

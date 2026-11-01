@@ -1,0 +1,14 @@
+2026-11-02 | DOCX schema validation after native Word field update
+Canonical XSD imports resolved with temporary local XML catalog.
+Typography: 宋体 / Times New Roman; all text explicitly black (000000).
+Visual review: all 16 pages across four contact sheets inspected.
+
+doc/week7-8/AI Agent工程实践-Python语言编码规范.docx
+SHA256=5a23b0a1544b0a668f343ce1378ba418fa50554751e87dcbf0ce1326e86b9892
+Paragraphs: 0 → 110 (+110)
+All validations PASSED!
+
+doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx
+SHA256=df9a571a1d5e72c7731d9ff0ec2443d2a54f786f8aea62c9327de779bd272e2d
+Paragraphs: 0 → 811 (+811)
+All validations PASSED!

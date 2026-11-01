@@ -1,0 +1,662 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 34,
+      "row": 1
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\apps.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.apps import AppConfig\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 3
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 11
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\error_views.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\n\nfrom django.shortcuts import render\nfrom django.utils.translation import gettext_lazy as _\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 13
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 9
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 8
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib import admin\nfrom django.contrib.admin.models import DELETION\nfrom django.contrib.contenttypes.models import ContentType\nfrom django.urls import NoReverseMatch, reverse\nfrom django.utils.encoding import force_str\nfrom django.utils.html import escape\nfrom django.utils.safestring import mark_safe\nfrom django.utils.translation import gettext_lazy as _\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 11
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 55,
+      "row": 13
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\n\nfrom django.db import models\nfrom django.shortcuts import get_object_or_404\nfrom django.utils.timezone import now\nfrom django.utils.translation import gettext_lazy as _\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 15
+          },
+          "location": {
+            "column": 1,
+            "row": 9
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 9
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 9,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 88,
+      "row": 76
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": null,
+    "location": {
+      "column": 84,
+      "row": 76
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 76,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 76,
+      "row": 77
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": null,
+    "location": {
+      "column": 70,
+      "row": 77
+    },
+    "message": "Line too long (112 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 77,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 90,
+      "row": 128
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": null,
+    "location": {
+      "column": 70,
+      "row": 128
+    },
+    "message": "Line too long (130 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 128,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 69,
+      "row": 166
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py",
+    "fix": null,
+    "location": {
+      "column": 62,
+      "row": 166
+    },
+    "message": "Line too long (114 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 166,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 115,
+      "row": 31
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\base_plugin.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 31
+    },
+    "message": "Line too long (114 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 31,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 33,
+      "row": 3
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\loader.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\nimport os\n\nfrom django.conf import settings\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 5
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 110,
+      "row": 35
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\loader.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 35
+    },
+    "message": "Line too long (109 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 35,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 111,
+      "row": 358
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\settings.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 358
+    },
+    "message": "Line too long (110 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 358,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 39,
+      "row": 38
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from __future__ import absolute_import, division, print_function, unicode_literals\n\nimport json\nimport os\nimport re\nimport shutil\nimport threading\nimport warnings\nfrom datetime import datetime\n\nimport six\nfrom django.conf import settings\nfrom django.core.exceptions import ImproperlyConfigured\nfrom django.utils.encoding import force_str\nfrom haystack.backends import (\n    BaseEngine,\n    BaseSearchBackend,\n    BaseSearchQuery,\n    EmptyResults,\n    log_query,\n)\nfrom haystack.constants import DJANGO_CT, DJANGO_ID, ID\nfrom haystack.exceptions import MissingDependency, SearchBackendError, SkipDocument\nfrom haystack.inputs import Clean, Exact, PythonData, Raw\nfrom haystack.models import SearchResult\nfrom haystack.utils import get_identifier, get_model_ct\nfrom haystack.utils import log as logging\nfrom haystack.utils.app_loading import haystack_get_model\nfrom jieba.analyse import ChineseAnalyzer\nfrom whoosh import index\nfrom whoosh.fields import (\n    BOOLEAN,\n    DATETIME,\n    IDLIST,\n    KEYWORD,\n    NGRAM,\n    NGRAMWORDS,\n    NUMERIC,\n    TEXT,\n    Schema,\n)\nfrom whoosh.fields import ID as WHOOSH_ID\nfrom whoosh.filedb.filestore import FileStorage, RamStorage\nfrom whoosh.highlight import HtmlFormatter\nfrom whoosh.qparser import QueryParser\nfrom whoosh.searching import ResultsPage\nfrom whoosh.writing import AsyncWriter\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 39
+          },
+          "location": {
+            "column": 1,
+            "row": 8
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 8
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 8,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 22
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 22
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 22,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 103,
+      "row": 32
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 32
+    },
+    "message": "Line too long (102 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 32,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "B904",
+    "end_location": {
+      "column": 106,
+      "row": 47
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 5,
+      "row": 46
+    },
+    "message": "Within an `except` clause, raise exceptions with `raise ... from err` or `raise ... from None` to distinguish them from errors in exception handling",
+    "name": "raise-without-from-inside-except",
+    "noqa_row": 46,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/raise-without-from-inside-except"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 106,
+      "row": 47
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 47
+    },
+    "message": "Line too long (105 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 47,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 21,
+      "row": 153
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 153
+    },
+    "message": "`build_schema` is too complex (12 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 153,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "B007",
+    "end_location": {
+      "column": 23,
+      "row": 164
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "unsafe",
+      "edits": [
+        {
+          "content": "_field_name",
+          "end_location": {
+            "column": 23,
+            "row": 164
+          },
+          "location": {
+            "column": 13,
+            "row": 164
+          }
+        }
+      ],
+      "message": "Rename unused `field_name` to `_field_name`"
+    },
+    "location": {
+      "column": 13,
+      "row": 164
+    },
+    "message": "Loop control variable `field_name` not used within loop body",
+    "name": "unused-loop-control-variable",
+    "noqa_row": 164,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-loop-control-variable"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 189
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 189
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 189,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 156,
+      "row": 193
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 193
+    },
+    "message": "Line too long (155 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 193,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 107,
+      "row": 195
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 195
+    },
+    "message": "Line too long (106 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 195,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 112,
+      "row": 204
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 204
+    },
+    "message": "Line too long (111 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 204,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 15,
+      "row": 355
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 355
+    },
+    "message": "`search` is too complex (33 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 355,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 23,
+      "row": 569
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 569
+    },
+    "message": "`more_like_this` is too complex (19 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 569,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 25,
+      "row": 680
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 680
+    },
+    "message": "`_process_results` is too complex (23 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 680,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 68,
+      "row": 754
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "                        import re\n\n                        from djangoblog.utils import CommonMarkdown\n",
+          "end_location": {
+            "column": 1,
+            "row": 755
+          },
+          "location": {
+            "column": 1,
+            "row": 753
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 25,
+      "row": 753
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 753,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "C901",
+    "end_location": {
+      "column": 29,
+      "row": 953
+    },
+    "filename": "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+    "fix": null,
+    "location": {
+      "column": 9,
+      "row": 953
+    },
+    "message": "`build_query_fragment` is too complex (27 > 10)",
+    "name": "complex-structure",
+    "noqa_row": 953,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/complex-structure"
+  }
+]

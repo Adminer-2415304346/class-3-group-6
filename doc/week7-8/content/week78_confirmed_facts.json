@@ -1,0 +1,205 @@
+{
+  "compiled_date": "2026-11-02",
+  "group": "24级软件工程3班第6组",
+  "project": "DjangoBlog",
+  "document_style": {
+    "chinese_font": "宋体",
+    "latin_font": "Times New Roman",
+    "text_color": "000000",
+    "source": "组长于2026-11-02确认：后续文档统一使用宋体和Times New Roman，文字黑色，不使用蓝色"
+  },
+  "meeting": {
+    "date": "2026-10-23",
+    "start": "19:00",
+    "end": "19:30",
+    "mode": "线下",
+    "place": "宿舍",
+    "attendance": "全员出席（6人）",
+    "absent": "无",
+    "chair": "石兆翔",
+    "recorder": "石兆翔",
+    "confirmation": "组长在本轮对话确认会议事实，并确认结论沿用已沟通的任务安排",
+    "conclusions": [
+      "六人分别主责blog、accounts、comments、oauth、servermanager、djangoblog，沿用既有分工，不重复占用同一App。",
+      "第七周侧重源码阅读、三层署名注释、人工分析与工具基线；第八周侧重适当改进、回归验证、同配置复扫及互查。",
+      "互查配对为SZX与GCY、YFY与GZX、WZY与SY；成员本人确认复核结论，不能代填。",
+      "采用统一静态工具、隔离验证和证据记录口径；结合源码核实问题，不把扫描告警直接等同于业务缺陷。",
+      "个人分支提交并集成到develop；所有成员完成后由组长负责develop到main的最终合并。",
+      "个人提交源码、四份分析素材及原始证据；组长汇总编码规范与质量分析Word，下一步优化计划明确优先级、责任人和验收条件。"
+    ]
+  },
+  "plan": {
+    "start_date": null,
+    "end_date": null,
+    "deadline": null,
+    "date_status": "日历起止与截止未单独留存；按任务周次和阶段编排，不倒推日期"
+  },
+  "review_status": "SZX/GCY与YFY/GZX四方向已确认补录；SY部分按组长要求由SZX代办并专项核查，未冒写WZY/SY个人签署",
+  "review_confirmation": {
+    "recorded_date": "2026-11-02",
+    "source": "组长确认两组已互查但未写记录，并要求补录",
+    "actual_date": null,
+    "date_note": "补录日期不等于实际互查日期；已有书面核查日期保留，未另存的日期、命令和逐项意见不补造",
+    "record": "互查记录/2026-11-02-两组互查补录.md",
+    "directions": [
+      {
+        "id": "PR-SZX-GCY",
+        "reviewer": "SZX",
+        "owner": "GCY",
+        "app": "djangoblog",
+        "status": "已完成，组长确认补录",
+        "evidence": "GCY工具与验证记录；SZX 10月31日集成验证"
+      },
+      {
+        "id": "PR-GCY-SZX",
+        "reviewer": "GCY",
+        "owner": "SZX",
+        "app": "blog",
+        "status": "已完成，组长确认补录",
+        "evidence": "组长确认互查事实；具体个人逐项意见未另存"
+      },
+      {
+        "id": "PR-YFY-GZX",
+        "reviewer": "YFY",
+        "owner": "GZX",
+        "app": "oauth",
+        "status": "已完成，组长确认补录",
+        "evidence": "YFY第8节原10月21日核查；GZX第4节同步"
+      },
+      {
+        "id": "PR-GZX-YFY",
+        "reviewer": "GZX",
+        "owner": "YFY",
+        "app": "accounts",
+        "status": "已完成，组长确认补录",
+        "evidence": "GZX既有边界检查；YFY第7节补录"
+      }
+    ]
+  },
+  "accounts_comparison": {
+    "operator": "SZX",
+    "summary": "成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/summary.json",
+    "note": "新增同配置补扫与原YFY历史扫描分别记录，不冒充YFY或GZX本人执行"
+  },
+  "members": [
+    {
+      "name": "石兆翔",
+      "id": "2415304346",
+      "tag": "SZX",
+      "app": "blog",
+      "branch": "szx_branch",
+      "peer": "GCY",
+      "status": "已集成；与GCY双向互查已确认补录，承担组长汇总"
+    },
+    {
+      "name": "喻飞扬",
+      "id": "2415304347",
+      "tag": "YFY",
+      "app": "accounts",
+      "branch": "yfy_branch",
+      "peer": "GZX",
+      "status": "已集成；与GZX双向互查已补录；SZX同配置补扫已入库"
+    },
+    {
+      "name": "王子扬",
+      "id": "2415304348",
+      "tag": "WZY",
+      "app": "comments",
+      "branch": "wzy_branch",
+      "peer": "SY",
+      "status": "已集成；相关核查按SY接手安排由SZX完成，不冒写WZY/SY个人署名"
+    },
+    {
+      "name": "顾梓鑫",
+      "id": "2415304345",
+      "tag": "GZX",
+      "app": "oauth",
+      "branch": "gzx_branch",
+      "peer": "YFY",
+      "status": "已集成；与YFY双向互查已确认补录，记录已同步"
+    },
+    {
+      "name": "宋洋",
+      "id": "2415304330",
+      "tag": "SY",
+      "app": "servermanager",
+      "branch": "sy",
+      "peer": "WZY",
+      "status": "SY原快照和基线保留；其后由SZX代办完成，11文件0/2复扫及33项本App验证"
+    },
+    {
+      "name": "郭曹钰",
+      "id": "2415304331",
+      "tag": "GCY",
+      "app": "djangoblog",
+      "branch": "gcy_branch",
+      "peer": "SZX",
+      "status": "已集成；SZX补修后通过，与SZX双向互查已确认补录"
+    }
+  ],
+  "document_version": "1.0",
+  "document_label": "小组汇总稿（含SY代办说明）",
+  "verification": {
+    "manifest": "成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/manifest.json",
+    "test_count": 390,
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "takeover": {
+    "date": "2026-11-02",
+    "original_owner": "SY",
+    "executor": "SZX",
+    "authorization": "组长明确要求接手SY无法完成的部分",
+    "record": "成员成果/SY/接手完成清单.json",
+    "review_record": "成员成果/SY/接手与专项核查记录.md",
+    "verified_code_commit": "ed32332b4bbd1b4b05808f93840427489447cd6e",
+    "metrics": {
+      "physical_lines": 429,
+      "code_token_lines": 313,
+      "classes": 13,
+      "functions_and_methods": 36,
+      "files": 11,
+      "new_comment_lines": 33,
+      "new_signed_lines": 32,
+      "annotation_groups": {
+        "module": 9,
+        "function": 18,
+        "core": 5
+      }
+    },
+    "baseline_scan": {
+      "files": 11,
+      "ruff": 5,
+      "bandit": 3,
+      "ruff_rules": {
+        "I001": 3,
+        "E501": 1,
+        "F841": 1
+      },
+      "bandit_rules": {
+        "B605": 1,
+        "B301": 1,
+        "B105": 1
+      },
+      "bandit_errors": 0
+    },
+    "after_scan": {
+      "files": 11,
+      "ruff": 0,
+      "bandit": 2,
+      "ruff_rules": {},
+      "bandit_rules": {
+        "B404": 1,
+        "B602": 1
+      },
+      "bandit_errors": 0
+    },
+    "review_mode": "原WZY/SY配对调整为SZX代办专项核查；未取得独立本人署名，不冒写"
+  }
+}

@@ -34,6 +34,12 @@ class LogEntryAdmin(admin.ModelAdmin):
         return False
 
     def has_change_permission(self, request, obj=None):
+        # GCY（关键逻辑）：LogEntry 变更权限是"超管或具备
+        # admin.change_logentry 权限，且非 POST"的组合。但 admin_site
+        # 的 has_permission 已把整个后台限制为仅超管可进，故这里的
+        # has_perm 分支实际不可达（保留作为独立配置语义）。
+        # 另：POST 被排除意味着通过后台批量操作修改日志本身会被
+        # 拒绝，属显式的只读设计。
         return (
                 request.user.is_superuser or
                 request.user.has_perm('admin.change_logentry')

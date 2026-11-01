@@ -1,0 +1,161 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 35,
+      "row": 4
+    },
+    "filename": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\src\\DjangoBlog\\servermanager\\MemcacheStorage.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from werobot.session import SessionStorage\r\nfrom werobot.utils import json_dumps, json_loads\r\n\r\nfrom djangoblog.utils import cache\r\n\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 7
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 33,
+      "row": 1
+    },
+    "filename": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\src\\DjangoBlog\\servermanager\\admin.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "from django.contrib import admin\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 2
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "E501",
+    "end_location": {
+      "column": 102,
+      "row": 21
+    },
+    "filename": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\src\\DjangoBlog\\servermanager\\api\\commonapi.py",
+    "fix": null,
+    "location": {
+      "column": 101,
+      "row": 21
+    },
+    "message": "Line too long (101 > 100)",
+    "name": "line-too-long",
+    "noqa_row": 21,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/line-too-long"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 45,
+      "row": 14
+    },
+    "filename": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\src\\DjangoBlog\\servermanager\\robot.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\r\nimport os\r\nimport re\r\n\r\nimport jsonpickle\r\nfrom django.conf import settings\r\nfrom werobot import WeRoBot\r\nfrom werobot.replies import Article, ArticlesReply\r\nfrom werobot.session.filestorage import FileStorage\r\n\r\nfrom djangoblog.utils import get_sha256\r\nfrom servermanager.api.blogapi import BlogApi\r\nfrom servermanager.api.commonapi import ChatGPT, CommandHandler\r\n\r\nfrom .MemcacheStorage import MemcacheStorage\r\n\r\n",
+          "end_location": {
+            "column": 1,
+            "row": 16
+          },
+          "location": {
+            "column": 1,
+            "row": 1
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 1
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 1,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "F841",
+    "end_location": {
+      "column": 30,
+      "row": 128
+    },
+    "filename": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\src\\DjangoBlog\\servermanager\\robot.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "",
+          "end_location": {
+            "column": 30,
+            "row": 128
+          },
+          "location": {
+            "column": 25,
+            "row": 128
+          }
+        }
+      ],
+      "message": "Remove assignment to unused variable `e`"
+    },
+    "location": {
+      "column": 29,
+      "row": 128
+    },
+    "message": "Local variable `e` is assigned to but never used",
+    "name": "unused-variable",
+    "noqa_row": 128,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unused-variable"
+  }
+]

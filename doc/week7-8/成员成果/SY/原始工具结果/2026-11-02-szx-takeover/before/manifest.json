@@ -1,0 +1,66 @@
+{
+  "operator": "SZX (taking over SY)",
+  "phase": "before",
+  "source_ref": "e52f5d0f3ed5a58110c9abf29fd4cb1e0b74c9bb",
+  "timestamp_utc": "2026-11-01T16:59:34.371945+00:00",
+  "python": "3.12.14",
+  "django": "5.2.17",
+  "openai": "2.54.0",
+  "test_run": {
+    "command": [
+      "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_\\doc\\week7-8\\tools\\run_isolated_tests.py",
+      "--result-json",
+      "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SY\\原始工具结果\\2026-11-02-szx-takeover\\before\\tests.json",
+      "servermanager.test_week78_takeover"
+    ],
+    "cwd": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-sy-verification-4014xw9_",
+    "returncode": 1
+  },
+  "test_result": {
+    "tests_run": 31,
+    "failures": 22,
+    "errors": 6,
+    "skipped": 0,
+    "per_app": {
+      "servermanager": 31
+    }
+  },
+  "scan_summary": {
+    "files": 11,
+    "ruff": 5,
+    "bandit": 3,
+    "ruff_rules": {
+      "I001": 3,
+      "E501": 1,
+      "F841": 1
+    },
+    "bandit_rules": {
+      "B605": 1,
+      "B301": 1,
+      "B105": 1
+    },
+    "bandit_errors": 0
+  },
+  "runner_sha256": "4eacf27459721ab6f45d47db2abfe3789fc03d021740a8e69d4e42e9b17e182c",
+  "source_sha256": {
+    "src/DjangoBlog/servermanager/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/DjangoBlog/servermanager/admin.py": "c96ca9e6b234e69cf007e6b44054a8732fb738ba3c328f293c867b74a2ba2d54",
+    "src/DjangoBlog/servermanager/api/__init__.py": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+    "src/DjangoBlog/servermanager/api/blogapi.py": "9676c9fd95096c22b6245b00a5258559a8a4b4eac56e02e98eefa9e4529a8d6d",
+    "src/DjangoBlog/servermanager/api/commonapi.py": "faefcf2570649b2c586c554fe1a467c8e7d0ca7448c5833a2b2b42b4ed04dfeb",
+    "src/DjangoBlog/servermanager/apps.py": "507029a79f0272e1497bd0afa7be3b483bdc453c1d6bbaf42f2f9ea61d650c1b",
+    "src/DjangoBlog/servermanager/MemcacheStorage.py": "11d9109cecabd9fda6226431bb015abc913e620b6ea977a7882b77f0812a72cb",
+    "src/DjangoBlog/servermanager/migrations/0001_initial.py": "7e81d89a5e5ceb9f0a9b8d9be4f2c1c674fdff6877baf7c1a43551c6fd0f82d8",
+    "src/DjangoBlog/servermanager/migrations/0002_alter_emailsendlog_options_and_more.py": "2d61dcabdb066b03f1ed006e79e7985b36fe58ec0d753a4565af1a1bdb27e9de",
+    "src/DjangoBlog/servermanager/migrations/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/DjangoBlog/servermanager/models.py": "cb9a8ad4838f49db45a1986c2d20666f551ef1bd20bf856a84c3a2ef4d99d40d",
+    "src/DjangoBlog/servermanager/robot.py": "19407466952c407d5a7cb352ce1bce396a821bd62c7678d9c92e90842b808ab5",
+    "src/DjangoBlog/servermanager/test_week78_takeover.py": "148294574d4669094547be1115ee47681a75f33c0649046a43a578f1fc6600ab",
+    "src/DjangoBlog/servermanager/tests.py": "47145c53aaf98fe0333dc50bf31a9252a6c602e1e44d54e52b76365fe34769f8",
+    "src/DjangoBlog/servermanager/urls.py": "3a95c0f49c0abfa401e62eb60f5da1461206f1a3bc51fecae22f04d235c7f2d5",
+    "src/DjangoBlog/servermanager/views.py": "81098e390420b7948c782fe13b385a70ab913c32db7157cda9444b84fd0cd54e"
+  },
+  "isolation": "SQLite memory, local cache/mail, no HTTP/socket or unmocked shell; no MySQL/Redis/WeChat/SMTP/real OpenAI validation.",
+  "regression_ast_sha256": "9816fa608948da336ea72d255cec624d529f46cd4fba63954980ab292fa548ec"
+}

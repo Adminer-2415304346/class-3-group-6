@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # 模块：comments评论模块 - models.py
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
@@ -6,7 +5,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
+
 from blog.models import Article
+
+
 # Create your models here.
 # 评论主模型，保存博客文章的评论以及评论回复数据，支持多级回复
 class Comment(models.Model):
@@ -23,7 +25,8 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL,
         verbose_name=_('author'),
         on_delete=models.CASCADE)
-    # WZY: 关联博客文章外键，建立Comment与Article一对多关系；文章删除则该文章全部评论级联删除
+    # WZY: 关联博客文章外键，建立Comment与Article一对多关系
+    # 文章删除则该文章全部评论级联删除
     article = models.ForeignKey(
         Article,
         verbose_name=_('article'),
@@ -49,7 +52,10 @@ class Comment(models.Model):
         get_latest_by = 'id'
         indexes = [
             # 优化评论列表查询：article + parent_comment + is_enable组合索引
-            models.Index(fields=['article', 'parent_comment', 'is_enable'], name='idx_art_parent_enable'),
+            models.Index(
+                fields=['article', 'parent_comment', 'is_enable'],
+                name='idx_art_parent_enable'
+            ),
             # 优化侧边栏评论查询：is_enable + id组合索引
             models.Index(fields=['is_enable', '-id'], name='idx_enable_id'),
         ]
@@ -70,32 +76,23 @@ class Comment(models.Model):
             ...
         }
         """
-        from django.db.models import Count
-        # WZY: 筛选当前评论下全部表情互动记录，按表情类型分组统计数量
-        reactions = CommentReaction.objects.filter(
-            comment=self
-        ).values('reaction_type').annotate(count=Count('id'))
+        viewer_id = user.pk if (user is not None and user.is_authenticated) else None
+        # WZY 原优化保留每表情前10个用户名；SZX：计数、名单、参与态改由同一个 SELECT 得出。
+        # SZX：避免聚合后新增 emoji 导致 KeyError，也避免取消反应后仍返回旧计数。
+        # 仅取必要列；应用层统计状态有界，但 MySQL 驱动仍可能缓冲整个结果集。
         result = {}
-        for reaction in reactions:
-            emoji = reaction['reaction_type']
-            # 获取该 emoji 的所有点赞用户
-            reaction_users = CommentReaction.objects.filter(
-                comment=self,
-                reaction_type=emoji
-            ).select_related('user')[:10]  # 最多显示10个用户
-            user_names = [r.user.nickname or r.user.username for r in reaction_users]
-            result[emoji] = {
-                'count': reaction['count'],
-                'has_reacted': False,
-                'users': user_names
-            }
-            # WZY: 如果用户已登录，查询该用户是否对当前这条评论点过该表情
-            if user and user.is_authenticated:
-                result[emoji]['has_reacted'] = CommentReaction.objects.filter(
-                    comment=self,
-                    user=user,
-                    reaction_type=emoji
-                ).exists()
+        for emoji, user_id, nickname, username in (
+            CommentReaction.objects.filter(comment=self)
+            .order_by('id')
+            .values_list('reaction_type', 'user_id', 'user__nickname', 'user__username')
+            .iterator(chunk_size=2000)
+        ):
+            data = result.setdefault(emoji, {'count': 0, 'has_reacted': False, 'users': []})
+            data['count'] += 1
+            if len(data['users']) < 10:
+                data['users'].append(nickname or username)
+            if viewer_id is not None and user_id == viewer_id:
+                data['has_reacted'] = True
         return result
 # 评论表情互动模型，记录用户对评论的emoji点赞/反馈
 class CommentReaction(models.Model):
@@ -127,7 +124,8 @@ class CommentReaction(models.Model):
         on_delete=models.CASCADE
     )
     # WZY: 表情类型字段，只能选取REACTION_CHOICES内定义的表情
-    # SZX：choices 用于表单/模型校验；直接 ORM 保存不自动 full_clean，也没有枚举 CHECK 约束。
+    # SZX：choices 用于表单/模型校验
+    # 直接 ORM 保存不自动 full_clean，也没有枚举 CHECK 约束。
     reaction_type = models.CharField(
         _('reaction type'),
         max_length=10,
@@ -142,8 +140,14 @@ class CommentReaction(models.Model):
         unique_together = ['comment', 'user', 'reaction_type']
         indexes = [
             # WZY: 索引，加速根据评论+表情类型查询互动记录
-            models.Index(fields=['comment', 'reaction_type'], name='idx_comment_reaction'),
+            models.Index(
+                fields=['comment', 'reaction_type'],
+                name='idx_comment_reaction'
+            ),
         ]
     # 后台管理展示该条emoji记录的简要信息
     def __str__(self):
-        return f'{self.user.username} - {self.reaction_type} on comment {self.comment.id}'
+        return (
+            f'{self.user.username} - {self.reaction_type} '
+            f'on comment {self.comment.id}'
+        )

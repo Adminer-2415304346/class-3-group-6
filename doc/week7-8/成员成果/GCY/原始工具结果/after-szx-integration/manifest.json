@@ -1,0 +1,481 @@
+{
+  "app": "djangoblog",
+  "owner": "GCY",
+  "stage": "after",
+  "timestamp_utc": "2026-10-31T13:27:20.741390+00:00",
+  "base_commit": "11800587aff13e2c91e40a38f53f9f50d635d794",
+  "python": "3.12.7",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "djangoblog/test_base.py",
+    "djangoblog/test_email_integration.py",
+    "djangoblog/test_email_integration_complete.py",
+    "djangoblog/test_plugins.py",
+    "djangoblog/test_week78_gcy_quality.py",
+    "djangoblog/tests.py"
+  ],
+  "files": [
+    {
+      "path": "djangoblog/__init__.py",
+      "sha256": "dc2bb60d7b62ff61eb1828a75d33f23bd9691f9cbd74de7e3515dd1ba7268514",
+      "physical_lines": 1,
+      "code_token_lines": 1,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "djangoblog/admin_site.py",
+      "sha256": "363691817a86c29236361874421e38e56b143fc3a26660082672741924984f13",
+      "physical_lines": 76,
+      "code_token_lines": 44,
+      "comment_lines": 16,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "djangoblog/apps.py",
+      "sha256": "1e5c631e22e643154150249a6a82a404e219f4f0a71614556693a15134731d38",
+      "physical_lines": 16,
+      "code_token_lines": 8,
+      "comment_lines": 6,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 1,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "djangoblog/base_views.py",
+      "sha256": "9f3f249c47c62cc36d2886a1c6a69a3417dd7eced6e19e51829f1bdfe3f81911",
+      "physical_lines": 132,
+      "code_token_lines": 104,
+      "comment_lines": 11,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 5,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "djangoblog/blog_signals.py",
+      "sha256": "932f368ebf70c7f4a7ca49d67578642af30d00e0dced523ad176cba0c15ae7aa",
+      "physical_lines": 196,
+      "code_token_lines": 143,
+      "comment_lines": 21,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 3
+      },
+      "classes": 0,
+      "functions_and_methods": 9
+    },
+    {
+      "path": "djangoblog/constants.py",
+      "sha256": "acc64776478e8bc6bcab68c522b11cea200b2fa6c8182e270cb443b0a35c2685",
+      "physical_lines": 98,
+      "code_token_lines": 60,
+      "comment_lines": 21,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 4,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "djangoblog/elasticsearch_backend.py",
+      "sha256": "06c9a4cbeb18465a4c7c7e56c785140f185d5c329cefd96478f35e844f336089",
+      "physical_lines": 215,
+      "code_token_lines": 156,
+      "comment_lines": 20,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 4,
+      "functions_and_methods": 17
+    },
+    {
+      "path": "djangoblog/error_views.py",
+      "sha256": "c7e9203c8c0f5f49a0e46525f04e83357ade10dd8ef208573be27a161e40491a",
+      "physical_lines": 145,
+      "code_token_lines": 123,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 0,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "djangoblog/feeds.py",
+      "sha256": "29b047fa67eb1fc441569065dc1b33bf070777fffe99cf9cad00a01a2b7b0b9f",
+      "physical_lines": 46,
+      "code_token_lines": 28,
+      "comment_lines": 6,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 1,
+      "functions_and_methods": 8
+    },
+    {
+      "path": "djangoblog/logentryadmin.py",
+      "sha256": "2b778e6880d25a125810e558a7c96a0370f69d75ab67b718751463e0391f4d84",
+      "physical_lines": 97,
+      "code_token_lines": 75,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 1,
+      "functions_and_methods": 7
+    },
+    {
+      "path": "djangoblog/mixins.py",
+      "sha256": "303915bbd899faff6db9ac431e4e87b197e8d9fe6dce4e98edeee010f5ab00e0",
+      "physical_lines": 303,
+      "code_token_lines": 244,
+      "comment_lines": 29,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 5
+      },
+      "classes": 7,
+      "functions_and_methods": 8
+    },
+    {
+      "path": "djangoblog/plugin_manage/base_plugin.py",
+      "sha256": "9941f155f55bb47867d78e94354d2ae14b9701c346adc2d22a26384d0cfa856f",
+      "physical_lines": 213,
+      "code_token_lines": 163,
+      "comment_lines": 19,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 1,
+      "functions_and_methods": 22
+    },
+    {
+      "path": "djangoblog/plugin_manage/hook_constants.py",
+      "sha256": "7cf169ab41414c6af8297f0d35c2d5fd70d9ceab3efe0d0d3af527c34aee9223",
+      "physical_lines": 25,
+      "code_token_lines": 16,
+      "comment_lines": 6,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "djangoblog/plugin_manage/hooks.py",
+      "sha256": "67be1604a32cecce762553d6a3c5ee89b9ed92a2e9f41d3250fe0c920b3ddeb2",
+      "physical_lines": 57,
+      "code_token_lines": 42,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 0,
+      "functions_and_methods": 3
+    },
+    {
+      "path": "djangoblog/plugin_manage/loader.py",
+      "sha256": "0ff6b33c0a4fe8c4b4475902a8954a68b3d2a2a9b0c771b170b6243fbabd32c3",
+      "physical_lines": 72,
+      "code_token_lines": 51,
+      "comment_lines": 9,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 0,
+      "functions_and_methods": 6
+    },
+    {
+      "path": "djangoblog/settings.py",
+      "sha256": "bebc5be94ab10d1d1dcd21a3999ded3d8c5336eae2720ad0c162094b5a45c989",
+      "physical_lines": 483,
+      "code_token_lines": 297,
+      "comment_lines": 125,
+      "signed_comment_lines": {
+        "SZX": 6,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 3
+      },
+      "classes": 0,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "djangoblog/sitemap.py",
+      "sha256": "3d34b5cbc15641e5e22da5b4b57c610a73793b5eda94b00b9e12dc3335f95a1a",
+      "physical_lines": 63,
+      "code_token_lines": 38,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 5,
+      "functions_and_methods": 10
+    },
+    {
+      "path": "djangoblog/spider_notify.py",
+      "sha256": "de57f16117b0d0cb78dc69c6507529c07f805c2e1c5face8c18a5df350c3299f",
+      "physical_lines": 28,
+      "code_token_lines": 16,
+      "comment_lines": 7,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 1,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "djangoblog/urls.py",
+      "sha256": "c763ce5caee896a78531c8cde4e648045c15f80da7de0d4c22dacfb1f1d083f4",
+      "physical_lines": 94,
+      "code_token_lines": 76,
+      "comment_lines": 10,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 0,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "djangoblog/utils.py",
+      "sha256": "25df8f5086037cc0ac258ea84eff16f8b81996cef4f8ebb690b33c2622b71027",
+      "physical_lines": 313,
+      "code_token_lines": 233,
+      "comment_lines": 41,
+      "signed_comment_lines": {
+        "SZX": 5,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 4
+      },
+      "classes": 1,
+      "functions_and_methods": 20
+    },
+    {
+      "path": "djangoblog/whoosh_cn_backend.py",
+      "sha256": "9fcb9c932c0d21e3caeabd797cec85eb2cfad366af95da3fb1b373175c620255",
+      "physical_lines": 1092,
+      "code_token_lines": 810,
+      "comment_lines": 91,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 2
+      },
+      "classes": 4,
+      "functions_and_methods": 18
+    },
+    {
+      "path": "djangoblog/wsgi.py",
+      "sha256": "3b136059f9f4d8cabb35a284857addf74d995108297dd13c1c4b86f13834b831",
+      "physical_lines": 20,
+      "code_token_lines": 12,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 1
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\GCY\\原始工具结果\\after-szx-integration\\ruff.json",
+        "djangoblog/__init__.py",
+        "djangoblog/admin_site.py",
+        "djangoblog/apps.py",
+        "djangoblog/base_views.py",
+        "djangoblog/blog_signals.py",
+        "djangoblog/constants.py",
+        "djangoblog/elasticsearch_backend.py",
+        "djangoblog/error_views.py",
+        "djangoblog/feeds.py",
+        "djangoblog/logentryadmin.py",
+        "djangoblog/mixins.py",
+        "djangoblog/plugin_manage/base_plugin.py",
+        "djangoblog/plugin_manage/hook_constants.py",
+        "djangoblog/plugin_manage/hooks.py",
+        "djangoblog/plugin_manage/loader.py",
+        "djangoblog/settings.py",
+        "djangoblog/sitemap.py",
+        "djangoblog/spider_notify.py",
+        "djangoblog/urls.py",
+        "djangoblog/utils.py",
+        "djangoblog/whoosh_cn_backend.py",
+        "djangoblog/wsgi.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "E:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\GCY\\原始工具结果\\after-szx-integration\\bandit.json",
+        "djangoblog/__init__.py",
+        "djangoblog/admin_site.py",
+        "djangoblog/apps.py",
+        "djangoblog/base_views.py",
+        "djangoblog/blog_signals.py",
+        "djangoblog/constants.py",
+        "djangoblog/elasticsearch_backend.py",
+        "djangoblog/error_views.py",
+        "djangoblog/feeds.py",
+        "djangoblog/logentryadmin.py",
+        "djangoblog/mixins.py",
+        "djangoblog/plugin_manage/base_plugin.py",
+        "djangoblog/plugin_manage/hook_constants.py",
+        "djangoblog/plugin_manage/hooks.py",
+        "djangoblog/plugin_manage/loader.py",
+        "djangoblog/settings.py",
+        "djangoblog/sitemap.py",
+        "djangoblog/spider_notify.py",
+        "djangoblog/urls.py",
+        "djangoblog/utils.py",
+        "djangoblog/whoosh_cn_backend.py",
+        "djangoblog/wsgi.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[warnings]\tWARNING\tinvalid escape sequence '\\d'\r\n\r\n[json]\tINFO\tJSON output written to file: E:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\GCY\\原始工具结果\\after-szx-integration\\bandit.json\r\n"
+    }
+  }
+}

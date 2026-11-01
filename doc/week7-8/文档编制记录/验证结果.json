@@ -1,0 +1,162 @@
+{
+  "content_and_input_checks": "passed",
+  "docx_zip_integrity": "passed",
+  "template_placeholders": "none",
+  "pdf_generated": false,
+  "documents": [
+    {
+      "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
+      "sha256": "5a23b0a1544b0a668f343ce1378ba418fa50554751e87dcbf0ce1326e86b9892",
+      "pages": 4,
+      "tables": 2,
+      "page_details": [
+        {
+          "page": 1,
+          "characters": 965,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-1-page-01.png"
+        },
+        {
+          "page": 2,
+          "characters": 1186,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-1-page-02.png"
+        },
+        {
+          "page": 3,
+          "characters": 1260,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-1-page-03.png"
+        },
+        {
+          "page": 4,
+          "characters": 1183,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-1-page-04.png"
+        }
+      ],
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 27,
+        "color_nodes": 27
+      },
+      "contact_sheets": [
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-1-sheet-1.png"
+      ],
+      "text_outside_page": []
+    },
+    {
+      "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
+      "sha256": "df9a571a1d5e72c7731d9ff0ec2443d2a54f786f8aea62c9327de779bd272e2d",
+      "pages": 12,
+      "tables": 23,
+      "page_details": [
+        {
+          "page": 1,
+          "characters": 1042,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-01.png"
+        },
+        {
+          "page": 2,
+          "characters": 1058,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-02.png"
+        },
+        {
+          "page": 3,
+          "characters": 1403,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-03.png"
+        },
+        {
+          "page": 4,
+          "characters": 1325,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-04.png"
+        },
+        {
+          "page": 5,
+          "characters": 1672,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-05.png"
+        },
+        {
+          "page": 6,
+          "characters": 415,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-06.png"
+        },
+        {
+          "page": 7,
+          "characters": 1275,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-07.png"
+        },
+        {
+          "page": 8,
+          "characters": 1050,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-08.png"
+        },
+        {
+          "page": 9,
+          "characters": 1317,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-09.png"
+        },
+        {
+          "page": 10,
+          "characters": 1291,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-10.png"
+        },
+        {
+          "page": 11,
+          "characters": 1288,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-11.png"
+        },
+        {
+          "page": 12,
+          "characters": 1386,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-page-12.png"
+        }
+      ],
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 13,
+        "color_nodes": 13
+      },
+      "contact_sheets": [
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-sheet-1.png",
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-sheet-2.png",
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-4fd4a23f7ad345f18adf99c41e323104\\pages\\document-2-sheet-3.png"
+      ],
+      "text_outside_page": []
+    }
+  ],
+  "visual_review": "passed",
+  "schema_validation": "passed after native Word field update",
+  "verified_date": "2026-11-02",
+  "regression_evidence": {
+    "tests_run": 390,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "executor_attribution": "SZX代SY；原SY快照保留，独立本人签署的限制已在报告说明。",
+  "visual_review_details": {
+    "pages_inspected": 16,
+    "method": "All four contact sheets inspected after the final Word save; Chinese/Latin fonts and black text verified in OOXML.",
+    "result": "No clipped text, blank pages, unreadable tables or footer overlap; repeated table headers retained.",
+    "typography": {
+      "chinese": "宋体",
+      "latin": "Times New Roman",
+      "text_color": "000000"
+    }
+  }
+}

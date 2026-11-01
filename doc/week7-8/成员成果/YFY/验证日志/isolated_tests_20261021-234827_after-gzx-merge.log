@@ -1,0 +1,379 @@
+﻿python : Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+At line:16 char:1
++ python doc/week7-8/tools/run_isolated_tests.py accounts.test_auth_har ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...che=shared')...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Found 84 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+test_active_user_still_authenticates (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_active_user
+_still_authenticates) ... ok
+test_inactive_user_is_rejected_by_email (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_inactive
+_user_is_rejected_by_email) ... ok
+test_inactive_user_is_rejected_by_username (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest.test_inact
+ive_user_is_rejected_by_username) ... ok
+test_missing_username_returns_none_instead_of_raising (accounts.test_auth_hardening.EmailOrUsernameBackendHardeningTest
+.test_missing_username_returns_none_instead_of_raising) ... ok
+test_code_cannot_be_replayed_after_successful_reset (accounts.test_auth_hardening.PasswordResetCodeLifecycleTest.test_c
+ode_cannot_be_replayed_after_successful_reset) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\
+blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_code_is_deleted_after_successful_reset (accounts.test_auth_hardening.PasswordResetCodeLifecycleTest.test_code_is_d
+eleted_after_successful_reset) ... ok
+test_forget_password_email_code_error (accounts.tests.AccountTest.test_forget_password_email_code_error) ... ⚠️  Vite m
+anifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_forget_password_email_code_fail (accounts.tests.AccountTest.test_forget_password_email_code_fail) ... ok
+test_forget_password_email_code_success (accounts.tests.AccountTest.test_forget_password_email_code_success) ... ok
+test_forget_password_email_not_user (accounts.tests.AccountTest.test_forget_password_email_not_user) ... ⚠️  Vite manif
+est not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_forget_password_email_success (accounts.tests.AccountTest.test_forget_password_email_success) ... ok
+test_validate_account (accounts.tests.AccountTest.test_validate_account) ... ok
+test_validate_register (accounts.tests.AccountTest.test_validate_register) ... ⚠️  Vite manifest not found: F:\软件工程\cla
+ss-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_verify_email_code (accounts.tests.AccountTest.test_verify_email_code) ... ok
+test_user_can_be_deactivated (accounts.test_user_business_logic.UserActivationTest.test_user_can_be_deactivated)
+测试用户可以被停用 ... ok
+test_user_can_be_reactivated (accounts.test_user_business_logic.UserActivationTest.test_user_can_be_reactivated)
+测试用户可以被重新激活 ... ok
+test_active_user_can_authenticate (accounts.test_user_business_logic.UserAuthenticationTest.test_active_user_can_authen
+ticate)
+测试激活的用户可以认证 ... ok
+test_inactive_user_cannot_authenticate (accounts.test_user_business_logic.UserAuthenticationTest.test_inactive_user_can
+not_authenticate)
+测试未激活的用户不能认证 ... ok
+test_user_can_authenticate_with_correct_credentials (accounts.test_user_business_logic.UserAuthenticationTest.test_user
+_can_authenticate_with_correct_credentials)
+测试用户可以用正确的凭据认证 ... ok
+test_user_cannot_authenticate_with_wrong_password (accounts.test_user_business_logic.UserAuthenticationTest.test_user_c
+annot_authenticate_with_wrong_password)
+测试用户不能用错误的密码认证 ... ok
+test_user_cannot_authenticate_with_wrong_username (accounts.test_user_business_logic.UserAuthenticationTest.test_user_c
+annot_authenticate_with_wrong_username)
+测试用户不能用错误的用户名认证 ... ok
+test_delete_user_cascade_effects (accounts.test_user_business_logic.UserDeletionTest.test_delete_user_cascade_effects)
+测试删除用户的级联效果 ... ok
+test_user_can_be_deleted (accounts.test_user_business_logic.UserDeletionTest.test_user_can_be_deleted)
+测试用户可以被删除 ... ok
+test_password_change_requires_save (accounts.test_user_business_logic.UserPasswordManagementTest.test_password_change_r
+equires_save)
+测试密码修改需要保存 ... ok
+test_set_unusable_password (accounts.test_user_business_logic.UserPasswordManagementTest.test_set_unusable_password)
+测试设置不可用的密码 ... ok
+test_user_can_change_password (accounts.test_user_business_logic.UserPasswordManagementTest.test_user_can_change_passwo
+rd)
+测试用户可以修改密码 ... ok
+test_create_superuser_method (accounts.test_user_business_logic.UserPermissionTest.test_create_superuser_method)
+测试创建超级用户的方法 ... ok
+test_normal_user_has_no_special_privileges (accounts.test_user_business_logic.UserPermissionTest.test_normal_user_has_n
+o_special_privileges)
+测试普通用户没有特殊权限 ... ok
+test_staff_user_is_staff (accounts.test_user_business_logic.UserPermissionTest.test_staff_user_is_staff)
+测试staff用户有staff权限 ... ok
+test_superuser_has_all_privileges (accounts.test_user_business_logic.UserPermissionTest.test_superuser_has_all_privileg
+es)
+测试超级用户有所有权限 ... ok
+test_user_can_be_promoted_to_staff (accounts.test_user_business_logic.UserPermissionTest.test_user_can_be_promoted_to_s
+taff)
+测试用户可以提升为staff ... ok
+test_user_can_be_promoted_to_superuser (accounts.test_user_business_logic.UserPermissionTest.test_user_can_be_promoted_
+to_superuser)
+测试用户可以提升为超级用户 ... ok
+test_user_can_update_email (accounts.test_user_business_logic.UserProfileTest.test_user_can_update_email)
+测试用户可以更新邮箱 ... ok
+test_user_has_email (accounts.test_user_business_logic.UserProfileTest.test_user_has_email)
+测试用户有邮箱 ... ok
+test_user_has_username (accounts.test_user_business_logic.UserProfileTest.test_user_has_username)
+测试用户有用户名 ... ok
+test_user_string_representation (accounts.test_user_business_logic.UserProfileTest.test_user_string_representation)
+测试用户字符串表示 ... ok
+test_query_active_users (accounts.test_user_business_logic.UserQueryTest.test_query_active_users)
+测试查询激活的用户 ... ok
+test_query_staff_users (accounts.test_user_business_logic.UserQueryTest.test_query_staff_users)
+测试查询staff用户 ... ok
+test_query_superusers (accounts.test_user_business_logic.UserQueryTest.test_query_superusers)
+测试查询超级用户 ... ok
+test_query_user_by_email (accounts.test_user_business_logic.UserQueryTest.test_query_user_by_email)
+测试按邮箱查询用户 ... ok
+test_query_user_by_username (accounts.test_user_business_logic.UserQueryTest.test_query_user_by_username)
+测试按用户名查询用户 ... ok
+test_email_is_stored_correctly (accounts.test_user_business_logic.UserRegistrationTest.test_email_is_stored_correctly)
+测试邮箱正确存储 ... ok
+test_user_can_be_created (accounts.test_user_business_logic.UserRegistrationTest.test_user_can_be_created)
+测试用户可以被创建 ... ok
+test_user_can_check_password (accounts.test_user_business_logic.UserRegistrationTest.test_user_can_check_password)
+测试用户可以验证密码 ... ok
+test_user_is_active_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_active_by_default)
+测试用户默认是激活状态 ... ok
+test_user_is_not_staff_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_not_staff_by_def
+ault)
+测试用户默认不是staff ... ok
+test_user_is_not_superuser_by_default (accounts.test_user_business_logic.UserRegistrationTest.test_user_is_not_superuse
+r_by_default)
+测试用户默认不是超级用户 ... ok
+test_user_password_is_hashed (accounts.test_user_business_logic.UserRegistrationTest.test_user_password_is_hashed)
+测试用户密码被哈希存储 ... ok
+test_username_must_be_unique (accounts.test_user_business_logic.UserRegistrationTest.test_username_must_be_unique)
+测试用户名必须唯一 ... ok
+test_admin_add_user (accounts.test_admin.BlogUserAdminTest.test_admin_add_user)
+测试通过后台新增用户 ... ok
+test_admin_add_user_page (accounts.test_admin.BlogUserAdminTest.test_admin_add_user_page)
+测试新增用户页面可正常打开（回归：Django 5.1+ 的 usable_password 字段） ... ok
+test_admin_add_user_without_usable_password (accounts.test_admin.BlogUserAdminTest.test_admin_add_user_without_usable_p
+assword)
+测试后台新增用户时禁用密码登录（usable_password=false） ... ok
+test_admin_change_user (accounts.test_admin.BlogUserAdminTest.test_admin_change_user)
+测试修改用户 ... ok
+test_admin_filter_by_is_staff (accounts.test_admin.BlogUserAdminTest.test_admin_filter_by_is_staff)
+测试按员工状态过滤 ... ok
+test_admin_forbidden_for_normal_user (accounts.test_admin.BlogUserAdminTest.test_admin_forbidden_for_normal_user)
+测试普通用户无法访问 ... ok
+test_admin_list_display (accounts.test_admin.BlogUserAdminTest.test_admin_list_display)
+测试列表显示字段 ... ok
+test_admin_requires_login (accounts.test_admin.BlogUserAdminTest.test_admin_requires_login)
+测试需要登录才能访问 ... ok
+test_admin_search (accounts.test_admin.BlogUserAdminTest.test_admin_search)
+测试搜索功能 ... ok
+test_get_list_filter (accounts.test_admin.BlogUserAdminTest.test_get_list_filter)
+测试获取列表过滤器 ... ok
+test_get_readonly_fields_for_staff (accounts.test_admin.BlogUserAdminTest.test_get_readonly_fields_for_staff)
+测试员工用户看到的只读字段 ... ok
+test_get_readonly_fields_for_superuser (accounts.test_admin.BlogUserAdminTest.test_get_readonly_fields_for_superuser)
+测试超级管理员看到的只读字段 ... ok
+test_external_return_target_still_falls_back_to_home (accounts.test_login_page.LoginPageTests.test_external_return_targ
+et_still_falls_back_to_home) ... ok
+test_failed_authentication_does_not_log_in_or_clear_sidebar_cache (accounts.test_login_page.LoginPageTests.test_failed_
+authentication_does_not_log_in_or_clear_sidebar_cache) ... ok
+test_failed_post_preserves_remember_selection (accounts.test_login_page.LoginPageTests.test_failed_post_preserves_remem
+ber_selection) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/mani
+fest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_initial_authentication_form_receives_the_request (accounts.test_login_page.LoginPageTests.test_initial_authenticat
+ion_form_receives_the_request) ... ok
+test_invalid_credentials_keep_username_but_never_render_password (accounts.test_login_page.LoginPageTests.test_invalid_
+credentials_keep_username_but_never_render_password) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\Djang
+oBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_login_uses_an_immediate_nonblocking_bridge_not_a_loading_spinner (accounts.test_login_page.LoginPageTests.test_log
+in_uses_an_immediate_nonblocking_bridge_not_a_loading_spinner) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6
+\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_missing_fields_have_accessible_inline_errors (accounts.test_login_page.LoginPageTests.test_missing_fields_have_acc
+essible_inline_errors) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.v
+ite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_native_form_keeps_csrf_required_fields_and_password_fallback (accounts.test_login_page.LoginPageTests.test_native_
+form_keeps_csrf_required_fields_and_password_fallback) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\Dja
+ngoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_native_post_still_requires_csrf (accounts.test_login_page.LoginPageTests.test_native_post_still_requires_csrf) ...
+ Forbidden (CSRF cookie not set.): /login/
+ok
+test_only_configured_oauth_provider_links_are_rendered (accounts.test_login_page.LoginPageTests.test_only_configured_oa
+uth_provider_links_are_rendered) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/bl
+og/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_other_account_pages_share_the_launcher_layout (accounts.test_login_page.LoginPageTests.test_other_account_pages_sh
+are_the_launcher_layout) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/
+.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_return_target_is_encoded_in_action_and_kept_in_hidden_field (accounts.test_login_page.LoginPageTests.test_return_t
+arget_is_encoded_in_action_and_kept_in_hidden_field) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\Djang
+oBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_return_target_survives_failed_post_context (accounts.test_login_page.LoginPageTests.test_return_target_survives_fa
+iled_post_context) ... ok
+test_successful_login_keeps_native_redirect_session_and_remember_cookie (accounts.test_login_page.LoginPageTests.test_s
+uccessful_login_keeps_native_redirect_session_and_remember_cookie) ... ok
+test_account_links_use_full_navigation_not_body_swaps (accounts.test_account_pages.AccountLauncherPageTests.test_accoun
+t_links_use_full_navigation_not_body_swaps) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blo
+g/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_account_pages_have_distinct_layouts_and_labelled_wide_actions (accounts.test_account_pages.AccountLauncherPageTest
+s.test_account_pages_have_distinct_layouts_and_labelled_wide_actions) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-
+group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_code_button_uses_the_existing_endpoint_and_real_async_feedback (accounts.test_account_pages.AccountLauncherPageTes
+ts.test_code_button_uses_the_existing_endpoint_and_real_async_feedback) ... ⚠️  Vite manifest not found: F:\软件工程\class-
+3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_forms_keep_native_post_csrf_field_names_order_and_required_flags (accounts.test_account_pages.AccountLauncherPageT
+ests.test_forms_keep_native_post_csrf_field_names_order_and_required_flags) ... ⚠️  Vite manifest not found: F:\软件工程\cl
+ass-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_passwords_are_native_masked_without_javascript_and_never_prefilled (accounts.test_account_pages.AccountLauncherPag
+eTests.test_passwords_are_native_masked_without_javascript_and_never_prefilled) ... ⚠️  Vite manifest not found: F:\软件工
+程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_register_errors_preserve_safe_nonsecret_fields_and_help_associations (accounts.test_account_pages.AccountLauncherP
+ageTests.test_register_errors_preserve_safe_nonsecret_fields_and_help_associations) ... ⚠️  Vite manifest not found: F:
+\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_register_has_one_board_with_grouped_fields_and_accessible_flow_control (accounts.test_account_pages.AccountLaunche
+rPageTests.test_register_has_one_board_with_grouped_fields_and_accessible_flow_control) ... ⚠️  Vite manifest not found
+: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_reset_errors_keep_email_and_code_without_passwords (accounts.test_account_pages.AccountLauncherPageTests.test_rese
+t_errors_keep_email_and_code_without_passwords) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog
+\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_transition_bootstrap_is_early_and_seam_is_decorative (accounts.test_account_pages.AccountLauncherPageTests.test_tr
+ansition_bootstrap_is_early_and_seam_is_decorative) ... ⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\Django
+Blog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: F:\软件工程\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+ISOLATED_TEST_FAILURES=0
+
+----------------------------------------------------------------------
+Ran 84 tests in 1.973s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+

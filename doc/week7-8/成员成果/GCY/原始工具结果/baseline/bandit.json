@@ -1,0 +1,1231 @@
+{
+  "errors": [],
+  "generated_at": "2026-10-31T12:41:07Z",
+  "metrics": {
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\__init__.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 1,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\admin_site.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 36,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\apps.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 8,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\base_views.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 89,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 1,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 128,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\constants.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 60,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\elasticsearch_backend.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 155,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\error_views.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 107,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\feeds.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 28,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py": {
+      "CONFIDENCE.HIGH": 4,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 4,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 75,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\mixins.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 213,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\base_plugin.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 155,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\hook_constants.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 16,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\hooks.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 36,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\plugin_manage\\loader.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 51,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\settings.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 294,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\sitemap.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 38,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\spider_notify.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 1,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 16,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 5,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 5,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 241,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 10,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 10,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 443,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 16,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 16,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 413,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_plugins.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 174,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\tests.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 22,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\urls.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 69,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\utils.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 1,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 233,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py": {
+      "CONFIDENCE.HIGH": 1,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 1,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 811,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\wsgi.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 10,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "_totals": {
+      "CONFIDENCE.HIGH": 7,
+      "CONFIDENCE.LOW": 1,
+      "CONFIDENCE.MEDIUM": 31,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 34,
+      "SEVERITY.MEDIUM": 5,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 3922,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "137                     cache.delete(f'tag_{tag.name}_1')\n138             except Exception:\n139                 pass  # 可能在创建时tags还未关联\n140 \n",
+      "col_offset": 12,
+      "end_col_offset": 20,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\blog_signals.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Try, Except, Pass detected.",
+      "line_number": 138,
+      "line_range": [
+        138,
+        139
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b110_try_except_pass.html",
+      "test_id": "B110",
+      "test_name": "try_except_pass"
+    },
+    {
+      "code": "59                 pass\n60         return mark_safe(object_link)\n61 \n",
+      "col_offset": 15,
+      "end_col_offset": 37,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 80,
+        "link": "https://cwe.mitre.org/data/definitions/80.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Potential XSS on mark_safe function.",
+      "line_number": 60,
+      "line_range": [
+        60
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b703_django_mark_safe.html",
+      "test_id": "B703",
+      "test_name": "django_mark_safe"
+    },
+    {
+      "code": "59                 pass\n60         return mark_safe(object_link)\n61 \n",
+      "col_offset": 15,
+      "end_col_offset": 37,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 79,
+        "link": "https://cwe.mitre.org/data/definitions/79.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.",
+      "line_number": 60,
+      "line_range": [
+        60
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b308-mark-safe",
+      "test_id": "B308",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "77             pass\n78         return mark_safe(user_link)\n79 \n",
+      "col_offset": 15,
+      "end_col_offset": 35,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 80,
+        "link": "https://cwe.mitre.org/data/definitions/80.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Potential XSS on mark_safe function.",
+      "line_number": 78,
+      "line_range": [
+        78
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b703_django_mark_safe.html",
+      "test_id": "B703",
+      "test_name": "django_mark_safe"
+    },
+    {
+      "code": "77             pass\n78         return mark_safe(user_link)\n79 \n",
+      "col_offset": 15,
+      "end_col_offset": 35,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\logentryadmin.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 79,
+        "link": "https://cwe.mitre.org/data/definitions/79.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Use of mark_safe() may expose cross-site scripting vulnerabilities and should be reviewed.",
+      "line_number": 78,
+      "line_range": [
+        78
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b308-mark-safe",
+      "test_id": "B308",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "13             data = '\\n'.join(urls)\n14             result = requests.post(settings.BAIDU_NOTIFY_URL, data=data)\n15             logger.info(result.text)\n",
+      "col_offset": 21,
+      "end_col_offset": 72,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\spider_notify.py",
+      "issue_confidence": "LOW",
+      "issue_cwe": {
+        "id": 400,
+        "link": "https://cwe.mitre.org/data/definitions/400.html"
+      },
+      "issue_severity": "MEDIUM",
+      "issue_text": "Call to requests without timeout",
+      "line_number": 14,
+      "line_range": [
+        14
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b113_request_without_timeout.html",
+      "test_id": "B113",
+      "test_name": "request_without_timeout"
+    },
+    {
+      "code": "29 \n30     def create_user(self, username='testuser', email='test@test.com', password='testpass123'):\n31         \"\"\"创建普通用户\"\"\"\n32         user = BlogUser.objects.create_user(\n33             username=username,\n34             email=email,\n35             password=password\n36         )\n37         return user\n38 \n",
+      "col_offset": 4,
+      "end_col_offset": 19,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'testpass123'",
+      "line_number": 30,
+      "line_range": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b107_hardcoded_password_default.html",
+      "test_id": "B107",
+      "test_name": "hardcoded_password_default"
+    },
+    {
+      "code": "38 \n39     def create_admin_user(self, username='admin', email='admin@admin.com', password='admin123'):\n40         \"\"\"创建管理员用户\"\"\"\n41         user = BlogUser.objects.create_superuser(\n42             username=username,\n43             email=email,\n44             password=password\n45         )\n46         return user\n47 \n",
+      "col_offset": 4,
+      "end_col_offset": 19,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'admin123'",
+      "line_number": 39,
+      "line_range": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b107_hardcoded_password_default.html",
+      "test_id": "B107",
+      "test_name": "hardcoded_password_default"
+    },
+    {
+      "code": "47 \n48     def create_staff_user(self, username='staff', email='staff@test.com', password='staff123'):\n49         \"\"\"创建员工用户\"\"\"\n50         user = BlogUser.objects.create_user(\n51             username=username,\n52             email=email,\n53             password=password,\n54             is_staff=True\n55         )\n56         return user\n57 \n",
+      "col_offset": 4,
+      "end_col_offset": 19,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'staff123'",
+      "line_number": 48,
+      "line_range": [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b107_hardcoded_password_default.html",
+      "test_id": "B107",
+      "test_name": "hardcoded_password_default"
+    },
+    {
+      "code": "116 \n117     def login_user(self, user=None, password='testpass123'):\n118         \"\"\"登录用户\"\"\"\n119         if user is None:\n120             user = self.user\n121         return self.client.login(username=user.username, password=password)\n122 \n",
+      "col_offset": 4,
+      "end_col_offset": 75,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'testpass123'",
+      "line_number": 117,
+      "line_range": [
+        117,
+        118,
+        119,
+        120,
+        121
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b107_hardcoded_password_default.html",
+      "test_id": "B107",
+      "test_name": "hardcoded_password_default"
+    },
+    {
+      "code": "124         \"\"\"登录管理员\"\"\"\n125         return self.client.login(username='admin', password='admin123')\n126 \n",
+      "col_offset": 15,
+      "end_col_offset": 71,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_base.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'admin123'",
+      "line_number": 125,
+      "line_range": [
+        125
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "138             email='test@example.com',\n139             password='OldPassword123!'\n140         )\n141 \n142         # 确保博客设置存在\n143         BlogSettings.objects.get_or_create(\n144             id=1,\n",
+      "col_offset": 20,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'OldPassword123!'",
+      "line_number": 139,
+      "line_range": [
+        136,
+        137,
+        138,
+        139,
+        140
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "241             email='author@example.com',\n242             password='password'\n243         )\n244 \n245         # 创建评论者\n246         self.commenter = BlogUser.objects.create_user(\n247             username='commenter',\n",
+      "col_offset": 22,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 242,
+      "line_range": [
+        239,
+        240,
+        241,
+        242,
+        243
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "248             email='commenter@example.com',\n249             password='password'\n250         )\n251 \n252         # 创建分类\n253         self.category = Category.objects.create(\n254             name='Test Category',\n",
+      "col_offset": 25,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 249,
+      "line_range": [
+        246,
+        247,
+        248,
+        249,
+        250
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "280         # 评论者登录\n281         self.client.login(username='commenter', password='password')\n282 \n",
+      "col_offset": 8,
+      "end_col_offset": 68,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 281,
+      "line_range": [
+        281
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "325             email='replier@example.com',\n326             password='password'\n327         )\n328 \n329         # 回复者登录\n330         self.client.login(username='replier', password='password')\n331 \n",
+      "col_offset": 18,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 326,
+      "line_range": [
+        323,
+        324,
+        325,
+        326,
+        327
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "329         # 回复者登录\n330         self.client.login(username='replier', password='password')\n331 \n",
+      "col_offset": 8,
+      "end_col_offset": 66,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 330,
+      "line_range": [
+        330
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "369         # 评论者登录\n370         self.client.login(username='commenter', password='password')\n371 \n",
+      "col_offset": 8,
+      "end_col_offset": 68,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 370,
+      "line_range": [
+        370
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "446         # 2. 用户登录\n447         self.client.login(username='journeyuser', password='JourneyPassword123!')\n448 \n",
+      "col_offset": 8,
+      "end_col_offset": 81,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'JourneyPassword123!'",
+      "line_number": 447,
+      "line_range": [
+        447
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "467             email='journeycommenter@example.com',\n468             password='password'\n469         )\n470 \n471         self.client.logout()\n472         self.client.login(username='journeycommenter', password='password')\n473 \n",
+      "col_offset": 20,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 468,
+      "line_range": [
+        465,
+        466,
+        467,
+        468,
+        469
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "471         self.client.logout()\n472         self.client.login(username='journeycommenter', password='password')\n473 \n",
+      "col_offset": 8,
+      "end_col_offset": 75,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 472,
+      "line_range": [
+        472
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "108                         username='testuser2024',\n109                         password='ComplexPassword@2024!'\n110                     )\n111                     self.assertTrue(login_success, \"验证后用户应该可以登录\")\n112         else:\n113             # 至少验证邮件包含相关内容\n",
+      "col_offset": 36,
+      "end_col_offset": 21,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'ComplexPassword@2024!'",
+      "line_number": 109,
+      "line_range": [
+        107,
+        108,
+        109,
+        110
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "171             email='reset@example.com',\n172             password='OldPassword123!'\n173         )\n174 \n175         BlogSettings.objects.get_or_create(\n176             id=1,\n177             defaults={'site_name': 'Test Blog'}\n",
+      "col_offset": 20,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'OldPassword123!'",
+      "line_number": 172,
+      "line_range": [
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "205                 # ============ 步骤4: 提交新密码和验证码 ============\n206                 new_password = 'NewPassword456!'\n207 \n",
+      "col_offset": 31,
+      "end_col_offset": 48,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'NewPassword456!'",
+      "line_number": 206,
+      "line_range": [
+        206
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "222                     username='resetuser',\n223                     password='OldPassword123!'\n224                 )\n225 \n226                 # 验证新密码可以用\n227                 new_password_works = authenticate(\n",
+      "col_offset": 37,
+      "end_col_offset": 17,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'OldPassword123!'",
+      "line_number": 223,
+      "line_range": [
+        221,
+        222,
+        223,
+        224
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "267             username='resetuser',\n268             password='OldPassword123!'\n269         )\n270 \n271         # 旧密码应该仍然有效\n272         self.assertIsNotNone(user_still_has_old_password)\n",
+      "col_offset": 38,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'OldPassword123!'",
+      "line_number": 268,
+      "line_range": [
+        266,
+        267,
+        268,
+        269
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "290             email='author@example.com',\n291             password='password'\n292         )\n293 \n294         # 创建评论者\n295         self.commenter = BlogUser.objects.create_user(\n296             username='commenter',\n",
+      "col_offset": 22,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 291,
+      "line_range": [
+        288,
+        289,
+        290,
+        291,
+        292
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "297             email='commenter@example.com',\n298             password='password'\n299         )\n300 \n301         # 创建分类和文章\n302         self.category = Category.objects.create(\n303             name='Test Category',\n",
+      "col_offset": 25,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 298,
+      "line_range": [
+        295,
+        296,
+        297,
+        298,
+        299
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "328         # ============ 步骤1: 评论者登录并发表评论 ============\n329         self.client.login(username='commenter', password='password')\n330 \n",
+      "col_offset": 8,
+      "end_col_offset": 68,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 329,
+      "line_range": [
+        329
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "376                 self.client.logout()\n377                 self.client.login(username='author', password='password')\n378 \n",
+      "col_offset": 16,
+      "end_col_offset": 73,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 377,
+      "line_range": [
+        377
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "437         # ============ 步骤2: 发表评论 ============\n438         self.client.login(username='commenter', password='password')\n439 \n",
+      "col_offset": 8,
+      "end_col_offset": 68,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 438,
+      "line_range": [
+        438
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "470                 email='admin@example.com',\n471                 password='adminpass'\n472             )\n473             self.client.login(username='admin', password='adminpass')\n474 \n475             # 审核通过\n476             comment.is_enable = True\n",
+      "col_offset": 20,
+      "end_col_offset": 13,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'adminpass'",
+      "line_number": 471,
+      "line_range": [
+        468,
+        469,
+        470,
+        471,
+        472
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "472             )\n473             self.client.login(username='admin', password='adminpass')\n474 \n",
+      "col_offset": 12,
+      "end_col_offset": 69,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'adminpass'",
+      "line_number": 473,
+      "line_range": [
+        473
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "538             username='journeyuser',\n539             password='JourneyPass123!'\n540         )\n541         self.assertTrue(login_success, \"阶段2：用户应该能够登录\")\n542 \n543         # ============ 阶段3: 用户创建文章 ============\n",
+      "col_offset": 24,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'JourneyPass123!'",
+      "line_number": 539,
+      "line_range": [
+        537,
+        538,
+        539,
+        540
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "565             email='commenter@example.com',\n566             password='password'\n567         )\n568 \n569         self.client.login(username='commenter', password='password')\n570 \n571         mail.outbox = []  # 清空邮件\n",
+      "col_offset": 20,
+      "end_col_offset": 9,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 566,
+      "line_range": [
+        563,
+        564,
+        565,
+        566,
+        567
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "568 \n569         self.client.login(username='commenter', password='password')\n570 \n",
+      "col_offset": 8,
+      "end_col_offset": 68,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password'",
+      "line_number": 569,
+      "line_range": [
+        569
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "594         self.client.logout()\n595         self.client.login(username='journeyuser', password='JourneyPass123!')\n596 \n",
+      "col_offset": 8,
+      "end_col_offset": 77,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\test_email_integration_complete.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'JourneyPass123!'",
+      "line_number": 595,
+      "line_range": [
+        595
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html",
+      "test_id": "B106",
+      "test_name": "hardcoded_password_funcarg"
+    },
+    {
+      "code": "139     \"\"\"生成随机数验证码\"\"\"\n140     return ''.join(random.sample(string.digits, 6))\n141 \n",
+      "col_offset": 19,
+      "end_col_offset": 50,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\utils.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 330,
+        "link": "https://cwe.mitre.org/data/definitions/330.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Standard pseudo-random generators are not suitable for security/cryptographic purposes.",
+      "line_number": 140,
+      "line_range": [
+        140
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random",
+      "test_id": "B311",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "275         if models is not None:\n276             assert isinstance(models, (list, tuple))\n277 \n",
+      "col_offset": 12,
+      "end_col_offset": 52,
+      "filename": "E:\\新建文件夹 (5)\\Git\\class-3-group-6\\src\\DjangoBlog\\djangoblog\\whoosh_cn_backend.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 276,
+      "line_range": [
+        276
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

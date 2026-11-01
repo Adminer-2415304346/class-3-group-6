@@ -1,12 +1,11 @@
+from accounts.models import BlogUser
+from blog.models import Article, Category
 from django.test import Client, RequestFactory, TransactionTestCase
 from django.urls import reverse
-
-from accounts.models import BlogUser
-from blog.models import Category, Article
-from comments.models import Comment
-from comments.templatetags.comments_tags import *
 from djangoblog.utils import get_max_articleid_commentid
 
+from comments.models import Comment
+from comments.templatetags.comments_tags import *
 
 # Create your tests here.
 

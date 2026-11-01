@@ -1,0 +1,44 @@
+{
+  "operator": "SZX",
+  "app_owner": "YFY",
+  "recorded_date": "2026-11-02",
+  "purpose": "Supplemental same-configuration comparison; original YFY evidence remains unchanged.",
+  "source_commits": {
+    "baseline": "a4e30eb4fa9969de7b6a07cc269a0e19584299ce",
+    "after": "3f8c7a2555751dfafc412f27904eb52328786d8a"
+  },
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "python": "3.12.14",
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "same_file_paths": true,
+  "results": {
+    "baseline": {
+      "files": 10,
+      "ruff": 9,
+      "bandit": 0,
+      "ruff_rules": {
+        "I001": 5,
+        "E501": 3,
+        "F401": 1
+      },
+      "bandit_errors": 0
+    },
+    "after": {
+      "files": 10,
+      "ruff": 8,
+      "bandit": 0,
+      "ruff_rules": {
+        "I001": 4,
+        "E501": 3,
+        "F401": 1
+      },
+      "bandit_errors": 0
+    }
+  }
+}

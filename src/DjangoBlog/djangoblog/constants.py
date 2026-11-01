@@ -5,6 +5,11 @@
 Django Blog 全局常量定义
 包含缓存超时时间、缓存键模板等配置
 """
+# GCY（模块层）：共用层常量集中地，用类做命名空间避免模块级散落。
+# CacheTimeout 统一缓存 TTL，CacheKey 提供缓存键模板（str.format 占位），
+# HttpStatus 收敛 HTTP 状态码，Pagination 固定分页参数。这些常量被
+# blog/comments 等 app 与 djangoblog 自身引用；约束是键模板一旦对外
+# 发布不可随意改格式，否则旧缓存键将失效、信号清理也匹配不到。
 
 
 # ===== 缓存过期时间（秒）=====

@@ -16,6 +16,10 @@ class StaticViewSitemap(Sitemap):
 
 
 class ArticleSiteMap(Sitemap):
+    # GCY（类/函数层）：文章站点地图，只收录 status='p' 的已发布文章，
+    # lastmod 取最后修改时间，供搜索引擎增量抓取。Category/Tag/User
+    # 三类地图类似；UserSiteMap.items 用 set 去重作者。变更频率与
+    # 优先级为声明值，搜索引擎仅作参考。
     changefreq = "monthly"
     priority = "0.6"
 

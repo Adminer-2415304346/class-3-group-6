@@ -1,0 +1,153 @@
+{
+  "app": "accounts",
+  "phase": "after",
+  "member": "YFY",
+  "started_at": "2026-10-21T14:59:58+08:00",
+  "repo_root": "F:\\软件工程\\class-3-group-6",
+  "app_dir": "src/DjangoBlog/accounts",
+  "branch": "yfy_branch",
+  "head_sha": "a4e30eb4fa9969de7b6a07cc269a0e19584299ce",
+  "working_tree_dirty": true,
+  "working_tree_status": [
+    "M src/DjangoBlog/accounts/admin.py",
+    " M src/DjangoBlog/accounts/apps.py",
+    " M src/DjangoBlog/accounts/forms.py",
+    " M src/DjangoBlog/accounts/models.py",
+    " M src/DjangoBlog/accounts/test_user_business_logic.py",
+    " M src/DjangoBlog/accounts/urls.py",
+    " M src/DjangoBlog/accounts/user_login_backend.py",
+    " M src/DjangoBlog/accounts/utils.py",
+    " M src/DjangoBlog/accounts/views.py",
+    "?? doc/week7-8/",
+    "?? src/DjangoBlog/accounts/test_auth_hardening.py"
+  ],
+  "python": "3.13.14",
+  "python_executable": "C:\\Users\\YFY\\AppData\\Local\\Temp\\yfy-quality-venv\\Scripts\\python.exe",
+  "ruff_version": "ruff 0.17.1",
+  "bandit_version": "__main__.py 1.9.4",
+  "config_files": {
+    "ruff": "doc/week7-8/tools/ruff.toml",
+    "driver": "doc/week7-8/tools/scan_app.py"
+  },
+  "config_sha256": "819ccc2030571274a84cea2474d2f5ecd4b033feb484dcd3bcce12128bbfc362",
+  "selection": {
+    "include": "App 下全部业务 Python（含 commands、templatetags、__init__.py）",
+    "exclude": [
+      "migrations/",
+      "tests/",
+      "test*.py",
+      "tests.py",
+      "__pycache__"
+    ]
+  },
+  "excluded_files": [
+    "migrations/0001_initial.py",
+    "migrations/0002_alter_bloguser_options_remove_bloguser_created_time_and_more.py",
+    "migrations/__init__.py",
+    "test_admin.py",
+    "test_auth_hardening.py",
+    "test_user_business_logic.py",
+    "tests.py"
+  ],
+  "files": [
+    {
+      "path": "src/DjangoBlog/accounts/__init__.py",
+      "physical_lines": 0,
+      "code_lines": 0,
+      "classes": 0,
+      "functions": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/admin.py",
+      "physical_lines": 70,
+      "code_lines": 48,
+      "classes": 5,
+      "functions": 2,
+      "sha256": "c072d46a5dd7ca83ee5e4830f2379a7e23a4b232f00bdd315b8c7b891be52ac7"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/apps.py",
+      "physical_lines": 6,
+      "code_lines": 3,
+      "classes": 1,
+      "functions": 0,
+      "sha256": "2d338a08be29e1eb9dc2711d356e62925e511e1978aac2bce4913cf91ad89bfb"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/forms.py",
+      "physical_lines": 135,
+      "code_lines": 98,
+      "classes": 5,
+      "functions": 6,
+      "sha256": "a6a326f96ecf3fbd1b6e24a0094fcba5c4f58b7aff62987ab201f8eb0b0147f9"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/models.py",
+      "physical_lines": 45,
+      "code_lines": 27,
+      "classes": 2,
+      "functions": 3,
+      "sha256": "2a2fe8fbb35db27600d4c50f620b2475ee0d940b5f85f0bec7e214382a12da03"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/templatetags/__init__.py",
+      "physical_lines": 0,
+      "code_lines": 0,
+      "classes": 0,
+      "functions": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/urls.py",
+      "physical_lines": 40,
+      "code_lines": 26,
+      "classes": 0,
+      "functions": 0,
+      "sha256": "8bfaf3546dcbdf61c76bf8f72b563dbe61ea7e04bfe3de539b264d8b55a83195"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/user_login_backend.py",
+      "physical_lines": 41,
+      "code_lines": 28,
+      "classes": 1,
+      "functions": 2,
+      "sha256": "3ea8839e58fe936b06fef37635057f0ac09ac6cd2c9fa4beb2d6f43da5638c16"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/utils.py",
+      "physical_lines": 66,
+      "code_lines": 41,
+      "classes": 0,
+      "functions": 5,
+      "sha256": "f5971c103eca202364cc50546170af482b7144980308b8fd932803872963505c"
+    },
+    {
+      "path": "src/DjangoBlog/accounts/views.py",
+      "physical_lines": 271,
+      "code_lines": 182,
+      "classes": 5,
+      "functions": 8,
+      "sha256": "d828568319bab368c7229d75301bafe337c74650dbd3b22fdbd0d5f973a952a7"
+    }
+  ],
+  "commands": {
+    "ruff": "C:\\Users\\YFY\\AppData\\Local\\Temp\\yfy-quality-venv\\Scripts\\python.exe -m ruff check --no-cache --output-format json --config F:\\软件工程\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml src/DjangoBlog/accounts/__init__.py src/DjangoBlog/accounts/admin.py src/DjangoBlog/accounts/apps.py src/DjangoBlog/accounts/forms.py src/DjangoBlog/accounts/models.py src/DjangoBlog/accounts/templatetags/__init__.py src/DjangoBlog/accounts/urls.py src/DjangoBlog/accounts/user_login_backend.py src/DjangoBlog/accounts/utils.py src/DjangoBlog/accounts/views.py",
+    "bandit": "C:\\Users\\YFY\\AppData\\Local\\Temp\\yfy-quality-venv\\Scripts\\python.exe -m bandit -q -f json --ignore-nosec src/DjangoBlog/accounts/__init__.py src/DjangoBlog/accounts/admin.py src/DjangoBlog/accounts/apps.py src/DjangoBlog/accounts/forms.py src/DjangoBlog/accounts/models.py src/DjangoBlog/accounts/templatetags/__init__.py src/DjangoBlog/accounts/urls.py src/DjangoBlog/accounts/user_login_backend.py src/DjangoBlog/accounts/utils.py src/DjangoBlog/accounts/views.py"
+  },
+  "exit_codes": {
+    "ruff": 1,
+    "bandit": 0
+  },
+  "finding_counts": {
+    "ruff": 9,
+    "bandit": 0
+  },
+  "outputs": [
+    "ruff.json",
+    "bandit.json",
+    "ruff.stderr.txt",
+    "bandit.stderr.txt"
+  ],
+  "metrics_note": "code_lines 为非空且不以 # 开头的物理行；类/函数含嵌套定义。"
+}

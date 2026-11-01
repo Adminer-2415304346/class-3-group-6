@@ -1,0 +1,82 @@
+[
+  {
+    "app": "blog",
+    "stage": "after",
+    "files": 23,
+    "ruff_findings": 65,
+    "ruff_rules": {
+      "I001": 17,
+      "F401": 14,
+      "F841": 2,
+      "E501": 25,
+      "E722": 1,
+      "E741": 1,
+      "B009": 2,
+      "B010": 1,
+      "C901": 1,
+      "E402": 1
+    },
+    "bandit_findings": 39,
+    "bandit_errors": []
+  },
+  {
+    "app": "accounts",
+    "stage": "after",
+    "files": 10,
+    "ruff_findings": 8,
+    "ruff_rules": {
+      "I001": 4,
+      "E501": 3,
+      "F401": 1
+    },
+    "bandit_findings": 0,
+    "bandit_errors": []
+  },
+  {
+    "app": "comments",
+    "stage": "after",
+    "files": 11,
+    "ruff_findings": 0,
+    "ruff_rules": {},
+    "bandit_findings": 0,
+    "bandit_errors": []
+  },
+  {
+    "app": "oauth",
+    "stage": "after",
+    "files": 10,
+    "ruff_findings": 12,
+    "ruff_rules": {
+      "I001": 3,
+      "E501": 7,
+      "F401": 1,
+      "C901": 1
+    },
+    "bandit_findings": 6,
+    "bandit_errors": []
+  },
+  {
+    "app": "djangoblog",
+    "stage": "after",
+    "files": 22,
+    "ruff_findings": 28,
+    "ruff_rules": {
+      "I001": 7,
+      "E501": 14,
+      "B904": 1,
+      "C901": 5,
+      "B007": 1
+    },
+    "bandit_findings": 5,
+    "bandit_errors": []
+  },
+  {
+    "app": "servermanager",
+    "stage": "after",
+    "files": 11,
+    "ruff_findings": 0,
+    "ruff_rules": {},
+    "bandit_findings": 2,
+    "bandit_errors": []
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "operator": "SZX",
+  "source_commit": "11e677cfbf326567be8ea395d65b6e60dc595594",
+  "original_review_timestamp_utc": "2026-10-31T10:51:31.344189+00:00",
+  "scope": "11 comments business Python files; excludes tests and migrations",
+  "source_sha256": {
+    "comments/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "comments/admin.py": "eca2beaaddbb2bc1bd3926d02e273ab32fcb04d79ce256f4f0d46cbe85bb1e63",
+    "comments/apps.py": "6b7fd1aafdb1c3a11ed199946ea1c1f959eb960dada2048a9ddaabed3d80d6f2",
+    "comments/comments_tags.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "comments/forms.py": "92bcfeaa5598fa803a1f9f0464a848d7ad82bbf52a7d043e72b2b89658a0aa7d",
+    "comments/models.py": "9b4d47712fc12c53fbff70772c38b17f8e942cd6848aeab9cc4f9e58f96e57e5",
+    "comments/templatetags/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "comments/templatetags/comments_tags.py": "059ca387d97127e43912b334ba75bd8b7d1762cc7bc0e8c3f59fb85cef5ae113",
+    "comments/urls.py": "4e0587cd799dbdfa3128f5649744590283b6f3034df340271198b3d18fd6b39f",
+    "comments/utils.py": "897b98f1727788995d001dfa8bb1b5d91fc60941560c05eb646db9c69ad9bebf",
+    "comments/views.py": "89bc7873d9dceea058de6001dcc9d9e1bfc6aaddac0ac545240c72f1df02a217"
+  },
+  "summary": {
+    "files": 11,
+    "ruff_findings": 4,
+    "ruff_rules": {
+      "I001": 4
+    },
+    "ruff_locations": [
+      [
+        "admin.py",
+        1,
+        "I001"
+      ],
+      [
+        "models.py",
+        4,
+        "I001"
+      ],
+      [
+        "utils.py",
+        1,
+        "I001"
+      ],
+      [
+        "views.py",
+        5,
+        "I001"
+      ]
+    ],
+    "bandit_findings": 0,
+    "bandit_errors": [],
+    "committed_after_ref": "d8a2b60dd87e1dd88c1aa21e8f637dad618e9e15",
+    "changed_since_committed_after": [
+      "src/DjangoBlog/comments/admin.py",
+      "src/DjangoBlog/comments/models.py",
+      "src/DjangoBlog/comments/views.py"
+    ],
+    "config_matches_committed_after": {
+      "ruff.toml": true,
+      "bandit.yaml": true
+    }
+  },
+  "provenance": "Raw static results preserved from the read-only review before this fix."
+}
