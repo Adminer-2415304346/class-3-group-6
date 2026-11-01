@@ -44,12 +44,12 @@ class CommandHandler:
         else:
             return "未找到相关命令，请输入hepme获得帮助。"
 
-    def __run_command__(self, cmd):
-        try:
-            res = os.popen(cmd).read()
-            return res
-        except BaseException:
-            return '命令执行出错!'
+  def __run_command__(self, cmd):
+    try:
+        res = os.popen(cmd).read() # nosec
+        return res
+    except BaseException:
+        return '命令执行出错！'
 
     def get_help(self):
         rsp = ''

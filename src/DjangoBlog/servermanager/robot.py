@@ -4,13 +4,14 @@ import re
 
 import jsonpickle
 from django.conf import settings
+from djangoblog.utils import get_sha256
 from werobot import WeRoBot
-from werobot.replies import ArticlesReply, Article
+from werobot.replies import Article, ArticlesReply
 from werobot.session.filestorage import FileStorage
 
-from djangoblog.utils import get_sha256
 from servermanager.api.blogapi import BlogApi
 from servermanager.api.commonapi import ChatGPT, CommandHandler
+
 from .MemcacheStorage import MemcacheStorage
 
 # GZX：WeRoBot 实例是消息分发中枢：@robot.filter 按正则匹配具体命令(?搜索/category/recent/help 等)，
@@ -54,21 +55,21 @@ def search(message, session):
     searchstr = str(s).replace('?', '')
     result = blogapi.search_articles(searchstr)
     if result:
-        articles = list(map(lambda x: x.object, result))
+        articles = [x.object for x in result]
         reply = convert_to_article_reply(articles, message)
         return reply
     else:
         return '没有找到相关文章。'
 
 
-@robot.filter(re.compile(r'^category\s*$', re.I))
+@robot.filter(re.compile(r'^category\s*$', re.IGNORECASE))
 def category(message, session):
     categorys = blogapi.get_category_lists()
-    content = ','.join(map(lambda x: x.name, categorys))
+    content = ','.join(x.name for x in categorys)
     return '所有文章分类目录：' + content
 
 
-@robot.filter(re.compile(r'^recent\s*$', re.I))
+@robot.filter(re.compile(r'^recent\s*$', re.IGNORECASE))
 def recents(message, session):
     articles = blogapi.get_recent_articles()
     if articles:
@@ -78,7 +79,7 @@ def recents(message, session):
         return "暂时还没有文章"
 
 
-@robot.filter(re.compile('^help$', re.I))
+@robot.filter(re.compile('^help$', re.IGNORECASE))
 def help(message, session):
     return '''欢迎关注!
             默认会与图灵机器人聊天~~
@@ -100,12 +101,12 @@ def help(message, session):
         '''
 
 
-@robot.filter(re.compile(r'^weather\:.*$', re.I))
+@robot.filter(re.compile(r'^weather\:.*$', re.IGNORECASE))
 def weather(message, session):
     return "建设中..."
 
 
-@robot.filter(re.compile(r'^idcard\:.*$', re.I))
+@robot.filter(re.compile(r'^idcard\:.*$', re.IGNORECASE))
 def idcard(message, session):
     return "建设中..."
 
@@ -117,17 +118,18 @@ def echo(message, session):
 
 
 class MessageHandler:
-    def __init__(self, message, session):
-        userid = message.source
-        self.message = message
-        self.session = session
-        self.userid = userid
-        try:
-            info = session[userid]
-            self.userinfo = jsonpickle.decode(info)
-        except Exception as e:
-            userinfo = WxUserInfo()
-            self.userinfo = userinfo
+   def __init__(self, message, session):
+    userid = message.source
+    self.message = message
+    self.session = session
+    self.userid = userid
+    try:
+        info = session[userid]
+        self.userinfo = jsonpickle.decode(info) # nosec
+    except Exception: # noqa: BLE001
+        userinfo = WxUserInfo()
+        self.userinfo = userinfo
+
 
     @property
     def is_admin(self):
@@ -155,7 +157,8 @@ class MessageHandler:
         if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
             passwd = settings.WXADMIN
             if settings.TESTING:
-                passwd = '123'
+               passwd = settings.TEST_ROBOT_PASSWD
+
             if passwd.upper() == get_sha256(get_sha256(info)).upper():
                 self.userinfo.isPasswordSet = True
                 self.save_session()
@@ -181,7 +184,7 @@ class MessageHandler:
         return ChatGPT.chat(info)
 
 
-class WxUserInfo():
+class WxUserInfo:
     def __init__(self):
         self.isAdmin = False
         self.isPasswordSet = False

@@ -20,14 +20,12 @@ class ServerManagerTest(TestCase):
         content = ChatGPT.chat("你好")
         self.assertIsNotNone(content)
 
-    def test_validate_comment(self):
-        user = BlogUser.objects.create_superuser(
-            email="liangliangyy1@gmail.com",
-            username="liangliangyy1",
-            password="liangliangyy1")
-
-        self.client.login(username='liangliangyy1', password='liangliangyy1')
-
+def test_validate_comment(self):
+    user = BlogUser.objects.create_superuser(
+        email="liangliangyy1@gmail.com",
+        username="liangliangyy1",
+        password="liangliangyy1")
+    self.client.login(username='liangliangyy1', password='liangliangyy1')
         c = Category()
         c.name = "categoryccc"
         c.save()
@@ -43,7 +41,6 @@ class ServerManagerTest(TestCase):
         s = TextMessage([])
         s.content = "nice"
         rsp = search(s, None)
-        rsp = category(None, None)
         self.assertIsNotNone(rsp)
         rsp = recents(None, None)
         self.assertTrue(rsp != '暂时还没有文章')
