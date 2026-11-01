@@ -4,11 +4,11 @@ Typography: 宋体 / Times New Roman; all text explicitly black (000000).
 Visual review: all 16 pages across four contact sheets inspected.
 
 doc/week7-8/AI Agent工程实践-Python语言编码规范.docx
-SHA256=defc093f533fe473c14ae544813834f45f7cecb3ed89e33a74619f38a547bb0f
+SHA256=5a23b0a1544b0a668f343ce1378ba418fa50554751e87dcbf0ce1326e86b9892
 Paragraphs: 0 → 110 (+110)
 All validations PASSED!
 
 doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx
-SHA256=6ca7dd0cf4f37b5322767d03512c3f0f49ea9d5da0efbb63a4b7cf715ff6f227
+SHA256=df9a571a1d5e72c7731d9ff0ec2443d2a54f786f8aea62c9327de779bd272e2d
 Paragraphs: 0 → 811 (+811)
 All validations PASSED!

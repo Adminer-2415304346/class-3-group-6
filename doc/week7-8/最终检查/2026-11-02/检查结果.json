@@ -1,0 +1,151 @@
+{
+  "checked_at": "2026-11-02T01:44:39.417709+08:00",
+  "operator": "SZX 石兆翔",
+  "decision": "本轮课程交付检查通过，按组长授权进入develop→main流程",
+  "tested_source_commit": "e14dc09e5cd4e4a617a32ccf591612f9de6caf78",
+  "business_source_unchanged_after_test": true,
+  "tests": {
+    "tests_run": 390,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "current_scan": [
+    {
+      "app": "blog",
+      "stage": "after",
+      "files": 23,
+      "ruff_findings": 65,
+      "ruff_rules": {
+        "I001": 17,
+        "F401": 14,
+        "F841": 2,
+        "E501": 25,
+        "E722": 1,
+        "E741": 1,
+        "B009": 2,
+        "B010": 1,
+        "C901": 1,
+        "E402": 1
+      },
+      "bandit_findings": 39,
+      "bandit_errors": []
+    },
+    {
+      "app": "accounts",
+      "stage": "after",
+      "files": 10,
+      "ruff_findings": 8,
+      "ruff_rules": {
+        "I001": 4,
+        "E501": 3,
+        "F401": 1
+      },
+      "bandit_findings": 0,
+      "bandit_errors": []
+    },
+    {
+      "app": "comments",
+      "stage": "after",
+      "files": 11,
+      "ruff_findings": 0,
+      "ruff_rules": {},
+      "bandit_findings": 0,
+      "bandit_errors": []
+    },
+    {
+      "app": "oauth",
+      "stage": "after",
+      "files": 10,
+      "ruff_findings": 12,
+      "ruff_rules": {
+        "I001": 3,
+        "E501": 7,
+        "F401": 1,
+        "C901": 1
+      },
+      "bandit_findings": 6,
+      "bandit_errors": []
+    },
+    {
+      "app": "djangoblog",
+      "stage": "after",
+      "files": 22,
+      "ruff_findings": 28,
+      "ruff_rules": {
+        "I001": 7,
+        "E501": 14,
+        "B904": 1,
+        "C901": 5,
+        "B007": 1
+      },
+      "bandit_findings": 5,
+      "bandit_errors": []
+    },
+    {
+      "app": "servermanager",
+      "stage": "after",
+      "files": 11,
+      "ruff_findings": 0,
+      "ruff_rules": {},
+      "bandit_findings": 2,
+      "bandit_errors": []
+    }
+  ],
+  "python_files_parsed": 147,
+  "syntax_warning_count": 1,
+  "member_materials": 20,
+  "local_links": "passed",
+  "document_source_fingerprints": "passed",
+  "docx_schema": "passed",
+  "visual_pages_inspected": 16,
+  "documents": [
+    {
+      "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
+      "sha256": "5a23b0a1544b0a668f343ce1378ba418fa50554751e87dcbf0ce1326e86b9892",
+      "pages": 4,
+      "tables": 2,
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 27,
+        "color_nodes": 27
+      }
+    },
+    {
+      "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
+      "sha256": "df9a571a1d5e72c7731d9ff0ec2443d2a54f786f8aea62c9327de779bd272e2d",
+      "pages": 12,
+      "tables": 23,
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 13,
+        "color_nodes": 13
+      }
+    }
+  ],
+  "main_before": "ba9ddcdd82de2cde46e66b8a132c40402a1fa9c8",
+  "merge_preview": "clean; previous merged tree identical to tested develop tree",
+  "limitations": [
+    "存量工具发现保留",
+    "真实外部服务及生产部署未验证",
+    "最终代办版的独立本人复核需补强"
+  ]
+}

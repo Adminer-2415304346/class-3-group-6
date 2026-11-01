@@ -1,0 +1,14 @@
+{
+  "tests_run": 390,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "per_app": {
+    "djangoblog": 39,
+    "comments": 50,
+    "blog": 158,
+    "accounts": 84,
+    "oauth": 26,
+    "servermanager": 33
+  }
+}

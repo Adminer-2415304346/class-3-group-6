@@ -1,6 +1,6 @@
 {
   "compiled_date": "2026-11-02",
-  "source_ref": "ed32332b4bbd1b4b05808f93840427489447cd6e",
+  "source_ref": "e14dc09e5cd4e4a617a32ccf591612f9de6caf78",
   "purpose": "Final course aggregation with actual executor attribution and verification boundaries.",
   "document_style": {
     "chinese_font": "宋体",
@@ -530,7 +530,7 @@
     "doc/week7-8/互查记录/2026-11-02-两组互查补录.md": "e74023452b2ab386bf2e7f579f5049ad42b8612351b17437ff0b77950534074d",
     "doc/week7-8/成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/summary.json": "a5fffc01e560f67f3d37b06a4f7d68f94c39b28f0250027da8ceccc9461c427c",
     "doc/week7-8/tools/supplement_accounts_baseline.py": "7b8b3be42a4d0433f1faf1bb871080f8a45f88a047d5b23c9abb0859eb4fcd29",
-    "doc/week7-8/成员成果/YFY/工具与验证记录.md": "1cedc051ad747031fde2a66daea0691713bab2c9ca393cfac6c164302f8be01f",
+    "doc/week7-8/成员成果/YFY/工具与验证记录.md": "7ce6b54d52eaf8b82c6ff0ccd5feb1213ba904495da1330b2ce47d496c4b41fb",
     "doc/week7-8/成员成果/GZX/互查记录.md": "d5c3b95b59db4010b35b282ad6c91c31cfa769d3a93c63fedc0e126db1e67bc8",
     "doc/week7-8/成员成果/GCY/工具与验证记录.md": "37e2069defbe8954617de43ebab1427178c6e31182267d87b79302f5fff23ab9",
     "doc/week7-8/成员成果/SY/接手完成清单.json": "4bf9cee5becef7cd0f503212268a761e5923d8a9fe0aa66fdfe27b873fea36df",
@@ -3389,11 +3389,11 @@
   "outputs": {
     "coding": {
       "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
-      "sha256": "defc093f533fe473c14ae544813834f45f7cecb3ed89e33a74619f38a547bb0f"
+      "sha256": "5a23b0a1544b0a668f343ce1378ba418fa50554751e87dcbf0ce1326e86b9892"
     },
     "quality": {
       "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
-      "sha256": "6ca7dd0cf4f37b5322767d03512c3f0f49ea9d5da0efbb63a4b7cf715ff6f227"
+      "sha256": "df9a571a1d5e72c7731d9ff0ec2443d2a54f786f8aea62c9327de779bd272e2d"
     }
   },
   "rendering": {
