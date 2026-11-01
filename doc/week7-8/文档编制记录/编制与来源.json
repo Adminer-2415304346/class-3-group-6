@@ -1,7 +1,13 @@
 {
   "compiled_date": "2026-11-02",
-  "source_ref": "3f8c7a2555751dfafc412f27904eb52328786d8a",
-  "purpose": "Course Word review drafts with confirmed content; not final group acceptance.",
+  "source_ref": "ed32332b4bbd1b4b05808f93840427489447cd6e",
+  "purpose": "Final course aggregation with actual executor attribution and verification boundaries.",
+  "document_style": {
+    "chinese_font": "宋体",
+    "latin_font": "Times New Roman",
+    "text_color": "000000",
+    "source": "组长于2026-11-02确认：后续文档统一使用宋体和Times New Roman，文字黑色，不使用蓝色"
+  },
   "meeting_confirmed": {
     "date": "2026-10-23",
     "start": "19:00",
@@ -29,42 +35,67 @@
     "date_status": "日历起止与截止未单独留存；按任务周次和阶段编排，不倒推日期"
   },
   "test_evidence": {
-    "test_count": 357,
+    "test_count": 390,
     "failure_count": 0,
-    "verified_code_commit": "11800587aff13e2c91e40a38f53f9f50d635d794",
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    },
+    "verified_code_commit": "ed32332b4bbd1b4b05808f93840427489447cd6e",
     "source_comparison": {
-      "src/DjangoBlog/blog/comment_cache.py": "LF/CRLF only",
-      "src/DjangoBlog/blog/urls.py": "LF/CRLF only",
-      "src/DjangoBlog/comments/admin.py": "LF/CRLF only",
-      "src/DjangoBlog/comments/models.py": "LF/CRLF only",
+      "src/DjangoBlog/blog/comment_cache.py": "exact",
+      "src/DjangoBlog/blog/urls.py": "exact",
+      "src/DjangoBlog/comments/admin.py": "exact",
+      "src/DjangoBlog/comments/models.py": "exact",
       "src/DjangoBlog/djangoblog/__init__.py": "exact",
-      "src/DjangoBlog/djangoblog/admin_site.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/apps.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/base_views.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/blog_signals.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/constants.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/elasticsearch_backend.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/error_views.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/feeds.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/logentryadmin.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/mixins.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/plugin_manage/base_plugin.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/plugin_manage/hook_constants.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/plugin_manage/hooks.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/plugin_manage/loader.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/settings.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/sitemap.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/spider_notify.py": "LF/CRLF only",
+      "src/DjangoBlog/djangoblog/admin_site.py": "exact",
+      "src/DjangoBlog/djangoblog/apps.py": "exact",
+      "src/DjangoBlog/djangoblog/base_views.py": "exact",
+      "src/DjangoBlog/djangoblog/blog_signals.py": "exact",
+      "src/DjangoBlog/djangoblog/constants.py": "exact",
+      "src/DjangoBlog/djangoblog/elasticsearch_backend.py": "exact",
+      "src/DjangoBlog/djangoblog/error_views.py": "exact",
+      "src/DjangoBlog/djangoblog/feeds.py": "exact",
+      "src/DjangoBlog/djangoblog/logentryadmin.py": "exact",
+      "src/DjangoBlog/djangoblog/mixins.py": "exact",
+      "src/DjangoBlog/djangoblog/plugin_manage/base_plugin.py": "exact",
+      "src/DjangoBlog/djangoblog/plugin_manage/hook_constants.py": "exact",
+      "src/DjangoBlog/djangoblog/plugin_manage/hooks.py": "exact",
+      "src/DjangoBlog/djangoblog/plugin_manage/loader.py": "exact",
+      "src/DjangoBlog/djangoblog/settings.py": "exact",
+      "src/DjangoBlog/djangoblog/sitemap.py": "exact",
+      "src/DjangoBlog/djangoblog/spider_notify.py": "exact",
       "src/DjangoBlog/djangoblog/test_base.py": "exact",
       "src/DjangoBlog/djangoblog/test_email_integration.py": "exact",
       "src/DjangoBlog/djangoblog/test_email_integration_complete.py": "exact",
       "src/DjangoBlog/djangoblog/test_plugins.py": "exact",
-      "src/DjangoBlog/djangoblog/test_week78_gcy_quality.py": "LF/CRLF only",
+      "src/DjangoBlog/djangoblog/test_week78_gcy_quality.py": "exact",
       "src/DjangoBlog/djangoblog/tests.py": "exact",
-      "src/DjangoBlog/djangoblog/urls.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/utils.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/whoosh_cn_backend.py": "LF/CRLF only",
-      "src/DjangoBlog/djangoblog/wsgi.py": "LF/CRLF only"
+      "src/DjangoBlog/djangoblog/urls.py": "exact",
+      "src/DjangoBlog/djangoblog/utils.py": "exact",
+      "src/DjangoBlog/djangoblog/whoosh_cn_backend.py": "exact",
+      "src/DjangoBlog/djangoblog/wsgi.py": "exact",
+      "src/DjangoBlog/servermanager/__init__.py": "exact",
+      "src/DjangoBlog/servermanager/admin.py": "exact",
+      "src/DjangoBlog/servermanager/api/__init__.py": "exact",
+      "src/DjangoBlog/servermanager/api/blogapi.py": "exact",
+      "src/DjangoBlog/servermanager/api/commonapi.py": "exact",
+      "src/DjangoBlog/servermanager/apps.py": "exact",
+      "src/DjangoBlog/servermanager/MemcacheStorage.py": "exact",
+      "src/DjangoBlog/servermanager/migrations/0001_initial.py": "exact",
+      "src/DjangoBlog/servermanager/migrations/0002_alter_emailsendlog_options_and_more.py": "exact",
+      "src/DjangoBlog/servermanager/migrations/__init__.py": "exact",
+      "src/DjangoBlog/servermanager/models.py": "exact",
+      "src/DjangoBlog/servermanager/robot.py": "exact",
+      "src/DjangoBlog/servermanager/test_week78_takeover.py": "exact",
+      "src/DjangoBlog/servermanager/tests.py": "exact",
+      "src/DjangoBlog/servermanager/urls.py": "exact",
+      "src/DjangoBlog/servermanager/views.py": "exact",
+      "doc/week7-8/tools/run_isolated_tests.py": "exact"
     },
     "comparison_rule": "Exact bytes or UTF-8 LF/CRLF equivalence only; no semantic changes accepted."
   },
@@ -165,20 +196,379 @@
     "accounts/utils.py": "LF/CRLF only",
     "accounts/views.py": "LF/CRLF only"
   },
+  "sy_takeover": {
+    "date": "2026-11-02",
+    "original_owner": "SY 宋洋",
+    "executor": "SZX 石兆翔（组长代办）",
+    "authorization": "组长确认SY无法完成，由SZX接手其模块工作",
+    "sy_stage_commit": "b4fe17ba9a146021cb5d6b817fa43c10e0cc65be",
+    "baseline_commit": "e52f5d0f3ed5a58110c9abf29fd4cb1e0b74c9bb",
+    "verified_code_commit": "ed32332b4bbd1b4b05808f93840427489447cd6e",
+    "metrics": {
+      "physical_lines": 429,
+      "code_token_lines": 313,
+      "classes": 13,
+      "functions_and_methods": 36,
+      "files": 11,
+      "new_comment_lines": 33,
+      "new_signed_lines": 32,
+      "annotation_groups": {
+        "module": 9,
+        "function": 18,
+        "core": 5
+      }
+    },
+    "baseline_scan": {
+      "files": 11,
+      "ruff": 5,
+      "bandit": 3,
+      "ruff_rules": {
+        "I001": 3,
+        "E501": 1,
+        "F841": 1
+      },
+      "bandit_rules": {
+        "B605": 1,
+        "B301": 1,
+        "B105": 1
+      },
+      "bandit_errors": 0
+    },
+    "after_scan": {
+      "files": 11,
+      "ruff": 0,
+      "bandit": 2,
+      "ruff_rules": {},
+      "bandit_rules": {
+        "B404": 1,
+        "B602": 1
+      },
+      "bandit_errors": 0
+    },
+    "test_result": {
+      "tests_run": 390,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "per_app": {
+        "djangoblog": 39,
+        "comments": 50,
+        "blog": 158,
+        "accounts": 84,
+        "oauth": 26,
+        "servermanager": 33
+      }
+    },
+    "before_regression": {
+      "tests_run": 31,
+      "failures": 22,
+      "errors": 6,
+      "skipped": 0,
+      "per_app": {
+        "servermanager": 31
+      }
+    },
+    "annotations": [
+      {
+        "path": "src/DjangoBlog/servermanager/__init__.py",
+        "physical_lines": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "new_comment_lines": [],
+        "new_signed_lines": [],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 0,
+          "function": 0,
+          "core": 0
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/admin.py",
+        "physical_lines": 15,
+        "sha256": "1700810c2218daa28cd3d94dc9d9beeff600b9c73f7ce55395dbb33e7858b4a4",
+        "new_comment_lines": [
+          1,
+          14
+        ],
+        "new_signed_lines": [
+          1,
+          14
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 1,
+          "core": 0
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/__init__.py",
+        "physical_lines": 1,
+        "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+        "new_comment_lines": [],
+        "new_signed_lines": [],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 0,
+          "function": 0,
+          "core": 0
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/blogapi.py",
+        "physical_lines": 31,
+        "sha256": "76089f695073978a4d719abfe0875483153c1f72cdd5626149b2ef74e1705995",
+        "new_comment_lines": [
+          1,
+          14,
+          23,
+          30
+        ],
+        "new_signed_lines": [
+          1,
+          14,
+          23,
+          30
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 3,
+          "core": 0
+        },
+        "ast_unchanged": false
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/api/commonapi.py",
+        "physical_lines": 75,
+        "sha256": "c12976bfbaa46bc660213a4268e3f69b3e879ff5ea3e874f9aa32fabefae49e9",
+        "new_comment_lines": [
+          1,
+          18,
+          26,
+          38,
+          45,
+          59,
+          60,
+          72
+        ],
+        "new_signed_lines": [
+          1,
+          18,
+          26,
+          38,
+          45,
+          59,
+          72
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 3,
+          "core": 3
+        },
+        "ast_unchanged": false
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/apps.py",
+        "physical_lines": 6,
+        "sha256": "964f4e6fe0258dd3eb628168437eca278984b6cc64f105dd49681e33d1b91e9f",
+        "new_comment_lines": [
+          1
+        ],
+        "new_signed_lines": [
+          1
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 0,
+          "core": 0
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/MemcacheStorage.py",
+        "physical_lines": 46,
+        "sha256": "76a1eb05e8903b5619827ccb9b43ccaf57c5c22cc0ad81dd12846fd6bbe520ed",
+        "new_comment_lines": [
+          1,
+          18,
+          35
+        ],
+        "new_signed_lines": [
+          1,
+          18,
+          35
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 2,
+          "core": 0
+        },
+        "ast_unchanged": false
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/models.py",
+        "physical_lines": 35,
+        "sha256": "b1d00a14755a7aadf36e240e43107c5e94dbfc4ccabdec3c15fbf6d85d2b45a0",
+        "new_comment_lines": [
+          1,
+          5,
+          22
+        ],
+        "new_signed_lines": [
+          1,
+          5,
+          22
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 0,
+          "core": 2
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/robot.py",
+        "physical_lines": 207,
+        "sha256": "47413219ab73f679e46ad31364c07add70aef282b199041efec2a8cdc319e4a8",
+        "new_comment_lines": [
+          1,
+          21,
+          37,
+          57,
+          108,
+          129,
+          134,
+          151,
+          164,
+          193
+        ],
+        "new_signed_lines": [
+          1,
+          21,
+          37,
+          57,
+          108,
+          129,
+          134,
+          151,
+          164,
+          193
+        ],
+        "existing_gzx_signed_lines": [
+          28
+        ],
+        "annotation_groups": {
+          "module": 1,
+          "function": 9,
+          "core": 0
+        },
+        "ast_unchanged": false
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/urls.py",
+        "physical_lines": 12,
+        "sha256": "618ccdbd93b6c0492e4a744b2f729305aa399d038c599a34f531396e2575b183",
+        "new_comment_lines": [
+          1
+        ],
+        "new_signed_lines": [
+          1
+        ],
+        "existing_gzx_signed_lines": [
+          8
+        ],
+        "annotation_groups": {
+          "module": 1,
+          "function": 0,
+          "core": 0
+        },
+        "ast_unchanged": true
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/views.py",
+        "physical_lines": 1,
+        "sha256": "ac62713eb0613dfce2d48060e38c154c296bfef7df9b48ced7b01116e4d148f9",
+        "new_comment_lines": [
+          1
+        ],
+        "new_signed_lines": [
+          1
+        ],
+        "existing_gzx_signed_lines": [],
+        "annotation_groups": {
+          "module": 1,
+          "function": 0,
+          "core": 0
+        },
+        "ast_unchanged": true
+      }
+    ],
+    "review_mode": "SZX代办专项核查；不冒充WZY/SY本人签署",
+    "remaining": [
+      "管理员配置shell命令的信任边界",
+      "并发确认的原子消费与会话TTL",
+      "生产凭据/模型可用性和真实微信回调",
+      "MySQL/Redis/SMTP与子进程树终止另行验证"
+    ]
+  },
   "inputs_sha256": {
-    "doc/week7-8/content/week78_confirmed_facts.json": "ae152a985a0ce0329517dcc1d4a33434c3644eb80a7467b9048056db8f14caf2",
-    "doc/week7-8/tools/build_week78_documents.py": "6441a9931a2c2e0b015fdf489ec744ce01438103d0121e10c0dc15f30c6180dc",
+    "doc/week7-8/content/week78_confirmed_facts.json": "59f2df2a6e6dce946aadecd25d374c4fa2a44e2323c0b1bd53d5a81388a65a76",
+    "doc/week7-8/tools/build_week78_documents.py": "20591065fdbe25129081d9c2e3184624b490abee5404ebf38f82d8fb2d90f334",
     "doc/week7-8/模板/编码规范.docx": "995df739a854eb46449858a5d90e9031e4c986b87d3d463e483b385c47ba78e7",
     "doc/week7-8/模板/质量分析报告.docx": "a15484cd2cd51222bd56e05e11a8adc7ef73a2a42dfb9c70bccf3e8c4b8cb028",
-    "doc/week7-8/成员成果/SZX/GCY集成/2026-10-31/after/manifest.json": "f77c86ac70b8800118e296330eea425656fa381bf5eacd432daa964d493a9fe2",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/manifest.json": "7b5963fffa7d8e014cc4ccbfd8fcd7bde801e8e6ca9ea69e09b7c68d90d75e63",
     "doc/week7-8/tools/ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
     "doc/week7-8/tools/bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c",
-    "doc/week7-8/互查记录/2026-11-02-两组互查补录.md": "c7379ee092bc36c5b959cfd88b586189c64ab59864c663dbe5e3abe9a4a42135",
+    "doc/week7-8/互查记录/2026-11-02-两组互查补录.md": "e74023452b2ab386bf2e7f579f5049ad42b8612351b17437ff0b77950534074d",
     "doc/week7-8/成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/summary.json": "a5fffc01e560f67f3d37b06a4f7d68f94c39b28f0250027da8ceccc9461c427c",
     "doc/week7-8/tools/supplement_accounts_baseline.py": "7b8b3be42a4d0433f1faf1bb871080f8a45f88a047d5b23c9abb0859eb4fcd29",
     "doc/week7-8/成员成果/YFY/工具与验证记录.md": "1cedc051ad747031fde2a66daea0691713bab2c9ca393cfac6c164302f8be01f",
     "doc/week7-8/成员成果/GZX/互查记录.md": "d5c3b95b59db4010b35b282ad6c91c31cfa769d3a93c63fedc0e126db1e67bc8",
     "doc/week7-8/成员成果/GCY/工具与验证记录.md": "37e2069defbe8954617de43ebab1427178c6e31182267d87b79302f5fff23ab9",
+    "doc/week7-8/成员成果/SY/接手完成清单.json": "4bf9cee5becef7cd0f503212268a761e5923d8a9fe0aa66fdfe27b873fea36df",
+    "doc/week7-8/成员成果/SY/接手与专项核查记录.md": "d58c5a45ffa27204c5ce469a1758555031322e06b896da8e84b5cbd6d0f189f5",
+    "doc/week7-8/tools/verify_sy_takeover.py": "d064f1db8536a00f3d269a524e03c437ab985d2875c6b8979336a5c7867fdb8b",
+    "doc/week7-8/tools/build_sy_takeover_materials.py": "8519be9bc59516e22e0820018f40ef89e7cce0437b2ab17caee976cab00d4132",
+    "doc/week7-8/tools/run_isolated_tests.py": "4eacf27459721ab6f45d47db2abfe3789fc03d021740a8e69d4e42e9b17e182c",
+    "doc/week7-8/tools/verify_week78_documents.py": "d059be4bf649fc3cc2acda31709c64b09c2cafa686956e004fa25d98ff77bd39",
+    "doc/week7-8/tools/render_week78_word.ps1": "44e1947b4a278a5f0a2301c29011cf14a8e4c2100d5ca4867103fc67197caf01",
+    "doc/week7-8/成员成果/GCY/改进计划.md": "0164e4d128cb827a172cdc1f161503b517b91d8e20e05b12c79cb8118fba2c27",
+    "doc/week7-8/成员成果/GCY/注释统计.md": "729c25b6f88fc703af1c50da8dc842ef7a29128a9eb6d300060dc5870f612a77",
+    "doc/week7-8/成员成果/GCY/质量分析片段.md": "334ef11016103a890c832ddc26c0b4038fc7dd1906ee57fb299bb4cfddd44bb8",
+    "doc/week7-8/成员成果/GZX/工具与验证记录.md": "56bc6aad30af533ee290f58fc3397f908421c492d93b4d39e17109147caf316e",
+    "doc/week7-8/成员成果/GZX/改进计划.md": "4dd58aa83ef044c41c0ab84133a715631fffed10cf135a83f548ad4d7c7fa0da",
+    "doc/week7-8/成员成果/GZX/注释统计.md": "6ec144901d94a09ab94be004c6c5da0551bc1475a0e07b218133a23f9ffe70bf",
+    "doc/week7-8/成员成果/GZX/质量分析片段.md": "0c5952a90005134d9749db00c5987a532a16a06a31860f93a6e76ab0f3ebc663",
+    "doc/week7-8/成员成果/SY/工具与验证记录.md": "f86065da5875dd21ec75ad8cdd07461091f7d228985a8f8086977d1785f064ef",
+    "doc/week7-8/成员成果/SY/改进计划.md": "6ec63ce24dff851d92948aa356f3f4aff01074b937a87e86e08e3a07652a10a7",
+    "doc/week7-8/成员成果/SY/注释统计.md": "ee9be3ef30171ecafd76b4c082c8fb634d7ffccb98b3834e85c8ec71138d1b56",
+    "doc/week7-8/成员成果/SY/质量分析片段.md": "2fb8b4d42621c427f6fcd404f6882208e197551c522a21295e454e7aa5da7a1e",
+    "doc/week7-8/成员成果/WZY/个人任务单-WZY-comments-修订版.md": "bdd26bf30798f02cb55dbad0503b39d0870c7ad5afdfb3d1ec1544c83d6ce755",
+    "doc/week7-8/成员成果/WZY/工具与验证记录.md": "01f4de00f7531da5d025c45f6400f932478366f811030369791c4003cc566e1f",
+    "doc/week7-8/成员成果/WZY/改进计划.md": "f513a56a1988be3d958d79f95c8ef5f82f4a34e9a6c41fbc0471a9b77a5a89b4",
+    "doc/week7-8/成员成果/WZY/注释统计.md": "32f917f6de59b15f4bb26b4afee21ec3199bf6c442c9c28f43f975e477c462c3",
+    "doc/week7-8/成员成果/WZY/质量分析片段.md": "405667974bae60dbf7caeffdfb7d84fb7a2e76fb3397f7930cf3bfbcad82cd63",
+    "doc/week7-8/成员成果/YFY/改进计划.md": "a9d76b43842f1af67ce6a3e6f6d53e7c690e6ca991dd3afebaa2c4fec548fa9d",
+    "doc/week7-8/成员成果/YFY/注释统计.md": "38ca2ac2d947474c59eb7f71475671ffabe39954c381eed9cf0e37b70ca0846e",
+    "doc/week7-8/成员成果/YFY/质量分析片段.md": "3e217160b65f76297c68bf3f6710e8cf4af2488c1869ae0563cc0c775f955848",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/bandit.json": "176090519d9f8d48d5931f46f2b1673c011c153043a61ae80c582b3be01ab3b9",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/manifest.json": "e17226ba3ff715a991a259e8a00a33af993e5acc6684db4b5bc04bb216edf382",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/ruff.json": "41c330de9a7a61343f3498e5f655be4697668f3d563c2609c6e8d9f01ac17f93",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/scan-manifest.json": "160a2d8d18bc39ea19c9b23350dc4bf7104599e80761276b94c39fa6a3ec13f0",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/sy-stage-syntax.json": "5799b2ada615048f5964704a82d1dbbb284ed2718fded601efa3cfe335420f8b",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/before/tests.json": "0c800271c31537deb09b07a6775169bd265f238a33aef9a0d72cbc6cc1c800ca",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/bandit.json": "61383e9f745a9cb2ee8c23f1dc04d177f78ff4c51bed1abcd8da3a652627cb90",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/ruff.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/scan-manifest.json": "296e365cfd91207c2b3a81e0f0c415fe1685da53f3dd968316a7cc5c41bbb216",
+    "doc/week7-8/成员成果/SY/原始工具结果/2026-11-02-szx-takeover/after/tests.json": "6cc9910b1b908ff451459f71136bb633897624cd014ec4b2f58d852cda2d9c2d",
     "doc/week7-8/成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/after/bandit.json": "6079dbb51eac1b1988f685dd121b6cacc2ea5e900066cd86c2ddf1339e13626d",
     "doc/week7-8/成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/after/manifest.json": "ee0a21d9b7e08924f38fb356ef3a8605b95ee1204c9a55c040d1e867c817c0bf",
     "doc/week7-8/成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/after/ruff.json": "4843c1cb2a408f9264585d83a4daf01daaaceb910bf1c90fd84fab3c06787b80",
@@ -2157,20 +2547,20 @@
         "path": "src/DjangoBlog/servermanager/MemcacheStorage.py",
         "relative": "servermanager/MemcacheStorage.py",
         "category": "production",
-        "physical_lines": 32,
-        "nonempty_lines": 24,
+        "physical_lines": 46,
+        "nonempty_lines": 37,
         "classes": 1,
         "functions": 6,
-        "comment_lines": 0,
+        "comment_lines": 3,
         "signed": {
-          "SZX": 0,
+          "SZX": 3,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 3,
           "GCY": 0
         },
-        "sha256": "11d9109cecabd9fda6226431bb015abc913e620b6ea977a7882b77f0812a72cb"
+        "sha256": "76a1eb05e8903b5619827ccb9b43ccaf57c5c22cc0ad81dd12846fd6bbe520ed"
       },
       {
         "path": "src/DjangoBlog/servermanager/__init__.py",
@@ -2195,20 +2585,20 @@
         "path": "src/DjangoBlog/servermanager/admin.py",
         "relative": "servermanager/admin.py",
         "category": "production",
-        "physical_lines": 19,
-        "nonempty_lines": 14,
+        "physical_lines": 15,
+        "nonempty_lines": 10,
         "classes": 2,
         "functions": 1,
-        "comment_lines": 1,
+        "comment_lines": 2,
         "signed": {
-          "SZX": 0,
+          "SZX": 2,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 2,
           "GCY": 0
         },
-        "sha256": "c96ca9e6b234e69cf007e6b44054a8732fb738ba3c328f293c867b74a2ba2d54"
+        "sha256": "1700810c2218daa28cd3d94dc9d9beeff600b9c73f7ce55395dbb33e7858b4a4"
       },
       {
         "path": "src/DjangoBlog/servermanager/api/__init__.py",
@@ -2233,58 +2623,58 @@
         "path": "src/DjangoBlog/servermanager/api/blogapi.py",
         "relative": "servermanager/api/blogapi.py",
         "category": "production",
-        "physical_lines": 27,
-        "nonempty_lines": 20,
+        "physical_lines": 31,
+        "nonempty_lines": 24,
         "classes": 1,
         "functions": 5,
-        "comment_lines": 0,
+        "comment_lines": 4,
         "signed": {
-          "SZX": 0,
+          "SZX": 4,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 4,
           "GCY": 0
         },
-        "sha256": "9676c9fd95096c22b6245b00a5258559a8a4b4eac56e02e98eefa9e4529a8d6d"
+        "sha256": "76089f695073978a4d719abfe0875483153c1f72cdd5626149b2ef74e1705995"
       },
       {
         "path": "src/DjangoBlog/servermanager/api/commonapi.py",
         "relative": "servermanager/api/commonapi.py",
         "category": "production",
-        "physical_lines": 64,
-        "nonempty_lines": 50,
+        "physical_lines": 75,
+        "nonempty_lines": 66,
         "classes": 2,
-        "functions": 5,
-        "comment_lines": 0,
+        "functions": 4,
+        "comment_lines": 8,
         "signed": {
-          "SZX": 0,
+          "SZX": 7,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 7,
           "GCY": 0
         },
-        "sha256": "faefcf2570649b2c586c554fe1a467c8e7d0ca7448c5833a2b2b42b4ed04dfeb"
+        "sha256": "c12976bfbaa46bc660213a4268e3f69b3e879ff5ea3e874f9aa32fabefae49e9"
       },
       {
         "path": "src/DjangoBlog/servermanager/apps.py",
         "relative": "servermanager/apps.py",
         "category": "production",
-        "physical_lines": 5,
-        "nonempty_lines": 3,
+        "physical_lines": 6,
+        "nonempty_lines": 4,
         "classes": 1,
         "functions": 0,
-        "comment_lines": 0,
+        "comment_lines": 1,
         "signed": {
-          "SZX": 0,
+          "SZX": 1,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 1,
           "GCY": 0
         },
-        "sha256": "507029a79f0272e1497bd0afa7be3b483bdc453c1d6bbaf42f2f9ea61d650c1b"
+        "sha256": "964f4e6fe0258dd3eb628168437eca278984b6cc64f105dd49681e33d1b91e9f"
       },
       {
         "path": "src/DjangoBlog/servermanager/migrations/0001_initial.py",
@@ -2347,49 +2737,49 @@
         "path": "src/DjangoBlog/servermanager/models.py",
         "relative": "servermanager/models.py",
         "category": "production",
-        "physical_lines": 33,
-        "nonempty_lines": 25,
+        "physical_lines": 35,
+        "nonempty_lines": 27,
         "classes": 4,
         "functions": 2,
-        "comment_lines": 1,
+        "comment_lines": 3,
         "signed": {
-          "SZX": 0,
+          "SZX": 3,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 3,
           "GCY": 0
         },
-        "sha256": "cb9a8ad4838f49db45a1986c2d20666f551ef1bd20bf856a84c3a2ef4d99d40d"
+        "sha256": "b1d00a14755a7aadf36e240e43107c5e94dbfc4ccabdec3c15fbf6d85d2b45a0"
       },
       {
         "path": "src/DjangoBlog/servermanager/robot.py",
         "relative": "servermanager/robot.py",
         "category": "production",
-        "physical_lines": 189,
-        "nonempty_lines": 159,
+        "physical_lines": 207,
+        "nonempty_lines": 171,
         "classes": 2,
-        "functions": 14,
-        "comment_lines": 2,
+        "functions": 18,
+        "comment_lines": 12,
         "signed": {
-          "SZX": 0,
+          "SZX": 10,
           "YFY": 0,
           "WZY": 0,
           "GZX": 1,
-          "SY": 0,
+          "SY": 10,
           "GCY": 0
         },
-        "sha256": "19407466952c407d5a7cb352ce1bce396a821bd62c7678d9c92e90842b808ab5"
+        "sha256": "47413219ab73f679e46ad31364c07add70aef282b199041efec2a8cdc319e4a8"
       },
       {
-        "path": "src/DjangoBlog/servermanager/tests.py",
-        "relative": "servermanager/tests.py",
+        "path": "src/DjangoBlog/servermanager/test_week78_takeover.py",
+        "relative": "servermanager/test_week78_takeover.py",
         "category": "test",
-        "physical_lines": 79,
-        "nonempty_lines": 67,
-        "classes": 1,
-        "functions": 3,
-        "comment_lines": 3,
+        "physical_lines": 303,
+        "nonempty_lines": 258,
+        "classes": 5,
+        "functions": 37,
+        "comment_lines": 0,
         "signed": {
           "SZX": 0,
           "YFY": 0,
@@ -2398,26 +2788,45 @@
           "SY": 0,
           "GCY": 0
         },
-        "sha256": "47145c53aaf98fe0333dc50bf31a9252a6c602e1e44d54e52b76365fe34769f8"
+        "sha256": "4a52bbffa8c534cd49265345927fd1c85b747945c910a3a973df8580f456be51"
+      },
+      {
+        "path": "src/DjangoBlog/servermanager/tests.py",
+        "relative": "servermanager/tests.py",
+        "category": "test",
+        "physical_lines": 32,
+        "nonempty_lines": 26,
+        "classes": 1,
+        "functions": 2,
+        "comment_lines": 0,
+        "signed": {
+          "SZX": 0,
+          "YFY": 0,
+          "WZY": 0,
+          "GZX": 0,
+          "SY": 0,
+          "GCY": 0
+        },
+        "sha256": "5fe3c9faf1742d1d1a6613169fc30fe0b17f54931ee4c9ec3f313408bca7092f"
       },
       {
         "path": "src/DjangoBlog/servermanager/urls.py",
         "relative": "servermanager/urls.py",
         "category": "production",
         "physical_lines": 12,
-        "nonempty_lines": 9,
+        "nonempty_lines": 10,
         "classes": 0,
         "functions": 0,
-        "comment_lines": 2,
+        "comment_lines": 3,
         "signed": {
-          "SZX": 0,
+          "SZX": 1,
           "YFY": 0,
           "WZY": 0,
           "GZX": 1,
-          "SY": 0,
+          "SY": 1,
           "GCY": 0
         },
-        "sha256": "3a95c0f49c0abfa401e62eb60f5da1461206f1a3bc51fecae22f04d235c7f2d5"
+        "sha256": "618ccdbd93b6c0492e4a744b2f729305aa399d038c599a34f531396e2575b183"
       },
       {
         "path": "src/DjangoBlog/servermanager/views.py",
@@ -2429,14 +2838,14 @@
         "functions": 0,
         "comment_lines": 1,
         "signed": {
-          "SZX": 0,
+          "SZX": 1,
           "YFY": 0,
           "WZY": 0,
           "GZX": 0,
-          "SY": 0,
+          "SY": 1,
           "GCY": 0
         },
-        "sha256": "81098e390420b7948c782fe13b385a70ab913c32db7157cda9444b84fd0cd54e"
+        "sha256": "ac62713eb0613dfce2d48060e38c154c296bfef7df9b48ced7b01116e4d148f9"
       }
     ],
     "djangoblog": [
@@ -2980,11 +3389,11 @@
   "outputs": {
     "coding": {
       "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
-      "sha256": "1ca6a4c8f5a2c5bc700a5b89657a9a7425967248ff2316f3b3d8845d8f6b36f2"
+      "sha256": "defc093f533fe473c14ae544813834f45f7cecb3ed89e33a74619f38a547bb0f"
     },
     "quality": {
       "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
-      "sha256": "9eba41097cc47801bd0ead457c5e937c3fb581289caae2391260f45811a9d27e"
+      "sha256": "6ca7dd0cf4f37b5322767d03512c3f0f49ea9d5da0efbb63a4b7cf715ff6f227"
     }
   },
   "rendering": {
@@ -2992,7 +3401,7 @@
     "pdf_generated": false,
     "page_counts": [
       4,
-      11
+      12
     ]
   }
 }

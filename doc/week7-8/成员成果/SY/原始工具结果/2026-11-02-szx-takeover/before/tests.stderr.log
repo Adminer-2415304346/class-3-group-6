@@ -1,0 +1,457 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_cancellation_is_not_swallowed (servermanager.test_week78_takeover.CommandExecutionTests.test_cancellation_is_not_swallowed) ... FAIL
+test_command_list_is_not_stale_after_first_read (servermanager.test_week78_takeover.CommandExecutionTests.test_command_list_is_not_stale_after_first_read) ... FAIL
+test_configured_command_success_is_bounded (servermanager.test_week78_takeover.CommandExecutionTests.test_configured_command_success_is_bounded) ... FAIL
+test_invalid_timeout_never_executes (servermanager.test_week78_takeover.CommandExecutionTests.test_invalid_timeout_never_executes) ... FAIL
+test_nonzero_exit_is_not_success (servermanager.test_week78_takeover.CommandExecutionTests.test_nonzero_exit_is_not_success) ... FAIL
+test_timeout_has_distinct_failure (servermanager.test_week78_takeover.CommandExecutionTests.test_timeout_has_distinct_failure) ... FAIL
+test_unknown_command_never_executes (servermanager.test_week78_takeover.CommandExecutionTests.test_unknown_command_never_executes) ... ok
+test_category_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_category_only_contains_published_articles) ... FAIL
+test_missing_category_preserves_empty_contract (servermanager.test_week78_takeover.PublicArticleTests.test_missing_category_preserves_empty_contract) ... ok
+test_recent_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_recent_only_contains_published_articles) ... FAIL
+test_search_with_only_stale_private_results_is_empty (servermanager.test_week78_takeover.PublicArticleTests.test_search_with_only_stale_private_results_is_empty) ... FAIL
+test_stale_search_entries_do_not_render_drafts_or_pages (servermanager.test_week78_takeover.PublicArticleTests.test_stale_search_entries_do_not_render_drafts_or_pages) ... FAIL
+test_api_error_is_explicit_and_not_logged_with_secret (servermanager.test_week78_takeover.ChatAdapterTests.test_api_error_is_explicit_and_not_logged_with_secret) ... FAIL
+test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) ... 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+
+  test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value=None) ... FAIL
+
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+  test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value='') ... FAIL
+
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+  test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value='   ') ... FAIL
+test_current_client_success_and_model (servermanager.test_week78_takeover.ChatAdapterTests.test_current_client_success_and_model) ... 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+FAIL
+test_empty_completion_is_not_success (servermanager.test_week78_takeover.ChatAdapterTests.test_empty_completion_is_not_success) ... 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+ok
+test_missing_key_does_not_construct_client (servermanager.test_week78_takeover.ChatAdapterTests.test_missing_key_does_not_construct_client) ... 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+ok
+test_request_has_timeout_and_no_hidden_retries (servermanager.test_week78_takeover.ChatAdapterTests.test_request_has_timeout_and_no_hidden_retries) ... 
+
+You tried to access openai.ChatCompletion, but this is no longer supported in openai>=1.0.0 - see the README at https://github.com/openai/openai-python for the API.
+
+You can run `openai migrate` to automatically upgrade your codebase to use the 1.0.0 interface. 
+
+Alternatively, you can pin your installation to the old version, e.g. `pip install openai==0.28`
+
+A detailed migration guide is available here: https://github.com/openai/openai-python/discussions/742
+
+ERROR
+test_anonymous_never_runs_command (servermanager.test_week78_takeover.RobotStateTests.test_anonymous_never_runs_command) ... ok
+test_configured_password_is_used_in_testing (servermanager.test_week78_takeover.RobotStateTests.test_configured_password_is_used_in_testing) ... FAIL
+test_exit_clears_verified_and_pending_state (servermanager.test_week78_takeover.RobotStateTests.test_exit_clears_verified_and_pending_state) ... FAIL
+test_expected_methods_remain_on_class (servermanager.test_week78_takeover.RobotStateTests.test_expected_methods_remain_on_class) ... ok
+test_legacy_object_payload_never_uses_object_deserializer (servermanager.test_week78_takeover.RobotStateTests.test_legacy_object_payload_never_uses_object_deserializer) ... FAIL
+test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) ... 
+  test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='invalid json') ... ERROR
+  test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='[]') ... ERROR
+  test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='{"isAdmin":"yes"}') ... ERROR
+  test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='{"isAdmin":false,"isPasswordSet":true,"Count":0,"Command":""}') ... ERROR
+test_pending_command_requires_confirmation_and_is_consumed_once (servermanager.test_week78_takeover.RobotStateTests.test_pending_command_requires_confirmation_and_is_consumed_once) ... FAIL
+test_session_is_plain_json_scalars (servermanager.test_week78_takeover.RobotStateTests.test_session_is_plain_json_scalars) ... FAIL
+test_third_wrong_password_ends_attempt (servermanager.test_week78_takeover.RobotStateTests.test_third_wrong_password_ends_attempt) ... FAIL
+test_waiting_for_password_never_runs_command (servermanager.test_week78_takeover.RobotStateTests.test_waiting_for_password_never_runs_command) ... ok
+test_cache_storage_round_trip_and_delete (servermanager.test_week78_takeover.SessionStorageTests.test_cache_storage_round_trip_and_delete) ... ok
+test_file_fallback_does_not_delete_existing_store (servermanager.test_week78_takeover.SessionStorageTests.test_file_fallback_does_not_delete_existing_store) ... FAIL
+test_unavailable_cache_probe_is_false (servermanager.test_week78_takeover.SessionStorageTests.test_unavailable_cache_probe_is_false) ... ERROR
+
+======================================================================
+ERROR: test_request_has_timeout_and_no_hidden_retries (servermanager.test_week78_takeover.ChatAdapterTests.test_request_has_timeout_and_no_hidden_retries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 45, in test_request_has_timeout_and_no_hidden_retries
+    self.assertEqual(self.factory.call_args.kwargs['timeout'], 10.0)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'kwargs'
+
+======================================================================
+ERROR: test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='invalid json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 196, in test_malformed_or_wrongly_typed_session_resets
+    self.assertFalse(handler.is_admin)
+                     ^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\robot.py", line 134, in is_admin
+    return self.userinfo.isAdmin
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'isAdmin'
+
+======================================================================
+ERROR: test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='[]')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 196, in test_malformed_or_wrongly_typed_session_resets
+    self.assertFalse(handler.is_admin)
+                     ^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\robot.py", line 134, in is_admin
+    return self.userinfo.isAdmin
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'isAdmin'
+
+======================================================================
+ERROR: test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='{"isAdmin":"yes"}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 196, in test_malformed_or_wrongly_typed_session_resets
+    self.assertFalse(handler.is_admin)
+                     ^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\robot.py", line 134, in is_admin
+    return self.userinfo.isAdmin
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'isAdmin'
+
+======================================================================
+ERROR: test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) (payload='{"isAdmin":false,"isPasswordSet":true,"Count":0,"Command":""}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 196, in test_malformed_or_wrongly_typed_session_resets
+    self.assertFalse(handler.is_admin)
+                     ^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\robot.py", line 134, in is_admin
+    return self.userinfo.isAdmin
+           ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'isAdmin'
+
+======================================================================
+ERROR: test_unavailable_cache_probe_is_false (servermanager.test_week78_takeover.SessionStorageTests.test_unavailable_cache_probe_is_false)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 249, in test_unavailable_cache_probe_is_false
+    self.assertFalse(storage.is_available)
+                     ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\MemcacheStorage.py", line 15, in is_available
+    self.set('checkavaliable', value=value)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\MemcacheStorage.py", line 28, in set
+    self.cache.set(id, json_dumps(value))
+  File "C:\Users\Lenovo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1139, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1143, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 1198, in _execute_mock_call
+    raise effect
+RuntimeError: fixture offline
+
+======================================================================
+FAIL: test_cancellation_is_not_swallowed (servermanager.test_week78_takeover.CommandExecutionTests.test_cancellation_is_not_swallowed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 109, in test_cancellation_is_not_swallowed
+    with self.assertRaises(KeyboardInterrupt):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: KeyboardInterrupt not raised
+
+======================================================================
+FAIL: test_command_list_is_not_stale_after_first_read (servermanager.test_week78_takeover.CommandExecutionTests.test_command_list_is_not_stale_after_first_read)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 105, in test_command_list_is_not_stale_after_first_read
+    self.assertEqual(handler.run('new-probe'), 'fresh')
+AssertionError: '未找到相关命令，请输入hepme获得帮助。' != 'fresh'
+- 未找到相关命令，请输入hepme获得帮助。
++ fresh
+
+
+======================================================================
+FAIL: test_configured_command_success_is_bounded (servermanager.test_week78_takeover.CommandExecutionTests.test_configured_command_success_is_bounded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 77, in test_configured_command_success_is_bounded
+    self.assertEqual(CommandHandler().run('PROBE'), 'unit output')
+AssertionError: '命令执行出错!' != 'unit output'
+- 命令执行出错!
++ unit output
+
+
+======================================================================
+FAIL: test_invalid_timeout_never_executes (servermanager.test_week78_takeover.CommandExecutionTests.test_invalid_timeout_never_executes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\utils.py", line 456, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 97, in test_invalid_timeout_never_executes
+    self.assertEqual(CommandHandler().run('probe'), '命令配置不正确')
+AssertionError: '命令执行出错!' != '命令配置不正确'
+- 命令执行出错!
++ 命令配置不正确
+
+
+======================================================================
+FAIL: test_nonzero_exit_is_not_success (servermanager.test_week78_takeover.CommandExecutionTests.test_nonzero_exit_is_not_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 87, in test_nonzero_exit_is_not_success
+    self.assertEqual(CommandHandler().run('probe'), '命令执行失败')
+AssertionError: '命令执行出错!' != '命令执行失败'
+- 命令执行出错!
++ 命令执行失败
+
+
+======================================================================
+FAIL: test_timeout_has_distinct_failure (servermanager.test_week78_takeover.CommandExecutionTests.test_timeout_has_distinct_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 83, in test_timeout_has_distinct_failure
+    self.assertEqual(CommandHandler().run('probe'), '命令执行超时')
+AssertionError: '命令执行出错!' != '命令执行超时'
+- 命令执行出错!
++ 命令执行超时
+
+
+======================================================================
+FAIL: test_category_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_category_only_contains_published_articles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 218, in test_category_only_contains_published_articles
+    self.assertEqual(list(BlogApi().get_category_articles(self.category.name)), [self.public])
+AssertionError: Lists differ: [<Art[17 chars]re-0>, <Article: robot-fixture-1>, <Article: r[39 chars]e-3>] != [<Art[17 chars]re-0>]
+
+First list contains 3 additional elements.
+First extra element 1:
+<Article: robot-fixture-1>
+
+- [<Article: robot-fixture-0>,
+?                            ^
+
++ [<Article: robot-fixture-0>]
+?                            ^
+
+-  <Article: robot-fixture-1>,
+-  <Article: robot-fixture-2>,
+-  <Article: robot-fixture-3>]
+
+======================================================================
+FAIL: test_recent_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_recent_only_contains_published_articles)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 215, in test_recent_only_contains_published_articles
+    self.assertEqual(list(BlogApi().get_recent_articles()), [self.public])
+AssertionError: Lists differ: [<Art[17 chars]re-0>, <Article: robot-fixture-1>, <Article: r[39 chars]e-3>] != [<Art[17 chars]re-0>]
+
+First list contains 3 additional elements.
+First extra element 1:
+<Article: robot-fixture-1>
+
+- [<Article: robot-fixture-0>,
+?                            ^
+
++ [<Article: robot-fixture-0>]
+?                            ^
+
+-  <Article: robot-fixture-1>,
+-  <Article: robot-fixture-2>,
+-  <Article: robot-fixture-3>]
+
+======================================================================
+FAIL: test_search_with_only_stale_private_results_is_empty (servermanager.test_week78_takeover.PublicArticleTests.test_search_with_only_stale_private_results_is_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 233, in test_search_with_only_stale_private_results_is_empty
+    self.assertEqual(module.search(SimpleNamespace(content='?fixture'), {}), '没有找到相关文章。')
+AssertionError: <MagicMock name='convert_to_article_reply()' id='2733577754416'> != '没有找到相关文章。'
+
+======================================================================
+FAIL: test_stale_search_entries_do_not_render_drafts_or_pages (servermanager.test_week78_takeover.PublicArticleTests.test_stale_search_entries_do_not_render_drafts_or_pages)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 228, in test_stale_search_entries_do_not_render_drafts_or_pages
+    self.assertEqual(render.call_args.args[0], [self.public])
+AssertionError: Lists differ: [<Art[17 chars]re-0>, <Article: robot-fixture-1>, <Article: r[17 chars]None] != [<Art[17 chars]re-0>]
+
+First list contains 3 additional elements.
+First extra element 1:
+<Article: robot-fixture-1>
+
+- [<Article: robot-fixture-0>,
+?                            ^
+
++ [<Article: robot-fixture-0>]
+?                            ^
+
+-  <Article: robot-fixture-1>,
+-  <Article: robot-fixture-2>,
+-  None]
+
+======================================================================
+FAIL: test_api_error_is_explicit_and_not_logged_with_secret (servermanager.test_week78_takeover.ChatAdapterTests.test_api_error_is_explicit_and_not_logged_with_secret)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 64, in test_api_error_is_explicit_and_not_logged_with_secret
+    self.client.chat.completions.create.assert_called_once()
+  File "C:\Users\Lenovo\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\unittest\mock.py", line 928, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'create' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 56, in test_blank_prompt_does_not_call_service
+    self.assertEqual(ChatGPT.chat(value), '请输入有效内容')
+AssertionError: '服务器出错了' != '请输入有效内容'
+- 服务器出错了
++ 请输入有效内容
+
+
+======================================================================
+FAIL: test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value='')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 56, in test_blank_prompt_does_not_call_service
+    self.assertEqual(ChatGPT.chat(value), '请输入有效内容')
+AssertionError: '服务器出错了' != '请输入有效内容'
+- 服务器出错了
++ 请输入有效内容
+
+
+======================================================================
+FAIL: test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) (value='   ')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 56, in test_blank_prompt_does_not_call_service
+    self.assertEqual(ChatGPT.chat(value), '请输入有效内容')
+AssertionError: '服务器出错了' != '请输入有效内容'
+- 服务器出错了
++ 请输入有效内容
+
+
+======================================================================
+FAIL: test_current_client_success_and_model (servermanager.test_week78_takeover.ChatAdapterTests.test_current_client_success_and_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\utils.py", line 456, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 38, in test_current_client_success_and_model
+    self.assertEqual(ChatGPT.chat('hello'), 'mock reply')
+AssertionError: '服务器出错了' != 'mock reply'
+- 服务器出错了
++ mock reply
+
+
+======================================================================
+FAIL: test_configured_password_is_used_in_testing (servermanager.test_week78_takeover.RobotStateTests.test_configured_password_is_used_in_testing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 150, in test_configured_password_is_used_in_testing
+    self.login()
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 132, in login
+    self.assertIn('验证通过', self.send('unit-password'))
+AssertionError: '验证通过' not found in '验证失败，请重新输入管理员密码:'
+
+======================================================================
+FAIL: test_exit_clears_verified_and_pending_state (servermanager.test_week78_takeover.RobotStateTests.test_exit_clears_verified_and_pending_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 164, in test_exit_clears_verified_and_pending_state
+    self.login()
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 132, in login
+    self.assertIn('验证通过', self.send('unit-password'))
+AssertionError: '验证通过' not found in '验证失败，请重新输入管理员密码:'
+
+======================================================================
+FAIL: test_legacy_object_payload_never_uses_object_deserializer (servermanager.test_week78_takeover.RobotStateTests.test_legacy_object_payload_never_uses_object_deserializer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 187, in test_legacy_object_payload_never_uses_object_deserializer
+    self.assertFalse(handler.is_admin)
+AssertionError: <MagicMock name='decode().isAdmin' id='2733550146752'> is not false
+
+======================================================================
+FAIL: test_pending_command_requires_confirmation_and_is_consumed_once (servermanager.test_week78_takeover.RobotStateTests.test_pending_command_requires_confirmation_and_is_consumed_once)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 155, in test_pending_command_requires_confirmation_and_is_consumed_once
+    self.login()
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 132, in login
+    self.assertIn('验证通过', self.send('unit-password'))
+AssertionError: '验证通过' not found in '验证失败，请重新输入管理员密码:'
+
+======================================================================
+FAIL: test_session_is_plain_json_scalars (servermanager.test_week78_takeover.RobotStateTests.test_session_is_plain_json_scalars)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 180, in test_session_is_plain_json_scalars
+    self.assertEqual(set(payload), {'isAdmin', 'isPasswordSet', 'Count', 'Command'})
+AssertionError: Items in the first set but not the second:
+'py/object'
+
+======================================================================
+FAIL: test_third_wrong_password_ends_attempt (servermanager.test_week78_takeover.RobotStateTests.test_third_wrong_password_ends_attempt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 174, in test_third_wrong_password_ends_attempt
+    self.assertEqual(self.send('bad-3'), '超过验证次数')
+AssertionError: '验证失败，请重新输入管理员密码:' != '超过验证次数'
+- 验证失败，请重新输入管理员密码:
++ 超过验证次数
+
+
+======================================================================
+FAIL: test_file_fallback_does_not_delete_existing_store (servermanager.test_week78_takeover.SessionStorageTests.test_file_fallback_does_not_delete_existing_store)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-verification-4014xw9_\src\DjangoBlog\servermanager\test_week78_takeover.py", line 253, in test_file_fallback_does_not_delete_existing_store
+    self.assertTrue(callable(creator), 'storage selection needs a testable non-destructive boundary')
+AssertionError: False is not true : storage selection needs a testable non-destructive boundary
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.066s
+
+FAILED (failures=22, errors=6)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

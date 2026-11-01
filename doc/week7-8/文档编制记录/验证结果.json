@@ -6,150 +6,157 @@
   "documents": [
     {
       "path": "doc/week7-8/AI Agent工程实践-Python语言编码规范.docx",
-      "sha256": "1ca6a4c8f5a2c5bc700a5b89657a9a7425967248ff2316f3b3d8845d8f6b36f2",
+      "sha256": "defc093f533fe473c14ae544813834f45f7cecb3ed89e33a74619f38a547bb0f",
       "pages": 4,
       "tables": 2,
       "page_details": [
         {
           "page": 1,
           "characters": 965,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-1-page-01.png"
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-1-page-01.png"
         },
         {
           "page": 2,
-          "characters": 1184,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-1-page-02.png"
+          "characters": 1186,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-1-page-02.png"
         },
         {
           "page": 3,
-          "characters": 1258,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-1-page-03.png"
+          "characters": 1260,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-1-page-03.png"
         },
         {
           "page": 4,
-          "characters": 1181,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-1-page-04.png"
+          "characters": 1183,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-1-page-04.png"
         }
       ],
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 27,
+        "color_nodes": 27
+      },
       "contact_sheets": [
-        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-1-sheet-1.png"
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-1-sheet-1.png"
       ],
       "text_outside_page": []
     },
     {
       "path": "doc/week7-8/AI Agent工程实践-开源软件质量分析报告.docx",
-      "sha256": "9eba41097cc47801bd0ead457c5e937c3fb581289caae2391260f45811a9d27e",
-      "pages": 11,
-      "tables": 22,
+      "sha256": "6ca7dd0cf4f37b5322767d03512c3f0f49ea9d5da0efbb63a4b7cf715ff6f227",
+      "pages": 12,
+      "tables": 23,
       "page_details": [
         {
           "page": 1,
-          "characters": 988,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-01.png"
+          "characters": 1043,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-01.png"
         },
         {
           "page": 2,
-          "characters": 1015,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-02.png"
+          "characters": 1058,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-02.png"
         },
         {
           "page": 3,
-          "characters": 1330,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-03.png"
+          "characters": 1403,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-03.png"
         },
         {
           "page": 4,
-          "characters": 1401,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-04.png"
+          "characters": 1325,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-04.png"
         },
         {
           "page": 5,
-          "characters": 1681,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-05.png"
+          "characters": 1672,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-05.png"
         },
         {
           "page": 6,
-          "characters": 1258,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-06.png"
+          "characters": 415,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-06.png"
         },
         {
           "page": 7,
-          "characters": 1013,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-07.png"
+          "characters": 1275,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-07.png"
         },
         {
           "page": 8,
-          "characters": 1315,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-08.png"
+          "characters": 1050,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-08.png"
         },
         {
           "page": 9,
-          "characters": 1266,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-09.png"
+          "characters": 1317,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-09.png"
         },
         {
           "page": 10,
-          "characters": 854,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-10.png"
+          "characters": 1291,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-10.png"
         },
         {
           "page": 11,
-          "characters": 1189,
-          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-page-11.png"
+          "characters": 1288,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-11.png"
+        },
+        {
+          "page": 12,
+          "characters": 1386,
+          "image": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-page-12.png"
         }
       ],
+      "typography": {
+        "status": "passed",
+        "fonts": [
+          "宋体",
+          "Times New Roman"
+        ],
+        "text_color": "000000",
+        "font_nodes": 13,
+        "color_nodes": 13
+      },
       "contact_sheets": [
-        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-sheet-1.png",
-        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-sheet-2.png",
-        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-9d9c85fb93054a8a9cfa288e2ae3dfd0\\pages\\document-2-sheet-3.png"
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-sheet-1.png",
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-sheet-2.png",
+        "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week78-word-preview-c690dae359d349c6bf3d311e0e356f14\\pages\\document-2-sheet-3.png"
       ],
       "text_outside_page": []
     }
   ],
   "visual_review": "passed",
-  "schema_validation": "passed",
+  "schema_validation": "passed after native Word field update",
   "verified_date": "2026-11-02",
   "visual_review_details": {
-    "scope": "All 15 pages on four contact sheets; quality pages 4 and 7 additionally inspected at full size.",
-    "final_pages_pixel_identical_to_inspected_preview": true,
-    "checks": [
-      "Updated page fields",
-      "Repeated table headers",
-      "No clipping or overflow",
-      "Four directed review records",
-      "Accounts supplement and pending SY state readable"
-    ]
+    "pages_inspected": 16,
+    "method": "All four contact sheets inspected after the final Word save; Chinese/Latin fonts and black text verified in OOXML.",
+    "result": "No clipped text, blank pages, unreadable tables or footer overlap; repeated table headers retained.",
+    "typography": {
+      "chinese": "宋体",
+      "latin": "Times New Roman",
+      "text_color": "000000"
+    }
   },
-  "schema_validation_details": {
-    "validator": "DOCX skill scripts/office/validate.py",
-    "phase": "After native Word field update",
-    "result": "Both files passed with exit code 0.",
-    "canonical_import_resolution": "Temporary XML catalog for official Dublin Core and W3C schemas; no checks skipped."
+  "regression_evidence": {
+    "tests_run": 390,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
   },
-  "peer_review_records": {
-    "directions": 4,
-    "basis": "Group leader confirmation",
-    "recorded_date": "2026-11-02",
-    "actual_dates_not_invented": true
-  },
-  "accounts_supplement": {
-    "operator": "SZX",
-    "files_each": 10,
-    "ruff": [
-      9,
-      8
-    ],
-    "bandit": [
-      0,
-      0
-    ],
-    "parse_errors": 0,
-    "context": "Full tracked Python package layout retained; accounts production files scanned only.",
-    "json_storage": "UTF-8 LF; original tool-output hashes retained."
-  },
-  "new_tool_checks": {
-    "rules": "Ruff E9,F",
-    "result": "passed"
-  },
-  "business_code": "No business code changed. Existing 357-test sources compared using exact bytes or UTF-8 LF/CRLF equivalence only; Django tests not rerun for documentation changes."
+  "executor_attribution": "SZX代SY；原SY快照保留，独立本人签署的限制已在报告说明。"
 }

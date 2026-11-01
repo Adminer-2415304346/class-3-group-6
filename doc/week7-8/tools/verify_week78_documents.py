@@ -46,20 +46,44 @@ def main():
             xml = etree.fromstring(archive.read('word/document.xml'))
             assert not xml.xpath('//w:ins | //w:del', namespaces=NS)
             text = ''.join(xml.xpath('//w:t/text()', namespaces=NS))
+            # Check stored Word formatting after the native Word save, including links and fields.
+            font_count = color_count = 0
+            for name in archive.namelist():
+                if not (name.startswith('word/') and name.endswith('.xml')):
+                    continue
+                if name == 'word/fontTable.xml':
+                    continue  # Font metadata is not formatting applied to text.
+                part_xml = etree.fromstring(archive.read(name))
+                for node in part_xml.xpath('//w:rFonts', namespaces=NS):
+                    font_count += 1
+                    for attribute in ['ascii', 'hAnsi', 'cs', 'eastAsia']:
+                        value = node.get(f'{{{NS["w"]}}}{attribute}')
+                        expected = facts['document_style'][
+                            'chinese_font' if attribute == 'eastAsia' else 'latin_font']
+                        assert value is None or value == expected, (path.name, name, value)
+                    assert not any('Theme' in attribute for attribute in node.attrib), name
+                for node in part_xml.xpath('//w:color', namespaces=NS):
+                    color_count += 1
+                    assert node.get(f'{{{NS["w"]}}}val') == '000000', (path.name, name, node.attrib)
+                    assert not any('theme' in attribute for attribute in node.attrib), name
+            assert font_count and color_count
         for member in facts['members']:
             assert member['name'] in text
-        assert '小组审阅稿' in text
+        assert facts['document_label'] in text
         assert '小组成员：xx' not in text and '//<' not in text
         assert text.count('xx') == 0
         required = (['规范制定的主要目的', '规范的适用范围', '3  规范'] if index == 1 else [
             '待分析开源软件概述', '软件质量分析方法及工具', '人工分析代码的质量情况',
             '工具分析代码的质量情况', '小组分工', '下一步的改进计划',
-            '2026-10-23 19:00—19:30', '357', '未单独留存',
+            '2026-10-23 19:00—19:30', str(facts['verification']['test_count']), '未单独留存',
             'PR-SZX-GCY', 'PR-GCY-SZX', 'PR-YFY-GZX', 'PR-GZX-YFY',
             facts['review_confirmation']['recorded_date'],
+            'SZX代SY',
         ])
         for expected in required:
             assert expected in text, (path.name, expected)
+        for stale in ['待SY', 'SY尚未交', 'SY待提交', 'WZY/SY待交接']:
+            assert stale not in text, (path.name, stale)
         document = Document(path)
         assert len(document.tables) == entry['tables']
         assert all(table.rows[0]._tr.xpath('./w:trPr/w:tblHeader') for table in document.tables)
@@ -94,6 +118,9 @@ def main():
             sheets.append(str(sheet_path))
         results.append({'path': path.relative_to(ROOT).as_posix(), 'sha256': digest(path),
                         'pages': len(book), 'tables': len(document.tables), 'page_details': pages,
+                        'typography': {'status': 'passed', 'fonts': ['宋体', 'Times New Roman'],
+                                       'text_color': '000000', 'font_nodes': font_count,
+                                       'color_nodes': color_count},
                         'contact_sheets': sheets, 'text_outside_page': out_of_page})
     for key, entry in provenance['outputs'].items():
         entry['sha256'] = digest(ROOT / entry['path'])

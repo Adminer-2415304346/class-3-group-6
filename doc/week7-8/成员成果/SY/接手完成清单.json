@@ -1,0 +1,323 @@
+{
+  "date": "2026-11-02",
+  "original_owner": "SY 宋洋",
+  "executor": "SZX 石兆翔（组长代办）",
+  "authorization": "组长确认SY无法完成，由SZX接手其模块工作",
+  "sy_stage_commit": "b4fe17ba9a146021cb5d6b817fa43c10e0cc65be",
+  "baseline_commit": "e52f5d0f3ed5a58110c9abf29fd4cb1e0b74c9bb",
+  "verified_code_commit": "ed32332b4bbd1b4b05808f93840427489447cd6e",
+  "metrics": {
+    "physical_lines": 429,
+    "code_token_lines": 313,
+    "classes": 13,
+    "functions_and_methods": 36,
+    "files": 11,
+    "new_comment_lines": 33,
+    "new_signed_lines": 32,
+    "annotation_groups": {
+      "module": 9,
+      "function": 18,
+      "core": 5
+    }
+  },
+  "baseline_scan": {
+    "files": 11,
+    "ruff": 5,
+    "bandit": 3,
+    "ruff_rules": {
+      "I001": 3,
+      "E501": 1,
+      "F841": 1
+    },
+    "bandit_rules": {
+      "B605": 1,
+      "B301": 1,
+      "B105": 1
+    },
+    "bandit_errors": 0
+  },
+  "after_scan": {
+    "files": 11,
+    "ruff": 0,
+    "bandit": 2,
+    "ruff_rules": {},
+    "bandit_rules": {
+      "B404": 1,
+      "B602": 1
+    },
+    "bandit_errors": 0
+  },
+  "test_result": {
+    "tests_run": 390,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 39,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "before_regression": {
+    "tests_run": 31,
+    "failures": 22,
+    "errors": 6,
+    "skipped": 0,
+    "per_app": {
+      "servermanager": 31
+    }
+  },
+  "annotations": [
+    {
+      "path": "src/DjangoBlog/servermanager/__init__.py",
+      "physical_lines": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_comment_lines": [],
+      "new_signed_lines": [],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 0,
+        "function": 0,
+        "core": 0
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/admin.py",
+      "physical_lines": 15,
+      "sha256": "1700810c2218daa28cd3d94dc9d9beeff600b9c73f7ce55395dbb33e7858b4a4",
+      "new_comment_lines": [
+        1,
+        14
+      ],
+      "new_signed_lines": [
+        1,
+        14
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 1,
+        "core": 0
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/api/__init__.py",
+      "physical_lines": 1,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "new_comment_lines": [],
+      "new_signed_lines": [],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 0,
+        "function": 0,
+        "core": 0
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/api/blogapi.py",
+      "physical_lines": 31,
+      "sha256": "76089f695073978a4d719abfe0875483153c1f72cdd5626149b2ef74e1705995",
+      "new_comment_lines": [
+        1,
+        14,
+        23,
+        30
+      ],
+      "new_signed_lines": [
+        1,
+        14,
+        23,
+        30
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 3,
+        "core": 0
+      },
+      "ast_unchanged": false
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/api/commonapi.py",
+      "physical_lines": 75,
+      "sha256": "c12976bfbaa46bc660213a4268e3f69b3e879ff5ea3e874f9aa32fabefae49e9",
+      "new_comment_lines": [
+        1,
+        18,
+        26,
+        38,
+        45,
+        59,
+        60,
+        72
+      ],
+      "new_signed_lines": [
+        1,
+        18,
+        26,
+        38,
+        45,
+        59,
+        72
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 3,
+        "core": 3
+      },
+      "ast_unchanged": false
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/apps.py",
+      "physical_lines": 6,
+      "sha256": "964f4e6fe0258dd3eb628168437eca278984b6cc64f105dd49681e33d1b91e9f",
+      "new_comment_lines": [
+        1
+      ],
+      "new_signed_lines": [
+        1
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 0,
+        "core": 0
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/MemcacheStorage.py",
+      "physical_lines": 46,
+      "sha256": "76a1eb05e8903b5619827ccb9b43ccaf57c5c22cc0ad81dd12846fd6bbe520ed",
+      "new_comment_lines": [
+        1,
+        18,
+        35
+      ],
+      "new_signed_lines": [
+        1,
+        18,
+        35
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 2,
+        "core": 0
+      },
+      "ast_unchanged": false
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/models.py",
+      "physical_lines": 35,
+      "sha256": "b1d00a14755a7aadf36e240e43107c5e94dbfc4ccabdec3c15fbf6d85d2b45a0",
+      "new_comment_lines": [
+        1,
+        5,
+        22
+      ],
+      "new_signed_lines": [
+        1,
+        5,
+        22
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 0,
+        "core": 2
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/robot.py",
+      "physical_lines": 207,
+      "sha256": "47413219ab73f679e46ad31364c07add70aef282b199041efec2a8cdc319e4a8",
+      "new_comment_lines": [
+        1,
+        21,
+        37,
+        57,
+        108,
+        129,
+        134,
+        151,
+        164,
+        193
+      ],
+      "new_signed_lines": [
+        1,
+        21,
+        37,
+        57,
+        108,
+        129,
+        134,
+        151,
+        164,
+        193
+      ],
+      "existing_gzx_signed_lines": [
+        28
+      ],
+      "annotation_groups": {
+        "module": 1,
+        "function": 9,
+        "core": 0
+      },
+      "ast_unchanged": false
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/urls.py",
+      "physical_lines": 12,
+      "sha256": "618ccdbd93b6c0492e4a744b2f729305aa399d038c599a34f531396e2575b183",
+      "new_comment_lines": [
+        1
+      ],
+      "new_signed_lines": [
+        1
+      ],
+      "existing_gzx_signed_lines": [
+        8
+      ],
+      "annotation_groups": {
+        "module": 1,
+        "function": 0,
+        "core": 0
+      },
+      "ast_unchanged": true
+    },
+    {
+      "path": "src/DjangoBlog/servermanager/views.py",
+      "physical_lines": 1,
+      "sha256": "ac62713eb0613dfce2d48060e38c154c296bfef7df9b48ced7b01116e4d148f9",
+      "new_comment_lines": [
+        1
+      ],
+      "new_signed_lines": [
+        1
+      ],
+      "existing_gzx_signed_lines": [],
+      "annotation_groups": {
+        "module": 1,
+        "function": 0,
+        "core": 0
+      },
+      "ast_unchanged": true
+    }
+  ],
+  "review_mode": "SZX代办专项核查；不冒充WZY/SY本人签署",
+  "remaining": [
+    "管理员配置shell命令的信任边界",
+    "并发确认的原子消费与会话TTL",
+    "生产凭据/模型可用性和真实微信回调",
+    "MySQL/Redis/SMTP与子进程树终止另行验证"
+  ]
+}

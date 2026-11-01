@@ -1,4 +1,4 @@
-"""Build course-template DOCX review drafts from confirmed facts and repository evidence.
+"""Build course-template DOCX reports from confirmed facts and repository evidence.
 
 Requires python-docx. Reads source as text/AST only; never starts Django or exports PDF.
 """
@@ -35,9 +35,7 @@ OUTPUTS = {
     'quality': WEEK / 'AI Agent工程实践-开源软件质量分析报告.docx',
 }
 RECORD = WEEK / '文档编制记录'
-NAVY = '17365D'
-GRAY = '526071'
-AMBER = 'FFF2CC'
+BLACK = '000000'
 
 REVIEW_CHECKS = [
     ('RC01', '版本与归属', '确认分支、App、基线/改进提交；保留原作者和补修者；先同步develop。'),
@@ -55,18 +53,18 @@ REVIEW_CHECKS = [
 PLAN_ROWS = [
     ('第7周任务阶段', '精读/三层注释、人工四类分析、基线与规范草稿', '各App主责；SZX统筹', '源码说明、四份素材、可复核baseline', '按第7周任务安排'),
     ('第8周任务阶段', '适当改进、回归验证、同配置复扫及互查', '各App主责与互查搭档', '修复及测试证据、after、互查结论', '按第8周任务安排'),
-    ('当前收尾阶段一', 'SY补交并与WZY双向互查；其余两组记录已补齐', 'SY、WZY；SZX统筹', 'SY材料和原始证据齐备；有新增修改则复测', 'SY提交后立即核对'),
-    ('当前收尾阶段二', '更新六人总表、规范/质量Word及优化计划，完成最终检查', 'SZX汇总；组长核对', '两份Word与最终代码/证据对应', '收到完整SY材料后'),
+    ('11月2日接手', '按组长指示由SZX完成SY模块、素材和专项核查', 'SZX代SY', '原快照保留；390项联合回归、统一复扫和四份材料', '2026-11-02完成'),
+    ('汇总与交付', '更新六App总表、规范/质量Word和下一步计划', 'SZX汇总；组长负责最终提交', '结构/分页检查；个人分支提交develop，main由组长决定', '本轮汇总；合并见PR38'),
 ]
 
 OPTIMIZATIONS = [
-    ('P1', '收尾完整交付', 'SY补齐及WZY/SY互查；核对六人总表与两份Word', 'SY/WZY；SZX统筹', '六人素材齐、证据对应；已有两组互查不重复留待补'),
+    ('P1', '部署与复核', '生产凭据/真实回调联调，补强接手版本的独立复核', '组长/部署维护人', '不用兼容默认凭据；实际复核与代办自检分别留痕'),
     ('P1', '文章与搜索失效', '统一文章批量发布/撤稿、普通删除与搜索索引的生命周期', 'SZX/GCY，协调WZY', '撤稿不再公开展示/搜索命中；相关缓存与索引验证'),
     ('P1', 'OAuth账号边界', 'state、隐藏ID归属、签名时效/一次性及邮箱归属策略', 'GZX/YFY，协调GCY', '模拟伪造/过期/重复使用及未激活账号，不越权关联'),
     ('P1', '上传与外部依赖', '上传授权/大小/格式/路径；显式搜索初始化与TLS异常策略', 'SZX/GCY', '越权/伪装/超限拒绝；无搜索服务时普通读取可用'),
     ('P1', '找回密码限频', '在secrets与成功消费基础上增加限流、失败次数及配额', 'YFY/GCY', '有效期、次数、重复/过期与正常用户流程均有断言'),
     ('P2', '查询和数据一致性', '浏览量原子更新、分类环校验、评论树与计数查询优化', 'SZX/WZY', '并发计数不丢失；环拒绝；同数据对比查询数及结果'),
-    ('P2', '构建与运维', '生产Vite产物、运维权限/参数/失败反馈、ChatGPT适配', 'SY/SZX，协调GCY', '未授权无系统副作用；失败不伪装成功；产物可用'),
+    ('P2', '构建与运维', '生产Vite产物、结构化命令白名单、并发确认/会话TTL及输出限制', '组长安排维护人', '产物可用；并发至多一次执行，过期状态失效，输出和子任务受控'),
 ]
 
 REFERENCES = [
@@ -135,9 +133,13 @@ def collect_inventory():
 
 
 INVENTORY, PARSE_WARNINGS = collect_inventory()
-TEST_EVIDENCE = WEEK / '成员成果/SZX/GCY集成/2026-10-31/after/manifest.json'
+TEST_EVIDENCE = WEEK / FACTS['verification']['manifest']
 TEST_RECORD = json.loads(TEST_EVIDENCE.read_text(encoding='utf-8'))
-assert TEST_RECORD['test_count'] == 357 and TEST_RECORD['failure_count'] == 0
+assert TEST_RECORD['test_count'] == FACTS['verification']['test_count'] and TEST_RECORD['failure_count'] == 0
+TEST_COUNT = TEST_RECORD['test_count']
+TEST_PER_APP = FACTS['verification']['per_app']
+TAKEOVER_PATH = WEEK / FACTS['takeover']['record']
+TAKEOVER = json.loads(TAKEOVER_PATH.read_text('utf-8'))
 TEST_SOURCE_MATCHES = {name: evidence_match(ROOT / name, expected)
                        for name, expected in TEST_RECORD['source_sha256'].items()}
 ACCOUNT_SCAN_SUMMARY = WEEK / FACTS['accounts_comparison']['summary']
@@ -151,22 +153,34 @@ ACCOUNT_SOURCE_MATCHES = {item['path']: evidence_match(ROOT / 'src/DjangoBlog' /
 ACCOUNT_COUNTS = ACCOUNT_SCAN['results']
 
 
-def run_font(run, size=10.5, bold=False, color='202A35', code=False):
-    run.font.name = 'Consolas' if code else 'Times New Roman'
+def text_properties(properties):
+    """Apply the group's Chinese/Latin fonts and explicit black, without theme overrides."""
+    fonts = properties.get_or_add_rFonts()
+    fonts.attrib.clear()
+    for name, value in [('ascii', 'Times New Roman'), ('hAnsi', 'Times New Roman'),
+                        ('cs', 'Times New Roman'), ('eastAsia', '宋体')]:
+        fonts.set(qn('w:' + name), value)
+    color = properties.get_or_add_color()
+    color.attrib.clear()
+    color.set(qn('w:val'), BLACK)
+
+
+def run_font(run, size=10.5, bold=False):
+    run.font.name = 'Times New Roman'
     run.font.size = Pt(size)
     run.font.bold = bold
-    run.font.color.rgb = RGBColor.from_string(color)
-    run._element.get_or_add_rPr().get_or_add_rFonts().set(qn('w:eastAsia'), '宋体')
+    run.font.color.rgb = RGBColor.from_string(BLACK)
+    text_properties(run._element.get_or_add_rPr())
 
 
-def para(document, text, *, small=False, bold=False, color='202A35'):
+def para(document, text, *, small=False, bold=False):
     paragraph = document.add_paragraph()
     fmt = paragraph.paragraph_format
     fmt.line_spacing = 1.15
     fmt.space_after = Pt(3 if '编码规范' in document.core_properties.title else 5)
     fmt.widow_control = True
     fmt.keep_with_next = False
-    run_font(paragraph.add_run(str(text)), 9 if small else 10.5, bold, color)
+    run_font(paragraph.add_run(str(text)), 9 if small else 10.5, bold)
     return paragraph
 
 
@@ -178,8 +192,7 @@ def heading(document, text, level=1, page=False):
     fmt.space_before = Pt(12 if level == 1 else 8)
     fmt.space_after = Pt(6)
     for run in paragraph.runs:
-        run_font(run, 14 if level == 1 else 11.5, True, NAVY)
-        run._element.get_or_add_rPr().get_or_add_rFonts().set(qn('w:eastAsia'), '黑体')
+        run_font(run, 14 if level == 1 else 11.5, True)
     return paragraph
 
 
@@ -187,7 +200,7 @@ def callout(document, text):
     paragraph = para(document, text)
     shd = OxmlElement('w:shd')
     shd.set(qn('w:val'), 'clear')
-    shd.set(qn('w:fill'), AMBER)
+    shd.set(qn('w:fill'), 'F2F2F2')
     paragraph._p.get_or_add_pPr().append(shd)
     return paragraph
 
@@ -225,13 +238,13 @@ def table(document, headers, rows, weights=None, size=9):
                 node = OxmlElement('w:' + side)
                 node.set(qn('w:val'), 'single')
                 node.set(qn('w:sz'), '4')
-                node.set(qn('w:color'), 'CCD4DE')
+                node.set(qn('w:color'), BLACK)
                 borders.append(node)
             tcpr.append(borders)
             if index == 0 or '待补' in str(value) or '待确认' in str(value):
                 shd = OxmlElement('w:shd')
                 shd.set(qn('w:val'), 'clear')
-                shd.set(qn('w:fill'), 'E9EFF6' if index == 0 else 'FFF8E3')
+                shd.set(qn('w:fill'), 'F2F2F2')
                 tcpr.append(shd)
             paragraph = cell.paragraphs[0]
             paragraph.paragraph_format.line_spacing = 1.05
@@ -262,9 +275,9 @@ def code(document, text):
         fmt.keep_together = True
         shd = OxmlElement('w:shd')
         shd.set(qn('w:val'), 'clear')
-        shd.set(qn('w:fill'), 'F3F5F7')
+        shd.set(qn('w:fill'), 'F5F5F5')
         paragraph._p.get_or_add_pPr().append(shd)
-        run_font(paragraph.add_run(line or ' '), 8.5, code=True)
+        run_font(paragraph.add_run(line or ' '), 8.5)
     para(document, '', small=True).paragraph_format.space_after = Pt(0)
 
 
@@ -286,9 +299,7 @@ def hyperlink(paragraph, label, url):
                                                is_external=True))
     run = OxmlElement('w:r')
     properties = OxmlElement('w:rPr')
-    color = OxmlElement('w:color')
-    color.set(qn('w:val'), '195595')
-    properties.append(color)
+    text_properties(properties)
     run.append(properties)
     text = OxmlElement('w:t')
     text.text = label
@@ -323,16 +334,15 @@ def new_document(kind, title):
         section.footer_distance = Cm(0.9)
         paragraph = section.header.paragraphs[0]
         paragraph.text = ''
-        run_font(paragraph.add_run(f'{FACTS["group"]} · DjangoBlog · 第7—8周'), 8.5,
-                 color=GRAY)
+        run_font(paragraph.add_run(f'{FACTS["group"]} · DjangoBlog · 第7—8周'), 8.5)
         paragraph = section.footer.paragraphs[0]
         paragraph.text = ''
         paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        run_font(paragraph.add_run('审阅稿  |  第 '), 8.5, color=GRAY)
+        run_font(paragraph.add_run('课程汇总稿  |  第 '), 8.5)
         field(paragraph, 'PAGE')
-        run_font(paragraph.add_run(' 页 / 共 '), 8.5, color=GRAY)
+        run_font(paragraph.add_run(' 页 / 共 '), 8.5)
         field(paragraph, 'NUMPAGES')
-        run_font(paragraph.add_run(' 页'), 8.5, color=GRAY)
+        run_font(paragraph.add_run(' 页'), 8.5)
     document.styles['Normal'].font.size = Pt(10.5)
     document.styles['Normal'].font.name = 'Times New Roman'
     document.styles['Normal']._element.get_or_add_rPr().get_or_add_rFonts().set(
@@ -342,14 +352,14 @@ def new_document(kind, title):
     props.subject = '第七、八周软件工程方法学课程任务'
     props.author = FACTS['group']
     props.last_modified_by = '石兆翔（组长整理）'
-    props.version = '0.2'
-    props.content_status = '小组审阅稿；待补项明确标识'
+    props.version = FACTS['document_version']
+    props.content_status = '本轮汇总稿；实际执行归属、核查方式及未验证边界见文内'
     props.created = datetime(2026, 10, 31, tzinfo=timezone.utc)
     props.modified = datetime.now(timezone.utc)
     paragraph = document.add_paragraph()
     paragraph.paragraph_format.space_after = Pt(8)
-    run_font(paragraph.add_run(title), 22, True, NAVY)
-    para(document, '第7—8周 · v0.2 小组审阅稿（待SY汇总）', bold=True, color=GRAY)
+    run_font(paragraph.add_run(title), 22, True)
+    para(document, f'第7—8周 · v{FACTS["document_version"]} {FACTS["document_label"]}', bold=True)
     para(document, f'组号：{FACTS["group"]}    更新日期：{FACTS["compiled_date"]}')
     para(document, '小组成员：' + '、'.join(member['name'] for member in MEMBERS))
     para(document, f'源码参照：{SOURCE_LABEL}    汇总人：石兆翔；编制输入另存指纹', small=True)
@@ -376,6 +386,17 @@ def normalize_properties(document):
 
 
 def save(document, path):
+    # Cover template styles, table styles, fields, hyperlinks and headers/footers as well.
+    for style in document.styles:
+        text_properties(style._element.get_or_add_rPr())
+    for part in document.part.package.parts:
+        root = getattr(part, '_element', None)
+        if root is None:
+            continue
+        for run in root.iter(qn('w:r')):
+            text_properties(run.get_or_add_rPr())
+        for properties in root.iter(qn('w:rPr')):
+            text_properties(properties)
     normalize_properties(document)
     temporary = path.with_name(path.stem + '.building.docx')
     document.save(temporary)
@@ -385,7 +406,7 @@ def save(document, path):
 def coding_document():
     document = new_document('coding', 'Python语言编码规范')
     callout(document, '本稿依据课程模板、现有工具配置与已确认案例整理。适用于本轮新增和修改代码；'
-            '存量偏离逐项记录整改依据。SZX/GCY与YFY/GZX互查已确认补录；WZY/SY待交接。')
+            '存量偏离逐项记录整改依据。SY部分按组长指示由SZX代办，实际署名与核查方式另行说明。')
     heading(document, '1  规范制定的主要目的')
     para(document, '统一六人协作时的命名、格式、注释、接口及验证方式，使代码能被另一位成员理解、'
          '复现和维护；将质量问题落实到具体路径、触发、修复及证据。')
@@ -488,8 +509,8 @@ def production_items(app):
 
 def quality_document():
     document = new_document('quality', '“DjangoBlog”开源软件质量分析报告')
-    callout(document, '汇总稿：已填入5人成果、已有357项隔离回归、两组四方向互查补录及SZX同配置补扫。'
-            '当前待SY本轮材料及WZY/SY互查后作最终汇总；未将补录日期当作实际互查日期。')
+    callout(document, f'最终汇总：覆盖六个App；SY保留原快照和基线，后续由SZX代办。所选联合回归{TEST_COUNT}项通过；'
+            '两组本人互查补录、代办专项核查与生产验证边界分别记录，不冒写个人贡献或签署。')
     heading(document, '1  待分析开源软件概述')
     para(document, 'DjangoBlog是以Python/Django实现的技术博客系统，提供文章与分类标签、站点设置、账号认证、第三方授权、'
          '评论/回复与表情反应、检索，以及运维和邮件日志等功能。关联展示采用Django模板和前端资源。')
@@ -507,7 +528,8 @@ def quality_document():
          sum(item['category'] == 'migration' for item in INVENTORY[member['app']]))
         for member in MEMBERS
     ], [1.5, 2, 2])
-    para(document, 'SY模块的仓库规模可以静态核实，但当前未见其本轮个人成果，不能据规模表认定其完成阅读、注释或改进。')
+    para(document, '11月2日组长确认SY无法完成，授权SZX接手servermanager。SY原阶段快照b4fe17b及基线原样保留；'
+         '其后注释、实现、验证和材料均注明SZX代SY，不写成SY个人独立阅读/编码。')
     heading(document, '2  软件质量分析方法及工具')
     heading(document, '2.1  分析的软件质量要素', 2)
     table(document, ['要素', '本轮关注点'], [
@@ -520,7 +542,8 @@ def quality_document():
          '静态发现结合源码核实，选取至少一项适当改进，保留必要的失败复现、修复、回归和同配置复扫。')
     para(document, '互查按RC01—RC10执行。候选风险不直接写成既成缺陷；集成验证与成员本人确认分别记录。'
          'SZX/GCY、YFY/GZX已由组长确认完成并补录；未另存的个人意见不补造。'
-         'YFY原配置差异保留，新同配置补扫单列；SY及WZY/SY互查仍待补。')
+         'YFY原配置差异与新补扫分别保留。SY原互查安排按接手指示调整为组长专项核查，'
+         '没有WZY/SY对最终代办版的独立署名，不把实现者自检写成独立同伴审查。')
     heading(document, '2.3  软件质量分析工具', 2)
     table(document, ['工具', '用途与边界'], [
         ('Ruff 0.17.1', 'E/F/I/B/C90，行长100，复杂度10，统一target=py312；静态告警不证明业务结果。'),
@@ -563,11 +586,13 @@ if args:
         ('R4两次读取与R5漏清后代缓存', 'SZX补为单次读取与完整生命周期；318项阶段回归通过，357项集成保持。', 'WZY原改动+SZX补修；EV05'),
         ('G2无参调用IndexError', '原22项全过，GCY初版3项报错；SZX显式识别可选上下文后关闭回归。', 'GCY原改动+SZX补修；EV06'),
         ('验证码用途/插件错误日志', 'SZX改secrets保持六位协议；回调无__name__不阻断后续，新增最小回归通过。', 'SZX；EV06'),
-        ('SY运维模块', '待补：本轮人工分析、实际改进、验证、扫描及互查，不能按既有源码认定完成。', 'SY待提交'),
+        ('运维代码层级/SDK', '修复SY快照2处语法错误和方法嵌套；更新固定SDK调用及有意义的mock断言。', 'SY原快照；SZX代办；EV12'),
+        ('机器人状态与公开数据', '纯JSON状态、三次失败退出、顺序确认消费；拒绝草稿/页面及陈旧私有索引对象。', 'SZX代办；EV12'),
+        ('会话回退与命令', '不删除已有会话存储；显式命令超时和退出结果，shell边界告警保留。', 'SZX代办；EV12'),
     ], [1.4, 3.1, 1.4], 8.8)
     heading(document, '4  工具分析代码的质量情况')
     para(document, '下表保留各阶段已确认结果及其分母。不同配置、范围或代码时点的结果不合计为“全系统下降”。'
-         '告警数量不是缺陷数量；没有执行不能填0。当前源码已核对已有357项记录，历史文本哈希仅允许LF/CRLF等价，核对方式留在编制清单。')
+         f'告警数量不是缺陷数量；没有执行不能填0。当前源码与最新{TEST_COUNT}项记录核对，历史文本哈希仅允许LF/CRLF等价。')
     table(document, ['App/阶段', '生产文件', 'Ruff', 'Bandit', '可比性与来源'], [
         ('blog原阶段', '22', '66→65', '45→39', '同阶段可比；当前新增缓存入口后生产23，历史扫描不能冒充完整最新范围。EV01'),
         ('accounts补扫', '10', f'{ACCOUNT_COUNTS["baseline"]["ruff"]}→{ACCOUNT_COUNTS["after"]["ruff"]}',
@@ -576,7 +601,7 @@ if args:
         ('oauth', '10', '12→12', '10→6', 'B113×4关闭；B105 URL/空串误报另记。前后配置一致。EV03'),
         ('comments最终', '11', '0', '0', '最终补修快照；旧基线9及中间3/4保留，SZX执行者单列。EV04/05'),
         ('djangoblog统一阶段', '22', '72→34→28', '8→7→5', '原版→GCY→SZX集成，包含上游修复；原自建混入测试数字另存。EV06'),
-        ('servermanager', '11现状', '待交', '待交', '这里只确认静态规模，未取得本轮个人工具证据。'),
+        ('servermanager代办', '11', '5→0', '3→2', 'SZX同配置补扫；B404/B602属同一管理员shell功能边界，不加nosec。EV12'),
     ], [1.3, 0.7, 0.9, 0.9, 3], 8.5)
     para(document, 'accounts原历史10→8因配置/驱动变更不直接作净下降；本次SZX补扫相同10个业务文件为Ruff9→8、'
          'Bandit0→0，无解析错误。结果包含基线至当前集成版本的变化，不全部归为YFY个人消除；未重新执行Django测试。')
@@ -585,18 +610,19 @@ if args:
          'C901×5、B007×1、B904×1；Bandit为日志链接B308/B703各2及Whoosh运行时assert B101×1，处置理由保留。')
     heading(document, '4.1  已确认行为验证与边界', 2)
     table(document, ['范围', '数量', '结果'], [
-        ('blog所选标签', '158', '通过'), ('accounts所选标签', '84', '通过'),
-        ('comments所选标签', '50', '通过'), ('oauth业务逻辑标签', '26', '通过'),
-        ('djangoblog既有22项+新增17项', '39', '通过'), ('合计', '357', 'failure_count=0'),
-    ], [3, 0.8, 1.2])
-    para(document, '环境：Python3.12.7、Django5.2.17、SQLite内存、LocMem缓存/邮箱、SimpleEngine，HTTP/socket阻断。'
+        (app + '所选标签', str(TEST_PER_APP[app]), '通过')
+        for app in ['blog', 'accounts', 'comments', 'oauth', 'djangoblog', 'servermanager']
+    ] + [('合计', str(TEST_COUNT), '失败0、错误0、跳过0')], [3, 0.8, 1.2])
+    para(document, f'环境：Python{TEST_RECORD["python"]}、Django{TEST_RECORD["django"]}、SQLite内存、LocMem缓存/邮箱、SimpleEngine；'
+         'HTTP/socket与未mock系统命令阻断。'
          '不代表全仓库全部测试、真实MySQL/Redis/CDN、OAuth提供商、SMTP投递或前端生产构建均已验证。'
-         '本次文档编制核对源码与已有357项通过记录一致，没有因整理Word虚构重新执行测试。')
+         '原集成357项与本次servermanager33项合并在同一次联合运行中通过。新增31项改进前为22失败6错误；'
+         '真实OpenAI模型可用性、微信回调和shell子进程树终止未实测，不把mock通过当作真实联调。')
     heading(document, '5  小组分工')
     table(document, ['成员/标识', '分析模块', '主要工作与注释范围', '互查/交付状态'], [
         (f'{m["name"]}\n{m["id"]}\n# {m["tag"]}：', m['app'],
          f'生产Python {len(production_items(m["app"]))}文件；当前逐文件注释见附录B。' +
-         ('本轮个人阅读/新增统计、改进证据待交。' if m['tag'] == 'SY' else '人工分析、工具和验证按本人材料及SZX补修分别记录。'),
+         ('SY阶段记录保留；本轮新增说明和实现由SZX代办，详见接手清单。' if m['tag'] == 'SY' else '人工分析、工具和验证按本人材料及SZX补修分别记录。'),
          m['status'] + f'；搭档{m["peer"]}') for m in MEMBERS
     ], [1.3, 0.9, 2.5, 2], 8.8)
     para(document, 'SZX的组长/集成补修不计作其他成员本人返工或人工签署。WZY/GCY原提交在个人分支保留，'
@@ -629,7 +655,7 @@ if args:
     table(document, ['配对', '当前状态', '记录与剩余事项'], [
         ('SZX↔GCY', '组长确认双向互查已完成，11月2日补录。', '技术参照沿用原证据；GCY未另存的逐项意见不补造。'),
         ('YFY↔GZX', '组长确认双向互查已完成，原空表已同步。', '沿用原检查和已修正表述；旧日期保留，不新增本人测试声明。'),
-        ('WZY↔SY', 'WZY材料与SZX补修已集成。', 'SY提交本轮成果；双方本人复核、处理和结论。'),
+        ('WZY/SY原配对', 'SY无法完成，按组长指示改为SZX代办专项核查。', 'SZX核对WZY相关代码，并实现/验证SY模块；没有WZY/SY独立签名，见EV13。'),
     ], [1, 2.2, 2.8], 8.8)
     heading(document, 'A.3  四方向互查补录登记', 2)
     table(document, ['编号/方向', '完成状态', '已有依据'], [
@@ -643,22 +669,22 @@ if args:
          '不作为独占署名或本周新增量。测试/迁移不混入；本周新增/修订需由个人差分证据确认。此清单填入可核实的当前事实。')
     for member in MEMBERS:
         heading(document, f'B.{MEMBERS.index(member) + 1}  {member["name"]} / {member["app"]}', 2)
+        signed_tag = 'SZX' if member['tag'] == 'SY' else member['tag']
         if member['tag'] == 'SY':
-            callout(document, '待补：SY尚未交本轮逐文件阅读/新增注释记录；不据现有代码补写其个人完成情况。'
-                    f'现状生产文件{len(production_items(member["app"]))}个已计入概述规模表。')
-            continue
+            para(document, f'SZX代SY新增署名说明{TAKEOVER["metrics"]["new_signed_lines"]}行、新增/改写物理注释'
+                 f'{TAKEOVER["metrics"]["new_comment_lines"]}行；原GZX说明保留。下表含SZX列为实际执行者，不作SY本人贡献。', small=True)
         rows = []
         for item in production_items(member['app']):
-            if item['comment_lines'] or item['signed'][member['tag']]:
+            if item['comment_lines'] or item['signed'][signed_tag]:
                 others = '、'.join(f'{tag}:{count}' for tag, count in item['signed'].items()
-                                  if tag != member['tag'] and count)
-                rows.append((item['relative'], item['comment_lines'], item['signed'][member['tag']],
+                                  if tag != signed_tag and count and not (member['tag'] == 'SY' and tag == 'SY'))
+                rows.append((item['relative'], item['comment_lines'], item['signed'][signed_tag],
                              others or '—'))
-        table(document, ['文件（相对src/DjangoBlog）', '注释token行', f'含{member["tag"]}', '其他缩写'],
+        table(document, ['文件（相对src/DjangoBlog）', '注释token行', f'含{signed_tag}', '其他缩写'],
               rows, [3, 1, 0.8, 1.4], 8.5)
         para(document, '未列出的该App业务文件没有COMMENT token；当前总量不等于本周新增，'
              f'本人周际统计与来源见成员成果/{member["tag"]}/注释统计或SZX阶段验证。', small=True)
-    heading(document, '附录C  证据索引及定稿待补项', page=True)
+    heading(document, '附录C  证据索引与交付核对', page=True)
     table(document, ['编号', '仓库路径/来源', '用途'], [
         ('EV01', 'doc/week7-8/README.md；成员成果/SZX/原始工具结果/quality-summary.json', 'blog原阶段分析、规模和工具对比'),
         ('EV02', '成员成果/YFY/工具与验证记录.md；原始工具结果/；验证日志/', 'accounts历史材料、84项；新同配置补扫见EV11'),
@@ -671,14 +697,16 @@ if args:
         ('EV09', 'GitHub PR37；develop@e52f5d0', '5人成果已集成，保留GCY原作者历史'),
         ('EV10', '互查记录/2026-11-02-两组互查补录.md', 'SZX/GCY与YFY/GZX四方向确认及原意见依据'),
         ('EV11', '成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/', 'SZX同配置9→8、0→0补扫；原始JSON/manifest'),
+        ('EV12', '成员成果/SY/四份素材、接手完成清单.json及2026-11-02-szx-takeover/', 'SY原快照保留；SZX代办、390项联合与5→0/3→2扫描'),
+        ('EV13', '成员成果/SY/接手与专项核查记录.md', '原WZY/SY配对变更及实际执行者，不冒写个人签名'),
     ], [0.6, 3.8, 1.6], 8.3)
     para(document, '除EV01首项README外，上表“成员成果/”路径均相对doc/week7-8。完整源码/模板/输入指纹见文档编制记录。', small=True)
-    table(document, ['定稿项', '当前状态', '责任/确认方'], [
-        ('SY个人交付', '待补：源码、四份素材、改进/验证/复扫、互查。', 'SY；WZY复核'),
+    table(document, ['交付核对项', '本轮状态与边界', '执行/确认方'], [
+        ('SY部分接手', '原快照/基线保留；代码、四份素材、注释统计及联合验证均完成。', 'SZX代SY'),
         ('已补齐项目', '两组四方向互查、YFY同配置补扫已入库；不再重复列为待补。', 'SZX/GCY；YFY/GZX'),
-        ('WZY/SY互查', '待SY提交后完成双向记录及必要整改/复核。', 'WZY/SY'),
+        ('专项核查', '按接手安排完成组长核查；没有WZY/SY对新代办版本的独立本人签署。', 'SZX；独立性边界已说明'),
         ('日期口径', '原日历日期未另存；任务周次与收尾触发条件已列，不虚构日期。', '组长'),
-        ('Word全组审阅', '本稿已填已确认内容；收齐数据后统一版本和确认状态。', 'SZX汇总；全员'),
+        ('Word与提交', '六App数据及实际贡献已汇总，结构/分页校验另存；个人分支至develop，main由组长决定。', 'SZX汇总；组长'),
     ], [1.1, 3.1, 1.3], 9)
     save(document, OUTPUTS['quality'])
 
@@ -718,15 +746,17 @@ P1阻断项修复并验证后再验收；P2/P3明确整改或保留理由。工�
 
 - SZX↔GCY：组长确认双向互查已完成，2026-11-02补录；技术参照与未留存信息分别记录。
 - YFY↔GZX：组长确认双向互查已完成，YFY第7节、GZX第4节和总状态已同步。
-- WZY↔SY：WZY集成补修已验证；SY提交本轮材料后完成双方本人复核。
+- WZY/SY原配对：11月2日SY无法完成，按组长要求由SZX接手并专项核查；没有WZY/SY对最终代办版本的独立签名，不冒写。
 - [四方向补录登记](互查记录/2026-11-02-两组互查补录.md)：补录日期不等于实际互查日期，未留存的个人逐项意见不补造。
+- [接手专项核查](成员成果/SY/接手与专项核查记录.md)：记录SZX代SY核对WZY及servermanager实现/自检的真实执行方式。
 
 ## 6. 当前进度与后续交付
 
-5人成果已合入develop；已有357项选定范围隔离测试通过，源码内容已核对，历史文本指纹的LF/CRLF等价单列。
+原五App成果及SY接手结果均已汇总；实际集成版本与验证源码见接手清单和PR38，不将个人旧分支当作最终集成源码。
 SZX于2026-11-02补齐accounts相同配置/10文件扫描：Ruff9→8、Bandit0→0，保留原历史记录，不冒充YFY本人执行。
-两份Word已填入两组互查和补扫结果；当前待SY成果与WZY/SY互查后作最终汇总。
-收到SY后：核对代码/四份素材/原始证据→完成双向互查和必要复测→更新六人规模/注释/工具与优化计划→更新Word并校验分页→个人分支提交develop。
+SY模块由SZX代办，统一11文件Ruff5→0、Bandit3→2，新增31项改进前22失败6错误，接手后33项本App与390项联合全部通过。
+两份Word已纳入六App实际数据、四份代办素材、注释统计、两组互查补录和专项核查，形成v1.0汇总稿。原日历日期未另存的继续说明，不倒填。
+本轮代办工作已完成；真实环境联调、独立复核补强及生产部署按后续优化计划处理。
 个人分支提交到develop；全组完成后由组长负责main最终合并。本文不代签任何成员本人确认。
 '''
     path = WEEK / '第7—8周组会、双周计划与互查标准.md'
@@ -744,19 +774,29 @@ def main():
                    WEEK / 'tools/supplement_accounts_baseline.py',
                    WEEK / '成员成果/YFY/工具与验证记录.md', WEEK / '成员成果/GZX/互查记录.md',
                    WEEK / '成员成果/GCY/工具与验证记录.md']
+    input_paths += [TAKEOVER_PATH, WEEK / FACTS['takeover']['review_record'],
+                    WEEK / 'tools/verify_sy_takeover.py', WEEK / 'tools/build_sy_takeover_materials.py',
+                    WEEK / 'tools/run_isolated_tests.py', WEEK / 'tools/verify_week78_documents.py',
+                    WEEK / 'tools/render_week78_word.ps1']
+    input_paths += sorted((WEEK / '成员成果').glob('*/*.md'))
+    for phase in ['before', 'after']:
+        input_paths += sorted((TEST_EVIDENCE.parent.parent / phase).glob('*.json'))
     input_paths += sorted(path for path in ACCOUNT_SCAN_SUMMARY.parent.rglob('*.json')
                           if path != ACCOUNT_SCAN_SUMMARY)
+    input_paths = list(dict.fromkeys(input_paths))
     manifest = {
         'compiled_date': FACTS['compiled_date'], 'source_ref': SOURCE_REF,
-        'purpose': 'Course Word review drafts with confirmed content; not final group acceptance.',
+        'purpose': 'Final course aggregation with actual executor attribution and verification boundaries.',
+        'document_style': FACTS['document_style'],
         'meeting_confirmed': FACTS['meeting'], 'plan_dates': FACTS['plan'],
-        'test_evidence': {'test_count': 357, 'failure_count': 0,
+        'test_evidence': {'test_count': TEST_COUNT, 'failure_count': 0, 'per_app': TEST_PER_APP,
                           'verified_code_commit': TEST_RECORD['verified_code_commit'],
                           'source_comparison': TEST_SOURCE_MATCHES,
                           'comparison_rule': 'Exact bytes or UTF-8 LF/CRLF equivalence only; no semantic changes accepted.'},
         'review_confirmation': FACTS['review_confirmation'],
         'accounts_same_config_supplement': ACCOUNT_SCAN,
         'accounts_source_comparison': ACCOUNT_SOURCE_MATCHES,
+        'sy_takeover': TAKEOVER,
         'inputs_sha256': {path.relative_to(ROOT).as_posix(): digest(path) for path in input_paths},
         'inventory': INVENTORY, 'source_parse_warnings': PARSE_WARNINGS,
         'outputs': {kind: {'path': path.relative_to(ROOT).as_posix(), 'sha256': digest(path)}

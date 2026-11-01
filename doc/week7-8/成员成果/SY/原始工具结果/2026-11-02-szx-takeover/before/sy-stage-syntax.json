@@ -1,0 +1,21 @@
+[
+  {
+    "path": "src/DjangoBlog/servermanager/api/commonapi.py",
+    "syntax": "failed",
+    "line": 47,
+    "message": "unindent does not match any outer indentation level"
+  },
+  {
+    "path": "src/DjangoBlog/servermanager/robot.py",
+    "syntax": "passed",
+    "class_methods": [
+      "__init__"
+    ]
+  },
+  {
+    "path": "src/DjangoBlog/servermanager/tests.py",
+    "syntax": "failed",
+    "line": 29,
+    "message": "unexpected indent"
+  }
+]
