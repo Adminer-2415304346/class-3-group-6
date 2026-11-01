@@ -27,6 +27,8 @@ FACTS_PATH = WEEK / 'content/week78_confirmed_facts.json'
 FACTS = json.loads(FACTS_PATH.read_text(encoding='utf-8'))
 MEMBERS = FACTS['members']
 SOURCE_REF = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
+SOURCE_BRANCH = subprocess.check_output(['git', 'branch', '--show-current'], cwd=ROOT, text=True).strip()
+SOURCE_LABEL = f'{SOURCE_BRANCH}@{SOURCE_REF[:7]}'
 SOURCE_URL = 'https://github.com/Adminer-2415304346/class-3-group-6'
 OUTPUTS = {
     'coding': WEEK / 'AI Agent工程实践-Python语言编码规范.docx',
@@ -51,14 +53,14 @@ REVIEW_CHECKS = [
 ]
 
 PLAN_ROWS = [
-    ('第7周任务阶段', '精读/三层注释、人工四类分析、基线与规范草稿', '各App主责；SZX统筹', '源码说明、四份素材、可复核baseline', '具体日历日期待确认'),
-    ('第8周任务阶段', '适当改进、回归验证、同配置复扫及互查', '各App主责与互查搭档', '修复及测试证据、after、本人互查结论', '具体日历日期待确认'),
-    ('当前收尾阶段一', 'SY补交；YFY补统一基线；三对互查记录闭环', 'SY、YFY及各复核人', '材料齐备、记录一致；新增修复经验证', '截止时间待确认'),
-    ('当前收尾阶段二', '规范/质量Word定稿、优化计划确认、组长核对', 'SZX汇总；全员确认本人数据', '两份Word与最终代码/证据对应', '截止时间待确认'),
+    ('第7周任务阶段', '精读/三层注释、人工四类分析、基线与规范草稿', '各App主责；SZX统筹', '源码说明、四份素材、可复核baseline', '按第7周任务安排'),
+    ('第8周任务阶段', '适当改进、回归验证、同配置复扫及互查', '各App主责与互查搭档', '修复及测试证据、after、互查结论', '按第8周任务安排'),
+    ('当前收尾阶段一', 'SY补交并与WZY双向互查；其余两组记录已补齐', 'SY、WZY；SZX统筹', 'SY材料和原始证据齐备；有新增修改则复测', 'SY提交后立即核对'),
+    ('当前收尾阶段二', '更新六人总表、规范/质量Word及优化计划，完成最终检查', 'SZX汇总；组长核对', '两份Word与最终代码/证据对应', '收到完整SY材料后'),
 ]
 
 OPTIMIZATIONS = [
-    ('P1', '收尾完整交付', 'SY补齐；YFY同配置基线；互查、日期和两份Word确认', '各成员；SZX统筹', '六人素材齐，原始证据可比，结论由本人确认'),
+    ('P1', '收尾完整交付', 'SY补齐及WZY/SY互查；核对六人总表与两份Word', 'SY/WZY；SZX统筹', '六人素材齐、证据对应；已有两组互查不重复留待补'),
     ('P1', '文章与搜索失效', '统一文章批量发布/撤稿、普通删除与搜索索引的生命周期', 'SZX/GCY，协调WZY', '撤稿不再公开展示/搜索命中；相关缓存与索引验证'),
     ('P1', 'OAuth账号边界', 'state、隐藏ID归属、签名时效/一次性及邮箱归属策略', 'GZX/YFY，协调GCY', '模拟伪造/过期/重复使用及未激活账号，不越权关联'),
     ('P1', '上传与外部依赖', '上传授权/大小/格式/路径；显式搜索初始化与TLS异常策略', 'SZX/GCY', '越权/伪装/超限拒绝；无搜索服务时普通读取可用'),
@@ -76,6 +78,18 @@ REFERENCES = [
 
 def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def evidence_match(path, expected):
+    """Accept only byte identity or UTF-8 LF/CRLF equivalence in historical text hashes."""
+    data = Path(path).read_bytes()
+    if hashlib.sha256(data).hexdigest() == expected:
+        return 'exact'
+    data.decode('utf-8')
+    lf = data.replace(b'\r\n', b'\n')
+    candidates = [lf, lf.replace(b'\n', b'\r\n')]
+    assert any(hashlib.sha256(item).hexdigest() == expected for item in candidates), path
+    return 'LF/CRLF only'
 
 
 def git_files(app):
@@ -124,8 +138,17 @@ INVENTORY, PARSE_WARNINGS = collect_inventory()
 TEST_EVIDENCE = WEEK / '成员成果/SZX/GCY集成/2026-10-31/after/manifest.json'
 TEST_RECORD = json.loads(TEST_EVIDENCE.read_text(encoding='utf-8'))
 assert TEST_RECORD['test_count'] == 357 and TEST_RECORD['failure_count'] == 0
-for name, expected in TEST_RECORD['source_sha256'].items():
-    assert digest(ROOT / name) == expected, f'Verified test source has changed: {name}'
+TEST_SOURCE_MATCHES = {name: evidence_match(ROOT / name, expected)
+                       for name, expected in TEST_RECORD['source_sha256'].items()}
+ACCOUNT_SCAN_SUMMARY = WEEK / FACTS['accounts_comparison']['summary']
+ACCOUNT_SCAN = json.loads(ACCOUNT_SCAN_SUMMARY.read_text(encoding='utf-8'))
+assert ACCOUNT_SCAN['same_file_paths'] and ACCOUNT_SCAN['tools'] == {'ruff': '0.17.1', 'bandit': '1.9.4'}
+for config_name, expected in ACCOUNT_SCAN['config_sha256'].items():
+    assert digest(WEEK / 'tools' / config_name) == expected, config_name
+ACCOUNT_AFTER = json.loads((ACCOUNT_SCAN_SUMMARY.parent / 'after/manifest.json').read_text('utf-8'))
+ACCOUNT_SOURCE_MATCHES = {item['path']: evidence_match(ROOT / 'src/DjangoBlog' / item['path'], item['sha256'])
+                          for item in ACCOUNT_AFTER['files']}
+ACCOUNT_COUNTS = ACCOUNT_SCAN['results']
 
 
 def run_font(run, size=10.5, bold=False, color='202A35', code=False):
@@ -319,17 +342,17 @@ def new_document(kind, title):
     props.subject = '第七、八周软件工程方法学课程任务'
     props.author = FACTS['group']
     props.last_modified_by = '石兆翔（组长整理）'
-    props.version = '0.1'
+    props.version = '0.2'
     props.content_status = '小组审阅稿；待补项明确标识'
     props.created = datetime(2026, 10, 31, tzinfo=timezone.utc)
     props.modified = datetime.now(timezone.utc)
     paragraph = document.add_paragraph()
     paragraph.paragraph_format.space_after = Pt(8)
     run_font(paragraph.add_run(title), 22, True, NAVY)
-    para(document, '第7—8周 · v0.1 小组审阅稿', bold=True, color=GRAY)
-    para(document, f'组号：{FACTS["group"]}    编制日期：2026年10月31日')
+    para(document, '第7—8周 · v0.2 小组审阅稿（待SY汇总）', bold=True, color=GRAY)
+    para(document, f'组号：{FACTS["group"]}    更新日期：{FACTS["compiled_date"]}')
     para(document, '小组成员：' + '、'.join(member['name'] for member in MEMBERS))
-    para(document, f'代码快照：develop@{SOURCE_REF[:7]}    汇总人：石兆翔', small=True)
+    para(document, f'源码参照：{SOURCE_LABEL}    汇总人：石兆翔；编制输入另存指纹', small=True)
     return document
 
 
@@ -362,7 +385,7 @@ def save(document, path):
 def coding_document():
     document = new_document('coding', 'Python语言编码规范')
     callout(document, '本稿依据课程模板、现有工具配置与已确认案例整理。适用于本轮新增和修改代码；'
-            '存量偏离逐项记录整改依据。本稿供全组审阅，成员本人互查结论另行确认。')
+            '存量偏离逐项记录整改依据。SZX/GCY与YFY/GZX互查已确认补录；WZY/SY待交接。')
     heading(document, '1  规范制定的主要目的')
     para(document, '统一六人协作时的命名、格式、注释、接口及验证方式，使代码能被另一位成员理解、'
          '复现和维护；将质量问题落实到具体路径、触发、修复及证据。')
@@ -465,8 +488,8 @@ def production_items(app):
 
 def quality_document():
     document = new_document('quality', '“DjangoBlog”开源软件质量分析报告')
-    callout(document, '阶段稿：已填入5人成果、357项已通过隔离回归及已核对数据；SY本轮素材、YFY统一基线、'
-            '互查确认和双周日期仍待补。本文不是全组最终验收完成声明。')
+    callout(document, '汇总稿：已填入5人成果、已有357项隔离回归、两组四方向互查补录及SZX同配置补扫。'
+            '当前待SY本轮材料及WZY/SY互查后作最终汇总；未将补录日期当作实际互查日期。')
     heading(document, '1  待分析开源软件概述')
     para(document, 'DjangoBlog是以Python/Django实现的技术博客系统，提供文章与分类标签、站点设置、账号认证、第三方授权、'
          '评论/回复与表情反应、检索，以及运维和邮件日志等功能。关联展示采用Django模板和前端资源。')
@@ -496,7 +519,8 @@ def quality_document():
     para(document, '按App阅读入口、核心对象与调用链，在模块/方法/关键块署名说明；从风格、设计、技能正例与问题四类人工分析。'
          '静态发现结合源码核实，选取至少一项适当改进，保留必要的失败复现、修复、回归和同配置复扫。')
     para(document, '互查按RC01—RC10执行。候选风险不直接写成既成缺陷；集成验证与成员本人确认分别记录。'
-         'SY未提交、YFY配置变更前后不可直接对比及双方互查空白均保留为待补。')
+         'SZX/GCY、YFY/GZX已由组长确认完成并补录；未另存的个人意见不补造。'
+         'YFY原配置差异保留，新同配置补扫单列；SY及WZY/SY互查仍待补。')
     heading(document, '2.3  软件质量分析工具', 2)
     table(document, ['工具', '用途与边界'], [
         ('Ruff 0.17.1', 'E/F/I/B/C90，行长100，复杂度10，统一target=py312；静态告警不证明业务结果。'),
@@ -543,15 +567,19 @@ if args:
     ], [1.4, 3.1, 1.4], 8.8)
     heading(document, '4  工具分析代码的质量情况')
     para(document, '下表保留各阶段已确认结果及其分母。不同配置、范围或代码时点的结果不合计为“全系统下降”。'
-         '告警数量不是缺陷数量；没有执行不能填0。当前集成源码与357项通过记录逐文件哈希对应。')
+         '告警数量不是缺陷数量；没有执行不能填0。当前源码已核对已有357项记录，历史文本哈希仅允许LF/CRLF等价，核对方式留在编制清单。')
     table(document, ['App/阶段', '生产文件', 'Ruff', 'Bandit', '可比性与来源'], [
         ('blog原阶段', '22', '66→65', '45→39', '同阶段可比；当前新增缓存入口后生产23，历史扫描不能冒充完整最新范围。EV01'),
-        ('accounts', '10', '10→8*', '0→0*', '*基线target313，最终target312；同配置baseline待补，不做净下降结论。EV02'),
+        ('accounts补扫', '10', f'{ACCOUNT_COUNTS["baseline"]["ruff"]}→{ACCOUNT_COUNTS["after"]["ruff"]}',
+         f'{ACCOUNT_COUNTS["baseline"]["bandit"]}→{ACCOUNT_COUNTS["after"]["bandit"]}',
+         'SZX于11月2日统一py312配置补扫；保留完整包目录供导入分类，不混用原py313数字。EV02/11'),
         ('oauth', '10', '12→12', '10→6', 'B113×4关闭；B105 URL/空串误报另记。前后配置一致。EV03'),
         ('comments最终', '11', '0', '0', '最终补修快照；旧基线9及中间3/4保留，SZX执行者单列。EV04/05'),
         ('djangoblog统一阶段', '22', '72→34→28', '8→7→5', '原版→GCY→SZX集成，包含上游修复；原自建混入测试数字另存。EV06'),
         ('servermanager', '11现状', '待交', '待交', '这里只确认静态规模，未取得本轮个人工具证据。'),
     ], [1.3, 0.7, 0.9, 0.9, 3], 8.5)
+    para(document, 'accounts原历史10→8因配置/驱动变更不直接作净下降；本次SZX补扫相同10个业务文件为Ruff9→8、'
+         'Bandit0→0，无解析错误。结果包含基线至当前集成版本的变化，不全部归为YFY个人消除；未重新执行Django测试。')
     para(document, 'djangoblog原自建Bandit实际扫27文件，含5个测试文件，after的38条中31条来自测试，'
          '不能按22个生产文件口径合计；已转统一入口并另存after-szx-integration。当前剩余Ruff I001×7、E501×14、'
          'C901×5、B007×1、B904×1；Bandit为日志链接B308/B703各2及Whoosh运行时assert B101×1，处置理由保留。')
@@ -577,7 +605,7 @@ if args:
     table(document, ['级别', '方向', '拟实施内容', '建议负责人', '验收条件'], OPTIMIZATIONS,
           [0.5, 1, 2.3, 1.1, 2.1], 8.5)
     para(document, '以上后续优化计划依据README和已确认剩余项整理；优先级与责任为拟定收尾/改进安排，'
-         '最终截止时间待组长确认，不能写成全部已实施或每位成员已承诺完成。')
+         '按任务阶段安排；日历截止未另存，不写成全部已实施或每位成员已承诺完成。')
     heading(document, '附录A  组会、双周计划与互查标准', page=True)
     meeting = FACTS['meeting']
     table(document, ['项目', '已确认内容'], [
@@ -594,15 +622,22 @@ if args:
     table(document, ['阶段', '任务', '责任', '交付/验收', '时间'], PLAN_ROWS,
           [1, 2.2, 1.3, 2.1, 1], 8.5)
     plan = FACTS['plan']
-    para(document, f'双周起始：{plan["start_date"] or "【待确认】"}；结束：{plan["end_date"] or "【待确认】"}；'
-         f'最终截止：{plan["deadline"] or "【待确认】"}。不以本次编制日期倒推实际计划日期。')
+    para(document, f'双周起始：{plan["start_date"] or "未单独留存"}；结束：{plan["end_date"] or "未单独留存"}；'
+         f'最终截止：{plan["deadline"] or "未单独留存"}。按上表任务周次编排，不以本次日期倒推历史计划。')
     heading(document, 'A.2  互查标准与闭环状态', 2)
     table(document, ['编号', '检查项', '通过条件'], REVIEW_CHECKS, [0.7, 1.1, 4], 8.8)
-    table(document, ['配对', '现有事实', '待确认/待补'], [
-        ('SZX↔GCY', 'SZX侧集成工具核查和修复证据已入库。', 'GCY对SZX的本人反向互查。'),
-        ('YFY↔GZX', '双方各有单侧核查内容，YFY第8节已有对GZX评审。', 'GZX互查表和YFY第7节仍有空白，需同步处理及本人确认。'),
+    table(document, ['配对', '当前状态', '记录与剩余事项'], [
+        ('SZX↔GCY', '组长确认双向互查已完成，11月2日补录。', '技术参照沿用原证据；GCY未另存的逐项意见不补造。'),
+        ('YFY↔GZX', '组长确认双向互查已完成，原空表已同步。', '沿用原检查和已修正表述；旧日期保留，不新增本人测试声明。'),
         ('WZY↔SY', 'WZY材料与SZX补修已集成。', 'SY提交本轮成果；双方本人复核、处理和结论。'),
     ], [1, 2.2, 2.8], 8.8)
+    heading(document, 'A.3  四方向互查补录登记', 2)
+    table(document, ['编号/方向', '完成状态', '已有依据'], [
+        (f'{item["id"]}\n{item["reviewer"]}→{item["owner"]}', item['status'], item['evidence'])
+        for item in FACTS['review_confirmation']['directions']
+    ], [1.3, 1.7, 3], 8.8)
+    para(document, '补录日期为2026-11-02，确认人为组长石兆翔。实际互查日期未单独留存的保持说明；'
+         '个人额外意见、签名及执行命令不补造。完整记录见互查记录/2026-11-02-两组互查补录.md。', small=True)
     heading(document, '附录B  当前集成源码的逐文件注释清单', page=True)
     para(document, '口径：业务Python中的COMMENT token物理行；含缩写按注释字符串包含该缩写计数，可能同一行含多个标识，'
          '不作为独占署名或本周新增量。测试/迁移不混入；本周新增/修订需由个人差分证据确认。此清单填入可核实的当前事实。')
@@ -626,21 +661,23 @@ if args:
     heading(document, '附录C  证据索引及定稿待补项', page=True)
     table(document, ['编号', '仓库路径/来源', '用途'], [
         ('EV01', 'doc/week7-8/README.md；成员成果/SZX/原始工具结果/quality-summary.json', 'blog原阶段分析、规模和工具对比'),
-        ('EV02', '成员成果/YFY/工具与验证记录.md；原始工具结果/；验证日志/', 'accounts材料、84项；同配置baseline待补'),
+        ('EV02', '成员成果/YFY/工具与验证记录.md；原始工具结果/；验证日志/', 'accounts历史材料、84项；新同配置补扫见EV11'),
         ('EV03', '成员成果/GZX/工具与验证记录.md、互查记录.md及原始工具结果/', 'oauth超时、26项和互查状态'),
         ('EV04', '成员成果/WZY/四份素材及after-r4-r5-szx/', 'comments分阶段问题与最终11文件复扫'),
         ('EV05', '成员成果/SZX/集成修复/2026-10-31/验证结果.md', 'R4/R5边界修复与318项阶段验证'),
         ('EV06', '成员成果/SZX/GCY集成/2026-10-31/验证结果.md；after/manifest.json', 'GCY补修、357项与逐文件指纹'),
         ('EV07', '成员成果/GCY/四份素材及after-szx-integration/', 'djangoblog22文件统一复扫与修订统计'),
-        ('EV08', 'content/week78_confirmed_facts.json；第7—8周组会、双周计划与互查标准.md', '组长确认事实、计划待补日期及当前清单'),
-        ('EV09', f'GitHub PR37；develop@{SOURCE_REF[:7]}', '5人成果已集成，保留GCY原作者历史'),
+        ('EV08', 'content/week78_confirmed_facts.json；第7—8周组会、双周计划与互查标准.md', '组长确认事实、任务阶段及日期未留存说明'),
+        ('EV09', 'GitHub PR37；develop@e52f5d0', '5人成果已集成，保留GCY原作者历史'),
+        ('EV10', '互查记录/2026-11-02-两组互查补录.md', 'SZX/GCY与YFY/GZX四方向确认及原意见依据'),
+        ('EV11', '成员成果/YFY/原始工具结果/2026-11-02-szx-same-config/', 'SZX同配置9→8、0→0补扫；原始JSON/manifest'),
     ], [0.6, 3.8, 1.6], 8.3)
     para(document, '除EV01首项README外，上表“成员成果/”路径均相对doc/week7-8。完整源码/模板/输入指纹见文档编制记录。', small=True)
     table(document, ['定稿项', '当前状态', '责任/确认方'], [
         ('SY个人交付', '待补：源码、四份素材、改进/验证/复扫、互查。', 'SY；WZY复核'),
-        ('YFY同配置baseline', '待补；保留已披露配置变化，不用旧10→8作统一下降。', 'YFY'),
-        ('本人互查闭环', '待补空白、不同步状态及本人结论；不代签。', '三对搭档'),
-        ('双周具体日期', '待确认起止与最终截止；任务阶段和责任已列。', '组长'),
+        ('已补齐项目', '两组四方向互查、YFY同配置补扫已入库；不再重复列为待补。', 'SZX/GCY；YFY/GZX'),
+        ('WZY/SY互查', '待SY提交后完成双向记录及必要整改/复核。', 'WZY/SY'),
+        ('日期口径', '原日历日期未另存；任务周次与收尾触发条件已列，不虚构日期。', '组长'),
         ('Word全组审阅', '本稿已填已确认内容；收齐数据后统一版本和确认状态。', 'SZX汇总；全员'),
     ], [1.1, 3.1, 1.3], 9)
     save(document, OUTPUTS['quality'])
@@ -650,7 +687,7 @@ def supporting_markdown():
     meeting = FACTS['meeting']
     text = f'''# 第7—8周组会、双周计划与互查标准
 
-编制：2026-10-31；{FACTS['group']}；组长石兆翔整理。代码进度快照develop@{SOURCE_REF[:7]}。
+更新：{FACTS['compiled_date']}；{FACTS['group']}；组长石兆翔整理。源码参照{SOURCE_LABEL}；编制输入另存指纹。
 会议事实及既定安排由组长在对话中确认；细化的验收清单与当前收尾安排在本次整理，不代填成员本人复核。
 
 ## 1. 已确认组会记录
@@ -669,7 +706,7 @@ def supporting_markdown():
     text += '\n'.join(f'| {m["name"]} {m["tag"]} | {m["app"]} | {m["branch"]} | {m["peer"]} |' for m in MEMBERS)
     text += '\n\n## 3. 双周阶段与当前收尾计划\n\n| 阶段 | 任务 | 责任 | 交付/验收 | 时间 |\n| --- | --- | --- | --- | --- |\n'
     text += '\n'.join('| ' + ' | '.join(row) + ' |' for row in PLAN_ROWS)
-    text += '\n\n双周起止与最终截止日期：**待组长确认**；不推算或回填虚构日期。\n'
+    text += '\n\n日历起止与最终截止未单独留存；按上表任务周次和收尾条件编排，不推算或回填日期。\n'
     text += '\n## 4. 统一互查标准\n\n| 编号 | 检查项 | 通过条件 |\n| --- | --- | --- |\n'
     text += '\n'.join('| ' + ' | '.join(row) + ' |' for row in REVIEW_CHECKS)
     text += '''
@@ -679,15 +716,17 @@ P1阻断项修复并验证后再验收；P2/P3明确整改或保留理由。工�
 
 ## 5. 当前闭环状态
 
-- SZX↔GCY：SZX集成核查完成；GCY对SZX的本人反向互查待确认。
-- YFY↔GZX：双方有单侧核查内容，仍需同步GZX互查表与YFY第7节空白，并由本人确认。
+- SZX↔GCY：组长确认双向互查已完成，2026-11-02补录；技术参照与未留存信息分别记录。
+- YFY↔GZX：组长确认双向互查已完成，YFY第7节、GZX第4节和总状态已同步。
 - WZY↔SY：WZY集成补修已验证；SY提交本轮材料后完成双方本人复核。
-- 不把留白改为“已通过”，不把个人分支旧代码误认为当前develop仍未修复。
+- [四方向补录登记](互查记录/2026-11-02-两组互查补录.md)：补录日期不等于实际互查日期，未留存的个人逐项意见不补造。
 
 ## 6. 当前进度与后续交付
 
-5人成果已合入develop；357项选定范围隔离测试通过并核对源码指纹。SY本轮成果、YFY统一基线、互查确认、双周日期与两份Word最终确认仍待收齐。
-编码规范已形成审阅稿，质量报告框架已填入确认数据。下一步优化按优先级/责任/验收条件列入报告第6节。
+5人成果已合入develop；已有357项选定范围隔离测试通过，源码内容已核对，历史文本指纹的LF/CRLF等价单列。
+SZX于2026-11-02补齐accounts相同配置/10文件扫描：Ruff9→8、Bandit0→0，保留原历史记录，不冒充YFY本人执行。
+两份Word已填入两组互查和补扫结果；当前待SY成果与WZY/SY互查后作最终汇总。
+收到SY后：核对代码/四份素材/原始证据→完成双向互查和必要复测→更新六人规模/注释/工具与优化计划→更新Word并校验分页→个人分支提交develop。
 个人分支提交到develop；全组完成后由组长负责main最终合并。本文不代签任何成员本人确认。
 '''
     path = WEEK / '第7—8周组会、双周计划与互查标准.md'
@@ -700,13 +739,24 @@ def main():
     supporting_markdown()
     quality_document()
     input_paths = [FACTS_PATH, Path(__file__), WEEK / '模板/编码规范.docx', WEEK / '模板/质量分析报告.docx',
-                   TEST_EVIDENCE, WEEK / 'tools/ruff.toml', WEEK / 'tools/bandit.yaml']
+                   TEST_EVIDENCE, WEEK / 'tools/ruff.toml', WEEK / 'tools/bandit.yaml',
+                   WEEK / FACTS['review_confirmation']['record'], ACCOUNT_SCAN_SUMMARY,
+                   WEEK / 'tools/supplement_accounts_baseline.py',
+                   WEEK / '成员成果/YFY/工具与验证记录.md', WEEK / '成员成果/GZX/互查记录.md',
+                   WEEK / '成员成果/GCY/工具与验证记录.md']
+    input_paths += sorted(path for path in ACCOUNT_SCAN_SUMMARY.parent.rglob('*.json')
+                          if path != ACCOUNT_SCAN_SUMMARY)
     manifest = {
         'compiled_date': FACTS['compiled_date'], 'source_ref': SOURCE_REF,
         'purpose': 'Course Word review drafts with confirmed content; not final group acceptance.',
         'meeting_confirmed': FACTS['meeting'], 'plan_dates': FACTS['plan'],
         'test_evidence': {'test_count': 357, 'failure_count': 0,
-                          'verified_code_commit': TEST_RECORD['verified_code_commit']},
+                          'verified_code_commit': TEST_RECORD['verified_code_commit'],
+                          'source_comparison': TEST_SOURCE_MATCHES,
+                          'comparison_rule': 'Exact bytes or UTF-8 LF/CRLF equivalence only; no semantic changes accepted.'},
+        'review_confirmation': FACTS['review_confirmation'],
+        'accounts_same_config_supplement': ACCOUNT_SCAN,
+        'accounts_source_comparison': ACCOUNT_SOURCE_MATCHES,
         'inputs_sha256': {path.relative_to(ROOT).as_posix(): digest(path) for path in input_paths},
         'inventory': INVENTORY, 'source_parse_warnings': PARSE_WARNINGS,
         'outputs': {kind: {'path': path.relative_to(ROOT).as_posix(), 'sha256': digest(path)}

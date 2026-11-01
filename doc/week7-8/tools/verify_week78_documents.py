@@ -54,7 +54,9 @@ def main():
         required = (['规范制定的主要目的', '规范的适用范围', '3  规范'] if index == 1 else [
             '待分析开源软件概述', '软件质量分析方法及工具', '人工分析代码的质量情况',
             '工具分析代码的质量情况', '小组分工', '下一步的改进计划',
-            '2026-10-23 19:00—19:30', '357', '【待确认】',
+            '2026-10-23 19:00—19:30', '357', '未单独留存',
+            'PR-SZX-GCY', 'PR-GCY-SZX', 'PR-YFY-GZX', 'PR-GZX-YFY',
+            facts['review_confirmation']['recorded_date'],
         ])
         for expected in required:
             assert expected in text, (path.name, expected)
