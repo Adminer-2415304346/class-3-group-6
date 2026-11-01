@@ -1,79 +1,32 @@
-from django.test import Client, RequestFactory, TestCase
-from django.utils import timezone
-from werobot.messages.messages import TextMessage
+"""SZX代SY：替换原先直接外呼/执行shell且只断言非空的两个测试。"""
 
-from accounts.models import BlogUser
-from blog.models import Category, Article
-from servermanager.api.commonapi import ChatGPT
-from .models import commands
-from .robot import MessageHandler, CommandHandler
-from .robot import search, category, recents
+import os
+from types import SimpleNamespace
+from unittest.mock import patch
+
+from django.test import TestCase
+
+from servermanager.api.commonapi import ChatGPT, CommandHandler
+from servermanager.models import commands
 
 
-# Create your tests here.
 class ServerManagerTest(TestCase):
-    def setUp(self):
-        self.client = Client()
-        self.factory = RequestFactory()
-
     def test_chat_gpt(self):
-        content = ChatGPT.chat("你好")
-        self.assertIsNotNone(content)
+        with (
+            patch.dict(os.environ, {"OPENAI_API_KEY": "unit-test-not-a-real-key"}),
+            patch("servermanager.api.commonapi.OpenAI") as factory,
+        ):
+            client = factory.return_value.__enter__.return_value
+            client.chat.completions.create.return_value = SimpleNamespace(
+                choices=[SimpleNamespace(message=SimpleNamespace(content=None))]
+            )
+            self.assertEqual(ChatGPT.chat("hello"), "服务器出错了")
+        client.chat.completions.create.assert_called_once()
 
     def test_validate_comment(self):
-        user = BlogUser.objects.create_superuser(
-            email="liangliangyy1@gmail.com",
-            username="liangliangyy1",
-            password="liangliangyy1")
-
-        self.client.login(username='liangliangyy1', password='liangliangyy1')
-
-        c = Category()
-        c.name = "categoryccc"
-        c.save()
-
-        article = Article()
-        article.title = "nicetitleccc"
-        article.body = "nicecontentccc"
-        article.author = user
-        article.category = c
-        article.type = 'a'
-        article.status = 'p'
-        article.save()
-        s = TextMessage([])
-        s.content = "nice"
-        rsp = search(s, None)
-        rsp = category(None, None)
-        self.assertIsNotNone(rsp)
-        rsp = recents(None, None)
-        self.assertTrue(rsp != '暂时还没有文章')
-
-        cmd = commands()
-        cmd.title = "test"
-        cmd.command = "ls"
-        cmd.describe = "test"
-        cmd.save()
-
-        cmdhandler = CommandHandler()
-        rsp = cmdhandler.run('test')
-        self.assertIsNotNone(rsp)
-        s.source = 'u'
-        s.content = 'test'
-        msghandler = MessageHandler(s, {})
-
-        # msghandler.userinfo.isPasswordSet = True
-        # msghandler.userinfo.isAdmin = True
-        msghandler.handler()
-        s.content = 'y'
-        msghandler.handler()
-        s.content = 'idcard:12321233'
-        msghandler.handler()
-        s.content = 'weather:上海'
-        msghandler.handler()
-        s.content = 'admin'
-        msghandler.handler()
-        s.content = '123'
-        msghandler.handler()
-
-        s.content = 'exit'
-        msghandler.handler()
+        commands.objects.create(title="fixture", command="not-a-real-command", describe="fixture")
+        with patch(
+            "subprocess.run", return_value=SimpleNamespace(returncode=0, stdout="mock output")
+        ) as run:
+            self.assertEqual(CommandHandler().run("fixture"), "mock output")
+        self.assertEqual(run.call_count, 1)

@@ -1,0 +1,276 @@
+{
+  "operator": "SZX (taking over SY)",
+  "source_ref": "99bbc93049f832e316d5c3be4eff73b2ba114179 + SZX working tree takeover",
+  "timestamp_utc": "2026-11-01T17:03:33.703326+00:00",
+  "python": "3.12.14",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "files": [
+    {
+      "path": "servermanager/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/admin.py",
+      "sha256": "faba0f3652a7356a87fa3b6ea8930ff94ed04c87ca80d5dda1d12e7f7442c757",
+      "physical_lines": 20,
+      "code_token_lines": 13,
+      "comment_lines": 2,
+      "signed_comment_lines": {
+        "SZX": 2,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 2,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 1
+    },
+    {
+      "path": "servermanager/api/__init__.py",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "physical_lines": 1,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/api/blogapi.py",
+      "sha256": "e777a7703ec051cd8ce6581afae3a47452e697438015147836ff18a8d12615a8",
+      "physical_lines": 31,
+      "code_token_lines": 20,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 4,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 4,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "servermanager/api/commonapi.py",
+      "sha256": "df5f655d60fc639c321233c664454a7f593507f39073e257917659d0b448a6b0",
+      "physical_lines": 71,
+      "code_token_lines": 54,
+      "comment_lines": 8,
+      "signed_comment_lines": {
+        "SZX": 7,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 7,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 4
+    },
+    {
+      "path": "servermanager/apps.py",
+      "sha256": "67ec58aeb48149ce6d4c1a0e72d417d4ed23a4088c4485b51162e84335a4581b",
+      "physical_lines": 6,
+      "code_token_lines": 3,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/MemcacheStorage.py",
+      "sha256": "96c768c27f4ed687035e0d32b2966662ca34748f485ec4080244140bfe35166e",
+      "physical_lines": 46,
+      "code_token_lines": 34,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 3,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 6
+    },
+    {
+      "path": "servermanager/models.py",
+      "sha256": "ccd03f6150b8e8aed982dba074b63907db79b09e6c6bd1d0619119942dde9eca",
+      "physical_lines": 35,
+      "code_token_lines": 24,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 3,
+        "GCY": 0
+      },
+      "classes": 4,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "servermanager/robot.py",
+      "sha256": "ab8f9e938182bc26ef333a53bfe1b21cb8cf69cacec7b15a417d4b861a1d3d52",
+      "physical_lines": 201,
+      "code_token_lines": 153,
+      "comment_lines": 12,
+      "signed_comment_lines": {
+        "SZX": 10,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 10,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 18
+    },
+    {
+      "path": "servermanager/urls.py",
+      "sha256": "2e4a8abf4f2897ffab99075e9946fae116ccdf7fe17cbf68ac50ca088dcf2bc5",
+      "physical_lines": 13,
+      "code_token_lines": 7,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/views.py",
+      "sha256": "ac62713eb0613dfce2d48060e38c154c296bfef7df9b48ced7b01116e4d148f9",
+      "physical_lines": 1,
+      "code_token_lines": 0,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SY\\原始工具结果\\2026-11-02-szx-takeover\\after-initial\\ruff.json",
+        "servermanager/__init__.py",
+        "servermanager/admin.py",
+        "servermanager/api/__init__.py",
+        "servermanager/api/blogapi.py",
+        "servermanager/api/commonapi.py",
+        "servermanager/apps.py",
+        "servermanager/MemcacheStorage.py",
+        "servermanager/models.py",
+        "servermanager/robot.py",
+        "servermanager/urls.py",
+        "servermanager/views.py"
+      ],
+      "cwd": "D:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog",
+      "returncode": 1
+    },
+    "bandit": {
+      "command": [
+        "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\成员成果\\SY\\原始工具结果\\2026-11-02-szx-takeover\\after-initial\\bandit.json",
+        "servermanager/__init__.py",
+        "servermanager/admin.py",
+        "servermanager/api/__init__.py",
+        "servermanager/api/blogapi.py",
+        "servermanager/api/commonapi.py",
+        "servermanager/apps.py",
+        "servermanager/MemcacheStorage.py",
+        "servermanager/models.py",
+        "servermanager/robot.py",
+        "servermanager/urls.py",
+        "servermanager/views.py"
+      ],
+      "cwd": "D:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog",
+      "returncode": 1
+    }
+  },
+  "raw_tool_json_sha256": {
+    "ruff": "d78d1a2218e23318427d86f2b018755cfe039a01da74d3e85c4b1446f6e0a18b",
+    "bandit": "819bfdada135b4f3221320d3ecf7687494711bedca0a1d7ef332384f205d2df8"
+  },
+  "summary": {
+    "files": 11,
+    "ruff": 1,
+    "bandit": 2,
+    "ruff_rules": {
+      "E501": 1
+    },
+    "bandit_rules": {
+      "B404": 1,
+      "B602": 1
+    },
+    "bandit_errors": 0
+  }
+}
