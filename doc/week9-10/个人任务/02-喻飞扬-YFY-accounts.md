@@ -44,7 +44,7 @@ YFY负责账号模板及launcherAccount.js，其他人不同时修改该文件�
 
 ## 4. 统一接口与配置（实施前遵守）
 
-[共享配置与接口约定v1.0](../共享配置与接口约定.md)已由SZX统一制定；本任务单可单独转发，完整契约从同步后的仓库取得。公共settings、总路由和共享信号仅SZX集成。
+[共享配置与接口约定v1.1](../共享配置与接口约定.md)已由SZX统一制定；本任务单可单独转发，完整契约从同步后的仓库取得。公共settings、总路由和共享信号仅SZX集成。
 
 ```python
 from djangoblog.maintenance_config import get_maintenance_option

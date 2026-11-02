@@ -1,0 +1,23 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+test_camera_orientation_is_applied_before_metadata_removal (blog.test_week910_functional.ImageUploadFunctionalTests.test_camera_orientation_is_applied_before_metadata_removal) ... FAIL
+
+======================================================================
+FAIL: test_camera_orientation_is_applied_before_metadata_removal (blog.test_week910_functional.ImageUploadFunctionalTests.test_camera_orientation_is_applied_before_metadata_removal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 276, in test_camera_orientation_is_applied_before_metadata_removal
+    self.assertEqual(image.size, (8, 12))
+AssertionError: Tuples differ: (12, 8) != (8, 12)
+
+First differing element 0:
+12
+8
+
+- (12, 8)
++ (8, 12)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.039s
+
+FAILED (failures=1)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

@@ -23,5 +23,7 @@
     "doc/week7-8/tools/run_isolated_tests.py": "4eacf27459721ab6f45d47db2abfe3789fc03d021740a8e69d4e42e9b17e182c"
   },
   "video_owner": "SZX统一录制；成员提供脚本/样本，不要求个人视频",
-  "business_status": "待各成员实施；400项仅为原390回归与公共配置新增10项，不代表本轮业务功能已完成"
+  "business_status": "待各成员实施；400项仅为原390回归与公共配置新增10项，不代表本轮业务功能已完成",
+  "phase": "公共准备阶段历史验证，400项",
+  "latest_business_record": "成员成果/SZX/证据/verification.json"
 }

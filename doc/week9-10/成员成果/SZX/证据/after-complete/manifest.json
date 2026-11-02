@@ -1,0 +1,53 @@
+{
+  "command": [
+    "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "--result-json",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week9-10\\成员成果\\SZX\\证据\\after-complete\\tests.json",
+    "djangoblog.test_week78_gcy_quality",
+    "comments.test_reaction_snapshot",
+    "blog.test_comment_lifecycle",
+    "blog.test_week78_quality",
+    "blog.test_views",
+    "blog.test_templatetags",
+    "blog.test_context_processors",
+    "blog.test_middleware",
+    "blog.test_brand_assets",
+    "blog.test_article_business_logic",
+    "blog.test_comment_interfaces",
+    "accounts.test_auth_hardening",
+    "accounts.tests",
+    "accounts.test_user_business_logic",
+    "accounts.test_admin",
+    "accounts.test_login_page",
+    "accounts.test_account_pages",
+    "oauth.test_oauth_business_logic",
+    "comments.tests",
+    "comments.test_views",
+    "comments.test_comment_business_logic",
+    "comments.test_quality_r45",
+    "djangoblog.tests",
+    "djangoblog.test_plugins",
+    "servermanager.tests",
+    "servermanager.test_week78_takeover",
+    "djangoblog.test_week910_configuration",
+    "blog.test_week910_functional",
+    "blog.tests.ArticleTest.test_image"
+  ],
+  "returncode": 0,
+  "tests": {
+    "tests_run": 433,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 49,
+      "comments": 50,
+      "blog": 191,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "test_ast_sha256": "64dd1f89bca48ea5c4cd0fe9c805b52ef18de7e9858b75ea97a5ac83c1fe7d8f"
+}

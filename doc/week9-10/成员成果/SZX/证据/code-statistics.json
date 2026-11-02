@@ -1,0 +1,50 @@
+{
+  "base_commit": "4cadfa4bbba1ac5144320e09f79149d655c27da6",
+  "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
+  "files": [
+    {
+      "path": "src/DjangoBlog/blog/models.py",
+      "category": "业务Python",
+      "added": 13,
+      "deleted": 7
+    },
+    {
+      "path": "src/DjangoBlog/blog/test_week910_functional.py",
+      "category": "测试",
+      "added": 299,
+      "deleted": 0
+    },
+    {
+      "path": "src/DjangoBlog/blog/tests.py",
+      "category": "测试",
+      "added": 26,
+      "deleted": 29
+    },
+    {
+      "path": "src/DjangoBlog/blog/uploads.py",
+      "category": "业务Python",
+      "added": 87,
+      "deleted": 0
+    },
+    {
+      "path": "src/DjangoBlog/blog/urls.py",
+      "category": "业务Python",
+      "added": 1,
+      "deleted": 0
+    },
+    {
+      "path": "src/DjangoBlog/blog/views.py",
+      "category": "业务Python",
+      "added": 58,
+      "deleted": 60
+    },
+    {
+      "path": "src/DjangoBlog/templates/blog/image_upload.html",
+      "category": "业务模板/JS",
+      "added": 68,
+      "deleted": 0
+    }
+  ],
+  "added": 552,
+  "deleted": 96
+}

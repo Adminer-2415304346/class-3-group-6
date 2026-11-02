@@ -2,15 +2,15 @@
 
 收件人：石兆翔；学号：2415304346；个人分支：`szx_branch`；复核搭档：GCY。
 范围：`src/DjangoBlog/blog/`及下列指定关联文件。基线：`main@52b783b4d8e6670b8d22638cf2fdfc39592bf4ad`。
-状态：任务已分配，业务优化待本人实施/验证；日期与结果按实际填写。第9周完成主要实现，第10周完成全App功能测试、联调、报告和MP4素材；具体日历截止按组长通知。
+状态更新（2026-11-02）：B91/B92已实现，代码baf8998，433项相关回归及本地HTTP/浏览器验证通过；B93选做未实施，GCY独立复核待确认。[实现与证据](../成员成果/SZX/实现说明.md)。第9周完成主要实现，第10周完成全App功能测试、联调、报告和MP4素材；具体日历截止按组长通知。
 
-## 1. 本轮目标与当前事实
+## 1. 本轮目标与基线事实
 
 先按第7节同步并保存本人统计起点；先采集基线，再开始业务实现。
 
 文章浏览量原子更新；图片上传权限与文件校验；选做分类环检测。
 
-Article.viewed()仍读取实例views后加一并save；fileupload仍使用固定sign、csrf_exempt及客户端字段名推断图片。上轮的草稿详情、清缓存权限和HTML转义已修复，保持其回归。
+实现前基线：Article.viewed()读取实例views后加一并save；fileupload仍使用固定sign、csrf_exempt及客户端字段名推断图片。上轮的草稿详情、清缓存权限和HTML转义已修复，保持其回归。
 
 ## 2. 文件与职责边界
 
@@ -44,7 +44,7 @@ Category增加自指/多层环校验，后台表单回显错误；分类树遍�
 
 ## 4. 统一接口与配置（实施前遵守）
 
-[共享配置与接口约定v1.0](../共享配置与接口约定.md)已由SZX统一制定；本任务单可单独转发，完整契约从同步后的仓库取得。公共settings、总路由和共享信号仅SZX集成。
+[共享配置与接口约定v1.1](../共享配置与接口约定.md)已由SZX统一制定；本任务单可单独转发，完整契约从同步后的仓库取得。公共settings、总路由和共享信号仅SZX集成。
 
 ```python
 from djangoblog.maintenance_config import get_maintenance_option
@@ -52,7 +52,7 @@ from djangoblog.maintenance_config import get_maintenance_option
 options = get_maintenance_option("UPLOAD_MAX_BYTES")
 ```
 
-入口已经提供，业务限制仍需本人接入。修改默认阈值/参数/返回值前交SZX更新统一约定；成员自己的演示配置/测试可用MAINTENANCE_OPTIONS部分覆盖。缓存键使用week910:<app>:<purpose>:<摘要>，敏感标识不明文写入键/日志。
+入口及B92配置接入已实现；下列任务要求保留为验收依据。修改默认阈值/参数/返回值前交SZX更新统一约定；成员自己的演示配置/测试可用MAINTENANCE_OPTIONS部分覆盖。缓存键使用week910:<app>:<purpose>:<摘要>，敏感标识不明文写入键/日志。
 
 ## 5. 必测功能清单
 
