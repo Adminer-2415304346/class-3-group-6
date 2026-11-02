@@ -1,0 +1,9 @@
+{
+  "members": 6,
+  "required_tasks": 12,
+  "optional_tasks": 6,
+  "shared_config_keys": 17,
+  "links": "passed",
+  "task_fields": "passed",
+  "task_status": "assigned, not business completion"
+}
