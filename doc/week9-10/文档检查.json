@@ -16,5 +16,19 @@
   "shared_contract": "1.1",
   "links": "passed",
   "source_fingerprints": "passed",
-  "tests": 433
+  "tests": 433,
+  "delivery_responsibilities": {
+    "checked_date": "2026-11-02",
+    "member_task_documents_checked": 5,
+    "leader_recording_owner": "SZX 石兆翔",
+    "required_member_documents": 3,
+    "reproduction_information_in": "实现说明.md",
+    "separate_member_demonstration_script_required": false,
+    "roles_consistent": "passed",
+    "local_markdown_links_checked": 41,
+    "broken_local_markdown_links": 0,
+    "assignments_and_completion_statuses": "unchanged",
+    "source_files_changed": 0,
+    "tests_note": "433项是此前业务实现验证结果；本轮只修订交付分工文档，未重新运行业务测试。"
+  }
 }
