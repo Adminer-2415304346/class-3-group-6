@@ -1,0 +1,22 @@
+{
+  "base_commit": "4cadfa4bbba1ac5144320e09f79149d655c27da6",
+  "command": [
+    "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week910-blog-baseline-t0hwirbd\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "--result-json",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week9-10\\成员成果\\SZX\\证据\\before-final\\tests.json",
+    "blog.test_week910_functional"
+  ],
+  "cwd": "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\week910-blog-baseline-t0hwirbd",
+  "returncode": 1,
+  "result": {
+    "tests_run": 31,
+    "failures": 27,
+    "errors": 3,
+    "skipped": 0,
+    "per_app": {
+      "blog": 31
+    }
+  },
+  "test_ast_sha256": "f7ca14c1f238ca8561d21b9f2ac43d13fff47e9550ee72febf0163532b018c96"
+}

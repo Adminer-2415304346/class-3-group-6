@@ -1,0 +1,9 @@
+{
+  "tests_run": 31,
+  "failures": 27,
+  "errors": 3,
+  "skipped": 0,
+  "per_app": {
+    "blog": 31
+  }
+}

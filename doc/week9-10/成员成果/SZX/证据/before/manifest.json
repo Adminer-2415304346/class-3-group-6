@@ -1,0 +1,26 @@
+{
+  "base_commit": "4cadfa4bbba1ac5144320e09f79149d655c27da6",
+  "command": [
+    "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "--result-json",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week9-10\\成员成果\\SZX\\证据\\before\\tests.json",
+    "blog.test_week910_functional"
+  ],
+  "returncode": 1,
+  "result": {
+    "tests_run": 31,
+    "failures": 27,
+    "errors": 3,
+    "skipped": 0,
+    "per_app": {
+      "blog": 31
+    }
+  },
+  "test_ast_sha256": "7ba19aaae7462ab78ac6c8fdc4144f9a2092977d4ffc7a83bb931b8fb87c4fe7",
+  "production_sha256": {
+    "src/DjangoBlog/blog/models.py": "6609a5f70f519aa90de58ce8dd3ea5bbc2a13ffed0f47b2a5702a8175963185e",
+    "src/DjangoBlog/blog/views.py": "b324fe3844d02b06cb17df14e8d51229cd524d104f0acf68c11226ff15924a82",
+    "src/DjangoBlog/blog/urls.py": "122305a179a0966b2861ad2fab6e49a6375f1398c0a405e806946571ef7bcb0c"
+  }
+}

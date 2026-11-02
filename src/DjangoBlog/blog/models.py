@@ -5,16 +5,16 @@ from abc import abstractmethod
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.db import models, router
+from django.db.models import F
 from django.urls import reverse
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from mdeditor.fields import MDTextField
 from uuslug import slugify
 
-from djangoblog.utils import cache_decorator, cache
-from djangoblog.utils import get_current_site
-from djangoblog.constants import CacheTimeout, CacheKey
+from djangoblog.constants import CacheKey, CacheTimeout
+from djangoblog.utils import cache, cache_decorator, get_current_site
 
 logger = logging.getLogger(__name__)
 
@@ -155,9 +155,15 @@ class Article(BaseModel):
         super().save(*args, **kwargs)
 
     def viewed(self):
-        # SZX（第7—8周）：读取后递增再写回存在并发丢失风险，本轮未改计数策略。
-        self.views += 1
-        self.save(update_fields=['views'])
+        # SZX（第9—10周）：数据库原子递增；只刷新计数，保留实例其他未保存改动。
+        if self.pk is None or self._state.adding:
+            raise ValueError('An article must be saved before recording views')
+        using = router.db_for_write(type(self), instance=self)
+        updated = type(self)._base_manager.using(using).filter(pk=self.pk).update(
+            views=F('views') + 1)
+        if not updated:
+            raise type(self).DoesNotExist('The article no longer exists')
+        self.refresh_from_db(using=using, fields=['views'])
 
     # SZX（第7—8周）：返回启用评论的 QuerySet；递归模板依赖 filter，不能改成列表。
     def comment_list(self):

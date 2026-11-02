@@ -2,8 +2,19 @@
   "members": 6,
   "required_tasks": 12,
   "optional_tasks": 6,
-  "shared_config_keys": 17,
+  "completed_by_executor": [
+    [
+      "SZX",
+      "B91"
+    ],
+    [
+      "SZX",
+      "B92"
+    ]
+  ],
+  "independent_review": "待GCY本人核查SZX版本",
+  "shared_contract": "1.1",
   "links": "passed",
-  "task_fields": "passed",
-  "task_status": "assigned, not business completion"
+  "source_fingerprints": "passed",
+  "tests": 433
 }

@@ -1,0 +1,744 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Week910 counter_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_counter_refresh_preserves_unsaved_content (blog.test_week910_functional.AtomicArticleViewsTests.test_counter_refresh_preserves_unsaved_content) ... ok
+test_deleted_row_is_not_silently_recreated (blog.test_week910_functional.AtomicArticleViewsTests.test_deleted_row_is_not_silently_recreated) ... ok
+test_http_detail_updates_database_and_render_context_once (blog.test_week910_functional.AtomicArticleViewsTests.test_http_detail_updates_database_and_render_context_once) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_instance_keeps_a_plain_integer (blog.test_week910_functional.AtomicArticleViewsTests.test_instance_keeps_a_plain_integer) ... ok
+test_later_save_does_not_reapply_the_increment (blog.test_week910_functional.AtomicArticleViewsTests.test_later_save_does_not_reapply_the_increment) ... ok
+test_two_stale_instances_both_increment_the_database (blog.test_week910_functional.AtomicArticleViewsTests.test_two_stale_instances_both_increment_the_database) ... ok
+test_unsaved_instance_cannot_increment_an_existing_id (blog.test_week910_functional.AtomicArticleViewsTests.test_unsaved_instance_cannot_increment_an_existing_id) ... ok
+test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='PNG') ... ERROR
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='JPEG') ... ERROR
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='WEBP') ... ERROR
+test_additional_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_additional_file_field_is_rejected) ... Bad Request: /upload
+ok
+test_anonymous_user_is_forbidden_even_with_legacy_sign (blog.test_week910_functional.ImageUploadFunctionalTests.test_anonymous_user_is_forbidden_even_with_legacy_sign) ... Forbidden (CSRF cookie not set.): /upload
+ok
+test_client_extension_and_mime_do_not_choose_storage_format (blog.test_week910_functional.ImageUploadFunctionalTests.test_client_extension_and_mime_do_not_choose_storage_format) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR
+test_configuration_controls_actual_format_allowlist (blog.test_week910_functional.ImageUploadFunctionalTests.test_configuration_controls_actual_format_allowlist) ... Bad Request: /upload
+ok
+test_disallowed_decodable_format_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_disallowed_decodable_format_is_rejected) ... Bad Request: /upload
+ok
+test_empty_file_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_empty_file_is_rejected) ... Bad Request: /upload
+ok
+test_exact_byte_limit_is_accepted (blog.test_week910_functional.ImageUploadFunctionalTests.test_exact_byte_limit_is_accepted) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR
+test_inactive_staff_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_inactive_staff_is_forbidden) ... Forbidden: /upload
+ok
+test_missing_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_missing_file_field_is_rejected) ... Bad Request: /upload
+ok
+test_multiple_files_are_rejected_before_saving (blog.test_week910_functional.ImageUploadFunctionalTests.test_multiple_files_are_rejected_before_saving) ... Bad Request: /upload
+ok
+test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) ... Method Not Allowed (GET): /upload
+Method Not Allowed (PUT): /upload
+Method Not Allowed (DELETE): /upload
+Method Not Allowed (HEAD): /upload
+Method Not Allowed (OPTIONS): /upload
+ok
+test_oversize_input_is_rejected_before_decode (blog.test_week910_functional.ImageUploadFunctionalTests.test_oversize_input_is_rejected_before_decode) ... Bad Request: /upload
+ok
+test_pixel_limit_is_checked (blog.test_week910_functional.ImageUploadFunctionalTests.test_pixel_limit_is_checked) ... Bad Request: /upload
+ok
+test_regular_user_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_regular_user_is_forbidden) ... Forbidden: /upload
+ok
+test_same_client_filename_does_not_overwrite_existing_file (blog.test_week910_functional.ImageUploadFunctionalTests.test_same_client_filename_does_not_overwrite_existing_file) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR
+test_script_renamed_to_png_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_script_renamed_to_png_is_rejected) ... Bad Request: /upload
+ok
+test_staff_can_open_upload_page_with_csrf_token (blog.test_week910_functional.ImageUploadFunctionalTests.test_staff_can_open_upload_page_with_csrf_token) ... ok
+test_staff_without_csrf_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_staff_without_csrf_is_forbidden) ... Forbidden (CSRF cookie not set.): /upload
+ok
+test_storage_failure_returns_recoverable_error (blog.test_week910_functional.ImageUploadFunctionalTests.test_storage_failure_returns_recoverable_error) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR
+test_trailing_payload_is_not_stored (blog.test_week910_functional.ImageUploadFunctionalTests.test_trailing_payload_is_not_stored) ... ⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Internal Server Error: /upload
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR
+test_truncated_image_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_truncated_image_is_rejected) ... Bad Request: /upload
+ok
+test_upload_page_requires_staff (blog.test_week910_functional.ImageUploadFunctionalTests.test_upload_page_requires_staff) ... Forbidden: /upload-image/
+ok
+test_wrong_field_name_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_wrong_field_name_is_rejected) ... Bad Request: /upload
+ok
+
+======================================================================
+ERROR: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='PNG')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 174, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    response = self.post(self.uploaded(image_bytes(image_format)))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='JPEG')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 174, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    response = self.post(self.uploaded(image_bytes(image_format)))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='WEBP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 174, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    response = self.post(self.uploaded(image_bytes(image_format)))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_client_extension_and_mime_do_not_choose_storage_format (blog.test_week910_functional.ImageUploadFunctionalTests.test_client_extension_and_mime_do_not_choose_storage_format)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 225, in test_client_extension_and_mime_do_not_choose_storage_format
+    response = self.post(self.uploaded(name="../../payload.html", content_type="text/html"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_exact_byte_limit_is_accepted (blog.test_week910_functional.ImageUploadFunctionalTests.test_exact_byte_limit_is_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 249, in test_exact_byte_limit_is_accepted
+    self.assertEqual(self.post(self.uploaded(data)).status_code, 200)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_same_client_filename_does_not_overwrite_existing_file (blog.test_week910_functional.ImageUploadFunctionalTests.test_same_client_filename_does_not_overwrite_existing_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 234, in test_same_client_filename_does_not_overwrite_existing_file
+    first = self.post().json()["data"]["name"]
+            ^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_storage_failure_returns_recoverable_error (blog.test_week910_functional.ImageUploadFunctionalTests.test_storage_failure_returns_recoverable_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 267, in test_storage_failure_returns_recoverable_error
+    response = self.post()
+               ^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+======================================================================
+ERROR: test_trailing_payload_is_not_stored (blog.test_week910_functional.ImageUploadFunctionalTests.test_trailing_payload_is_not_stored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 260, in test_trailing_payload_is_not_stored
+    response = self.post(self.uploaded(image_bytes() + b"<script>untrusted</script>"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\test_week910_functional.py", line 124, in post
+    return self.client.post(
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1156, in post
+    response = super().post(
+               ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 499, in post
+    return self.generic(
+           ^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 671, in generic
+    return self.request(**r)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 1090, in request
+    self.check_exception(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 805, in check_exception
+    raise exc_value
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\views\decorators\http.py", line 64, in inner
+    return func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\views.py", line 398, in fileupload
+    data = save_uploaded_image(files[0])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\软件工程方法学\class-3-group-6\src\DjangoBlog\blog\uploads.py", line 69, in save_uploaded_image
+    day = timezone.localdate().strftime("%Y/%m/%d")
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 197, in localdate
+    return localtime(value, timezone).date()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\utils\timezone.py", line 183, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.434s
+
+FAILED (errors=8)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

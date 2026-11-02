@@ -1,21 +1,27 @@
-import os
+import io
+import tempfile
 
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.management import call_command
 from django.core.paginator import Paginator
 from django.templatetags.static import static
-from django.test import Client, RequestFactory, TestCase
+from django.test import Client, RequestFactory, TestCase, override_settings
 from django.urls import reverse
 from django.utils import timezone
+from PIL import Image
 
 from accounts.models import BlogUser
 from blog.forms import BlogSearchForm
-from blog.models import Article, Category, Tag, SideBar, Links
-from blog.templatetags.blog_tags import load_pagination_info, load_articletags, highlight_search_term, highlight_content
-from djangoblog.utils import get_current_site, get_sha256
-from oauth.models import OAuthUser, OAuthConfig
-
+from blog.models import Article, Category, Links, SideBar, Tag
+from blog.templatetags.blog_tags import (
+    highlight_content,
+    highlight_search_term,
+    load_articletags,
+    load_pagination_info,
+)
+from djangoblog.utils import get_current_site
+from oauth.models import OAuthConfig, OAuthUser
 
 # Create your tests here.
 
@@ -125,7 +131,7 @@ class ArticleTest(TestCase):
         from djangoblog.spider_notify import SpiderNotify
         SpiderNotify.baidu_notify([article.get_full_url()])
 
-        from blog.templatetags.blog_tags import gravatar_url, gravatar
+        from blog.templatetags.blog_tags import gravatar, gravatar_url
         u = gravatar_url('liangliangyy@gmail.com')
         u = gravatar('liangliangyy@gmail.com')
 
@@ -160,27 +166,18 @@ class ArticleTest(TestCase):
                 self.assertEqual(response.status_code, 200)
 
     def test_image(self):
-        import requests
-        rsp = requests.get(
-            'https://www.python.org/static/img/python-logo.png')
-        imagepath = os.path.join(settings.BASE_DIR, 'python.png')
-        with open(imagepath, 'wb') as file:
-            file.write(rsp.content)
-        rsp = self.client.post('/upload')
-        self.assertEqual(rsp.status_code, 403)
-        sign = get_sha256(get_sha256(settings.SECRET_KEY))
-        with open(imagepath, 'rb') as file:
-            imgfile = SimpleUploadedFile(
-                'python.png', file.read(), content_type='image/jpg')
-            form_data = {'python.png': imgfile}
-            rsp = self.client.post(
-                '/upload?sign=' + sign, form_data, follow=True)
-            self.assertEqual(rsp.status_code, 200)
-        os.remove(imagepath)
-        from djangoblog.utils import save_user_avatar, send_email
-        send_email(['qq@qq.com'], 'testTitle', 'testContent')
-        save_user_avatar(
-            'https://www.python.org/static/img/python-logo.png')
+        # SZX（第9—10周）：上传测试使用本地图片/临时媒体目录和有效staff，不再外呼。
+        self.assertEqual(self.client.post(reverse('blog:upload')).status_code, 403)
+        staff = BlogUser.objects.create_user(
+            username='legacy-upload-staff', is_staff=True, is_active=True)
+        self.client.force_login(staff)
+        with tempfile.TemporaryDirectory() as media, override_settings(MEDIA_ROOT=media):
+            with Image.new('RGB', (8, 8), 'green') as image, io.BytesIO() as output:
+                image.save(output, format='PNG')
+                imgfile = SimpleUploadedFile('sample.png', output.getvalue(), 'image/png')
+            response = self.client.post(reverse('blog:upload'), {'file': imgfile})
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.json()['data']['format'], 'PNG')
 
     def test_errorpage(self):
         rsp = self.client.get('/eee')
