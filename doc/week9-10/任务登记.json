@@ -1,0 +1,217 @@
+{
+  "version": "1.0",
+  "assigned_date": "2026-11-02",
+  "baseline_commit": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad",
+  "baseline_branch": "main",
+  "status": "assigned; business features not yet implemented",
+  "shared_contract": "共享配置与接口约定.md",
+  "shared_owner": "SZX",
+  "members": [
+    {
+      "name": "石兆翔",
+      "tag": "SZX",
+      "id": "2415304346",
+      "app": "blog",
+      "branch": "szx_branch",
+      "peer": "GCY",
+      "summary": "文章浏览量原子更新；图片上传权限与文件校验；选做分类环检测。",
+      "document": "个人任务/01-石兆翔-SZX-blog.md",
+      "required_tasks": [
+        {
+          "id": "B91",
+          "title": "浏览量原子更新",
+          "status": "待实施"
+        },
+        {
+          "id": "B92",
+          "title": "可用的受控图片上传",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "B93",
+        "title": "分类防环与可观察错误",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "blog.test_comment_lifecycle",
+        "blog.test_week78_quality",
+        "blog.test_views",
+        "blog.test_templatetags",
+        "blog.test_context_processors",
+        "blog.test_middleware",
+        "blog.test_brand_assets",
+        "blog.test_article_business_logic",
+        "blog.test_comment_interfaces"
+      ],
+      "new_test_label": "blog.test_week910_functional"
+    },
+    {
+      "name": "喻飞扬",
+      "tag": "YFY",
+      "id": "2415304347",
+      "app": "accounts",
+      "branch": "yfy_branch",
+      "peer": "GZX",
+      "summary": "找回密码验证码服务端冷却与前端同步；错误次数和锁定；选做激活链接时效/重发。",
+      "document": "个人任务/02-喻飞扬-YFY-accounts.md",
+      "required_tasks": [
+        {
+          "id": "A91",
+          "title": "服务端验证码发送冷却",
+          "status": "待实施"
+        },
+        {
+          "id": "A92",
+          "title": "验证码失败次数和挑战锁定",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "A93",
+        "title": "激活链接期限与重新发送",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "accounts.test_auth_hardening",
+        "accounts.tests",
+        "accounts.test_user_business_logic",
+        "accounts.test_admin",
+        "accounts.test_login_page",
+        "accounts.test_account_pages"
+      ],
+      "new_test_label": "accounts.test_week910_functional"
+    },
+    {
+      "name": "王子扬",
+      "tag": "WZY",
+      "id": "2415304348",
+      "app": "comments",
+      "branch": "wzy_branch",
+      "peer": "SY",
+      "summary": "评论正文与公开文章校验；发布限频/防重复；选做评论树查询优化。",
+      "document": "个人任务/03-王子扬-WZY-comments.md",
+      "required_tasks": [
+        {
+          "id": "C91",
+          "title": "评论输入和目标文章校验",
+          "status": "待实施"
+        },
+        {
+          "id": "C92",
+          "title": "评论限频和重复保护",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "C93",
+        "title": "评论树查询优化",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "comments.test_reaction_snapshot",
+        "comments.tests",
+        "comments.test_views",
+        "comments.test_comment_business_logic",
+        "comments.test_quality_r45"
+      ],
+      "new_test_label": "comments.test_week910_functional"
+    },
+    {
+      "name": "顾梓鑫",
+      "tag": "GZX",
+      "id": "2415304345",
+      "app": "oauth",
+      "branch": "gzx_branch",
+      "peer": "YFY",
+      "summary": "OAuth state校验与消费；受控邮箱绑定；选做密钥显示/敏感日志最小化。",
+      "document": "个人任务/04-顾梓鑫-GZX-oauth.md",
+      "required_tasks": [
+        {
+          "id": "O91",
+          "title": "state绑定会话并按期一次消费",
+          "status": "待实施"
+        },
+        {
+          "id": "O92",
+          "title": "邮箱归属、绑定期限与一次确认",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "O93",
+        "title": "后台与日志敏感数据最小化",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "oauth.test_oauth_business_logic"
+      ],
+      "new_test_label": "oauth.test_week910_functional"
+    },
+    {
+      "name": "宋洋",
+      "tag": "SY",
+      "id": "2415304330",
+      "app": "servermanager",
+      "branch": "sy",
+      "peer": "WZY",
+      "summary": "固定动作允许列表替代shell文本；管理员/确认票据过期和单次消费；选做本地机器人演示命令。",
+      "document": "个人任务/05-宋洋-SY-servermanager.md",
+      "required_tasks": [
+        {
+          "id": "S91",
+          "title": "固定动作允许列表",
+          "status": "待实施"
+        },
+        {
+          "id": "S92",
+          "title": "管理员期限及命令确认票据",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "S93",
+        "title": "本地机器人消息链路演示工具",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "servermanager.tests",
+        "servermanager.test_week78_takeover"
+      ],
+      "new_test_label": "servermanager.test_week910_functional"
+    },
+    {
+      "name": "郭曹钰",
+      "tag": "GCY",
+      "id": "2415304331",
+      "app": "djangoblog",
+      "branch": "gcy_branch",
+      "peer": "SZX",
+      "summary": "独立本地演示配置与运行说明；可执行环境诊断；选做幂等演示数据初始化。",
+      "document": "个人任务/06-郭曹钰-GCY-djangoblog.md",
+      "required_tasks": [
+        {
+          "id": "D91",
+          "title": "可重复启动的独立本地演示环境",
+          "status": "待实施"
+        },
+        {
+          "id": "D92",
+          "title": "本地环境诊断命令",
+          "status": "待实施"
+        }
+      ],
+      "optional_task": {
+        "id": "D93",
+        "title": "幂等演示数据初始化",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "djangoblog.test_week78_gcy_quality",
+        "djangoblog.tests",
+        "djangoblog.test_plugins"
+      ],
+      "new_test_label": "djangoblog.test_week910_functional"
+    }
+  ]
+}
