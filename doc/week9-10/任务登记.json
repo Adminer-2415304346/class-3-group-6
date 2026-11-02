@@ -161,7 +161,7 @@
       "app": "servermanager",
       "branch": "sy",
       "peer": "WZY",
-      "summary": "固定动作允许列表替代shell文本；管理员/确认票据过期和单次消费；选做本地机器人演示命令。",
+      "summary": "固定动作允许列表替代shell文本；管理员/确认票据过期和单次消费；选做本地机器人消息链路测试命令。",
       "document": "个人任务/05-宋洋-SY-servermanager.md",
       "required_tasks": [
         {
@@ -177,7 +177,7 @@
       ],
       "optional_task": {
         "id": "S93",
-        "title": "本地机器人消息链路演示工具",
+        "title": "本地机器人消息链路测试工具",
         "status": "选做待实施"
       },
       "baseline_test_labels": [
@@ -193,12 +193,12 @@
       "app": "djangoblog",
       "branch": "gcy_branch",
       "peer": "SZX",
-      "summary": "独立本地演示配置与运行说明；可执行环境诊断；选做幂等演示数据初始化。",
+      "summary": "独立本地运行配置与运行说明；可执行环境诊断；选做幂等样例数据初始化。",
       "document": "个人任务/06-郭曹钰-GCY-djangoblog.md",
       "required_tasks": [
         {
           "id": "D91",
-          "title": "可重复启动的独立本地演示环境",
+          "title": "可重复启动的独立本地运行环境",
           "status": "待实施"
         },
         {
@@ -209,7 +209,7 @@
       ],
       "optional_task": {
         "id": "D93",
-        "title": "幂等演示数据初始化",
+        "title": "幂等样例数据初始化",
         "status": "选做待实施"
       },
       "baseline_test_labels": [
@@ -221,5 +221,28 @@
     }
   ],
   "shared_contract_version": "1.1",
-  "updated_date": "2026-11-02"
+  "updated_date": "2026-11-02",
+  "delivery_responsibilities": {
+    "recording_owner": "SZX 石兆翔",
+    "recording_work": [
+      "统一演示",
+      "讲解",
+      "录制",
+      "剪辑"
+    ],
+    "member_work": [
+      "功能实现",
+      "功能测试",
+      "技术交接"
+    ],
+    "required_member_documents": [
+      "实现说明.md",
+      "功能测试记录.md",
+      "代码变更统计.md"
+    ],
+    "reproduction_information_in": "实现说明.md",
+    "individual_demonstration_required": false,
+    "individual_video_required": false,
+    "individual_narration_or_shooting_script_required": false
+  }
 }
