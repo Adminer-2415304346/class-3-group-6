@@ -1,0 +1,38 @@
+YFY 第9—10周 accounts A91/A92 本地整站 HTTP 冒烟记录
+====================================================
+
+执行时间：2026-11-07 16:2x（Asia/Shanghai）
+执行方式：临时配置（不纳入仓库）+ 临时 SQLite + 文件邮件后端
+服务器：python src/DjangoBlog/manage.py runserver 127.0.0.1:8010 --noreload
+说明：本项为本地整站 HTTP 冒烟，不是 settings_demo 验证；仓库无 settings_demo，
+      且当前环境无 Node/npm 与前端构建产物，因此未做真实浏览器视觉验证。
+
+临时环境（位于 %TEMP%\week910-smoke，未提交仓库）：
+- smoke_settings.py：继承 djangoblog.settings，改用 sqlite3(smoke.sqlite3)
+  与 django.core.mail.backends.filebased.EmailBackend，DEBUG=True
+- 已执行 migrate，创建 Site 与用户 smokeuser / smoke@example.com（旧密码 OldPass!2024）
+- smoke_client.py：带 CookieJar 与禁用自动重定向的 HTTP 客户端
+
+执行命令：
+  python C:\Users\YFY\AppData\Local\Temp\week910-smoke\smoke_client.py
+
+实际输出（exit code 0，11/11 PASS）：
+PASS GET /forget_password/ 200
+PASS 页面含策略提示
+PASS 首次发送 200 sent
+PASS retry_after=60
+PASS 文件邮件收到 6 位码
+PASS 重复发送 429 rate_limited
+PASS Retry-After 头与 JSON 一致
+PASS 剩余秒数在 1..60
+PASS 正确码重置 302
+PASS 旧码复用被拒绝且非 302
+PASS 新密码可登录 302
+
+结论：
+- A91 发送冷却在真实 HTTP 路径生效：首次 200/sent/retry_after=60，
+  重复请求 429/rate_limited，且 Retry-After 头与 JSON retry_after 一致。
+- 验证码确实通过邮件后端投递（文件邮件中可解析 6 位码）。
+- A92 正确码重置成功（302），成功后验证码被消费，旧码复用被拒绝且提示“过期”。
+- 重置后的新密码可完成登录（302），端到端链路闭环。
+- 页面策略提示文案与共享配置一致（连续输错 5 次锁定 15 分钟）。
