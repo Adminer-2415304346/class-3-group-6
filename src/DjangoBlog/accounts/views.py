@@ -11,14 +11,15 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import logout
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponseRedirect, HttpResponseForbidden
+from django.http import JsonResponse
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.urls import reverse
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views import View
 
+from djangoblog.maintenance_config import get_maintenance_option
 from djangoblog.utils import send_email, get_sha256, get_current_site, generate_code, delete_sidebar_cache
 from djangoblog.base_views import SecureFormView, LoginFormView, LogoutRedirectView
 from . import utils
@@ -232,6 +233,24 @@ class ForgetPasswordView(SecureFormView):
     form_class = ForgetPasswordForm
     template_name = 'account/forget_password.html'
 
+    # YFY（第9—10周）：把当前请求传给表单，校验上下文才能绑定到浏览器会话。
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    # YFY（第9—10周）：模板提示使用维护配置，不在页面里硬编码 5 分钟/5 次/900 秒。
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reset_code_ttl_minutes'] = max(
+            1, get_maintenance_option('RESET_CODE_TTL_SECONDS') // 60)
+        context['reset_send_cooldown_seconds'] = get_maintenance_option(
+            'RESET_SEND_COOLDOWN_SECONDS')
+        context['reset_max_failures'] = get_maintenance_option('RESET_MAX_FAILURES')
+        context['reset_lock_minutes'] = max(
+            1, get_maintenance_option('RESET_LOCK_SECONDS') // 60)
+        return context
+
     # YFY：表单校验完成，视图执行密码加密更新，使用make_password加密后写入BlogUser模型
     # YFY：前置条件：ForgetPasswordForm.clean_email 已确认邮箱存在、clean_code 已确认验证码有效。
     # YFY：并发边界：clean 与这里之间用户可能被删除，filter().get() 仍可能抛 DoesNotExist。
@@ -242,27 +261,60 @@ class ForgetPasswordView(SecureFormView):
             blog_user = BlogUser.objects.filter(email=form.cleaned_data.get("email")).get()
             blog_user.password = make_password(form.cleaned_data["new_password2"])
             blog_user.save()
-            # YFY：改进：密码保存成功后立即删除验证码，避免同一码在 5 分钟 TTL 内被重复使用。
-            utils.delete_code(blog_user.email)
+            # YFY：改进：密码保存成功后立即删除验证码，避免同一码在有效期内被重复使用。
+            # YFY（第9—10周）：按当前浏览器上下文一并清理失败计数/锁定，并移除会话挑战。
+            context = utils.get_reset_context(self.request, blog_user.email)
+            utils.consume_code(blog_user.email, context=context)
+            utils.forget_challenge(self.request, blog_user.email)
             return HttpResponseRedirect('/login/')
         else:
             return self.render_to_response({'form': form})
 
 
+def _reset_api_response(success, code, message, status=200, retry_after=None):
+    """YFY（第9—10周）：按共享约定返回验证码接口 JSON；429 同步带 Retry-After 头。"""
+    payload = {'success': success, 'code': code, 'message': message, 'data': {}}
+    if retry_after is not None:
+        payload['retry_after'] = int(retry_after)
+    response = JsonResponse(payload, status=status)
+    if retry_after is not None and status == 429:
+        response['Retry-After'] = str(int(retry_after))
+    return response
+
+
 class ForgetPasswordEmailCode(View):
 
     # YFY：入口：POST 邮箱后生成 6 位数字码并发送邮件；只校验邮箱格式，不校验邮箱是否已注册。
-    # YFY：设计取舍：不暴露“邮箱是否存在”，但也没有发送频率限制，存在被用于邮件轰炸的滥用面。
-    # YFY：失败路径：邮箱格式非法返回纯文本“错误的邮箱”，HTTP 状态仍是 200，不是 400。
+    # YFY（第9—10周）：同邮箱发送冷却由服务端控制，前端只展示服务端返回的真实剩余秒数。
+    # YFY（第9—10周）：冷却拒绝时不发信、不覆盖旧码；投递失败释放冷却且不留下新码，可立即重试。
     def post(self, request: HttpRequest):
         form = ForgetPasswordCodeForm(request.POST)
         if not form.is_valid():
-            return HttpResponse("错误的邮箱")
-        to_email = form.cleaned_data["email"]
+            return _reset_api_response(
+                False, 'invalid_email', '邮箱格式不正确，请检查后重试', status=400)
+        to_email = utils.normalize_email(form.cleaned_data["email"])
 
-        # YFY：顺序：先发信再写缓存；发信抛异常时不会留下验证码，但接口会返回 500。
+        remaining = utils.try_reserve_send(to_email)
+        if remaining is not None:
+            return _reset_api_response(
+                False, 'rate_limited', '验证码发送过于频繁，请稍后重试',
+                status=429, retry_after=remaining)
+
         code = generate_code()
-        utils.send_verify_email(to_email, code)
-        utils.set_code(to_email, code)
+        try:
+            # YFY（第9—10周）：先发信后写码；发送异常时既不写新码，也释放冷却以便重试。
+            utils.send_verify_email(to_email, code)
+        except Exception:
+            # YFY（第9—10周）：用 warning 记录，避免 ERROR 级触发管理员错误邮件而干扰本地验证。
+            logger.warning('reset code delivery failed', exc_info=True)
+            utils.release_send_cooldown(to_email)
+            return _reset_api_response(
+                False, 'delivery_unavailable', '邮件服务暂时不可用，请稍后重试', status=503)
 
-        return HttpResponse("ok")
+        challenge = utils.new_challenge()
+        utils.set_code(to_email, code, challenge=challenge)
+        utils.remember_challenge(request, to_email, challenge)
+        utils.clear_attempt_state(to_email, utils.get_reset_context(request, to_email))
+        return _reset_api_response(
+            True, 'sent', '验证码已发送',
+            retry_after=get_maintenance_option('RESET_SEND_COOLDOWN_SECONDS'))
