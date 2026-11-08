@@ -51,8 +51,13 @@ class RegisterForm(UserCreationForm):
 
 
 # YFY：找回密码表单：清洗顺序为 new_password1 → new_password2 → email → code；
-# YFY：clean_code 读取 cleaned_data.email，邮箱失败时为 None，仍会校验并多报一条“验证码错误”。
+# YFY（第9—10周）：验证码校验只在邮箱与密码字段都合法、且码非空时执行，避免把无效输入
+# YFY（第9—10周）：计为真实尝试；校验上下文（浏览器会话/挑战）由视图通过关键字参数传入。
 class ForgetPasswordForm(forms.Form):
+    def __init__(self, *args, request=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+
     new_password1 = forms.CharField(
         label=_("New password"),
         widget=forms.PasswordInput(
@@ -116,12 +121,20 @@ class ForgetPasswordForm(forms.Form):
         return user_email
 
     # YFY：clean_code钩子，调用utils工具类校验用户提交的重置密码验证码是否正确
-    # YFY：这里只校验不消费；验证码会在 ForgetPasswordView 保存密码成功后由 delete_code 删除。
+    # YFY：这里只校验不消费；验证码会在 ForgetPasswordView 保存密码成功后由 consume_code 删除。
+    # YFY（第9—10周）：缺邮箱、空码或其他字段已报错时不进入真实码校验，避免错误累计；
+    # YFY（第9—10周）：显式传入浏览器上下文，锁定/挑战状态按会话隔离。
     def clean_code(self):
         code = self.cleaned_data.get("code")
+        email = self.cleaned_data.get("email")
+        if not code or not email:
+            return code
+        if any(name for name in self._errors if name != "code"):
+            return code
         error = utils.verify(
-            email=self.cleaned_data.get("email"),
+            email=email,
             code=code,
+            context=utils.get_reset_context(self.request, email),
         )
         if error:
             raise ValidationError(error)
