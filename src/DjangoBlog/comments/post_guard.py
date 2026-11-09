@@ -71,16 +71,21 @@ def _active_state(user_id, scope, state_key, at):
 
 
 def _reserve(user_id, scope, state_key, expires_at):
-    """写状态行；唯一约束冲突（并发请求抢先）时返回 None。"""
+    """写状态行：只允许插入；唯一约束冲突（并发请求抢先）时返回 None。
+
+    这里必须用 create 而不是 update_or_create：限频用的是固定 state_key，
+    update_or_create 遇到已存在的行会直接改写 expires_at 并返回成功，等于让
+    后一个请求无声覆盖前一个请求的抢占结果，两条评论都会入库。
+    调用前的 _prune_expired 已清掉到期行，因此插入失败只可能是并发抢占。
+    """
     try:
         with transaction.atomic():
-            state, _ = CommentPostState.objects.update_or_create(
+            return CommentPostState.objects.create(
                 user_id=user_id,
                 scope=scope,
                 state_key=state_key,
-                defaults={'expires_at': expires_at},
+                expires_at=expires_at,
             )
-            return state
     except IntegrityError:
         return None
 

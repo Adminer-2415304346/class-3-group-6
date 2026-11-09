@@ -4,6 +4,7 @@
 # 导入Django表单相关模块
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxLengthValidator
 from django.forms import ModelForm
 
 # WZY（第9—10周 C91）：正文长度上限统一从共享配置读取，不在本App硬编码阈值
@@ -26,9 +27,19 @@ class CommentForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        body_field = self.fields['body']
         # WZY（第9—10周 C91）：关闭字段层的自动 strip，让“纯空白”走到 clean_body 的
         # 统一提示；真正入库的值仍由 clean_body 去首尾空白后返回。
-        self.fields['body'].strip = False
+        body_field.strip = False
+        # WZY（第9—10周 C91）：摘掉字段层由模型 max_length 派生的长度校验，
+        # 否则超长正文会先被 Django 自带提示拦下、永远走不到 clean_body 的统一文案。
+        # 长度规则仍由 clean_body 按 COMMENT_MAX_LENGTH 执行；浏览器端 maxlength 属性一并去掉。
+        body_field.max_length = None
+        body_field.validators = [
+            validator for validator in body_field.validators
+            if not isinstance(validator, MaxLengthValidator)
+        ]
+        body_field.widget.attrs.pop('maxlength', None)
 
     # WZY（第9—10周 C91）：正文规范化与长度校验。
     # 1) 去首尾空白（含换行、全角空格之外的制表符），空串与纯空白都判为空；
