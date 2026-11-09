@@ -1,0 +1,221 @@
+﻿Found 49 test(s).
+python.exe : Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+所在位置 行:1 字符: 200
++ ... ocation $p; & $py "doc\week7-8\tools\run_isolated_tests.py" --result- ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...che=shared')...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+test_custom_method_cache_key_remains_supported (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_cus
+tom_method_cache_key_remains_supported) ... ok
+test_errors_inside_business_function_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_err
+ors_inside_business_function_propagate) ... ok
+test_errors_inside_custom_key_factory_propagate (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_er
+rors_inside_custom_key_factory_propagate) ... ok
+test_keyword_only_none_result_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_keyword_on
+ly_none_result_is_cached) ... ok
+test_noncallable_optional_cache_key_uses_fallback (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_
+noncallable_optional_cache_key_uses_fallback) ... ok
+test_plain_arguments_have_separate_cache_entries (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_p
+lain_arguments_have_separate_cache_entries) ... ok
+test_public_comment_and_article_detail_still_work (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_
+public_comment_and_article_detail_still_work) ... ⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBl
+og\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_real_site_helper_works_without_arguments (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_real
+_site_helper_works_without_arguments) ... ok
+test_zero_argument_function_is_cached (djangoblog.test_week78_gcy_quality.CacheDecoratorContractTests.test_zero_argumen
+t_function_is_cached) ... ok
+test_permission_denied_renders_real_custom_403_page (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_perm
+ission_denied_renders_real_custom_403_page) ... HTTP 403 Error: GCY error-handler regression
+Traceback (most recent call last):
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55,
+ in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in 
+_get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Forbidden (Permission denied): /__gcy_denied__/
+Traceback (most recent call last):
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55,
+ in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in 
+_get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\djangoblog\test_week78_gcy_quality.py", line 22, in denied_view
+    raise PermissionDenied('GCY error-handler regression')
+django.core.exceptions.PermissionDenied: GCY error-handler regression
+ok
+test_project_resolves_custom_403_handler (djangoblog.test_week78_gcy_quality.ForbiddenHandlerTests.test_project_resolve
+s_custom_403_handler) ... ok
+test_utils (djangoblog.tests.DjangoBlogTest.test_utils) ... ok
+test_copyright_notice_added (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_notice_added)
+测试版权声明已添加 ... ⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manif
+est.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_copyright_plugin_loaded (djangoblog.test_plugins.ArticleCopyrightPluginTest.test_copyright_plugin_loaded)
+测试版权插件已加载 ... ok
+test_plugin_config (djangoblog.test_plugins.BasePluginTest.test_plugin_config)
+测试插件配置 ... ok
+test_plugin_get_context (djangoblog.test_plugins.BasePluginTest.test_plugin_get_context)
+测试获取插件信息 ... ok
+test_plugin_initialization (djangoblog.test_plugins.BasePluginTest.test_plugin_initialization)
+测试插件初始化 ... ok
+test_plugin_register_hooks (djangoblog.test_plugins.BasePluginTest.test_plugin_register_hooks)
+测试插件注册钩子 ... ok
+test_external_links_plugin_loaded (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_plugin_loaded)
+测试外部链接插件已加载 ... ok
+test_external_links_processing (djangoblog.test_plugins.ExternalLinksPluginTest.test_external_links_processing)
+测试外部链接处理 ... ok
+test_apply_filters (djangoblog.test_plugins.PluginHooksTest.test_apply_filters)
+测试应用过滤器 ... ok
+test_hook_error_handling (djangoblog.test_plugins.PluginHooksTest.test_hook_error_handling)
+测试钩子错误处理 ... Error applying filter hook 'the_content' callback 'error_hook': Hook error
+Traceback (most recent call last):
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\djangoblog\plugin_manage\hooks.py", line 51, in apply_filters
+    value = callback(value, *args, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\PC\class-3-group-6\src\DjangoBlog\djangoblog\test_plugins.py", line 78, in error_hook
+    raise Exception("Hook error")
+Exception: Hook error
+ok
+test_multiple_hooks (djangoblog.test_plugins.PluginHooksTest.test_multiple_hooks)
+测试多个钩子 ... ok
+test_register_hook (djangoblog.test_plugins.PluginHooksTest.test_register_hook)
+测试注册钩子 ... ok
+test_run_action (djangoblog.test_plugins.PluginHooksTest.test_run_action)
+测试运行动作钩子 ... ok
+test_load_plugins (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins)
+测试加载插件 ... ok
+test_load_plugins_handles_errors (djangoblog.test_plugins.PluginLoaderTest.test_load_plugins_handles_errors)
+测试插件加载错误处理 ... ok
+test_calculate_reading_time (djangoblog.test_plugins.ReadingTimePluginTest.test_calculate_reading_time)
+测试计算阅读时间 ... ok
+test_reading_time_plugin_loaded (djangoblog.test_plugins.ReadingTimePluginTest.test_reading_time_plugin_loaded)
+测试阅读时间插件已加载 ... ok
+test_seo_meta_tags (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_meta_tags)
+测试 SEO meta 标签 ... ⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/
+manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_seo_optimizer_plugin_loaded (djangoblog.test_plugins.SEOOptimizerPluginTest.test_seo_optimizer_plugin_loaded)
+测试 SEO 优化插件已加载 ... ok
+test_view_count_increment (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_increment)
+测试浏览次数增加 ... ⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manife
+st.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_view_count_plugin_loaded (djangoblog.test_plugins.ViewCountPluginTest.test_view_count_plugin_loaded)
+测试浏览次数插件已加载 ... ok
+test_action_error_without_callback_name_does_not_block_next_action (djangoblog.test_week78_gcy_quality.SharedBoundaryTe
+sts.test_action_error_without_callback_name_does_not_block_next_action) ... ok
+test_filter_error_without_callback_name_does_not_block_next_filter (djangoblog.test_week78_gcy_quality.SharedBoundaryTe
+sts.test_filter_error_without_callback_name_does_not_block_next_filter) ... ok
+test_reset_code_keeps_six_ascii_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_reset_code_keeps_si
+x_ascii_digits) ... ok
+test_reset_code_preserves_leading_zero_and_repeated_digits (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test
+_reset_code_preserves_leading_zero_and_repeated_digits) ... ok
+test_spider_notify_sends_urls_with_five_second_timeout (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spi
+der_notify_sends_urls_with_five_second_timeout) ... ok
+test_spider_timeout_is_logged_without_raising (djangoblog.test_week78_gcy_quality.SharedBoundaryTests.test_spider_timeo
+ut_is_logged_without_raising) ... ok
+test_action_registry_is_explicit_and_can_be_disabled (djangoblog.test_week910_configuration.MaintenanceConfigurationTes
+ts.test_action_registry_is_explicit_and_can_be_disabled) ... ok
+test_agreed_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_agreed_defaults) ... ok
+test_invalid_upload_formats_are_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_inva
+lid_upload_formats_are_rejected) ... ok
+test_non_dictionary_override_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_non_
+dictionary_override_is_rejected) ... ok
+test_nonpositive_or_noninteger_limit_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.t
+est_nonpositive_or_noninteger_limit_is_rejected) ... ok
+test_partial_override_keeps_other_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_pa
+rtial_override_keeps_other_defaults) ... ok
+test_returned_options_do_not_mutate_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_
+returned_options_do_not_mutate_defaults) ... ok
+test_supported_sequence_is_returned_as_immutable_tuple (djangoblog.test_week910_configuration.MaintenanceConfigurationT
+ests.test_supported_sequence_is_returned_as_immutable_tuple) ... ok
+test_unknown_override_key_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown
+_override_key_is_rejected) ... ok
+test_unknown_requested_option_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unk
+nown_requested_option_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 0.620s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+ISOLATED_TEST_FAILURES=0

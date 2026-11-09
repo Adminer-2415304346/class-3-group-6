@@ -1,0 +1,37 @@
+﻿{
+  "status": "ok",
+  "demo_mode": true,
+  "settings_module": "djangoblog.settings_demo",
+  "checks": [
+    {
+      "name": "database",
+      "status": "ok",
+      "detail": "engine=django.db.backends.sqlite3 vendor=sqlite",
+      "fix": null
+    },
+    {
+      "name": "cache",
+      "status": "ok",
+      "detail": "set/get/delete 往返一致",
+      "fix": null
+    },
+    {
+      "name": "templates",
+      "status": "ok",
+      "detail": "已加载 share_layout/base.html；DIRS=['C:\\\\Users\\\\PC\\\\class-3-group-6\\\\src\\\\DjangoBlog\\\\templates']",
+      "fix": null
+    },
+    {
+      "name": "frontend_manifest",
+      "status": "ok",
+      "detail": "C:\\Users\\PC\\class-3-group-6\\src\\DjangoBlog\\blog\\static\\blog\\dist\\.vite\\manifest.json 可解析，2 个引用产物存在",
+      "fix": null
+    },
+    {
+      "name": "media_directory",
+      "status": "ok",
+      "detail": "C:\\Users\\PC\\class-3-group-6\\src\\DjangoBlog\\demo_runtime\\media 可写",
+      "fix": null
+    }
+  ]
+}

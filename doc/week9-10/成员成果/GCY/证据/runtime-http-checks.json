@@ -1,0 +1,110 @@
+{
+  "status": "ok",
+  "base_url": "http://127.0.0.1:8000",
+  "checks": [
+    {
+      "name": "home",
+      "path": "/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "home_css_asset",
+      "path": "/static/blog/dist/css/main-C_vVv2Od.css",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "home_js_asset",
+      "path": "/static/blog/dist/js/main-Bef77X5D.js",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "login_page",
+      "path": "/login/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "admin_entry_redirect",
+      "path": "/admin/",
+      "expected_status": 302,
+      "actual_status": 302,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "admin_login_page",
+      "path": "/admin/login/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "article_detail_anonymous",
+      "path": "/article/2026/11/9/1.html",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "missing_page",
+      "path": "/definitely-not-a-page-gcy/",
+      "expected_status": 404,
+      "actual_status": 404,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "health_endpoint",
+      "path": "/health/",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "login_submit",
+      "path": "/login/",
+      "expected_status": 302,
+      "actual_status": 302,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "article_detail_authenticated",
+      "path": "/article/2026/11/9/1.html",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "comment_submit",
+      "path": "/article/1/postcomment",
+      "expected_status": 302,
+      "actual_status": 302,
+      "missing_markers": [],
+      "status": "ok"
+    },
+    {
+      "name": "comment_visible",
+      "path": "/article/2026/11/9/1.html",
+      "expected_status": 200,
+      "actual_status": 200,
+      "missing_markers": [],
+      "status": "ok"
+    }
+  ]
+}
