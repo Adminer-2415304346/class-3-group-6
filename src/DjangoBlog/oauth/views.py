@@ -110,10 +110,12 @@ def authorize(request):
         and 0 <= (now_ts - saved['created_at']) < state_ttl
     )
     if not state_ok:
-        # 拒绝旧/跨渠道/过期/缺 state 回调；清掉该渠道会话，不留下可重放值。
-        states.pop(type, None)
-        request.session['oauth_states'] = states
-        request.session.modified = True
+        # GZX（第9—10周复核）：state 不匹配（旧 state/伪造/跨浏览器）时不能 pop 掉
+        # session 里最新的有效 state；只有 state 匹配但过期时才清除。
+        if saved and incoming_state and secrets.compare_digest(saved['state'], incoming_state):
+            states.pop(type, None)
+            request.session['oauth_states'] = states
+            request.session.modified = True
         logger.warning('oauth state rejected for channel=%s', type)
         return render(request, 'oauth/state_error.html',
                       {'message': _('Login session expired or invalid. Please restart login.')},
@@ -216,7 +218,10 @@ def authorize(request):
                 return response
         else:
             # GZX：第三方未返回邮箱（如 GitHub 私有邮箱）：先暂存 OAuthUser，跳转补邮箱页。
+            # GZX（复核）：把 oauthid 绑到当前 session，防止 RequireEmailView 被篡改 oauthid 改绑他人账号。
             user.save()
+            request.session['pending_oauth_id'] = user.id
+            request.session.modified = True
             url = reverse('oauth:require_email', kwargs={
                 'oauthid': user.id
             })
@@ -399,9 +404,19 @@ class RequireEmailView(FormView):
         # GZX（第9—10周 O92）：表单提交邮箱后，不再用无时效 HMAC 链接；改为创建 PendingBinding
         # + TimestampSigner（600s）+ 浏览器上下文 + 数据库一次性消费。同邮箱已有本地账号时邮件
         # 提示需先登录该账号再确认，隐藏 oauthid 不再是安全凭据。
+        # GZX（复核）：校验 oauthid 必须等于当前 session 中 authorize 暂存的 pending_oauth_id，
+        # 防止篡改隐藏字段把别人的第三方账号改绑到攻击者邮箱。
         email = form.cleaned_data['email'].strip().casefold()
         oauthid = form.cleaned_data['oauthid']
+        pending_id = self.request.session.get('pending_oauth_id')
+        if not pending_id or int(oauthid) != int(pending_id):
+            return render(self.request, 'oauth/state_error.html',
+                          {'message': _('Invalid email session. Please restart the OAuth login.')},
+                          status=403)
         oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
+        # 消费 session 标记，防止重复提交
+        self.request.session.pop('pending_oauth_id', None)
+        self.request.session.modified = True
 
         bc = secrets.token_hex(16)
         nonce = secrets.token_hex(16)

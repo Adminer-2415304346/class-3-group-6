@@ -1,10 +1,10 @@
 {
-  "tests_run": 48,
+  "tests_run": 50,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
   "per_app": {
-    "oauth": 38,
+    "oauth": 40,
     "djangoblog": 10
   }
 }
