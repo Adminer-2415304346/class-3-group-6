@@ -52,7 +52,7 @@ class BaseOauthManager(metaclass=ABCMeta):
         return self.is_access_token_set and self.access_token is not None and self.openid is not None
 
     @abstractmethod
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
         pass
 
     @abstractmethod
@@ -106,12 +106,16 @@ class WBOauthManager(BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立 OAuth2 参数附加；nexturl 仍按原实现拼入
+        # redirect_uri 兼容旧渠道配置，但回调时 next 以服务端会话为准，不再信任回调传入值。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': self.callback_url + '&next_url=' + nexturl
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -211,13 +215,16 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加；nexturl 仅用于兼容回调拼参，回调以会话为准。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': self.callback_url,
             'scope': 'openid email',
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -294,13 +301,16 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加；next_url 仍拼入 redirect_uri 兼容旧配置。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': f'{self.callback_url}&next_url={next_url}',
             'scope': 'user:email'
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -389,13 +399,16 @@ class FaceBookOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': self.callback_url,
             'scope': 'email,public_profile'
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -466,12 +479,15 @@ class QQOauthManager(BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加；next_url 仍拼入 redirect_uri 兼容旧配置。
         params = {
             'response_type': 'code',
             'client_id': self.client_id,
             'redirect_uri': self.callback_url + '&next_url=' + next_url,
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
