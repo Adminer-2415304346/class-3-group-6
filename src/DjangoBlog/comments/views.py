@@ -2,8 +2,10 @@
 # 修改人：WZY
 # 说明：为本文件新增# WZY:注释，原有业务代码保留不变
 # Create your views here.
+from django.db import transaction
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
 from django.views import View
 
 from accounts.models import BlogUser
@@ -12,6 +14,7 @@ from djangoblog.base_views import AuthenticatedFormView
 
 from .forms import CommentForm
 from .models import Comment, CommentReaction
+from .post_guard import CommentPostRejected, check_and_reserve
 
 
 # WZY: 评论提交视图，继承AuthenticatedFormView，自带登录校验，未登录用户无法提交评论
@@ -27,17 +30,33 @@ class CommentPostView(AuthenticatedFormView):
     # WZY: 评论提交失败后，渲染的文章详情页面模板
     template_name = 'blog/article_detail.html'  # 渲染页面模板
 
+    # WZY（第9—10周 C91）：评论目标文章必须是已发布(status='p')的文章，
+    # 草稿等不可公开文章按 404 处理（404 语义，不是表单错误，也不是 500）。
+    # 已发布的独立页面(type='p')沿用原有评论规则，不做额外限制。
+    def get_target_article(self):
+        return get_object_or_404(
+            Article, pk=self.kwargs['article_id'], status='p')
+
     # WZY: GET请求处理，访问提交评论的路由，直接重定向到文章页面评论区锚点
     def get(self, request, *args, **kwargs):
-        article_id = self.kwargs['article_id']
-        article = get_object_or_404(Article, pk=article_id)
+        article = self.get_target_article()
         url = article.get_absolute_url()
         return HttpResponseRedirect(url + "#comments")
 
     # WZY: 表单校验失败时执行，返回文章页面并携带表单错误信息，展示给用户
     def form_invalid(self, form):
-        article_id = self.kwargs['article_id']
-        article = get_object_or_404(Article, pk=article_id)
+        article = self.get_target_article()
+        # WZY（第9—10周 C91）：错误必须可见。
+        # article_detail.html 只在 article.comment_status == 'o' 且 OPEN_SITE_COMMENT 为真时
+        # 渲染评论表单；文章关闭评论或站点评论关闭时，回显文章页会让用户看不到任何提示。
+        # 这两种情况改用本 App 的错误页（模板在 templates/comments/ 内，仍属本人范围）。
+        from djangoblog.utils import get_blog_setting
+        if article.comment_status != 'o' or not get_blog_setting().open_site_comment:
+            return TemplateResponse(
+                self.request,
+                'comments/post_comment_error.html',
+                {'form': form, 'article': article},
+            )
         return self.render_to_response({
             'form': form,
             'article': article
@@ -48,14 +67,15 @@ class CommentPostView(AuthenticatedFormView):
         """提交的数据验证合法后的逻辑"""
         user = self.request.user
         author = BlogUser.objects.get(pk=user.pk)
-        article_id = self.kwargs['article_id']
-        article = get_object_or_404(Article, pk=article_id)
+        article = self.get_target_article()
         # WZY: 文章评论关闭时，把错误挂到表单并回显页面，而不是抛 500
         # SZX：Article.status 目前仅定义 'd'/'p'；这里只检查真实存在的 comment_status。
         if article.comment_status == 'c':
             form.add_error(None, '该文章评论已关闭.')
             return self.form_invalid(form)
         # WZY: save(False)仅构建模型对象，暂不写入数据库，后续手动补充关联字段
+        # WZY（第9—10周 C91）：body 已在 CommentForm.clean_body 去空白并按配置校验长度，
+        # 这里拿到的就是将要入库的规范化正文。
         comment = form.save(False)
         # WZY: 将评论和当前文章建立外键关联，确定这条评论归属哪一篇文章
         comment.article = article
@@ -68,15 +88,31 @@ class CommentPostView(AuthenticatedFormView):
         comment.author = author
         # WZY: 有父评论ID时，校验其存在且属于当前文章，否则报错（防跨文章回复）
         parent_comment_id = form.cleaned_data.get('parent_comment_id')
+        parent_comment = None
         if parent_comment_id:
             try:
                 parent_comment = Comment.objects.get(
-                    pk=parent_comment_id, article_id=article_id)
+                    pk=parent_comment_id, article_id=article.pk)
             except Comment.DoesNotExist:
                 form.add_error('parent_comment_id', '父评论不存在或不属于当前文章.')
                 return self.form_invalid(form)
             comment.parent_comment = parent_comment
-        comment.save(True)  # WZY: 将构造完成的评论存入数据库
+        # WZY（第9—10周 C92）：内容/文章/父评论校验全部通过后才进入限频与重复判定。
+        # 状态占用与评论写入放在同一个事务里：写入抛错或回滚时状态一并回滚，
+        # 既不会残留“成功冷却”，也不会在回滚后触发提交后的缓存失效和邮件通知。
+        try:
+            with transaction.atomic():
+                check_and_reserve(
+                    user_id=author.pk,
+                    article_id=article.pk,
+                    body=comment.body,
+                    parent_comment_id=parent_comment.pk if parent_comment else None,
+                )
+                comment.save(True)  # WZY: 将构造完成的评论存入数据库
+        except CommentPostRejected as rejected:
+            # 限频/重复：按现有表单错误契约回显，不改成 JSON，也不写 429 页面
+            form.add_error(None, rejected.message)
+            return self.form_invalid(form)
         return HttpResponseRedirect(
             "%s#div-comment-%d" %
             (article.get_absolute_url(), comment.pk))

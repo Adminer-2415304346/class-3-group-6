@@ -1,0 +1,1 @@
+{"app": "comments", "stage": "after", "files": 12, "ruff_findings": 0, "ruff_rules": {}, "bandit_findings": 0, "bandit_errors": []}

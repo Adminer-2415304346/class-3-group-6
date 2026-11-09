@@ -4,7 +4,7 @@ from django.test import Client, RequestFactory, TransactionTestCase
 from django.urls import reverse
 from djangoblog.utils import get_max_articleid_commentid
 
-from comments.models import Comment
+from comments.models import Comment, CommentPostState
 from comments.templatetags.comments_tags import *
 
 # Create your tests here.
@@ -28,6 +28,12 @@ class CommentsTest(TransactionTestCase):
         for comment in comments:
             comment.is_enable = True
             comment.save()
+
+    def expire_post_state(self):
+        # WZY（第9—10周 C92）：同一用户的连续评论受 30 秒间隔与 120 秒重复窗口约束。
+        # 本用例验证的是“审核开关 + 评论树”的既有逻辑，因此在两次提交之间清空发布状态，
+        # 等价于时间窗已过期；限频/重复语义由 comments/test_week910_functional.py 覆盖。
+        CommentPostState.objects.all().delete()
 
     def test_validate_comment(self):
         self.client.login(username='liangliangyy1', password='liangliangyy1')
@@ -62,6 +68,7 @@ class CommentsTest(TransactionTestCase):
 
         self.assertEqual(len(article.comment_list()), 1)
 
+        self.expire_post_state()
         response = self.client.post(comment_url,
                                     {
                                         'body': '123ffffffffff',
@@ -74,6 +81,7 @@ class CommentsTest(TransactionTestCase):
         self.assertEqual(len(article.comment_list()), 2)
         parent_comment_id = article.comment_list()[0].id
 
+        self.expire_post_state()
         response = self.client.post(comment_url,
                                     {
                                         'body': '''

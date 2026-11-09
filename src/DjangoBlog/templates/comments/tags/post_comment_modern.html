@@ -22,6 +22,16 @@
 
         {% csrf_token %}
 
+        {# WZY（第9—10周 C91）：非字段错误（评论已关闭、过于频繁、内容重复）必须可见 #}
+        {% if form.non_field_errors %}
+            <div class="mb-3 flex items-start gap-1.5 rounded-lg border border-destructive/40 bg-destructive/10 px-3.5 py-2.5 text-sm text-destructive">
+                <svg class="mt-0.5 size-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                </svg>
+                <span>{{ form.non_field_errors }}</span>
+            </div>
+        {% endif %}
+
         <div class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
             <!-- 评论内容 -->
             <div class="p-4 md:p-5">
@@ -47,6 +57,12 @@
 
             <!-- 隐藏字段 -->
             <div class="hidden">{{ form.parent_comment_id }}</div>
+            {# WZY（第9—10周 C91）：父评论错误（不存在/跨文章）回显，不随隐藏字段一起隐藏 #}
+            {% if form.parent_comment_id.errors %}
+                <div class="flex items-start gap-1.5 px-4 pb-2 text-sm text-destructive md:px-5">
+                    <span>{{ form.parent_comment_id.errors }}</span>
+                </div>
+            {% endif %}
 
             <!-- 底部操作栏 -->
             <div class="flex items-center justify-between flex-wrap gap-3 border-t border-border px-4 md:px-5 py-3">

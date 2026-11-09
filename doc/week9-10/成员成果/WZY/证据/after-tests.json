@@ -1,0 +1,10 @@
+{
+  "tests_run": 90,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "per_app": {
+    "comments": 80,
+    "djangoblog": 10
+  }
+}
