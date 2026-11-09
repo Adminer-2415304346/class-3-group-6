@@ -1,0 +1,63 @@
+﻿python.exe : [2026-11-09 20:01:01,879] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章结尾版权声明 
+initialized.
+所在位置 行:1 字符: 267
++ ... ocation $p; & $py "src\DjangoBlog\manage.py" demo_healthcheck --setti ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([2026-11-09 20:...声明 initialized.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[2026-11-09 20:01:01,879] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章结尾版权声明 initialized.
+[2026-11-09 20:01:01,880] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: art
+icle_copyright - 文章结尾版权声明
+[2026-11-09 20:01:01,880] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: art
+icle_copyright - 文章结尾版权声明
+[2026-11-09 20:01:01,881] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 阅读时间预测 initialized.
+[2026-11-09 20:01:01,881] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 阅读时间预测 initialized.
+[2026-11-09 20:01:01,882] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: rea
+ding_time - 阅读时间预测
+[2026-11-09 20:01:01,882] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: rea
+ding_time - 阅读时间预测
+[2026-11-09 20:01:01,883] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 外部链接处理器 initialized.
+[2026-11-09 20:01:01,883] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 外部链接处理器 initialized.
+[2026-11-09 20:01:01,883] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: ext
+ernal_links - 外部链接处理器
+[2026-11-09 20:01:01,883] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: ext
+ernal_links - 外部链接处理器
+[2026-11-09 20:01:01,885] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章浏览次数统计 initialized.
+[2026-11-09 20:01:01,885] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章浏览次数统计 initialized.
+[2026-11-09 20:01:01,885] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: vie
+w_count - 文章浏览次数统计
+[2026-11-09 20:01:01,885] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: vie
+w_count - 文章浏览次数统计
+[2026-11-09 20:01:01,886] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] SEO 优化器 initialized.
+[2026-11-09 20:01:01,886] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] SEO 优化器 initialized.
+[2026-11-09 20:01:01,887] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: seo
+_optimizer - SEO 优化器
+[2026-11-09 20:01:01,887] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: seo
+_optimizer - SEO 优化器
+[2026-11-09 20:01:01,888] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 图片性能优化插件 initialized.
+[2026-11-09 20:01:01,888] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 图片性能优化插件 initialized.
+[2026-11-09 20:01:01,888] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: ima
+ge_lazy_loading - 图片性能优化插件
+[2026-11-09 20:01:01,888] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: ima
+ge_lazy_loading - 图片性能优化插件
+[2026-11-09 20:01:01,890] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章推荐 initialized.
+[2026-11-09 20:01:01,890] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章推荐 initialized.
+[2026-11-09 20:01:01,890] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: art
+icle_recommendation - 文章推荐
+[2026-11-09 20:01:01,890] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: art
+icle_recommendation - 文章推荐
+[2026-11-09 20:01:01,891] INFO [plugins.cloudflare_cache.plugin.init_plugin:68 plugin] Initializing Cloudflare 缓存管理 v1.
+0.0
+[2026-11-09 20:01:01,891] ERROR [plugins.cloudflare_cache.plugin._validate_config:104 plugin] [CF Plugin] CLOUDFLARE_ZO
+NE_ID not configured
+[2026-11-09 20:01:01,891] INFO [plugins.cloudflare_cache.plugin._validate_config:105 plugin] [CF Plugin] Please set env
+ironment variable: CLOUDFLARE_ZONE_ID
+[2026-11-09 20:01:01,892] WARNING [plugins.cloudflare_cache.plugin.init_plugin:80 plugin] [CF Plugin] Plugin disabled d
+ue to invalid configuration
+[2026-11-09 20:01:01,892] INFO [plugins.cloudflare_cache.plugin.register_hooks:184 plugin] [CF Plugin] Plugin is disabl
+ed, skipping hook registration
+[2026-11-09 20:01:01,892] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: clo
+udflare_cache - Cloudflare 缓存管理
+[2026-11-09 20:01:01,892] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: clo
+udflare_cache - Cloudflare 缓存管理
