@@ -2,8 +2,8 @@
   "app": "comments",
   "owner": "WZY",
   "stage": "after",
-  "timestamp_utc": "2026-11-09T10:45:06.688096+00:00",
-  "base_commit": "6e397f0bcccb48bcb46f52c495f28bdeb3d0b10f",
+  "timestamp_utc": "2026-11-09T13:22:45.861311+00:00",
+  "base_commit": "b9f4ab4bf22c82b91bcf8e3219472e9a750be7e2",
   "python": "3.11.9",
   "tools": {
     "ruff": "0.17.1",
@@ -100,14 +100,14 @@
     },
     {
       "path": "comments/forms.py",
-      "sha256": "63c4c2a1c0cb32e8c07eb31d56c561041fa4a479391ec3e3d8e290726cc657ef",
-      "physical_lines": 47,
-      "code_token_lines": 24,
-      "comment_lines": 18,
+      "sha256": "cf6e8a7860f3ca5f03d3ff10043e01dad13f08faba680cfff5ee5a493cc58829",
+      "physical_lines": 58,
+      "code_token_lines": 32,
+      "comment_lines": 21,
       "signed_comment_lines": {
         "SZX": 0,
         "YFY": 0,
-        "WZY": 10,
+        "WZY": 11,
         "GZX": 0,
         "SY": 0,
         "GCY": 0
@@ -134,9 +134,9 @@
     },
     {
       "path": "comments/post_guard.py",
-      "sha256": "fb0c097c0dc0b25daf89d91d488d502f35eeed39e996d33734c78c2e38f131e0",
-      "physical_lines": 140,
-      "code_token_lines": 110,
+      "sha256": "28d90e07db3eb2df692da2645f1653d2773c4dd9623276f243e8ec7b2d32f39a",
+      "physical_lines": 145,
+      "code_token_lines": 115,
       "comment_lines": 0,
       "signed_comment_lines": {
         "SZX": 0,
