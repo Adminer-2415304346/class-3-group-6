@@ -5,10 +5,16 @@
 再执行
     python doc/week9-10/成员成果/GCY/证据/runtime-http-check.py /article/2026/11/9/1.html
 脚本会匿名访问首页/登录/后台/文章/404/健康检查，再用演示账号登录并发表一条评论，
-结果打印并写入同目录 runtime-http-checks.json。演示账号：gcy_demo / demo-pass-1234。
+结果打印并写入同目录 runtime-http-checks.json。
+
+登录账号从环境变量读取，仓库内不保存口令：
+    $env:GCY_DEMO_USERNAME = 'gcy_demo'        # 可选，默认 gcy_demo
+    $env:GCY_DEMO_PASSWORD = '<本地 createsuperuser 时的口令>'
+未设置口令时脚本只跑匿名部分，登录与评论两项标记为 skipped。
 """
 import http.client
 import json
+import os
 import sys
 import urllib.parse
 from pathlib import Path
@@ -19,8 +25,8 @@ ORIGIN = f'http://{HOST}:{PORT}'
 PROJECT = Path(__file__).resolve().parents[5]
 MANIFEST = PROJECT / 'src/DjangoBlog/blog/static/blog/dist/.vite/manifest.json'
 RESULT = Path(__file__).resolve().parent / 'runtime-http-checks.json'
-USERNAME = 'gcy_demo'
-PASSWORD = 'demo-pass-1234'
+USERNAME = os.environ.get('GCY_DEMO_USERNAME', 'gcy_demo')
+PASSWORD = os.environ.get('GCY_DEMO_PASSWORD', '')
 COMMENT_TEXT = 'GCY 第9—10周演示评论'
 
 
@@ -89,33 +95,49 @@ def main(article_path):
         record(name, path, expected, status, body.decode('utf-8', errors='replace'), markers)
 
     # 登录 -> 已登录文章页出现评论表单 -> 提交评论 -> 页面可见评论内容
-    session.request('/login/')
-    status, _, body = session.request('/login/', 'POST', {
-        'username': USERNAME,
-        'password': PASSWORD,
-        'csrfmiddlewaretoken': session.csrf_token(),
-        'next': '',
-    })
-    record('login_submit', '/login/', 302, status, body.decode('utf-8', errors='replace'))
-
-    status, _, body = session.request(article_path)
-    record('article_detail_authenticated', article_path, 200, status,
-           body.decode('utf-8', errors='replace'), ('postcomment', 'commentform'))
-
-    status, _, body = session.request(
-        f'/article/{article_id}/postcomment', 'POST', {
-            'body': COMMENT_TEXT,
-            'parent_comment_id': '',
+    if not PASSWORD:
+        for name, path in (
+            ('login_submit', '/login/'),
+            ('article_detail_authenticated', article_path),
+            ('comment_submit', f'/article/{article_id}/postcomment'),
+            ('comment_visible', article_path),
+        ):
+            results.append({'name': name, 'path': path, 'expected_status': None,
+                            'actual_status': None, 'missing_markers': [], 'status': 'skipped'})
+    else:
+        session.request('/login/')
+        status, _, body = session.request('/login/', 'POST', {
+            'username': USERNAME,
+            'password': PASSWORD,
             'csrfmiddlewaretoken': session.csrf_token(),
+            'next': '',
         })
-    record('comment_submit', f'/article/{article_id}/postcomment', 302, status,
-           body.decode('utf-8', errors='replace'))
+        record('login_submit', '/login/', 302, status, body.decode('utf-8', errors='replace'))
 
-    status, _, body = session.request(article_path)
-    record('comment_visible', article_path, 200, status,
-           body.decode('utf-8', errors='replace'), (COMMENT_TEXT,))
+        status, _, body = session.request(article_path)
+        record('article_detail_authenticated', article_path, 200, status,
+               body.decode('utf-8', errors='replace'), ('postcomment', 'commentform'))
 
-    overall = 'ok' if all(item['status'] == 'ok' for item in results) else 'failed'
+        status, _, body = session.request(
+            f'/article/{article_id}/postcomment', 'POST', {
+                'body': COMMENT_TEXT,
+                'parent_comment_id': '',
+                'csrfmiddlewaretoken': session.csrf_token(),
+            })
+        record('comment_submit', f'/article/{article_id}/postcomment', 302, status,
+               body.decode('utf-8', errors='replace'))
+
+        status, _, body = session.request(article_path)
+        record('comment_visible', article_path, 200, status,
+               body.decode('utf-8', errors='replace'), (COMMENT_TEXT,))
+
+    statuses = {item['status'] for item in results}
+    if 'failed' in statuses:
+        overall = 'failed'
+    elif statuses == {'ok'}:
+        overall = 'ok'
+    else:
+        overall = 'partial'
     report = {'status': overall, 'base_url': ORIGIN, 'checks': results}
     RESULT.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(report, ensure_ascii=False, indent=2))
