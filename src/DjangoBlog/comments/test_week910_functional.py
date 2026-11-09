@@ -138,10 +138,24 @@ class CommentInputValidationTests(CommentWeek910TestCase):
         comment = self.comments_of().get()
         self.assertEqual(len(comment.body), 2000)
 
+    def test_c_t02_boundary_with_surrounding_spaces_accepted(self):
+        """C-T02 去首尾空白后刚好 2000 字：接受，入库为去空白后的正文。
+
+        回归点：字段层若保留模型派生的 2000 上限，会把“带前后空格的 2002 字符”
+        判成超长而误拒，长度必须只由 clean_body 按去空白后的值判定。
+        """
+        body = '  \n' + '评' * 2000 + '  \t'
+        response = self.post_comment(body)
+        self.assertEqual(response.status_code, 302)
+        comment = self.comments_of().get()
+        self.assertEqual(len(comment.body), 2000)
+        self.assertEqual(comment.body, '评' * 2000)
+
     def test_c_t02_2001_chars_rejected(self):
-        """C-T02 2001 字符：拒绝且无记录。"""
+        """C-T02 2001 字符：拒绝、提示为本组统一文案、无记录。"""
         response = self.post_comment('评' * 2001)
         self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '评论内容最多 2000 个字符')
         self.assertEqual(self.comments_of().count(), 0)
 
     @override_settings(MAINTENANCE_OPTIONS={'COMMENT_MAX_LENGTH': 1500})
@@ -254,6 +268,29 @@ class CommentRateLimitTests(CommentWeek910TestCase):
         allowed = self.post_comment('第二条', at=self.at + timedelta(seconds=interval))
         self.assertEqual(allowed.status_code, 302)
         self.assertEqual(self.comments_of().count(), 2)
+
+    def test_c_t06_concurrent_interval_reserve_does_not_overwrite(self):
+        """C-T06 并发抢占同一限频状态：后到请求必须失败，不能改写已有状态行。
+
+        限频用固定 state_key，若用 update_or_create 写状态，第二个请求会直接改写
+        expires_at 并返回成功，等于把限频状态“覆盖”掉；这里直接验证第二次抢占返回 None。
+        """
+        from comments.post_guard import _reserve, interval_state_key
+        first = _reserve(self.user.id, CommentPostState.SCOPE_INTERVAL,
+                         interval_state_key(), self.at + timedelta(seconds=30))
+        self.assertIsNotNone(first)
+        second = _reserve(self.user.id, CommentPostState.SCOPE_INTERVAL,
+                          interval_state_key(), self.at + timedelta(seconds=30))
+        self.assertIsNone(second)
+
+    def test_c_t06_both_prechecks_pass_only_first_persists(self):
+        """C-T06 两个请求都通过前置检查时：只有先抢到的入库，后到者被限频拒绝。"""
+        self.assertEqual(self.post_comment('并发正文A').status_code, 302)
+        with patch('comments.post_guard._active_state', return_value=None):
+            response = self.post_comment('并发正文B')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, '评论提交过于频繁')
+        self.assertEqual(self.comments_of().count(), 1)
 
     def test_c_t07_other_user_is_independent(self):
         """C-T07 另一个用户：重复键与冷却都独立（全用户间隔按用户维度验证）。"""
