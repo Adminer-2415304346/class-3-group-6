@@ -1,0 +1,242 @@
+[WZY] warm import compressor.filters.base ok (platform detection does not fork)
+Found 60 test(s).
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+test_new_emoji_before_rows_are_read_does_not_raise (comments.test_reaction_snapshot.ReactionSnapshotTests.test_new_emoji_before_rows_are_read_does_not_raise) ... ok
+test_removed_reaction_does_not_leave_a_count_from_an_earlier_read (comments.test_reaction_snapshot.ReactionSnapshotTests.test_removed_reaction_does_not_leave_a_count_from_an_earlier_read) ... ok
+test_zero_one_and_eight_types_use_one_query_and_exclude_other_comments (comments.test_reaction_snapshot.ReactionSnapshotTests.test_zero_one_and_eight_types_use_one_query_and_exclude_other_comments) ... ok
+test_can_comment_on_open_comment_article (comments.test_comment_business_logic.CommentArticleStatusTest.test_can_comment_on_open_comment_article)
+测试可以在开放评论的文章上评论 ... E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Test Category_1'
+  warnings.warn(warning, CacheKeyWarning)
+ok
+test_comment_status_closed_validation (comments.test_comment_business_logic.CommentArticleStatusTest.test_comment_status_closed_validation)
+测试关闭评论的文章状态 ... ok
+test_comments_belong_to_correct_article (comments.test_comment_business_logic.CommentArticleStatusTest.test_comments_belong_to_correct_article)
+测试评论属于正确的文章 ... ok
+test_comment_article_relationship (comments.test_comment_business_logic.CommentCreationTest.test_comment_article_relationship)
+测试评论与文章的关系 ... ok
+test_comment_author_is_correct (comments.test_comment_business_logic.CommentCreationTest.test_comment_author_is_correct)
+测试评论作者正确 ... ok
+test_comment_created_with_required_fields (comments.test_comment_business_logic.CommentCreationTest.test_comment_created_with_required_fields)
+测试评论创建包含必需字段 ... ok
+test_comment_has_creation_time (comments.test_comment_business_logic.CommentCreationTest.test_comment_has_creation_time)
+测试评论有创建时间 ... ok
+test_comment_can_be_deleted (comments.test_comment_business_logic.CommentDeletionTest.test_comment_can_be_deleted)
+测试评论可以被删除 ... ok
+test_deleting_parent_comment_with_replies (comments.test_comment_business_logic.CommentDeletionTest.test_deleting_parent_comment_with_replies)
+测试删除有回复的父评论 ... ok
+test_comment_approved_directly_when_no_review_required (comments.test_comment_business_logic.CommentModerationTest.test_comment_approved_directly_when_no_review_required)
+测试不需要审核时评论直接通过 ... ok
+test_comment_can_be_approved (comments.test_comment_business_logic.CommentModerationTest.test_comment_can_be_approved)
+测试评论可以被批准 ... ok
+test_comment_can_be_rejected (comments.test_comment_business_logic.CommentModerationTest.test_comment_can_be_rejected)
+测试评论可以被拒绝 ... ok
+test_comment_pending_by_default_when_review_required (comments.test_comment_business_logic.CommentModerationTest.test_comment_pending_by_default_when_review_required)
+测试需要审核时评论默认为待审状态 ... ok
+test_only_approved_comments_in_public_list (comments.test_comment_business_logic.CommentModerationTest.test_only_approved_comments_in_public_list)
+测试只有已批准的评论在公开列表中 ... ok
+test_comment_ordering (comments.test_comment_business_logic.CommentQueryTest.test_comment_ordering)
+测试评论排序 ... ok
+test_query_comments_by_article (comments.test_comment_business_logic.CommentQueryTest.test_query_comments_by_article)
+测试按文章查询评论 ... ok
+test_query_comments_by_author (comments.test_comment_business_logic.CommentQueryTest.test_query_comments_by_author)
+测试按作者查询评论 ... ok
+test_query_root_comments_only (comments.test_comment_business_logic.CommentQueryTest.test_query_root_comments_only)
+测试只查询根评论（无父评论的评论） ... ok
+test_comment_can_have_no_parent (comments.test_comment_business_logic.CommentReplyTest.test_comment_can_have_no_parent)
+测试评论可以没有父评论（根评论） ... ok
+test_comment_can_have_parent (comments.test_comment_business_logic.CommentReplyTest.test_comment_can_have_parent)
+测试评论可以有父评论（回复） ... ok
+test_multiple_replies_to_same_comment (comments.test_comment_business_logic.CommentReplyTest.test_multiple_replies_to_same_comment)
+测试同一评论的多个回复 ... ok
+test_nested_comment_structure (comments.test_comment_business_logic.CommentReplyTest.test_nested_comment_structure)
+测试嵌套评论结构 ... ok
+test_parent_comment_has_replies (comments.test_comment_business_logic.CommentReplyTest.test_parent_comment_has_replies)
+测试父评论有回复 ... ok
+test_delete_model_invalidates_after_delete (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_delete_model_invalidates_after_delete) ... ok
+test_delete_queryset_captures_ids_before_delete (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_delete_queryset_captures_ids_before_delete) ... ok
+test_disable_action_invalidates_after_commit (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_disable_action_invalidates_after_commit) ... ok
+test_enable_action_invalidates_after_commit (comments.test_quality_r45.CommentAdminCacheInvalidationTests.test_enable_action_invalidates_after_commit) ... ok
+test_anonymous_has_reacted_is_false (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_anonymous_has_reacted_is_false) ... ok
+test_counts_and_top10_users_are_preserved (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_counts_and_top10_users_are_preserved) ... ok
+test_empty_comment_returns_empty_object (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_empty_comment_returns_empty_object) ... ok
+test_optimized_summary_uses_one_query (comments.test_quality_r45.ReactionSummaryOptimizationTests.test_optimized_summary_uses_one_query) ... ok
+test_validate_comment (comments.tests.CommentsTest.test_validate_comment) ... ok
+test_closed_article_returns_form_error (comments.test_views.CommentReplyValidationTest.test_closed_article_returns_form_error)
+R3：关闭评论的文章提交应回显表单错误，而非 500 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_cross_article_reply_rejected (comments.test_views.CommentReplyValidationTest.test_cross_article_reply_rejected)
+R1：跨文章回复应被拒绝，不得在目标文章下创建回复 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_invalid_parent_comment_id_rejected (comments.test_views.CommentReplyValidationTest.test_invalid_parent_comment_id_rejected)
+R2：无效父评论 ID 应返回表单错误，而非 500 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_sql_injection_protection (comments.test_views.CommentSecurityTest.test_sql_injection_protection)
+测试 SQL 注入防护 ... ok
+test_xss_protection (comments.test_views.CommentSecurityTest.test_xss_protection)
+测试 XSS 防护 ... ok
+test_comment_rate_limit (comments.test_views.CommentSpamTest.test_comment_rate_limit)
+测试评论频率限制 ... ok
+test_duplicate_comment (comments.test_views.CommentSpamTest.test_duplicate_comment)
+测试重复评论 ... ok
+test_comment_display_on_article (comments.test_views.CommentViewTest.test_comment_display_on_article)
+测试评论在文章页显示 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_comment_moderation (comments.test_views.CommentViewTest.test_comment_moderation)
+测试评论审核 ... ok
+test_disabled_comment_not_display (comments.test_views.CommentViewTest.test_disabled_comment_not_display)
+测试未启用的评论不显示 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_post_comment_authenticated (comments.test_views.CommentViewTest.test_post_comment_authenticated)
+测试已登录用户发表评论 ... ok
+test_post_comment_empty_body (comments.test_views.CommentViewTest.test_post_comment_empty_body)
+测试提交空评论 ... ⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_post_comment_invalid_article (comments.test_views.CommentViewTest.test_post_comment_invalid_article)
+测试对不存在的文章评论 ... HTTP 404 Error: No Article matches the given query.
+Traceback (most recent call last):
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 90, in get_object_or_404
+    return queryset.get(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\db\models\query.py", line 635, in get
+    raise self.model.DoesNotExist(
+blog.models.Article.DoesNotExist: Article matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\djangoblog\base_views.py", line 61, in dispatch
+    return super().dispatch(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\base.py", line 144, in dispatch
+    return handler(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\views\generic\edit.py", line 151, in post
+    return self.form_valid(form)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\comments\views.py", line 52, in form_valid
+    article = get_object_or_404(Article, pk=article_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\.venv\Lib\site-packages\django\shortcuts.py", line 92, in get_object_or_404
+    raise Http404(
+django.http.response.Http404: No Article matches the given query.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: E:\git\Git小组作业\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+Not Found: /article/99999/postcomment
+ok
+test_post_comment_unauthenticated (comments.test_views.CommentViewTest.test_post_comment_unauthenticated)
+测试未登录用户发表评论 ... ok
+test_post_reply_comment (comments.test_views.CommentViewTest.test_post_reply_comment)
+测试回复评论 ... ok
+test_action_registry_is_explicit_and_can_be_disabled (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_action_registry_is_explicit_and_can_be_disabled) ... ok
+test_agreed_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_agreed_defaults) ... ok
+test_invalid_upload_formats_are_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_invalid_upload_formats_are_rejected) ... ok
+test_non_dictionary_override_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_non_dictionary_override_is_rejected) ... ok
+test_nonpositive_or_noninteger_limit_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_nonpositive_or_noninteger_limit_is_rejected) ... ok
+test_partial_override_keeps_other_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_partial_override_keeps_other_defaults) ... ok
+test_returned_options_do_not_mutate_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_returned_options_do_not_mutate_defaults) ... ok
+ISOLATED_TEST_FAILURES=0
+test_supported_sequence_is_returned_as_immutable_tuple (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_supported_sequence_is_returned_as_immutable_tuple) ... ok
+test_unknown_override_key_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown_override_key_is_rejected) ... ok
+test_unknown_requested_option_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown_requested_option_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 60 tests in 6.071s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
