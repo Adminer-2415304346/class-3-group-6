@@ -3,6 +3,8 @@ import os
 import re
 
 import jsonpickle
+import time
+
 from django.conf import settings
 from djangoblog.utils import get_sha256
 from werobot import WeRoBot
@@ -117,19 +119,27 @@ def echo(message, session):
     return handler.handler()
 
 
-class MessageHandler:
-   def __init__(self, message, session):
-    userid = message.source
-    self.message = message
-    self.session = session
-    self.userid = userid
-    try:
-        info = session[userid]
-        self.userinfo = jsonpickle.decode(info) # nosec
-    except Exception: # noqa: BLE001
-        userinfo = WxUserInfo()
-        self.userinfo = userinfo
+class WxUserInfo:
+    def __init__(self):
+        self.isAdmin = False
+        self.isPasswordSet = False
+        self.Count = 0
+        self.Command = ''
+        self.admin_login_ts = None
 
+
+class MessageHandler:
+    def __init__(self, message, session):
+        userid = message.source
+        self.message = message
+        self.session = session
+        self.userid = userid
+        try:
+            info = session[userid]
+            self.userinfo = jsonpickle.decode(info)
+        except Exception:
+            userinfo = WxUserInfo()
+            self.userinfo = userinfo
 
     @property
     def is_admin(self):
@@ -142,6 +152,31 @@ class MessageHandler:
     def save_session(self):
         info = jsonpickle.encode(self.userinfo)
         self.session[self.userid] = info
+
+    def handle_msg(self, info):
+        if self.userinfo.isAdmin and self.userinfo.isPasswordSet:
+            # 管理员超时判断
+            if self.userinfo.admin_login_ts is None or (time.time() - self.userinfo.admin_login_ts) > 900:
+                self.userinfo = WxUserInfo()
+                self.save_session()
+                return "管理员会话超时，请重新发送ADMIN登录"
+
+            if self.userinfo.Command != '' and info.upper() == 'Y':
+                res = cmd_handler.run(self.userinfo.Command)
+                if res["ok"]:
+                    output = res.get("stdout", "") + "\n" + res.get("stderr", "")
+                    return f"执行成功，返回码: {res['returncode']}\n{output}"
+                else:
+                    return f"执行失败: {res['reason']}"
+            else:
+                if info.upper() == 'HELPME':
+                    return cmd_handler.get_help()
+                self.userinfo.Command = info
+                self.save_session()
+                return f"确认执行动作ID:{info} ?(回复Y确认)"
+        else:
+            # 非管理员走这里
+            return ChatGPT.chat(info)
 
     def handler(self):
         info = self.message.content
@@ -157,36 +192,13 @@ class MessageHandler:
         if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
             passwd = settings.WXADMIN
             if settings.TESTING:
-               passwd = settings.TEST_ROBOT_PASSWD
-
-            if passwd.upper() == get_sha256(get_sha256(info)).upper():
+                passwd = settings.TEST_ROBOT_PASSWD
+            if info.strip() == passwd:
                 self.userinfo.isPasswordSet = True
+                self.userinfo.admin_login_ts = time.time()
                 self.save_session()
-                return "验证通过,请输入命令或者要执行的命令代码:输入helpme获得帮助"
+                return "管理员登录成功"
             else:
-                if self.userinfo.Count >= 3:
-                    self.userinfo = WxUserInfo()
-                    self.save_session()
-                    return "超过验证次数"
-                self.userinfo.Count += 1
-                self.save_session()
-                return "验证失败，请重新输入管理员密码:"
-        if self.userinfo.isAdmin and self.userinfo.isPasswordSet:
-            if self.userinfo.Command != '' and info.upper() == 'Y':
-                return cmd_handler.run(self.userinfo.Command)
-            else:
-                if info.upper() == 'HELPME':
-                    return cmd_handler.get_help()
-                self.userinfo.Command = info
-                self.save_session()
-                return "确认执行: " + info + " 命令?"
+                return "密码错误"
 
-        return ChatGPT.chat(info)
-
-
-class WxUserInfo:
-    def __init__(self):
-        self.isAdmin = False
-        self.isPasswordSet = False
-        self.Count = 0
-        self.Command = ''
+        return self.handle_msg(info)
