@@ -193,6 +193,9 @@ class OauthEmailBindingTest(TestCase):
         ou = OAuthUser.objects.create(
             openid='gh_noemail', nickname='Newbie', type='github', email='')
         client = self.client_class()
+        s = client.session
+        s['pending_oauth_id'] = ou.id
+        s.save()
         # 填邮箱表单
         resp = client.post(
             reverse('oauth:require_email', kwargs={'oauthid': ou.id}),
@@ -217,6 +220,9 @@ class OauthEmailBindingTest(TestCase):
         ou = OAuthUser.objects.create(
             openid='gh_replay', nickname='R', type='github', email='')
         client = self.client_class()
+        s = client.session
+        s['pending_oauth_id'] = ou.id
+        s.save()
         client.post(
             reverse('oauth:require_email', kwargs={'oauthid': ou.id}),
             {'email': 'replay@example.com', 'oauthid': ou.id})
@@ -237,6 +243,9 @@ class OauthEmailBindingTest(TestCase):
         ou = OAuthUser.objects.create(
             openid='gh_t', nickname='T', type='github', email='')
         client = self.client_class()
+        s = client.session
+        s['pending_oauth_id'] = ou.id
+        s.save()
         client.post(
             reverse('oauth:require_email', kwargs={'oauthid': ou.id}),
             {'email': 'tamper@example.com', 'oauthid': ou.id})
@@ -321,6 +330,9 @@ class RequireEmailViewFlowTest(TestCase):
     def test_require_email_form_creates_pending_binding(self):
         ou = OAuthUser.objects.create(openid='gh_noemail', nickname='x', type='github')
         client = self.client_class()
+        s = client.session
+        s['pending_oauth_id'] = ou.id
+        s.save()
         resp = client.post(
             reverse('oauth:require_email', kwargs={'oauthid': ou.id}),
             {'email': 'user@example.com', 'oauthid': ou.id},
@@ -329,3 +341,43 @@ class RequireEmailViewFlowTest(TestCase):
         self.assertEqual(PendingBinding.objects.filter(email='user@example.com').count(), 1)
         self.assertEqual(len(mail.outbox), 1)
         self.assertIn('user@example.com', mail.outbox[0].body)
+
+    def test_tampered_oauthid_rejected(self):
+        """复核: 隐藏 oauthid 与 session pending_oauth_id 不匹配时 403，不创建 PendingBinding。"""
+        ou1 = OAuthUser.objects.create(openid='gh_a', nickname='A', type='github')
+        ou2 = OAuthUser.objects.create(openid='gh_b', nickname='B', type='github')
+        client = self.client_class()
+        s = client.session
+        s['pending_oauth_id'] = ou1.id
+        s.save()
+        # 提交别人的 oauthid
+        resp = client.post(
+            reverse('oauth:require_email', kwargs={'oauthid': ou2.id}),
+            {'email': 'attacker@example.com', 'oauthid': ou2.id})
+        self.assertEqual(resp.status_code, 403)
+        self.assertEqual(PendingBinding.objects.filter(email='attacker@example.com').count(), 0)
+
+
+class StateRejectionPreservesLatestStateTest(TestCase):
+    """复核: 旧/错误 state 回调不能清掉 session 中最新的有效 state。"""
+
+    def test_bad_state_does_not_clear_latest_valid_state(self):
+        from unittest.mock import patch, MagicMock
+        mgr = MagicMock()
+        mgr.ICON_NAME = 'github'
+        mgr.get_authorization_url.side_effect = lambda nexturl='/', state=None: f'https://x?state={state}'
+
+        with patch('oauth.views.get_manager_by_type', return_value=mgr):
+            client = self.client_class()
+            client.get('/oauth/oauthlogin?type=github')
+            state1 = client.session['oauth_states']['github']['state']
+            # 再发起一次，state2 覆盖 state1
+            client.get('/oauth/oauthlogin?type=github')
+            state2 = client.session['oauth_states']['github']['state']
+            self.assertNotEqual(state1, state2)
+            # 用旧 state1 回调，应被拒绝但不能清掉 state2
+            resp = client.get(f'/oauth/authorize?type=github&code=c&state={state1}')
+            self.assertEqual(resp.status_code, 403)
+            # session 里应仍有 state2
+            self.assertIn('github', client.session['oauth_states'])
+            self.assertEqual(client.session['oauth_states']['github']['state'], state2)
