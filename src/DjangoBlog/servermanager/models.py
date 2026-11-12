@@ -18,6 +18,20 @@ class commands(models.Model):
         verbose_name_plural = verbose_name
 
 
+class RobotAdminSession(models.Model):
+    """SZX（代SY，第9—10周）：每位管理员的当前会话及其最近一次命令确认。"""
+
+    owner = models.CharField(max_length=64, primary_key=True, serialize=False)
+    session_id = models.CharField(max_length=32)
+    expires_at = models.DateTimeField()
+    ticket_id = models.CharField(max_length=32, blank=True, default="")
+    ticket_title = models.CharField(max_length=300, blank=True, default="")
+    ticket_action = models.CharField(max_length=32, blank=True, default="")
+    ticket_created_at = models.DateTimeField(null=True, blank=True)
+    ticket_expires_at = models.DateTimeField(null=True, blank=True)
+    ticket_consumed = models.BooleanField(default=True)
+
+
 class EmailSendLog(models.Model):
     # SZX（代SY，第7—8周）：这里只记录投递结果，不把模型保存说成发信操作。
     emailto = models.CharField("收件人", max_length=300)

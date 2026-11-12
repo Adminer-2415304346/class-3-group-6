@@ -3,17 +3,18 @@
 import json
 import os
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from django.test import SimpleTestCase, TestCase, override_settings
-from openai import OpenAIError
-
 from accounts.models import BlogUser
 from blog.models import Article, Category
+from django.test import SimpleTestCase, TestCase, override_settings
 from djangoblog.utils import get_sha256
+from openai import OpenAIError
+
 from servermanager import robot as module
 from servermanager.api.blogapi import BlogApi
 from servermanager.api.commonapi import ChatGPT, CommandHandler
@@ -72,7 +73,7 @@ class ChatAdapterTests(SimpleTestCase):
 
 class CommandExecutionTests(TestCase):
     def setUp(self):
-        commands.objects.create(title="probe", command="synthetic-command", describe="fixture")
+        commands.objects.create(title="probe", command="python_version", describe="fixture")
 
     def test_configured_command_success_is_bounded(self):
         with patch(
@@ -80,11 +81,12 @@ class CommandExecutionTests(TestCase):
         ) as run:
             self.assertEqual(CommandHandler().run("PROBE"), "unit output")
         run.assert_called_once_with(
-            "synthetic-command",
-            shell=True,
+            [sys.executable, "--version"],
+            shell=False,
             capture_output=True,
             text=True,
-            timeout=10.0,
+            errors="replace",
+            timeout=10,
             check=False,
         )
 
@@ -94,14 +96,14 @@ class CommandExecutionTests(TestCase):
 
     def test_nonzero_exit_is_not_success(self):
         with patch("subprocess.run", return_value=SimpleNamespace(returncode=2, stdout="")):
-            self.assertEqual(CommandHandler().run("probe"), "命令执行失败")
+            self.assertEqual(CommandHandler().run("probe"), "命令执行失败（退出码 2）")
 
     def test_unknown_command_never_executes(self):
         with patch("subprocess.run") as run:
             self.assertIn("未找到", CommandHandler().run("not configured"))
         run.assert_not_called()
 
-    @override_settings(ROBOT_COMMAND_TIMEOUT=0)
+    @override_settings(MAINTENANCE_OPTIONS={"ROBOT_COMMAND_TIMEOUT_SECONDS": 0})
     def test_invalid_timeout_never_executes(self):
         with patch("subprocess.run") as run:
             self.assertEqual(CommandHandler().run("probe"), "命令配置不正确")
@@ -110,7 +112,7 @@ class CommandExecutionTests(TestCase):
     def test_command_list_is_not_stale_after_first_read(self):
         handler = CommandHandler()
         handler.get_help()
-        commands.objects.create(title="new-probe", command="new-fixture", describe="new")
+        commands.objects.create(title="new-probe", command="python_version", describe="new")
         with patch("subprocess.run", return_value=SimpleNamespace(returncode=0, stdout="fresh")):
             self.assertEqual(handler.run("new-probe"), "fresh")
 
@@ -120,10 +122,11 @@ class CommandExecutionTests(TestCase):
                 CommandHandler().run("probe")
 
 
-class RobotStateTests(SimpleTestCase):
+class RobotStateTests(TestCase):
     def setUp(self):
         self.session = {}
-        command_patch = patch.object(module, "cmd_handler")
+        commands.objects.create(title="probe", command="python_version", describe="fixture")
+        command_patch = patch.object(module.cmd_handler, "run", return_value="executed mock")
         self.command = command_patch.start()
         self.addCleanup(command_patch.stop)
         chat_patch = patch.object(module.ChatGPT, "chat", return_value="mock chat")
@@ -150,13 +153,13 @@ class RobotStateTests(SimpleTestCase):
     def test_anonymous_never_runs_command(self):
         self.assertEqual(self.send("probe"), "mock chat")
         self.assertEqual(self.send("Y"), "mock chat")
-        self.command.run.assert_not_called()
+        self.command.assert_not_called()
 
     def test_waiting_for_password_never_runs_command(self):
         self.send("ADMIN")
         self.send("probe")
         self.send("Y")
-        self.command.run.assert_not_called()
+        self.command.assert_not_called()
 
     def test_configured_password_is_used_in_testing(self):
         self.login()
@@ -166,18 +169,17 @@ class RobotStateTests(SimpleTestCase):
     def test_pending_command_requires_confirmation_and_is_consumed_once(self):
         self.login()
         self.assertIn("确认执行", self.send("probe"))
-        self.command.run.assert_not_called()
-        self.command.run.return_value = "executed mock"
+        self.command.assert_not_called()
         self.assertEqual(self.send("Y"), "executed mock")
         self.send("Y")
-        self.command.run.assert_called_once_with("probe")
+        self.command.assert_called_once_with("probe", expected_action="python_version")
 
     def test_exit_clears_verified_and_pending_state(self):
         self.login()
         self.send("probe")
         self.assertEqual(self.send("EXIT"), "退出成功")
         self.assertEqual(self.send("Y"), "mock chat")
-        self.command.run.assert_not_called()
+        self.command.assert_not_called()
 
     def test_third_wrong_password_ends_attempt(self):
         self.send("ADMIN")
@@ -191,7 +193,10 @@ class RobotStateTests(SimpleTestCase):
     def test_session_is_plain_json_scalars(self):
         self.send("ADMIN")
         payload = json.loads(self.session["unit-user"])
-        self.assertEqual(set(payload), {"isAdmin", "isPasswordSet", "Count", "Command"})
+        self.assertEqual(
+            set(payload), {"isAdmin", "isPasswordSet", "Count", "Command", "SessionId", "TicketId"},
+        )
+        self.assertTrue(all(type(value) in {bool, int, str} for value in payload.values()))
         self.assertNotIn("py/object", payload)
 
     def test_legacy_object_payload_never_uses_object_deserializer(self):

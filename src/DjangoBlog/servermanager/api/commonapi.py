@@ -1,10 +1,12 @@
 # SZX（代SY，第7—8周）：聊天SDK和数据库配置命令的边界；调用者必须完成管理员确认。
 import logging
-import math
 import os
 import subprocess
+import sys
 
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+from djangoblog.maintenance_config import get_maintenance_option
 from openai import OpenAI, OpenAIError
 
 from servermanager.models import commands
@@ -41,35 +43,70 @@ class ChatGPT:
 
 
 class CommandHandler:
-    def run(self, title):
-        # SZX（代SY，第7—8周）：每次读取当前配置，避免首轮QuerySet缓存后看不到新命令。
-        command = commands.objects.filter(title__iexact=title).first()
-        if command is None:
-            return "未找到相关命令，请输入helpme获得帮助。"
-        return self.__run_command__(command.command)
+    # SZX（代SY，第9—10周）：数据库只选动作 ID，参数由代码固定。
+    ACTIONS = {"python_version": (sys.executable, "--version")}
 
-    def __run_command__(self, command):
+    def resolve(self, title):
+        if not isinstance(title, str) or not 0 < len(title) <= 300:
+            return None, "未找到相关命令，请输入helpme获得帮助。"
+        command = commands.objects.filter(title__iexact=title).order_by("pk").first()
+        if command is None:
+            return None, "未找到相关命令，请输入helpme获得帮助。"
+        if command.command not in self.ACTIONS:
+            return None, "旧命令配置已停用，请在后台填写固定动作 ID python_version。"
         try:
-            timeout = float(getattr(settings, "ROBOT_COMMAND_TIMEOUT", 10.0))
-            if not math.isfinite(timeout) or timeout <= 0:
-                return "命令配置不正确"
-        except (TypeError, ValueError):
-            return "命令配置不正确"
+            allowed = get_maintenance_option("ROBOT_ALLOWED_ACTIONS")
+        except ImproperlyConfigured:
+            return None, "命令配置不正确"
+        if command.command not in allowed:
+            return None, "此动作未启用，请输入helpme查看可用命令。"
+        return command, None
+
+    @staticmethod
+    def _limit_output(message, limit):
+        return message if len(message) <= limit else message[:limit - 1] + "…"
+
+    def run(self, title, *, expected_action=None):
+        command, error = self.resolve(title)
+        if error:
+            return error
+        if expected_action is not None and command.command != expected_action:
+            return "动作配置已变更，请重新发起确认。"
+        timeout = get_maintenance_option("ROBOT_COMMAND_TIMEOUT_SECONDS")
+        limit = get_maintenance_option("ROBOT_OUTPUT_MAX_CHARS")
         try:
-            # SZX（代SY，第7—8周）：保留管理员配置的shell语义，设置超时并区分退出失败。
-            # 此入口不是任意聊天文本执行器；shell告警保留，不用nosec隐藏。
             result = subprocess.run(
-                command, shell=True, capture_output=True, text=True, timeout=timeout, check=False
+                list(self.ACTIONS[command.command]),
+                shell=False,
+                capture_output=True,
+                text=True,
+                errors="replace",
+                timeout=timeout,
+                check=False,
             )
-            return result.stdout if result.returncode == 0 else "命令执行失败"
+            if result.returncode == 0:
+                message = result.stdout or result.stderr or "命令执行成功"
+            else:
+                message = f"命令执行失败（退出码 {result.returncode}）"
         except subprocess.TimeoutExpired:
-            return "命令执行超时"
+            message = "命令执行超时"
         except (OSError, ValueError) as error:
             logger.warning("机器人命令失败：%s", type(error).__name__)
-            return "命令执行出错!"
+            message = "命令执行出错"
+        return self._limit_output(message, limit)
 
     def get_help(self):
-        # SZX（代SY，第7—8周）：帮助和执行均查询数据库当前状态；不在模块导入时读命令表。
-        return "".join(
-            f"{command.title}:{command.describe}\n" for command in commands.objects.all()
-        )
+        try:
+            allowed = get_maintenance_option("ROBOT_ALLOWED_ACTIONS")
+            limit = get_maintenance_option("ROBOT_OUTPUT_MAX_CHARS")
+        except ImproperlyConfigured:
+            return "命令配置不正确"
+        lines = []
+        seen_titles = set()
+        for command in commands.objects.order_by("pk"):
+            key = command.title.casefold()
+            enabled = command.command in allowed and command.command in self.ACTIONS
+            if key not in seen_titles and enabled:
+                lines.append(f"{command.title}:{command.describe}\n")
+            seen_titles.add(key)
+        return self._limit_output("".join(lines) or "没有可用命令", limit)
