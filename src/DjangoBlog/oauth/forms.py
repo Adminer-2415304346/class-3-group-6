@@ -7,8 +7,8 @@ from django.forms import widgets
 class RequireEmailForm(forms.Form):
     # GZX：email 由 EmailField 做格式必填校验；oauthid 是隐藏字段，仅携带 OAuthUser 主键，
     # 它不是权限凭证——隐藏值可被前端篡改，不能用来证明当前会话拥有该第三方账号。
-    email = forms.EmailField(label='电子邮箱', required=True)
-    oauthid = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    email = forms.EmailField(label='电子邮箱', max_length=254)
+    oauthid = forms.IntegerField(widget=forms.HiddenInput, min_value=1)
 
     def __init__(self, *args, **kwargs):
         # GZX：渲染时把邮箱输入框换成 EmailInput 并加样式占位，不改校验规则。

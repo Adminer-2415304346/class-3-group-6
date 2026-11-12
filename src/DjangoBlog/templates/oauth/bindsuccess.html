@@ -14,6 +14,14 @@
 
                 <h2 class="text-xl font-bold tracking-tight text-foreground mb-4">{{ content }}</h2>
 
+                {% if can_manage %}
+                    <form method="post" class="mb-4 flex justify-center gap-4 text-sm">
+                        {% csrf_token %}
+                        <button name="action" value="resend" class="font-medium text-primary">重发确认邮件</button>
+                        <button name="action" value="cancel" class="text-muted-foreground">取消绑定</button>
+                    </form>
+                {% endif %}
+
                 <div class="flex items-center justify-center gap-4 text-sm">
                     <a href="{% url 'account:login' %}"
                        class="inline-flex items-center gap-1.5 font-medium text-primary transition-colors hover:text-primary/80">

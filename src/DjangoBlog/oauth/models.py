@@ -24,7 +24,7 @@ class OAuthUser(models.Model):
     token = models.CharField(max_length=150, null=True, blank=True)
     picture = models.CharField(max_length=350, blank=True, null=True)
     type = models.CharField(blank=False, null=False, max_length=50)
-    email = models.CharField(max_length=50, null=True, blank=True)
+    email = models.CharField(max_length=254, null=True, blank=True)
     metadata = models.TextField(null=True, blank=True)
     creation_time = models.DateTimeField(_('creation time'), default=now)
     last_modify_time = models.DateTimeField(_('last modify time'), default=now)
@@ -76,6 +76,23 @@ class OAuthConfig(models.Model):
         verbose_name = 'oauth配置'
         verbose_name_plural = verbose_name
         ordering = ['-creation_time']
+
+
+class OAuthLoginState(models.Model):
+    """SZX（接手GZX，第9—10周）：对同一浏览器和渠道的最新 state 做数据库一次消费。"""
+
+    browser_context = models.CharField(max_length=64)
+    channel = models.CharField(max_length=10)
+    digest = models.CharField(max_length=64)
+    expires_at = models.DateTimeField(db_index=True)
+    consumed = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['browser_context', 'channel'], name='oauth_one_current_state',
+            ),
+        ]
 
 
 # GZX（第9—10周 O92）：待邮箱绑定证明：第三方账号要求用户填写邮箱时，服务端落库一条
