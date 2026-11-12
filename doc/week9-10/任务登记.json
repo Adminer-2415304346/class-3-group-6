@@ -3,7 +3,8 @@
   "assigned_date": "2026-11-02",
   "baseline_commit": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad",
   "baseline_branch": "main",
-  "status": "partial: SZX B91/B92 implemented and self-verified; other tasks await member submission/review",
+  "status": "12项必做优化已实现并通过六App联合回归，独立复核按本人记录登记",
+  "integration_evidence": "接手验证.json",
   "shared_contract": "共享配置与接口约定.md",
   "shared_owner": "SZX",
   "members": [
@@ -65,12 +66,16 @@
         {
           "id": "A91",
           "title": "服务端验证码发送冷却",
-          "status": "待实施"
+          "status": "已合入 develop 并通过联合回归",
+          "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
+          "evidence": "成员成果/YFY/功能测试记录.md"
         },
         {
           "id": "A92",
           "title": "验证码失败次数和挑战锁定",
-          "status": "待实施"
+          "status": "已合入 develop 并通过联合回归",
+          "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
+          "evidence": "成员成果/YFY/功能测试记录.md"
         }
       ],
       "optional_task": {
@@ -101,12 +106,16 @@
         {
           "id": "C91",
           "title": "评论输入和目标文章校验",
-          "status": "待实施"
+          "status": "已合入 develop 并通过联合回归",
+          "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
+          "evidence": "成员成果/WZY/功能测试记录.md"
         },
         {
           "id": "C92",
           "title": "评论限频和重复保护",
-          "status": "待实施"
+          "status": "已合入 develop 并通过联合回归",
+          "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
+          "evidence": "成员成果/WZY/功能测试记录.md"
         }
       ],
       "optional_task": {
@@ -136,18 +145,26 @@
         {
           "id": "O91",
           "title": "state绑定会话并按期一次消费",
-          "status": "待实施"
+          "status": "顾梓鑫实现，石兆翔补齐并通过联合回归",
+          "actual_executor": "GZX + SZX",
+          "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
+          "evidence": "成员成果/GZX/功能测试记录.md",
+          "independent_review": "待YFY本人复核"
         },
         {
           "id": "O92",
           "title": "邮箱归属、绑定期限与一次确认",
-          "status": "待实施"
+          "status": "顾梓鑫实现，石兆翔补齐并通过联合回归",
+          "actual_executor": "GZX + SZX",
+          "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
+          "evidence": "成员成果/GZX/功能测试记录.md",
+          "independent_review": "待YFY本人复核"
         }
       ],
       "optional_task": {
         "id": "O93",
         "title": "后台与日志敏感数据最小化",
-        "status": "选做待实施"
+          "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
       },
       "baseline_test_labels": [
         "oauth.test_oauth_business_logic"
@@ -167,12 +184,20 @@
         {
           "id": "S91",
           "title": "固定动作允许列表",
-          "status": "待实施"
+          "status": "石兆翔接手实现并通过联合回归",
+          "actual_executor": "SZX",
+          "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+          "evidence": "成员成果/SY/功能测试记录.md",
+          "independent_review": "待WZY本人复核"
         },
         {
           "id": "S92",
           "title": "管理员期限及命令确认票据",
-          "status": "待实施"
+          "status": "石兆翔接手实现并通过联合回归",
+          "actual_executor": "SZX",
+          "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+          "evidence": "成员成果/SY/功能测试记录.md",
+          "independent_review": "待WZY本人复核"
         }
       ],
       "optional_task": {
@@ -199,12 +224,16 @@
         {
           "id": "D91",
           "title": "可重复启动的独立本地运行环境",
-          "status": "待实施"
+          "status": "已合入 develop 并通过联合回归和空库启动",
+          "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
+          "evidence": "成员成果/GCY/功能测试记录.md"
         },
         {
           "id": "D92",
           "title": "本地环境诊断命令",
-          "status": "待实施"
+          "status": "已合入 develop 并通过五项健康检查",
+          "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
+          "evidence": "成员成果/GCY/功能测试记录.md"
         }
       ],
       "optional_task": {
@@ -221,7 +250,7 @@
     }
   ],
   "shared_contract_version": "1.1",
-  "updated_date": "2026-11-02",
+  "updated_date": "2026-11-12",
   "delivery_responsibilities": {
     "recording_owner": "SZX 石兆翔",
     "recording_work": [
