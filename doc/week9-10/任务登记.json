@@ -68,14 +68,18 @@
           "title": "服务端验证码发送冷却",
           "status": "已合入 develop 并通过联合回归",
           "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
-          "evidence": "成员成果/YFY/功能测试记录.md"
+          "evidence": "成员成果/YFY/功能测试记录.md",
+          "independent_review": "顾梓鑫复核通过",
+          "independent_review_record": "成员成果/GZX/互查记录-第9-10周.md"
         },
         {
           "id": "A92",
           "title": "验证码失败次数和挑战锁定",
           "status": "已合入 develop 并通过联合回归",
           "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
-          "evidence": "成员成果/YFY/功能测试记录.md"
+          "evidence": "成员成果/YFY/功能测试记录.md",
+          "independent_review": "顾梓鑫复核通过",
+          "independent_review_record": "成员成果/GZX/互查记录-第9-10周.md"
         }
       ],
       "optional_task": {
@@ -149,7 +153,8 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "待YFY本人复核"
+          "independent_review": "喻飞扬复核，功能通过，扫描证据和文档待订正",
+          "independent_review_record": "成员成果/YFY/互查记录-第9-10周.md"
         },
         {
           "id": "O92",
@@ -158,13 +163,14 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "待YFY本人复核"
+          "independent_review": "喻飞扬复核，功能通过，扫描证据和文档待订正",
+          "independent_review_record": "成员成果/YFY/互查记录-第9-10周.md"
         }
       ],
       "optional_task": {
         "id": "O93",
         "title": "后台与日志敏感数据最小化",
-          "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
+        "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
       },
       "baseline_test_labels": [
         "oauth.test_oauth_business_logic"
@@ -250,7 +256,7 @@
     }
   ],
   "shared_contract_version": "1.1",
-  "updated_date": "2026-11-12",
+  "updated_date": "2026-11-14",
   "delivery_responsibilities": {
     "recording_owner": "SZX 石兆翔",
     "recording_work": [
