@@ -1,0 +1,227 @@
+{
+  "review_date": "2026-11-14",
+  "reviewer": "SZX",
+  "reviewed_member": "GCY",
+  "integration_commit": "b249ce9509d2d0a01db85cdf62831f8544671e99",
+  "original_gcy_code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
+  "environment": {
+    "python": "3.12.10",
+    "django": "5.2.17",
+    "node": "26.13.0",
+    "npm": "11.20.0",
+    "vite": "6.4.3",
+    "local_profile": "djangoblog.settings_demo"
+  },
+  "build_and_database": {
+    "npm_ci_exit_code": 0,
+    "npm_run_build_exit_code": 0,
+    "makemigrations_check_exit_code": 0,
+    "migrations_applied": 46
+  },
+  "profile_comparison": {
+    "explicit_demo": true,
+    "production_settings_unchanged": true,
+    "production_database": "MySQL",
+    "production_mail": "SMTP",
+    "demo_database": "SQLite",
+    "demo_cache": "LocMem",
+    "demo_mail": "console",
+    "demo_search": "Whoosh",
+    "inherited_elasticsearch_removed": true,
+    "isolated_runtime_directories": [
+      "db",
+      "media",
+      "logs",
+      "whoosh"
+    ]
+  },
+  "browser": {
+    "engine": "Chromium",
+    "browser_version": "157.0.8103.51",
+    "routes": {
+      "home": 200,
+      "login": 200,
+      "register": 200,
+      "admin_login": 200,
+      "article": 200,
+      "health": 200,
+      "missing": 404,
+      "admin_redirect": 302
+    },
+    "form_actions": {
+      "login_post": 302,
+      "comment_post": 302,
+      "comment_visible": true
+    },
+    "compiled_resources": {
+      "/static/blog/dist/css/main-B7XJkxv5.css": 200,
+      "/static/blog/dist/js/main-Lf1F7Fss.js": 200
+    },
+    "page_errors": 0,
+    "browser_external_requests_blocked": true
+  },
+  "console_mail": {
+    "mail_backend": "console",
+    "messages": 1,
+    "body_rendered_in_console": true
+  },
+  "server_external_io_blocked_in_review": true,
+  "healthcheck": {
+    "status": "ok",
+    "success_exit_code": 0,
+    "checks": {
+      "database": "ok",
+      "cache": "ok",
+      "templates": "ok",
+      "frontend_manifest": "ok",
+      "media_directory": "ok"
+    },
+    "from_different_working_directory_exit": 0,
+    "text_format_check_count": 5,
+    "negative": {
+      "missing": {
+        "status": "failed",
+        "exit_code": 1,
+        "failed_check": "frontend_manifest",
+        "build_fix_provided": true
+      },
+      "invalid_json": {
+        "status": "failed",
+        "exit_code": 1,
+        "failed_check": "frontend_manifest",
+        "build_fix_provided": true
+      },
+      "missing_reference": {
+        "status": "failed",
+        "exit_code": 1,
+        "failed_check": "frontend_manifest",
+        "build_fix_provided": true
+      }
+    },
+    "after_restoring_exit_code": 0,
+    "entry_validation_gap": {
+      "expected_status": "failed",
+      "actual_status": "ok",
+      "actual_exit_code": 0,
+      "required_entry": "src/main.js",
+      "entry_present": false,
+      "actual_detail": "2 referenced artifacts exist",
+      "normal_home_status": 200,
+      "normal_home_references_compiled_main_js": true,
+      "missing_entry_home_status": 200,
+      "missing_entry_home_references_compiled_main_js": false
+    }
+  },
+  "isolated_tests": {
+    "tests_run": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 70
+    },
+    "exit_code": 0,
+    "labels": [
+      "djangoblog.test_week78_gcy_quality",
+      "djangoblog.tests",
+      "djangoblog.test_plugins",
+      "djangoblog.test_week910_configuration",
+      "djangoblog.test_week910_functional"
+    ]
+  },
+  "implementation_diff_added_deleted_by_file": {
+    "demo_checks.py": [
+      182,
+      0
+    ],
+    "management/__init__.py": [
+      0,
+      0
+    ],
+    "management/commands/__init__.py": [
+      0,
+      0
+    ],
+    "management/commands/demo_healthcheck.py": [
+      41,
+      0
+    ],
+    "settings_demo.py": [
+      94,
+      0
+    ],
+    "test_week910_functional.py": [
+      209,
+      0
+    ]
+  },
+  "static_scan": {
+    "tested_commit": "b249ce9509d2d0a01db85cdf62831f8544671e99",
+    "comparison_commit": "6e397f0bcccb48bcb46f52c495f28bdeb3d0b10f",
+    "tools": {
+      "ruff": "0.17.1",
+      "bandit": "1.9.4"
+    },
+    "scope": "Tracked Python files in djangoblog except migrations and tests",
+    "config_sha256": {
+      "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+      "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+    },
+    "new_ruff_finding_locations": 0,
+    "new_bandit_finding_locations": 0,
+    "stages": {
+      "before": {
+        "files": 23,
+        "ruff": {
+          "total": 34,
+          "rules": {
+            "I001": 13,
+            "E501": 14,
+            "B904": 1,
+            "C901": 5,
+            "B007": 1
+          }
+        },
+        "bandit": {
+          "total": 5,
+          "rules": {
+            "B703": 2,
+            "B308": 2,
+            "B101": 1
+          },
+          "severity": {
+            "MEDIUM": 4,
+            "LOW": 1
+          },
+          "errors": 0
+        }
+      },
+      "integrated": {
+        "files": 28,
+        "ruff": {
+          "total": 34,
+          "rules": {
+            "I001": 13,
+            "E501": 14,
+            "B904": 1,
+            "C901": 5,
+            "B007": 1
+          }
+        },
+        "bandit": {
+          "total": 5,
+          "rules": {
+            "B703": 2,
+            "B308": 2,
+            "B101": 1
+          },
+          "severity": {
+            "MEDIUM": 4,
+            "LOW": 1
+          },
+          "errors": 0
+        }
+      }
+    }
+  }
+}
