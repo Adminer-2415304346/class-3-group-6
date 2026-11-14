@@ -3,8 +3,9 @@
   "assigned_date": "2026-11-02",
   "baseline_commit": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad",
   "baseline_branch": "main",
-  "status": "12项必做优化已实现并通过六App联合回归，独立复核按本人记录登记",
+  "status": "12 项必做优化已实现并通过 536 项联合回归，互查意见和代办验收分别登记",
   "integration_evidence": "接手验证.json",
+  "latest_regression_evidence": "成员成果/SZX/证据/GCY互查代办与D92复验.json",
   "shared_contract": "共享配置与接口约定.md",
   "shared_owner": "SZX",
   "members": [
@@ -24,7 +25,9 @@
           "status": "已实现并通过本人验证",
           "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
           "evidence": "成员成果/SZX/证据/verification.json",
-          "independent_review": "待GCY本人复核"
+          "independent_review": "待郭曹钰本人确认",
+          "alternate_acceptance": "石兆翔代办验收通过",
+          "alternate_acceptance_record": "成员成果/SZX/GCY互查任务代办记录.md"
         },
         {
           "id": "B92",
@@ -32,7 +35,9 @@
           "status": "已实现并通过本人验证",
           "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
           "evidence": "成员成果/SZX/证据/verification.json",
-          "independent_review": "待GCY本人复核"
+          "independent_review": "待郭曹钰本人确认",
+          "alternate_acceptance": "石兆翔代办验收通过",
+          "alternate_acceptance_record": "成员成果/SZX/GCY互查任务代办记录.md"
         }
       ],
       "optional_task": {
@@ -232,14 +237,19 @@
           "title": "可重复启动的独立本地运行环境",
           "status": "已合入 develop 并通过联合回归和空库启动",
           "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
-          "evidence": "成员成果/GCY/功能测试记录.md"
+          "evidence": "成员成果/GCY/功能测试记录.md",
+          "independent_review": "石兆翔复核通过",
+          "independent_review_record": "成员成果/SZX/互查记录-第9-10周.md"
         },
         {
           "id": "D92",
           "title": "本地环境诊断命令",
-          "status": "已合入 develop 并通过五项健康检查",
+          "status": "已实现，主入口漏检已修复并复验通过",
           "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
-          "evidence": "成员成果/GCY/功能测试记录.md"
+          "followup_commit": "ffb9d7e0d3dce5e39d23cbab88466686c2641411",
+          "evidence": "成员成果/GCY/功能测试记录.md",
+          "independent_review": "石兆翔提出主入口漏检，组长补正后复验通过",
+          "independent_review_record": "成员成果/SZX/互查记录-第9-10周.md"
         }
       ],
       "optional_task": {

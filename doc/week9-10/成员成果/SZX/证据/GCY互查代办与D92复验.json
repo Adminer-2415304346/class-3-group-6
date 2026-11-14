@@ -1,0 +1,211 @@
+{
+  "date": "2026-11-14",
+  "original_reviewer_assignment": {
+    "blog": "GCY",
+    "djangoblog": "SZX"
+  },
+  "actual_execution": {
+    "blog_alternate_acceptance": "SZX",
+    "djangoblog_fix_and_retest": "SZX"
+  },
+  "baseline_develop": "a5bd3b49070551231868aa640d0302f7120d863f",
+  "tested_code_commit": "ffb9d7e0d3dce5e39d23cbab88466686c2641411",
+  "environment": {
+    "python": "3.12.10",
+    "django": "5.2.17",
+    "pillow": "12.3.0",
+    "node": "26.13.0",
+    "npm": "11.20.0",
+    "vite": "6.4.3",
+    "functional": "Django settings_demo, local disk SQLite, network blocked except local loopback",
+    "regression": "Project isolated runner with in-memory SQLite, LocMem and network blocked"
+  },
+  "integrated_regression": {
+    "tests_run": 536,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 71,
+      "comments": 80,
+      "blog": 191,
+      "accounts": 100,
+      "oauth": 50,
+      "servermanager": 44
+    },
+    "exit_code": 0,
+    "labels": [
+      "djangoblog.test_week78_gcy_quality",
+      "comments.test_reaction_snapshot",
+      "blog.test_comment_lifecycle",
+      "blog.test_week78_quality",
+      "blog.test_views",
+      "blog.test_templatetags",
+      "blog.test_context_processors",
+      "blog.test_middleware",
+      "blog.test_brand_assets",
+      "blog.test_article_business_logic",
+      "blog.test_comment_interfaces",
+      "accounts.test_auth_hardening",
+      "accounts.tests",
+      "accounts.test_user_business_logic",
+      "accounts.test_admin",
+      "accounts.test_login_page",
+      "accounts.test_account_pages",
+      "oauth.test_oauth_business_logic",
+      "comments.tests",
+      "comments.test_views",
+      "comments.test_comment_business_logic",
+      "comments.test_quality_r45",
+      "djangoblog.tests",
+      "djangoblog.test_plugins",
+      "servermanager.tests",
+      "servermanager.test_week78_takeover",
+      "djangoblog.test_week910_configuration",
+      "blog.test_week910_functional",
+      "blog.tests.ArticleTest.test_image",
+      "accounts.test_week910_functional",
+      "oauth.test_week910_functional",
+      "comments.test_week910_functional",
+      "djangoblog.test_week910_functional",
+      "servermanager.test_week910_functional"
+    ]
+  },
+  "demo": {
+    "npm_ci_exit_code": 0,
+    "npm_run_build_exit_code": 0,
+    "migrations_applied": 46,
+    "makemigrations_check_exit_code": 0
+  },
+  "blog_browser": {
+    "browser_version": "157.0.8103.51",
+    "routes": {
+      "home": 200,
+      "category": 200,
+      "tag": 200,
+      "archive": 200,
+      "draft": 404,
+      "article": 200
+    },
+    "visible_view_counts": [
+      14,
+      15,
+      16
+    ],
+    "uploads": {
+      "PNG": {
+        "upload_status": 200,
+        "media_status": 200,
+        "content_type": "image/png",
+        "browser_decoded_preview": true
+      },
+      "JPEG": {
+        "upload_status": 200,
+        "media_status": 200,
+        "content_type": "image/jpeg",
+        "browser_decoded_preview": true
+      },
+      "WEBP": {
+        "upload_status": 200,
+        "media_status": 200,
+        "content_type": "application/octet-stream",
+        "browser_decoded_preview": true
+      }
+    },
+    "non_image_upload": {
+      "http_status": 400,
+      "result": "invalid_file"
+    },
+    "authenticated_upload_without_csrf": 403,
+    "browser_page_errors": 0
+  },
+  "d92_retest": {
+    "before_new_test": {
+      "tests_run": 1,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "per_app": {
+        "djangoblog": 1
+      },
+      "exit_code": 1,
+      "explanation": "Three failing subtests from one test method"
+    },
+    "after_cli": {
+      "normal": {
+        "status": "ok",
+        "exit_code": 0,
+        "checks": {
+          "database": "ok",
+          "cache": "ok",
+          "templates": "ok",
+          "frontend_manifest": "ok",
+          "media_directory": "ok"
+        },
+        "build_hint": false
+      },
+      "missing_entry": {
+        "status": "failed",
+        "exit_code": 1,
+        "checks": {
+          "database": "ok",
+          "cache": "ok",
+          "templates": "ok",
+          "frontend_manifest": "failed",
+          "media_directory": "ok"
+        },
+        "build_hint": true,
+        "diagnostic_detail": "缺少或无法读取 Vite 主入口 src/main.js"
+      },
+      "missing_file": {
+        "status": "failed",
+        "exit_code": 1,
+        "checks": {
+          "database": "ok",
+          "cache": "ok",
+          "templates": "ok",
+          "frontend_manifest": "failed",
+          "media_directory": "ok"
+        },
+        "build_hint": true,
+        "diagnostic_detail": "src/main.js 缺少有效的 file 字段"
+      },
+      "invalid_file": {
+        "status": "failed",
+        "exit_code": 1,
+        "checks": {
+          "database": "ok",
+          "cache": "ok",
+          "templates": "ok",
+          "frontend_manifest": "failed",
+          "media_directory": "ok"
+        },
+        "build_hint": true,
+        "diagnostic_detail": "src/main.js 缺少有效的 file 字段"
+      },
+      "restored": {
+        "status": "ok",
+        "exit_code": 0,
+        "checks": {
+          "database": "ok",
+          "cache": "ok",
+          "templates": "ok",
+          "frontend_manifest": "ok",
+          "media_directory": "ok"
+        },
+        "build_hint": false
+      }
+    }
+  },
+  "diff": {
+    "src/DjangoBlog/djangoblog/demo_checks.py": {
+      "added": 11,
+      "deleted": 1
+    },
+    "src/DjangoBlog/djangoblog/test_week910_functional.py": {
+      "added": 19,
+      "deleted": 0
+    }
+  },
+  "changed_python_ruff_exit_code": 0
+}
