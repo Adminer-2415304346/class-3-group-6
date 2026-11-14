@@ -1,315 +1,496 @@
-# GZX：本模块是 OAuth 登录的视图层：发起授权(oauthlogin)、回调换号登录(authorize)、
-# 补邮箱(RequireEmailView)、邮件确认(emailconfirm)、结果页(bindsuccess)。
-# 上游是第三方平台回调与模板标签，下游依赖 oauthmanager、OAuthUser 模型与 djangoblog 邮件/信号。
+# GZX：本模块是 OAuth 登录的视图层，负责发起授权、回调、补邮箱、邮件确认和结果页。
+# SZX（接手GZX，第9—10周）：完成渠道回调、数据库一次消费和邮箱绑定的验收项。
+import hashlib
 import logging
-# Create your views here.
-from urllib.parse import urlparse
+import re
+import secrets
+import time
+from datetime import timedelta
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.contrib.auth import login
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import transaction
-from django.http import HttpResponseForbidden
+from django.contrib.auth import get_user_model, login
+from django.core.exceptions import PermissionDenied, ValidationError
+from django.core.signing import BadSignature, TimestampSigner
+from django.core.validators import validate_email
+from django.db import IntegrityError, transaction
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import FormView
+from django.utils.crypto import salted_hmac
+from django.utils.html import format_html
 from django.utils.http import url_has_allowed_host_and_scheme
-
+from django.utils.translation import gettext_lazy as _
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_GET, require_http_methods
+from django.views.generic import FormView
 from djangoblog.blog_signals import oauth_user_login_signal
-from djangoblog.utils import get_current_site
-from djangoblog.utils import send_email, get_sha256
-from oauth.forms import RequireEmailForm
-from .models import OAuthUser
-from .oauthmanager import get_manager_by_type, OAuthAccessTokenException
+from djangoblog.maintenance_config import get_maintenance_option
+from djangoblog.utils import get_current_site, send_email
+from requests.exceptions import RequestException
+
+from .forms import RequireEmailForm
+from .models import OAuthConfig, OAuthLoginState, OAuthUser, PendingBinding
+from .oauthmanager import OAuthAccessTokenException, get_manager_by_type
 
 logger = logging.getLogger(__name__)
 
+# GZX：OAuth 签名盐与 accounts 激活流程分离。
+BIND_SIGN_SALT = 'week910.oauth.bind'
+STATE_VALUE = re.compile(r'[0-9a-f]{64}')
+CONTEXT_VALUE = re.compile(r'[0-9a-f]{32}')
+BINDING_EXPIRED = _('This binding link has already been used or expired.')
+BINDING_SESSION_INVALID = _('Invalid email session. Please restart the OAuth login.')
+PROVIDER_FAILED = _('Unable to complete third-party login. Please try again.')
+
+
+def _notice(request, message, status=403):
+    return render(request, 'oauth/state_error.html', {'message': message}, status=status)
+
 
 def get_redirecturl(request):
-    # GZX：解析 next_url：空值或登录页回退 '/'；用 url_has_allowed_host_and_scheme 做
-    # 同域白名单校验，外链/跨域一律回退 '/'，防开放重定向。require_https 跟随当前请求是否安全。
-    nexturl = request.GET.get('next_url', None)
-    if not nexturl or nexturl == '/login/' or nexturl == '/login':
+    # GZX：外链和登录页回退首页，HTTPS 请求不降级。
+    target = request.GET.get('next_url', '')
+    if not target or len(target) > 2048 or target in ('/login/', '/login'):
         return '/'
-
-    # Only allow relative URLs or URLs pointing to the current host
-    site_domain = get_current_site().domain
     if url_has_allowed_host_and_scheme(
-        url=nexturl,
-        allowed_hosts={site_domain},
-        require_https=request.is_secure()
+        url=target,
+        allowed_hosts={request.get_host(), get_current_site().domain},
+        require_https=request.is_secure(),
     ):
-        return nexturl
-
-    logger.info('非法url:' + str(nexturl))
+        return target
     return '/'
 
 
-# GZX：发起授权入口：按 type 取对应管理器，拼接授权 URL 后 302 跳转到第三方登录页；
-# 不接触 token，只负责把用户导出去。
+def _browser_context(request):
+    context = request.session.get('oauth_browser_context')
+    if isinstance(context, str) and CONTEXT_VALUE.fullmatch(context):
+        return context
+    return None
+
+
+def _ensure_browser_context(request):
+    context = _browser_context(request)
+    if context is None:
+        context = secrets.token_hex(16)
+        request.session['oauth_browser_context'] = context
+    return context
+
+
+def _state_digest(state):
+    return hashlib.sha256(state.encode('ascii')).hexdigest()
+
+
+@require_GET
 def oauthlogin(request):
-    type = request.GET.get('type', None)
-    if not type:
+    # GZX：每渠道保留最后一次授权及已校验的站内跳转。
+    channel = request.GET.get('type', '').lower()
+    manager = get_manager_by_type(channel) if channel else None
+    if manager is None:
         return HttpResponseRedirect('/')
-    manager = get_manager_by_type(type)
-    if not manager:
-        return HttpResponseRedirect('/')
-    nexturl = get_redirecturl(request)
-    authorizeurl = manager.get_authorization_url(nexturl)
-    return HttpResponseRedirect(authorizeurl)
+    next_url = get_redirecturl(request)
+    context = _ensure_browser_context(request)
+    state = secrets.token_hex(32)
+    now = timezone.now()
+    ttl = get_maintenance_option('OAUTH_STATE_TTL_SECONDS')
+    OAuthLoginState.objects.filter(expires_at__lte=now).delete()
+    OAuthLoginState.objects.update_or_create(
+        browser_context=context,
+        channel=channel,
+        defaults={
+            'digest': _state_digest(state),
+            'expires_at': now + timedelta(seconds=ttl),
+            'consumed': False,
+        },
+    )
+    states = request.session.get('oauth_states', {})
+    states = states.copy() if isinstance(states, dict) else {}
+    states[channel] = {'state': state, 'created_at': int(time.time()), 'next_url': next_url}
+    request.session['oauth_states'] = states
+    return HttpResponseRedirect(manager.get_authorization_url(next_url, state=state))
 
 
-# GZX：OAuth 回调核心：用 code 换 token → 拉第三方用户信息 → 按 (type, openid) 查/建 OAuthUser
-# → 有关联本站用户则直接登录，无邮箱则转补邮箱流程；此函数是"回调→关联本站用户"的汇合点。
-def authorize(request):
-    type = request.GET.get('type', None)
-    if not type:
-        return HttpResponseRedirect('/')
-    manager = get_manager_by_type(type)
-    if not manager:
-        return HttpResponseRedirect('/')
-    code = request.GET.get('code', None)
-    # GZX：换 token 分两类失败：OAuthAccessTokenException 记 warning 回首页；
-    # 其他异常记 error 并把 rsp 置 None，下面用重新发起授权兜底。
+def _consume_state(request, channel):
+    state = request.GET.get('state', '')
+    context = _browser_context(request)
+    states = request.session.get('oauth_states', {})
+    if not (context and STATE_VALUE.fullmatch(state) and isinstance(states, dict)):
+        return None
+    saved = states.get(channel)
+    if not isinstance(saved, dict):
+        return None
+    expected = saved.get('state')
+    created_at = saved.get('created_at')
+    if (
+        not isinstance(expected, str) or not STATE_VALUE.fullmatch(expected)
+        or not secrets.compare_digest(expected, state) or type(created_at) is not int
+        or not 0 <= int(time.time()) - created_at < get_maintenance_option(
+            'OAUTH_STATE_TTL_SECONDS',
+        )
+    ):
+        # GZX 复核修复：拒绝旧回调时保留仍有效的新授权。
+        return None
+    # SZX：条件更新同时核对浏览器、渠道、最新摘要、时效和消费状态。
+    consumed = OAuthLoginState.objects.filter(
+        browser_context=context, channel=channel, digest=_state_digest(state),
+        expires_at__gt=timezone.now(), consumed=False,
+    ).update(consumed=True)
+    if consumed != 1:
+        return None
+    remaining = states.copy()
+    remaining.pop(channel, None)
+    request.session['oauth_states'] = remaining
+    return saved.get('next_url', '/')
+
+
+def _normalized_email(value):
+    if not isinstance(value, str):
+        return None
+    email = value.strip().casefold()
+    if len(email) > 254:
+        return None
     try:
-        rsp = manager.get_access_token_by_code(code)
-    except OAuthAccessTokenException as e:
-        logger.warning("OAuthAccessTokenException:" + str(e))
-        return HttpResponseRedirect('/')
-    except Exception as e:
-        logger.error(e)
-        rsp = None
-    nexturl = get_redirecturl(request)
-    if not rsp:
-        return HttpResponseRedirect(manager.get_authorization_url(nexturl))
-    user = manager.get_oauth_userinfo()
-    if user:
-        # GZX：昵称为空时用时间戳兜底，避免空昵称落库。
-        if not user.nickname or not user.nickname.strip():
-            user.nickname = "djangoblog" + timezone.now().strftime('%y%m%d%I%M%S')
-        # GZX：已绑定过的 (type, openid) 命中则刷新头像/元数据/昵称并复用旧记录（含 author 关联）；
-        # 未命中则保留管理器新建的临时对象，稍后落库。
-        try:
-            temp = OAuthUser.objects.get(type=type, openid=user.openid)
-            temp.picture = user.picture
-            temp.metadata = user.metadata
-            temp.nickname = user.nickname
-            user = temp
-        except ObjectDoesNotExist:
-            pass
-        # facebook的token过长
-        if type == 'facebook':
-            user.token = ''
-        # GZX：有邮箱走"事务内关联本站用户→发信号→login→跳 nexturl"；
-        # 无邮箱走下方补邮箱分支。
-        if user.email:
-            # GZX：事务保证"建/取本站用户 + 挂载 OAuthUser + 保存"一致；
-            # 按 email get_or_create 本站用户，新用户昵称冲突改用时间戳用户名，source 记 authorize。
-            with transaction.atomic():
-                author = None
-                try:
-                    author = get_user_model().objects.get(id=user.author_id)
-                except ObjectDoesNotExist:
-                    pass
-                if not author:
-                    result = get_user_model().objects.get_or_create(email=user.email)
-                    author = result[0]
-                    if result[1]:
-                        try:
-                            get_user_model().objects.get(username=user.nickname)
-                        except ObjectDoesNotExist:
-                            author.username = user.nickname
-                        else:
-                            author.username = "djangoblog" + timezone.now().strftime('%y%m%d%I%M%S')
-                        author.source = 'authorize'
-                        author.save()
-
-                user.author = author
-                user.save()
-
-                # GZX：发登录信号（后台下载/本地化头像、清缓存）后 login 写会话；
-                # 注意此处按邮箱关联，不校验该邮箱是否已属于其他本地账号。
-                oauth_user_login_signal.send(
-                    sender=authorize.__class__, id=user.id)
-                login(request, author)
-                # 设置session过期时间为2周（默认）
-                request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-                # 设置登录标记 cookie
-                response = HttpResponseRedirect(nexturl)
-                response.set_cookie(
-                    'logged_user',
-                    'true',
-                    max_age=settings.SESSION_COOKIE_AGE,
-                    httponly=False,  # 允许 JavaScript 访问
-                    samesite='Lax'
-                )
-                return response
-        else:
-            # GZX：第三方未返回邮箱（如 GitHub 私有邮箱）：先暂存 OAuthUser，跳转补邮箱页，
-            # 由 emailconfirm 验证链接后再完成与本站用户的绑定。
-            user.save()
-            url = reverse('oauth:require_email', kwargs={
-                'oauthid': user.id
-            })
-
-            return HttpResponseRedirect(url)
-    else:
-        return HttpResponseRedirect(nexturl)
+        validate_email(email)
+    except ValidationError:
+        return None
+    return email
 
 
-def emailconfirm(request, id, sign):
-    # GZX：签名 = HMAC-SHA256(SECRET_KEY, id)（见 djangoblog.utils.get_sha256），
-    # 只绑定主键 id，不含时效/邮箱/随机数：候选观察——链接不过期、邮箱改后旧链接仍可用，
-    # 且 id 可枚举，需团队评估加时效与一次性。签名不符或缺失返回 403。
-    if not sign:
-        return HttpResponseForbidden()
-    if not get_sha256(settings.SECRET_KEY +
-                      str(id) +
-                      settings.SECRET_KEY).upper() == sign.upper():
-        return HttpResponseForbidden()
-    oauthuser = get_object_or_404(OAuthUser, pk=id)
-    # GZX：事务内完成取/建本站用户并挂载 OAuthUser，随后 login、发确认邮件、跳结果页。
+def _save_provider_identity(channel, profile):
+    nickname = profile.nickname.strip()[:50] if isinstance(profile.nickname, str) else ''
+    nickname = nickname or 'OAuth user'
+    picture = profile.picture[:350] if isinstance(profile.picture, str) else ''
+    token = profile.token if isinstance(profile.token, str) else ''
+    if channel == 'facebook' or len(token) > 150:
+        token = ''
+    metadata = profile.metadata if isinstance(profile.metadata, str) else None
     with transaction.atomic():
-        if oauthuser.author:
-            author = get_user_model().objects.get(pk=oauthuser.author_id)
-        else:
-            result = get_user_model().objects.get_or_create(email=oauthuser.email)
-            author = result[0]
-            if result[1]:
-                author.source = 'emailconfirm'
-                author.username = oauthuser.nickname.strip() if oauthuser.nickname.strip(
-                ) else "djangoblog" + timezone.now().strftime('%y%m%d%I%M%S')
-                author.save()
-        oauthuser.author = author
-        oauthuser.save()
-    oauth_user_login_signal.send(
-        sender=emailconfirm.__class__,
-        id=oauthuser.id)
+        # 同渠道的回调共用配置行锁，避免同时创建同一个第三方身份。
+        OAuthConfig.objects.select_for_update().filter(
+            type=channel, is_enable=True,
+        ).order_by('pk').values_list('pk', flat=True).first()
+        user, created = OAuthUser.objects.get_or_create(
+            type=channel,
+            openid=profile.openid,
+            defaults={
+                'nickname': nickname,
+                'picture': picture,
+                'metadata': metadata,
+                'token': token,
+            },
+        )
+        if not created:
+            # 不将未证明的新邮箱或旧实例上的 author 写回已绑定记录。
+            OAuthUser.objects.filter(pk=user.pk).update(
+                nickname=nickname, picture=picture, metadata=metadata,
+                last_modify_time=timezone.now(),
+            )
+            user.refresh_from_db(fields=['author', 'nickname', 'picture'])
+        return user
+
+
+def _login_response(request, oauth_user, author, destination):
+    oauth_user_login_signal.send(sender=OAuthUser, id=oauth_user.pk)
     login(request, author)
-    # 设置session过期时间为2周（默认）
     request.session.set_expiry(settings.SESSION_COOKIE_AGE)
-
-    site = 'http://' + get_current_site().domain
-    content = _('''
-     <p>Congratulations, you have successfully bound your email address. You can use
-      %(oauthuser_type)s to directly log in to this website without a password.</p>
-       You are welcome to continue to follow this site, the address is
-        <a href="%(site)s" rel="bookmark">%(site)s</a>
-            Thank you again!
-            <br />
-        If the link above cannot be opened, please copy this link to your browser.
-        %(site)s
-    ''') % {'oauthuser_type': oauthuser.type, 'site': site}
-
-    send_email(emailto=[oauthuser.email, ], title=_('Congratulations on your successful binding!'), content=content)
-    url = reverse('oauth:bindsuccess', kwargs={
-        'oauthid': id
-    })
-    url = url + '?type=success'
-    # 设置登录标记 cookie
-    response = HttpResponseRedirect(url)
+    response = HttpResponseRedirect(destination)
     response.set_cookie(
-        'logged_user',
-        'true',
-        max_age=settings.SESSION_COOKIE_AGE,
-        httponly=False,  # 允许 JavaScript 访问
-        samesite='Lax'
+        'logged_user', 'true', max_age=settings.SESSION_COOKIE_AGE,
+        secure=request.is_secure(), samesite='Lax',
     )
     return response
+
+
+def _exchange_profile(manager, channel, code):
+    try:
+        exchanged = manager.get_access_token_by_code(code)
+        profile = exchanged
+        if exchanged and not isinstance(exchanged, OAuthUser):
+            profile = manager.get_oauth_userinfo()
+    except (
+        OAuthAccessTokenException, RequestException, ValueError,
+        TypeError, KeyError, AttributeError,
+    ) as error:
+        logger.warning('OAuth provider failed for %s: %s', channel, type(error).__name__)
+        return None
+    if not isinstance(profile, OAuthUser):
+        return None
+    if type(profile.openid) is int:
+        profile.openid = str(profile.openid)
+    if (
+        not isinstance(profile.openid, str)
+        or not profile.openid.strip()
+        or len(profile.openid) > 50
+    ):
+        return None
+    return profile
+
+
+@require_GET
+def authorize(request):
+    channel = request.GET.get('type', '').lower()
+    manager = get_manager_by_type(channel) if channel else None
+    if manager is None:
+        return HttpResponseRedirect('/')
+    next_url = _consume_state(request, channel)
+    if next_url is None:
+        return _notice(request, _('Login session expired or invalid. Please restart login.'))
+    code = request.GET.get('code')
+    if not code:
+        return _notice(request, _('Authorization was not completed.'), status=400)
+    profile = _exchange_profile(manager, channel, code)
+    if profile is None:
+        return _notice(request, PROVIDER_FAILED, status=502)
+    try:
+        oauth_user = _save_provider_identity(channel, profile)
+    except OAuthUser.MultipleObjectsReturned:
+        logger.warning('Multiple records for an OAuth identity in channel %s', channel)
+        return _notice(request, _('Unable to verify the third-party account.'))
+
+    if oauth_user.author_id is not None:
+        author = get_user_model().objects.filter(pk=oauth_user.author_id, is_active=True).first()
+        if author is None:
+            return _notice(request, _('Please activate your local account before signing in.'))
+        return _login_response(request, oauth_user, author, next_url)
+
+    email = _normalized_email(profile.email)
+    if email:
+        # GZX O92：第三方给出的新邮箱和同名邮箱都先完成本站邮件确认。
+        return _start_pending_binding(request, oauth_user.pk, email)
+    request.session['pending_oauth_id'] = oauth_user.pk
+    ttl = get_maintenance_option('OAUTH_BIND_TTL_SECONDS')
+    request.session['pending_oauth_until'] = int(time.time()) + ttl
+    return HttpResponseRedirect(reverse('oauth:require_email', kwargs={'oauthid': oauth_user.pk}))
+
+
+def _pending_bindings(request, oauthid):
+    context = _browser_context(request)
+    if context is None:
+        return PendingBinding.objects.none()
+    return PendingBinding.objects.filter(
+        oauth_user_id=oauthid,
+        browser_context=context,
+        expires_at__gt=timezone.now(),
+        consumed=False,
+    )
+
+
+def _start_pending_binding(request, oauthid, email, *, previous_nonce=None):
+    context = _ensure_browser_context(request)
+    ttl = get_maintenance_option('OAUTH_BIND_TTL_SECONDS')
+    with transaction.atomic():
+        oauth_user = OAuthUser.objects.select_for_update().filter(
+            pk=oauthid, author__isnull=True,
+        ).first()
+        if oauth_user is None:
+            return _notice(
+                request, _('This third-party account can no longer be bound.'), status=409,
+            )
+        if previous_nonce and not _pending_bindings(request, oauthid).filter(
+            nonce=previous_nonce,
+        ).exists():
+            return _notice(request, BINDING_EXPIRED, status=400)
+        PendingBinding.objects.filter(
+            oauth_user=oauth_user, browser_context=context, consumed=False,
+        ).update(consumed=True)
+        binding = PendingBinding.objects.create(
+            oauth_user=oauth_user,
+            email=email,
+            nonce=secrets.token_hex(16),
+            browser_context=context,
+            expires_at=timezone.now() + timedelta(seconds=ttl),
+        )
+    if request.session.get('pending_oauth_id') == oauthid:
+        request.session.pop('pending_oauth_id', None)
+        request.session.pop('pending_oauth_until', None)
+
+    signed = TimestampSigner(salt=BIND_SIGN_SALT).sign_object({
+        'oauth_id': oauthid, 'email': email, 'nonce': binding.nonce,
+    })
+    path = reverse('oauth:email_confirm', kwargs={'id': oauthid, 'sign': signed})
+    url = request.build_absolute_uri(path) if getattr(settings, 'DEMO_MODE', False) else (
+        f'https://{get_current_site().domain}{path}'
+    )
+    existing = get_user_model().objects.filter(email__iexact=email).exists()
+    if existing:
+        instructions = _(
+            'A local account with this email already exists. Please log in to that account '
+            'and confirm the binding in the same browser.'
+        )
+    else:
+        instructions = _(
+            'Please confirm the email in the same browser to create your local account.'
+        )
+    content = format_html(
+        '<p>{}</p><p>{}</p><p><a href="{}">{}</a></p>',
+        instructions, _('The link expires in %(seconds)s seconds.') % {'seconds': ttl},
+        url, _('Confirm third-party account binding'),
+    )
+    send_email(emailto=[email], title=_('Confirm third-party account binding'), content=content)
+    destination = reverse('oauth:bindsuccess', kwargs={'oauthid': oauthid})
+    return HttpResponseRedirect(destination + '?type=email')
+
+
+def _read_binding_proof(sign, oauthid):
+    signer = TimestampSigner(salt=BIND_SIGN_SALT)
+    ttl = get_maintenance_option('OAUTH_BIND_TTL_SECONDS')
+    try:
+        raw = signer.unsign(sign, max_age=ttl)
+        if ':' in raw:
+            # 兼容升级前已发出且仍有效的定时签名。
+            signed_id, remainder = raw.split(':', 1)
+            email, nonce = remainder.rsplit(':', 1)
+            if signed_id != str(oauthid):
+                return None
+        else:
+            payload = signer.unsign_object(sign, max_age=ttl)
+            if not isinstance(payload, dict) or type(payload.get('oauth_id')) is not int:
+                return None
+            if payload['oauth_id'] != oauthid:
+                return None
+            email, nonce = payload.get('email'), payload.get('nonce')
+    except (BadSignature, ValueError, TypeError):
+        return None
+    if (
+        not email or _normalized_email(email) != email
+        or not isinstance(nonce, str) or not CONTEXT_VALUE.fullmatch(nonce)
+    ):
+        return None
+    return email, nonce
+
+
+def _existing_email_owner(request, email):
+    matching = get_user_model().objects.filter(email__iexact=email)
+    if not matching.exists():
+        return None
+    if request.user.is_authenticated:
+        author = matching.filter(pk=request.user.pk, is_active=True).first()
+        if author is not None:
+            return author
+    raise PermissionDenied
+
+
+@require_GET
+def emailconfirm(request, id, sign):
+    proof = _read_binding_proof(sign, id)
+    context = _browser_context(request)
+    if proof is None or not context:
+        return _notice(request, _('Invalid or expired binding link. Open it in the same browser.'))
+    email, nonce = proof
+
+    try:
+        with transaction.atomic():
+            oauth_user = OAuthUser.objects.select_for_update().filter(pk=id).first()
+            bindings = PendingBinding.objects.filter(
+                oauth_user_id=id, nonce=nonce, email=email, browser_context=context,
+            )
+            if oauth_user is None or not bindings.exists():
+                return _notice(request, _('Binding information does not match this browser.'))
+            available = bindings.filter(consumed=False)
+            if oauth_user.author_id is not None or not available.filter(
+                expires_at__gt=timezone.now(),
+            ).exists():
+                return _notice(request, BINDING_EXPIRED, status=400)
+            author = _existing_email_owner(request, email)
+
+            # 领取票据、创建本地账号和关联 OAuthUser 一起提交，异常时一并回滚。
+            if available.filter(expires_at__gt=timezone.now()).update(consumed=True) != 1:
+                return _notice(request, BINDING_EXPIRED, status=400)
+            if author is None:
+                digest = salted_hmac(
+                    'week910.oauth.username', email, algorithm='sha256',
+                ).hexdigest()
+                author = get_user_model().objects.create_user(
+                    username='oauth_' + digest, email=email, nickname=oauth_user.nickname,
+                    source='emailconfirm',
+                )
+            attached = OAuthUser.objects.filter(pk=id, author__isnull=True).update(
+                author=author, email=email, last_modify_time=timezone.now(),
+            )
+            if attached != 1:
+                raise IntegrityError('OAuth identity binding changed')
+    except PermissionDenied:
+        return _notice(
+            request, _('Please log in to the active account with this email, then confirm.'),
+        )
+    except IntegrityError:
+        return _notice(request, _('The account changed. Please retry confirmation.'), status=409)
+
+    send_email(
+        emailto=[email], title=_('Congratulations on your successful binding!'),
+        content=_('Your third-party account is now linked to your local account.'),
+    )
+    destination = reverse('oauth:bindsuccess', kwargs={'oauthid': id}) + '?type=success'
+    return _login_response(request, oauth_user, author, destination)
 
 
 class RequireEmailView(FormView):
     form_class = RequireEmailForm
     template_name = 'oauth/require_email.html'
 
-    def get(self, request, *args, **kwargs):
-        # GZX：候选观察：已填邮箱时本应重定向，目前是 pass 空操作（注释掉的跳转未启用），
-        # 已绑定邮箱的记录仍会打开表单页。
-        oauthid = self.kwargs['oauthid']
-        oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
-        if oauthuser.email:
-            pass
-            # return HttpResponseRedirect('/')
-
-        return super(RequireEmailView, self).get(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        # GZX 复核修复：只有刚通过本站 OAuth 回调的浏览器才能填写该身份的邮箱。
+        oauthid = kwargs['oauthid']
+        expires_at = request.session.get('pending_oauth_until')
+        if (
+            request.session.get('pending_oauth_id') != oauthid
+            or type(expires_at) is not int or int(time.time()) >= expires_at
+        ):
+            return _notice(request, BINDING_SESSION_INVALID)
+        self.oauth_user = get_object_or_404(OAuthUser, pk=oauthid, author__isnull=True)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_initial(self):
-        # GZX：把路由里的 oauthid 塞进隐藏字段初始值，邮箱初始为空。
-        oauthid = self.kwargs['oauthid']
-        return {
-            'email': '',
-            'oauthid': oauthid
-        }
+        return {'oauthid': self.oauth_user.pk}
 
     def get_context_data(self, **kwargs):
-        # GZX：把第三方头像传给模板展示，不改变表单数据。
-        oauthid = self.kwargs['oauthid']
-        oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
-        if oauthuser.picture:
-            kwargs['picture'] = oauthuser.picture
-        return super(RequireEmailView, self).get_context_data(**kwargs)
+        return super().get_context_data(picture=self.oauth_user.picture, **kwargs)
+
+    def form_invalid(self, form):
+        return self.render_to_response(self.get_context_data(form=form), status=400)
 
     def form_valid(self, form):
-        # GZX：以表单提交的 oauthid（隐藏字段）取 OAuthUser 并写入邮箱；
-        # 候选观察：未校验该 oauthid 与当前会话/路由一致，隐藏值可被替换（IDOR 面）。
-        # 随后生成 HMAC 确认链接并 send_email，邮件实际由 djangoblog.blog_signals 发送。
-        email = form.cleaned_data['email']
-        oauthid = form.cleaned_data['oauthid']
-        oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
-        oauthuser.email = email
-        oauthuser.save()
-        sign = get_sha256(settings.SECRET_KEY +
-                          str(oauthuser.id) + settings.SECRET_KEY)
-        site = get_current_site().domain
-        if settings.DEBUG:
-            site = '127.0.0.1:8000'
-        path = reverse('oauth:email_confirm', kwargs={
-            'id': oauthid,
-            'sign': sign
-        })
-        url = "http://{site}{path}".format(site=site, path=path)
-
-        content = _("""
-               <p>Please click the link below to bind your email</p>
-
-                 <a href="%(url)s" rel="bookmark">%(url)s</a>
-
-                 Thank you again!
-                 <br />
-                 If the link above cannot be opened, please copy this link to your browser.
-                  <br />
-                 %(url)s
-                """) % {'url': url}
-        send_email(emailto=[email, ], title=_('Bind your email'), content=content)
-        url = reverse('oauth:bindsuccess', kwargs={
-            'oauthid': oauthid
-        })
-        url = url + '?type=email'
-        return HttpResponseRedirect(url)
+        if form.cleaned_data['oauthid'] != self.oauth_user.pk:
+            return _notice(self.request, BINDING_SESSION_INVALID)
+        email = _normalized_email(form.cleaned_data['email'])
+        if not email:
+            form.add_error('email', _('Please enter a valid email address.'))
+            return self.form_invalid(form)
+        return _start_pending_binding(self.request, self.oauth_user.pk, email)
 
 
+@require_http_methods(['GET', 'POST'])
+@csrf_protect
 def bindsuccess(request, oauthid):
-    # GZX：纯结果展示页：query 参数 type=email 显示"待收邮件"文案，否则显示"绑定成功"；
-    # 不做鉴权与状态变更。
-    type = request.GET.get('type', None)
-    oauthuser = get_object_or_404(OAuthUser, pk=oauthid)
-    if type == 'email':
+    pending = _pending_bindings(request, oauthid)
+    if request.method == 'POST':
+        binding = pending.first()
+        if binding is None:
+            return _notice(request, BINDING_EXPIRED, status=400)
+        action = request.POST.get('action')
+        if action == 'cancel':
+            pending.filter(nonce=binding.nonce).update(consumed=True)
+            return HttpResponseRedirect('/')
+        if action == 'resend':
+            return _start_pending_binding(
+                request, oauthid, binding.email, previous_nonce=binding.nonce,
+            )
+        return _notice(request, _('Unknown binding action.'), status=400)
+
+    if request.GET.get('type') == 'email':
+        if not pending.exists():
+            return _notice(request, BINDING_EXPIRED, status=400)
         title = _('Bind your email')
-        content = _(
-            'Congratulations, the binding is just one step away. '
-            'Please log in to your email to check the email to complete the binding. Thank you.')
+        content = _('Please check your email and open the confirmation link in this browser.')
+        can_manage = True
     else:
+        if not request.user.is_authenticated or not OAuthUser.objects.filter(
+            pk=oauthid, author_id=request.user.pk,
+        ).exists():
+            return _notice(request, _('Unable to verify the third-party account.'))
         title = _('Binding successful')
-        content = _(
-            "Congratulations, you have successfully bound your email address. You can use %(oauthuser_type)s"
-            " to directly log in to this website without a password. You are welcome to continue to follow this site." % {
-                'oauthuser_type': oauthuser.type})
+        content = _('Your third-party account is now linked to your local account.')
+        can_manage = False
     return render(request, 'oauth/bindsuccess.html', {
-        'title': title,
-        'content': content
+        'title': title, 'content': content, 'can_manage': can_manage,
     })

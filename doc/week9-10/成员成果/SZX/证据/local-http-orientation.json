@@ -1,0 +1,15 @@
+{
+  "real_http": "passed",
+  "case": "EXIF orientation 6 applied before metadata removal",
+  "source_dimensions": [
+    12,
+    8
+  ],
+  "stored_dimensions": [
+    8,
+    12
+  ],
+  "remaining_exif": 0,
+  "upload_status": 200,
+  "media_status": 200
+}

@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.docx binary
+*.png binary
+*.jpg binary
+*.mp4 binary
+# Preserve verbatim test stderr, including framework whitespace, as raw evidence.
+"公共准备验证/tests.stderr.log" -text -whitespace
+"成员成果/SZX/证据/**/tests.stderr.log" -text -whitespace

@@ -1,0 +1,366 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\core\cache\backends\base.py:119: CacheKeyWarning: Cache key contains characters that will cause errors if used with memcached: ':1:category_list_Week910 counter_1'
+  warnings.warn(warning, CacheKeyWarning)
+test_counter_refresh_preserves_unsaved_content (blog.test_week910_functional.AtomicArticleViewsTests.test_counter_refresh_preserves_unsaved_content) ... ok
+test_deleted_row_is_not_silently_recreated (blog.test_week910_functional.AtomicArticleViewsTests.test_deleted_row_is_not_silently_recreated) ... FAIL
+test_http_detail_updates_database_and_render_context_once (blog.test_week910_functional.AtomicArticleViewsTests.test_http_detail_updates_database_and_render_context_once) ... ⚠️  Vite manifest not found: C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+⚠️  Vite manifest not found: C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+🔧 Running in development mode. Make sure Vite dev server is running.
+ok
+test_instance_keeps_a_plain_integer (blog.test_week910_functional.AtomicArticleViewsTests.test_instance_keeps_a_plain_integer) ... ok
+test_later_save_does_not_reapply_the_increment (blog.test_week910_functional.AtomicArticleViewsTests.test_later_save_does_not_reapply_the_increment) ... ok
+test_two_stale_instances_both_increment_the_database (blog.test_week910_functional.AtomicArticleViewsTests.test_two_stale_instances_both_increment_the_database) ... FAIL
+test_unsaved_instance_cannot_increment_an_existing_id (blog.test_week910_functional.AtomicArticleViewsTests.test_unsaved_instance_cannot_increment_an_existing_id) ... FAIL
+test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) ... Forbidden: /upload
+
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='PNG') ... FAIL
+Forbidden: /upload
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='JPEG') ... FAIL
+Forbidden: /upload
+  test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='WEBP') ... FAIL
+test_additional_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_additional_file_field_is_rejected) ... Forbidden: /upload
+FAIL
+test_anonymous_user_is_forbidden_even_with_legacy_sign (blog.test_week910_functional.ImageUploadFunctionalTests.test_anonymous_user_is_forbidden_even_with_legacy_sign) ... FAIL
+test_client_extension_and_mime_do_not_choose_storage_format (blog.test_week910_functional.ImageUploadFunctionalTests.test_client_extension_and_mime_do_not_choose_storage_format) ... Forbidden: /upload
+FAIL
+test_configuration_controls_actual_format_allowlist (blog.test_week910_functional.ImageUploadFunctionalTests.test_configuration_controls_actual_format_allowlist) ... Forbidden: /upload
+FAIL
+test_disallowed_decodable_format_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_disallowed_decodable_format_is_rejected) ... Forbidden: /upload
+FAIL
+test_empty_file_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_empty_file_is_rejected) ... Forbidden: /upload
+FAIL
+test_exact_byte_limit_is_accepted (blog.test_week910_functional.ImageUploadFunctionalTests.test_exact_byte_limit_is_accepted) ... Forbidden: /upload
+FAIL
+test_inactive_staff_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_inactive_staff_is_forbidden) ... Forbidden: /upload
+ok
+test_missing_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_missing_file_field_is_rejected) ... Forbidden: /upload
+FAIL
+test_multiple_files_are_rejected_before_saving (blog.test_week910_functional.ImageUploadFunctionalTests.test_multiple_files_are_rejected_before_saving) ... Forbidden: /upload
+FAIL
+test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) ... 
+  test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='GET') ... FAIL
+  test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='PUT') ... FAIL
+  test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='DELETE') ... FAIL
+  test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='HEAD') ... FAIL
+  test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='OPTIONS') ... FAIL
+test_oversize_input_is_rejected_before_decode (blog.test_week910_functional.ImageUploadFunctionalTests.test_oversize_input_is_rejected_before_decode) ... Forbidden: /upload
+FAIL
+test_pixel_limit_is_checked (blog.test_week910_functional.ImageUploadFunctionalTests.test_pixel_limit_is_checked) ... Forbidden: /upload
+FAIL
+test_regular_user_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_regular_user_is_forbidden) ... Forbidden: /upload
+ok
+test_same_client_filename_does_not_overwrite_existing_file (blog.test_week910_functional.ImageUploadFunctionalTests.test_same_client_filename_does_not_overwrite_existing_file) ... Forbidden: /upload
+ERROR
+test_script_renamed_to_png_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_script_renamed_to_png_is_rejected) ... Forbidden: /upload
+FAIL
+test_staff_can_open_upload_page_with_csrf_token (blog.test_week910_functional.ImageUploadFunctionalTests.test_staff_can_open_upload_page_with_csrf_token) ... ERROR
+test_staff_without_csrf_is_forbidden (blog.test_week910_functional.ImageUploadFunctionalTests.test_staff_without_csrf_is_forbidden) ... Forbidden: /upload
+ok
+test_storage_failure_returns_recoverable_error (blog.test_week910_functional.ImageUploadFunctionalTests.test_storage_failure_returns_recoverable_error) ... Forbidden: /upload
+FAIL
+test_trailing_payload_is_not_stored (blog.test_week910_functional.ImageUploadFunctionalTests.test_trailing_payload_is_not_stored) ... Forbidden: /upload
+FAIL
+test_truncated_image_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_truncated_image_is_rejected) ... Forbidden: /upload
+FAIL
+test_upload_page_requires_staff (blog.test_week910_functional.ImageUploadFunctionalTests.test_upload_page_requires_staff) ... ERROR
+test_wrong_field_name_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_wrong_field_name_is_rejected) ... Forbidden: /upload
+FAIL
+
+======================================================================
+ERROR: test_same_client_filename_does_not_overwrite_existing_file (blog.test_week910_functional.ImageUploadFunctionalTests.test_same_client_filename_does_not_overwrite_existing_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 236, in test_same_client_filename_does_not_overwrite_existing_file
+    first = self.post().json()["data"]["name"]
+            ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\client.py", line 951, in _parse_json
+    raise ValueError(
+ValueError: Content-Type header is "text/html; charset=utf-8", not "application/json"
+
+======================================================================
+ERROR: test_staff_can_open_upload_page_with_csrf_token (blog.test_week910_functional.ImageUploadFunctionalTests.test_staff_can_open_upload_page_with_csrf_token)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 275, in test_staff_can_open_upload_page_with_csrf_token
+    response = self.client.get(reverse("blog:upload_page"))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'upload_page' not found. 'upload_page' is not a valid view function or pattern name.
+
+======================================================================
+ERROR: test_upload_page_requires_staff (blog.test_week910_functional.ImageUploadFunctionalTests.test_upload_page_requires_staff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 283, in test_upload_page_requires_staff
+    self.assertEqual(self.client.get(reverse("blog:upload_page")).status_code, 403)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'upload_page' not found. 'upload_page' is not a valid view function or pattern name.
+
+======================================================================
+FAIL: test_deleted_row_is_not_silently_recreated (blog.test_week910_functional.AtomicArticleViewsTests.test_deleted_row_is_not_silently_recreated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 71, in test_deleted_row_is_not_silently_recreated
+    with self.assertRaises(Article.DoesNotExist):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DoesNotExist not raised
+
+======================================================================
+FAIL: test_two_stale_instances_both_increment_the_database (blog.test_week910_functional.AtomicArticleViewsTests.test_two_stale_instances_both_increment_the_database)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 46, in test_two_stale_instances_both_increment_the_database
+    self.assertEqual(Article.objects.get(pk=self.article.pk).views, 12)
+AssertionError: 11 != 12
+
+======================================================================
+FAIL: test_unsaved_instance_cannot_increment_an_existing_id (blog.test_week910_functional.AtomicArticleViewsTests.test_unsaved_instance_cannot_increment_an_existing_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 77, in test_unsaved_instance_cannot_increment_an_existing_id
+    with self.assertRaises(ValueError):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='PNG')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 177, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    self.assertEqual(response.status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='JPEG')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 177, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    self.assertEqual(response.status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_actual_png_jpeg_and_webp_are_saved_with_matching_formats (blog.test_week910_functional.ImageUploadFunctionalTests.test_actual_png_jpeg_and_webp_are_saved_with_matching_formats) (image_format='WEBP')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 177, in test_actual_png_jpeg_and_webp_are_saved_with_matching_formats
+    self.assertEqual(response.status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_additional_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_additional_file_field_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 212, in test_additional_file_field_is_rejected
+    self.assert_invalid(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_anonymous_user_is_forbidden_even_with_legacy_sign (blog.test_week910_functional.ImageUploadFunctionalTests.test_anonymous_user_is_forbidden_even_with_legacy_sign)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 147, in test_anonymous_user_is_forbidden_even_with_legacy_sign
+    self.assertEqual(response.status_code, 403)
+AssertionError: 200 != 403
+
+======================================================================
+FAIL: test_client_extension_and_mime_do_not_choose_storage_format (blog.test_week910_functional.ImageUploadFunctionalTests.test_client_extension_and_mime_do_not_choose_storage_format)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 228, in test_client_extension_and_mime_do_not_choose_storage_format
+    self.assertEqual(response.status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_configuration_controls_actual_format_allowlist (blog.test_week910_functional.ImageUploadFunctionalTests.test_configuration_controls_actual_format_allowlist)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\utils.py", line 456, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 259, in test_configuration_controls_actual_format_allowlist
+    self.assert_invalid(self.post())
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_disallowed_decodable_format_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_disallowed_decodable_format_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 224, in test_disallowed_decodable_format_is_rejected
+    self.assert_invalid(self.post(self.uploaded(image_bytes("BMP"))))
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_empty_file_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_empty_file_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 215, in test_empty_file_is_rejected
+    self.assert_invalid(self.post(self.uploaded(b"")))
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_exact_byte_limit_is_accepted (blog.test_week910_functional.ImageUploadFunctionalTests.test_exact_byte_limit_is_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 251, in test_exact_byte_limit_is_accepted
+    self.assertEqual(self.post(self.uploaded(data)).status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_missing_file_field_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_missing_file_field_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 192, in test_missing_file_field_is_rejected
+    self.assert_invalid(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_multiple_files_are_rejected_before_saving (blog.test_week910_functional.ImageUploadFunctionalTests.test_multiple_files_are_rejected_before_saving)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 205, in test_multiple_files_are_rejected_before_saving
+    self.assert_invalid(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='GET')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 170, in test_non_post_methods_are_rejected
+    self.assertEqual(response.status_code, 405)
+AssertionError: 200 != 405
+
+======================================================================
+FAIL: test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='PUT')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 170, in test_non_post_methods_are_rejected
+    self.assertEqual(response.status_code, 405)
+AssertionError: 200 != 405
+
+======================================================================
+FAIL: test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='DELETE')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 170, in test_non_post_methods_are_rejected
+    self.assertEqual(response.status_code, 405)
+AssertionError: 200 != 405
+
+======================================================================
+FAIL: test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='HEAD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 170, in test_non_post_methods_are_rejected
+    self.assertEqual(response.status_code, 405)
+AssertionError: 200 != 405
+
+======================================================================
+FAIL: test_non_post_methods_are_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_non_post_methods_are_rejected) (method='OPTIONS')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 170, in test_non_post_methods_are_rejected
+    self.assertEqual(response.status_code, 405)
+AssertionError: 200 != 405
+
+======================================================================
+FAIL: test_oversize_input_is_rejected_before_decode (blog.test_week910_functional.ImageUploadFunctionalTests.test_oversize_input_is_rejected_before_decode)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\utils.py", line 456, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 246, in test_oversize_input_is_rejected_before_decode
+    self.assert_invalid(self.post(), "file_too_large")
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_pixel_limit_is_checked (blog.test_week910_functional.ImageUploadFunctionalTests.test_pixel_limit_is_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week78-sy-runtime-20261102\django\test\utils.py", line 456, in inner
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 255, in test_pixel_limit_is_checked
+    self.assert_invalid(self.post())
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_script_renamed_to_png_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_script_renamed_to_png_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 218, in test_script_renamed_to_png_is_rejected
+    self.assert_invalid(self.post(self.uploaded(b"<script>alert(1)</script>")))
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_storage_failure_returns_recoverable_error (blog.test_week910_functional.ImageUploadFunctionalTests.test_storage_failure_returns_recoverable_error)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 270, in test_storage_failure_returns_recoverable_error
+    self.assertEqual(response.status_code, 503)
+AssertionError: 403 != 503
+
+======================================================================
+FAIL: test_trailing_payload_is_not_stored (blog.test_week910_functional.ImageUploadFunctionalTests.test_trailing_payload_is_not_stored)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 263, in test_trailing_payload_is_not_stored
+    self.assertEqual(response.status_code, 200)
+AssertionError: 403 != 200
+
+======================================================================
+FAIL: test_truncated_image_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_truncated_image_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 221, in test_truncated_image_is_rejected
+    self.assert_invalid(self.post(self.uploaded(image_bytes()[:-9])))
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+======================================================================
+FAIL: test_wrong_field_name_is_rejected (blog.test_week910_functional.ImageUploadFunctionalTests.test_wrong_field_name_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 198, in test_wrong_field_name_is_rejected
+    self.assert_invalid(response)
+  File "C:\Users\Lenovo\AppData\Local\Temp\week910-blog-baseline-t0hwirbd\src\DjangoBlog\blog\test_week910_functional.py", line 134, in assert_invalid
+    self.assertEqual(response.status_code, 400)
+AssertionError: 403 != 400
+
+----------------------------------------------------------------------
+Ran 31 tests in 0.522s
+
+FAILED (failures=27, errors=3)
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...

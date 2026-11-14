@@ -1,0 +1,122 @@
+{
+  "base_commit": "4cadfa4bbba1ac5144320e09f79149d655c27da6",
+  "source_sha256_lf": {
+    "src/DjangoBlog/blog/models.py": "26063926496237078d3a52b5b3d92d2f95e95b39821d39620cb09c3d2d01e950",
+    "src/DjangoBlog/blog/views.py": "5d21833a069fe207254205926b570374f024b5d831755b06de2b32cf908d1457",
+    "src/DjangoBlog/blog/urls.py": "1245618b5a86b745acd6167195198d399256a46a65f65ee7a2771f62d269ba9f",
+    "src/DjangoBlog/blog/uploads.py": "f66acb6a9eef95986df2e68d7631cc904b92b4ad0d9b153e68d0092bb9f1122b",
+    "src/DjangoBlog/blog/test_week910_functional.py": "cf5d5acae4d3b36b112edf56c6333ace380082355c766fc6ac6bf0a5cf97b7cc",
+    "src/DjangoBlog/blog/tests.py": "7e1957c918994be6935205b5404138180693c212102f260fe02b93d4e6906573",
+    "src/DjangoBlog/templates/blog/image_upload.html": "e8ddd8e8c6e94addf7089e780bbe21df6a1fcbf4086156df7e916f97b4a4028d"
+  },
+  "paired_case_count": 31,
+  "paired_test_functions_identical": true,
+  "new_case_count": 32,
+  "baseline": {
+    "tests_run": 31,
+    "failures": 27,
+    "errors": 3,
+    "skipped": 0,
+    "per_app": {
+      "blog": 31
+    }
+  },
+  "orientation_before": {
+    "tests_run": 1,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "blog": 1
+    }
+  },
+  "final": {
+    "tests_run": 433,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 49,
+      "comments": 50,
+      "blog": 191,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "local_http": {
+    "profile": "temporary local SQLite/LocMem preview; not GCY settings_demo or production",
+    "url": "http://127.0.0.1:52925",
+    "results": [
+      {
+        "case": "anonymous upload page",
+        "status": 302
+      },
+      {
+        "case": "staff upload and read media",
+        "status": 200,
+        "media_status": 200,
+        "image_dimensions": [
+          320,
+          180
+        ],
+        "data": {
+          "url": "/media/images/2026/11/02/6a5f1393d6884069a8aeea64238280fd.png",
+          "name": "images/2026/11/02/6a5f1393d6884069a8aeea64238280fd.png",
+          "size": 2729,
+          "format": "PNG"
+        }
+      },
+      {
+        "case": "forged image",
+        "status": 400,
+        "code": "invalid_file"
+      },
+      {
+        "case": "missing CSRF",
+        "status": 403
+      },
+      {
+        "case": "anonymous with valid CSRF",
+        "status": 403,
+        "code": "permission_denied"
+      },
+      {
+        "case": "real HTTP article requests",
+        "status": 200,
+        "database_view_counts": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "passed": true
+  },
+  "local_http_orientation": {
+    "real_http": "passed",
+    "case": "EXIF orientation 6 applied before metadata removal",
+    "source_dimensions": [
+      12,
+      8
+    ],
+    "stored_dimensions": [
+      8,
+      12
+    ],
+    "remaining_exif": 0,
+    "upload_status": 200,
+    "media_status": 200
+  },
+  "browser": {
+    "status": "passed on latest restarted server",
+    "normal_upload": "PNG success and rendered media preview",
+    "forged_upload": "visible invalid image error",
+    "screenshots": [
+      "upload-success.jpg",
+      "upload-invalid.jpg"
+    ]
+  },
+  "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
+  "final_scan": "after-complete-scan"
+}

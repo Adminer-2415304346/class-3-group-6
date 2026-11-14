@@ -1,4 +1,5 @@
-# Create your models here.
+# GZX（第9—10周）：OAuth 业务模型：OAuthUser 第三方账号绑定、OAuthConfig 渠道配置、
+# PendingBinding 待邮箱确认的一次性绑定记录（O92）。
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -23,7 +24,7 @@ class OAuthUser(models.Model):
     token = models.CharField(max_length=150, null=True, blank=True)
     picture = models.CharField(max_length=350, blank=True, null=True)
     type = models.CharField(blank=False, null=False, max_length=50)
-    email = models.CharField(max_length=50, null=True, blank=True)
+    email = models.CharField(max_length=254, null=True, blank=True)
     metadata = models.TextField(null=True, blank=True)
     creation_time = models.DateTimeField(_('creation time'), default=now)
     last_modify_time = models.DateTimeField(_('last modify time'), default=now)
@@ -75,3 +76,46 @@ class OAuthConfig(models.Model):
         verbose_name = 'oauth配置'
         verbose_name_plural = verbose_name
         ordering = ['-creation_time']
+
+
+class OAuthLoginState(models.Model):
+    """SZX（接手GZX，第9—10周）：对同一浏览器和渠道的最新 state 做数据库一次消费。"""
+
+    browser_context = models.CharField(max_length=64)
+    channel = models.CharField(max_length=10)
+    digest = models.CharField(max_length=64)
+    expires_at = models.DateTimeField(db_index=True)
+    consumed = models.BooleanField(default=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['browser_context', 'channel'], name='oauth_one_current_state',
+            ),
+        ]
+
+
+# GZX（第9—10周 O92）：待邮箱绑定证明：第三方账号要求用户填写邮箱时，服务端落库一条
+# 600 秒内有效的一次性绑定记录；TimestampSigner 只负责签名与到期，真正的"只能用一次"
+# 由 consumed 字段配合条件 UPDATE 保证。nonce 随机且唯一；browser_context 是发起时
+# 种入会话的随机标识，用于确认链接必须在同一浏览器上下文打开。
+class PendingBinding(models.Model):
+    oauth_user = models.ForeignKey(
+        OAuthUser,
+        verbose_name=_('oauth user'),
+        on_delete=models.CASCADE,
+        related_name='pending_bindings')
+    email = models.CharField(max_length=255, verbose_name=_('email'))
+    nonce = models.CharField(max_length=64, unique=True, verbose_name=_('nonce'))
+    browser_context = models.CharField(max_length=64, verbose_name=_('browser context'))
+    expires_at = models.DateTimeField(verbose_name=_('expires at'))
+    consumed = models.BooleanField(_('consumed'), default=False)
+    created_at = models.DateTimeField(_('creation time'), default=now)
+
+    class Meta:
+        verbose_name = _('pending oauth binding')
+        verbose_name_plural = verbose_name
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.email}->{self.oauth_user_id}'

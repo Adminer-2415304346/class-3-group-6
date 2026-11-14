@@ -58,6 +58,7 @@ urlpatterns = [
         r'upload',
         views.fileupload,
         name='upload'),
+    path('upload-image/', views.image_upload_page, name='upload_page'),
     path(
         r'clean',
         # SZX（第7—8周）：路由保持兼容，视图内限制有效超级用户 POST 并验证 CSRF。

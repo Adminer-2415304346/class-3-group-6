@@ -1,0 +1,2 @@
+﻿{"app": "accounts", "stage": "after", "files": 10, "ruff_findings": 7, "ruff_rules": {"I001": 4, "E501": 2, "F401": 1}, "bandit_findings": 0, "bandit_errors": []}
+exit_code=0

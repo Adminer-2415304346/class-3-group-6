@@ -2,19 +2,23 @@
 import json
 import os
 import re
+from datetime import timedelta
 from pathlib import Path
-from secrets import compare_digest
+from secrets import compare_digest, token_hex
 
 from django.conf import settings
+from django.utils import timezone
+from djangoblog.maintenance_config import get_maintenance_option
+from djangoblog.utils import get_sha256
 from werobot import WeRoBot
 from werobot.replies import Article, ArticlesReply
 from werobot.session.filestorage import FileStorage
 
-from djangoblog.utils import get_sha256
 from servermanager.api.blogapi import BlogApi
 from servermanager.api.commonapi import ChatGPT, CommandHandler
 
 from .MemcacheStorage import MemcacheStorage
+from .models import RobotAdminSession
 
 
 def _create_session_storage():
@@ -109,6 +113,7 @@ class MessageHandler:
         self.message = message
         self.session = session
         self.userid = message.source
+        self.owner = get_sha256(f"week910:servermanager:owner:{self.userid}")
         self.userinfo = WxUserInfo()
         try:
             value = session[self.userid]
@@ -126,67 +131,136 @@ class MessageHandler:
         return self.userinfo.isPasswordSet
 
     def save_session(self):
-        # SZX（代SY，第7—8周）：保存既有字段名的纯标量字典；旧对象格式自动失效为未登录。
+        # SZX（代SY，第9—10周）：会话只保留有界标量，权限和票据状态以数据库为准。
         payload = {name: getattr(self.userinfo, name) for name in WxUserInfo.FIELDS}
         self.session[self.userid] = json.dumps(payload)
+
+    def _reset_session(self, *, revoke=False, awaiting_password=False):
+        if revoke:
+            RobotAdminSession.objects.filter(owner=self.owner).delete()
+        self.userinfo = WxUserInfo()
+        self.userinfo.isAdmin = awaiting_password
+        self.save_session()
+
+    def _active_session(self):
+        return RobotAdminSession.objects.filter(
+            owner=self.owner,
+            session_id=self.userinfo.SessionId,
+            expires_at__gt=timezone.now(),
+        )
 
     def _validate_password(self, content):
         # SZX（代SY，第7—8周）：测试使用显式配置覆盖；生产和测试不再走不同口令协议。
         expected = str(settings.WXADMIN).upper()
         actual = get_sha256(get_sha256(content)).upper()
-        if compare_digest(expected, actual):
+        if expected.isascii() and compare_digest(expected, actual):
+            expires_at = timezone.now() + timedelta(
+                seconds=get_maintenance_option("ROBOT_SESSION_TTL_SECONDS"),
+            )
+            session_id = token_hex(16)
+            RobotAdminSession.objects.update_or_create(
+                owner=self.owner,
+                defaults={
+                    "session_id": session_id,
+                    "expires_at": expires_at,
+                    "ticket_id": "",
+                    "ticket_title": "",
+                    "ticket_action": "",
+                    "ticket_created_at": None,
+                    "ticket_expires_at": None,
+                    "ticket_consumed": True,
+                },
+            )
             self.userinfo.isPasswordSet = True
             self.userinfo.Count = 0
+            self.userinfo.SessionId = session_id
             self.save_session()
-            return "验证通过,请输入命令或者要执行的命令代码:输入helpme获得帮助"
+            return "验证通过。请输入命令标题，输入helpme查看可用命令。"
         self.userinfo.Count += 1
         if self.userinfo.Count >= 3:
-            self.userinfo = WxUserInfo()
-            self.save_session()
+            self._reset_session()
             return "超过验证次数"
         self.save_session()
         return "验证失败，请重新输入管理员密码:"
 
-    def _confirmed_command(self, content):
-        # SZX（代SY，第7—8周）：先消费待执行项再调用命令，重复Y不能重放上一次命令。
-        if self.userinfo.Command and content.upper() == "Y":
-            command = self.userinfo.Command
-            self.userinfo.Command = ""
-            self.save_session()
-            return cmd_handler.run(command)
-        if content.upper() == "HELPME":
-            return cmd_handler.get_help()
-        self.userinfo.Command = content[:300]
+    def _consume_ticket(self, grant):
+        ticket_id = self.userinfo.TicketId
+        if not ticket_id or ticket_id != grant.ticket_id:
+            return "没有待确认命令，请重新输入命令标题。"
+        # SZX（代SY，第9—10周）：以当前会话、票据 ID、未消费状态和同一应用时钟为条件。
+        consumed = self._active_session().filter(
+            ticket_id=ticket_id,
+            ticket_expires_at__gt=timezone.now(),
+            ticket_consumed=False,
+        ).update(ticket_consumed=True)
+        if consumed != 1:
+            return "确认已过期或已使用，请重新输入命令标题。"
+        self.userinfo.Command = ""
+        self.userinfo.TicketId = ""
         self.save_session()
-        return "确认执行: " + self.userinfo.Command + " 命令?"
+        return cmd_handler.run(grant.ticket_title, expected_action=grant.ticket_action)
+
+    def _handle_admin_command(self, content):
+        grant = self._active_session().first()
+        if grant is None:
+            self._reset_session()
+            return "管理员会话已过期，请重新发送ADMIN登录。"
+        command_text = content.upper()
+        if command_text == "Y":
+            return self._consume_ticket(grant)
+        if command_text == "HELPME":
+            return cmd_handler.get_help()
+
+        command, error = cmd_handler.resolve(content)
+        if error:
+            return error
+        created_at = timezone.now()
+        confirmation_ttl = get_maintenance_option("ROBOT_CONFIRM_TTL_SECONDS")
+        ticket_id = token_hex(16)
+        created = self._active_session().update(
+            ticket_id=ticket_id,
+            ticket_title=command.title,
+            ticket_action=command.command,
+            ticket_created_at=created_at,
+            ticket_expires_at=min(
+                grant.expires_at, created_at + timedelta(seconds=confirmation_ttl),
+            ),
+            ticket_consumed=False,
+        )
+        if created != 1:
+            self._reset_session()
+            return "管理员会话已过期，请重新发送ADMIN登录。"
+        self.userinfo.Command = command.title
+        self.userinfo.TicketId = ticket_id
+        self.save_session()
+        return f"确认执行 {command.title}？请回复Y。"
 
     def handler(self):
         # SZX（代SY，第7—8周）：类方法缩进保持独立；先验证身份，后验证口令与一次确认。
         content = str(self.message.content).strip()
         if self.is_admin and content.upper() == "EXIT":
-            self.userinfo = WxUserInfo()
-            self.save_session()
+            self._reset_session(revoke=True)
             return "退出成功"
         if content.upper() == "ADMIN":
-            self.userinfo = WxUserInfo()
-            self.userinfo.isAdmin = True
-            self.save_session()
+            self._reset_session(revoke=True, awaiting_password=True)
             return "输入管理员密码"
         if self.is_admin and not self.is_password_set:
             return self._validate_password(content)
         if self.is_admin:
-            return self._confirmed_command(content)
+            return self._handle_admin_command(content)
         return ChatGPT.chat(content)
 
 
 class WxUserInfo:
-    FIELDS = ("isAdmin", "isPasswordSet", "Count", "Command")
+    FIELDS = ("isAdmin", "isPasswordSet", "Count", "Command", "SessionId", "TicketId")
 
     def __init__(self):
         self.isAdmin = False
         self.isPasswordSet = False
         self.Count = 0
         self.Command = ""
+        self.SessionId = ""
+        self.TicketId = ""
 
     @classmethod
     def from_payload(cls, payload):
@@ -200,7 +274,17 @@ class WxUserInfo:
             return result
         if not isinstance(payload["Command"], str) or len(payload["Command"]) > 300:
             return result
-        if payload["isPasswordSet"] and not payload["isAdmin"]:
+        for name in ("SessionId", "TicketId"):
+            value = payload[name]
+            if not isinstance(value, str) or (value and not re.fullmatch(r"[a-f0-9]{32}", value)):
+                return result
+        if payload["isPasswordSet"] != bool(payload["SessionId"]) or (
+            payload["isPasswordSet"] and not payload["isAdmin"]
+        ):
+            return result
+        if bool(payload["Command"]) != bool(payload["TicketId"]) or (
+            payload["TicketId"] and not payload["SessionId"]
+        ):
             return result
         for name in cls.FIELDS:
             setattr(result, name, payload[name])

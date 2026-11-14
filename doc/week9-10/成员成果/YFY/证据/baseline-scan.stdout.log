@@ -1,0 +1,1 @@
+﻿{"app": "accounts", "stage": "baseline", "files": 10, "ruff_findings": 8, "ruff_rules": {"I001": 4, "E501": 3, "F401": 1}, "bandit_findings": 0, "bandit_errors": []}

@@ -1,0 +1,49 @@
+{
+  "profile": "temporary local SQLite/LocMem preview; not GCY settings_demo or production",
+  "url": "http://127.0.0.1:52925",
+  "results": [
+    {
+      "case": "anonymous upload page",
+      "status": 302
+    },
+    {
+      "case": "staff upload and read media",
+      "status": 200,
+      "media_status": 200,
+      "image_dimensions": [
+        320,
+        180
+      ],
+      "data": {
+        "url": "/media/images/2026/11/02/6a5f1393d6884069a8aeea64238280fd.png",
+        "name": "images/2026/11/02/6a5f1393d6884069a8aeea64238280fd.png",
+        "size": 2729,
+        "format": "PNG"
+      }
+    },
+    {
+      "case": "forged image",
+      "status": 400,
+      "code": "invalid_file"
+    },
+    {
+      "case": "missing CSRF",
+      "status": 403
+    },
+    {
+      "case": "anonymous with valid CSRF",
+      "status": 403,
+      "code": "permission_denied"
+    },
+    {
+      "case": "real HTTP article requests",
+      "status": 200,
+      "database_view_counts": [
+        0,
+        1,
+        2
+      ]
+    }
+  ],
+  "passed": true
+}

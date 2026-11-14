@@ -23,8 +23,8 @@ class ServerManagerTest(TestCase):
             self.assertEqual(ChatGPT.chat("hello"), "服务器出错了")
         client.chat.completions.create.assert_called_once()
 
-    def test_validate_comment(self):
-        commands.objects.create(title="fixture", command="not-a-real-command", describe="fixture")
+    def test_configured_action_runs(self):
+        commands.objects.create(title="fixture", command="python_version", describe="fixture")
         with patch(
             "subprocess.run", return_value=SimpleNamespace(returncode=0, stdout="mock output")
         ) as run:

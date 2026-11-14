@@ -1,0 +1,63 @@
+{
+  "command": [
+    "C:\\Users\\Lenovo\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week7-8\\tools\\run_isolated_tests.py",
+    "--result-json",
+    "D:\\软件工程方法学\\class-3-group-6\\doc\\week9-10\\公共准备验证\\tests.json",
+    "djangoblog.test_week78_gcy_quality",
+    "comments.test_reaction_snapshot",
+    "blog.test_comment_lifecycle",
+    "blog.test_week78_quality",
+    "blog.test_views",
+    "blog.test_templatetags",
+    "blog.test_context_processors",
+    "blog.test_middleware",
+    "blog.test_brand_assets",
+    "blog.test_article_business_logic",
+    "blog.test_comment_interfaces",
+    "accounts.test_auth_hardening",
+    "accounts.tests",
+    "accounts.test_user_business_logic",
+    "accounts.test_admin",
+    "accounts.test_login_page",
+    "accounts.test_account_pages",
+    "oauth.test_oauth_business_logic",
+    "comments.tests",
+    "comments.test_views",
+    "comments.test_comment_business_logic",
+    "comments.test_quality_r45",
+    "djangoblog.tests",
+    "djangoblog.test_plugins",
+    "servermanager.tests",
+    "servermanager.test_week78_takeover",
+    "djangoblog.test_week910_configuration"
+  ],
+  "cwd": "D:\\软件工程方法学\\class-3-group-6",
+  "returncode": 0,
+  "tests": {
+    "tests_run": 400,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 49,
+      "comments": 50,
+      "blog": 158,
+      "accounts": 84,
+      "oauth": 26,
+      "servermanager": 33
+    }
+  },
+  "scope": "390 previous selected regressions plus 10 common configuration tests; individual week9-10 business tasks are not implemented",
+  "source_base": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad + SZX task/configuration working tree",
+  "source_sha256": {
+    "src/DjangoBlog/djangoblog/maintenance_config.py": "e5e35e1de962c476d6650a5046ac2537c98dc1d053382ef16ba2ee43715d36e3",
+    "src/DjangoBlog/djangoblog/test_week910_configuration.py": "334460681edb141b4f7aa47afe0922e95d020a8455653eb38d4cebfca89dec3d",
+    "doc/week7-8/tools/run_isolated_tests.py": "4eacf27459721ab6f45d47db2abfe3789fc03d021740a8e69d4e42e9b17e182c"
+  },
+  "versions": {
+    "Django": "5.2.17",
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  }
+}

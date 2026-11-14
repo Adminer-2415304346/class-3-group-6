@@ -1,0 +1,283 @@
+{
+  "version": "1.1",
+  "assigned_date": "2026-11-02",
+  "baseline_commit": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad",
+  "baseline_branch": "main",
+  "status": "12项必做优化已实现并通过六App联合回归，独立复核按本人记录登记",
+  "integration_evidence": "接手验证.json",
+  "shared_contract": "共享配置与接口约定.md",
+  "shared_owner": "SZX",
+  "members": [
+    {
+      "name": "石兆翔",
+      "tag": "SZX",
+      "id": "2415304346",
+      "app": "blog",
+      "branch": "szx_branch",
+      "peer": "GCY",
+      "summary": "文章浏览量原子更新；图片上传权限与文件校验；选做分类环检测。",
+      "document": "个人任务/01-石兆翔-SZX-blog.md",
+      "required_tasks": [
+        {
+          "id": "B91",
+          "title": "浏览量原子更新",
+          "status": "已实现并通过本人验证",
+          "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
+          "evidence": "成员成果/SZX/证据/verification.json",
+          "independent_review": "待GCY本人复核"
+        },
+        {
+          "id": "B92",
+          "title": "可用的受控图片上传",
+          "status": "已实现并通过本人验证",
+          "code_commit": "baf899832670b72d53531c670f3751f2a52c03e2",
+          "evidence": "成员成果/SZX/证据/verification.json",
+          "independent_review": "待GCY本人复核"
+        }
+      ],
+      "optional_task": {
+        "id": "B93",
+        "title": "分类防环与可观察错误",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "blog.test_comment_lifecycle",
+        "blog.test_week78_quality",
+        "blog.test_views",
+        "blog.test_templatetags",
+        "blog.test_context_processors",
+        "blog.test_middleware",
+        "blog.test_brand_assets",
+        "blog.test_article_business_logic",
+        "blog.test_comment_interfaces"
+      ],
+      "new_test_label": "blog.test_week910_functional"
+    },
+    {
+      "name": "喻飞扬",
+      "tag": "YFY",
+      "id": "2415304347",
+      "app": "accounts",
+      "branch": "yfy_branch",
+      "peer": "GZX",
+      "summary": "找回密码验证码服务端冷却与前端同步；错误次数和锁定；选做激活链接时效/重发。",
+      "document": "个人任务/02-喻飞扬-YFY-accounts.md",
+      "required_tasks": [
+        {
+          "id": "A91",
+          "title": "服务端验证码发送冷却",
+          "status": "已合入 develop 并通过联合回归",
+          "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
+          "evidence": "成员成果/YFY/功能测试记录.md"
+        },
+        {
+          "id": "A92",
+          "title": "验证码失败次数和挑战锁定",
+          "status": "已合入 develop 并通过联合回归",
+          "code_commit": "f0d91d03260c81865270753bee21f9db026ade25",
+          "evidence": "成员成果/YFY/功能测试记录.md"
+        }
+      ],
+      "optional_task": {
+        "id": "A93",
+        "title": "激活链接期限与重新发送",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "accounts.test_auth_hardening",
+        "accounts.tests",
+        "accounts.test_user_business_logic",
+        "accounts.test_admin",
+        "accounts.test_login_page",
+        "accounts.test_account_pages"
+      ],
+      "new_test_label": "accounts.test_week910_functional"
+    },
+    {
+      "name": "王子扬",
+      "tag": "WZY",
+      "id": "2415304348",
+      "app": "comments",
+      "branch": "wzy_branch",
+      "peer": "SY",
+      "summary": "评论正文与公开文章校验；发布限频/防重复；选做评论树查询优化。",
+      "document": "个人任务/03-王子扬-WZY-comments.md",
+      "required_tasks": [
+        {
+          "id": "C91",
+          "title": "评论输入和目标文章校验",
+          "status": "已合入 develop 并通过联合回归",
+          "code_commits": [
+            "0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1",
+            "bb058c40610cb02dcb1d77abd2df7490c84b1205"
+          ],
+          "evidence": "成员成果/WZY/功能测试记录.md"
+        },
+        {
+          "id": "C92",
+          "title": "评论限频和重复保护",
+          "status": "已合入 develop 并通过联合回归",
+          "code_commits": [
+            "0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1",
+            "bb058c40610cb02dcb1d77abd2df7490c84b1205"
+          ],
+          "evidence": "成员成果/WZY/功能测试记录.md"
+        }
+      ],
+      "optional_task": {
+        "id": "C93",
+        "title": "评论树查询优化",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "comments.test_reaction_snapshot",
+        "comments.tests",
+        "comments.test_views",
+        "comments.test_comment_business_logic",
+        "comments.test_quality_r45"
+      ],
+      "new_test_label": "comments.test_week910_functional"
+    },
+    {
+      "name": "顾梓鑫",
+      "tag": "GZX",
+      "id": "2415304345",
+      "app": "oauth",
+      "branch": "gzx_branch",
+      "peer": "YFY",
+      "summary": "OAuth state校验与消费；受控邮箱绑定；选做密钥显示/敏感日志最小化。",
+      "document": "个人任务/04-顾梓鑫-GZX-oauth.md",
+      "required_tasks": [
+        {
+          "id": "O91",
+          "title": "state绑定会话并按期一次消费",
+          "status": "顾梓鑫实现，石兆翔补齐并通过联合回归",
+          "actual_executor": "GZX + SZX",
+          "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
+          "evidence": "成员成果/GZX/功能测试记录.md",
+          "independent_review": "已由GZX复核YFY accounts A91/A92，通过（互查记录-第9-10周.md）"
+        },
+        {
+          "id": "O92",
+          "title": "邮箱归属、绑定期限与一次确认",
+          "status": "顾梓鑫实现，石兆翔补齐并通过联合回归",
+          "actual_executor": "GZX + SZX",
+          "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
+          "evidence": "成员成果/GZX/功能测试记录.md",
+          "independent_review": "已由GZX复核YFY accounts A91/A92，通过（互查记录-第9-10周.md）"
+        }
+      ],
+      "optional_task": {
+        "id": "O93",
+        "title": "后台与日志敏感数据最小化",
+        "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
+      },
+      "baseline_test_labels": [
+        "oauth.test_oauth_business_logic"
+      ],
+      "new_test_label": "oauth.test_week910_functional"
+    },
+    {
+      "name": "宋洋",
+      "tag": "SY",
+      "id": "2415304330",
+      "app": "servermanager",
+      "branch": "sy",
+      "peer": "WZY",
+      "summary": "固定动作允许列表替代shell文本；管理员/确认票据过期和单次消费；选做本地机器人消息链路测试命令。",
+      "document": "个人任务/05-宋洋-SY-servermanager.md",
+      "required_tasks": [
+        {
+          "id": "S91",
+          "title": "固定动作允许列表",
+          "status": "石兆翔接手实现并通过联合回归",
+          "actual_executor": "SZX",
+          "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+          "evidence": "成员成果/SY/功能测试记录.md",
+          "independent_review": "待WZY本人复核"
+        },
+        {
+          "id": "S92",
+          "title": "管理员期限及命令确认票据",
+          "status": "石兆翔接手实现并通过联合回归",
+          "actual_executor": "SZX",
+          "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+          "evidence": "成员成果/SY/功能测试记录.md",
+          "independent_review": "待WZY本人复核"
+        }
+      ],
+      "optional_task": {
+        "id": "S93",
+        "title": "本地机器人消息链路测试工具",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "servermanager.tests",
+        "servermanager.test_week78_takeover"
+      ],
+      "new_test_label": "servermanager.test_week910_functional"
+    },
+    {
+      "name": "郭曹钰",
+      "tag": "GCY",
+      "id": "2415304331",
+      "app": "djangoblog",
+      "branch": "gcy_branch",
+      "peer": "SZX",
+      "summary": "独立本地运行配置与运行说明；可执行环境诊断；选做幂等样例数据初始化。",
+      "document": "个人任务/06-郭曹钰-GCY-djangoblog.md",
+      "required_tasks": [
+        {
+          "id": "D91",
+          "title": "可重复启动的独立本地运行环境",
+          "status": "已合入 develop 并通过联合回归和空库启动",
+          "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
+          "evidence": "成员成果/GCY/功能测试记录.md"
+        },
+        {
+          "id": "D92",
+          "title": "本地环境诊断命令",
+          "status": "已合入 develop 并通过五项健康检查",
+          "code_commit": "103517609de43ed051acaad9bb9a49977b7c615c",
+          "evidence": "成员成果/GCY/功能测试记录.md"
+        }
+      ],
+      "optional_task": {
+        "id": "D93",
+        "title": "幂等样例数据初始化",
+        "status": "选做待实施"
+      },
+      "baseline_test_labels": [
+        "djangoblog.test_week78_gcy_quality",
+        "djangoblog.tests",
+        "djangoblog.test_plugins"
+      ],
+      "new_test_label": "djangoblog.test_week910_functional"
+    }
+  ],
+  "shared_contract_version": "1.1",
+  "updated_date": "2026-11-12",
+  "delivery_responsibilities": {
+    "recording_owner": "SZX 石兆翔",
+    "recording_work": [
+      "统一演示",
+      "讲解",
+      "录制",
+      "剪辑"
+    ],
+    "member_work": [
+      "功能实现",
+      "功能测试",
+      "技术交接"
+    ],
+    "required_member_documents": [
+      "实现说明.md",
+      "功能测试记录.md",
+      "代码变更统计.md"
+    ],
+    "reproduction_information_in": "实现说明.md",
+    "individual_demonstration_required": false,
+    "individual_video_required": false,
+    "individual_narration_or_shooting_script_required": false
+  }
+}

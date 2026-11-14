@@ -12,9 +12,12 @@ from blog.models import Article
 # Create your models here.
 # 评论主模型，保存博客文章的评论以及评论回复数据，支持多级回复
 class Comment(models.Model):
-    # WZY: 评论正文，文本字段，限制最多300字符，存储用户输入的评论内容
+    # WZY: 评论正文，文本字段，存储用户输入的评论内容
+    # WZY（第9—10周 C91）：上限改为共享配置 COMMENT_MAX_LENGTH 的默认值 2000，
+    # 与 get_maintenance_option("COMMENT_MAX_LENGTH") 一致；表单层还会再按配置值校验，
+    # 配置调小时以配置为准，模型上限只作为硬边界。
     # SZX：max_length 参与模型/表单校验，不是 MySQL TEXT 列的物理长度限制。
-    body = models.TextField('正文', max_length=300)
+    body = models.TextField('正文', max_length=2000)
     # WZY: 评论创建时间，默认取当前时间，记录评论提交时刻
     creation_time = models.DateTimeField(_('creation time'), default=now)
     # WZY: 评论最后修改时间，记录评论内容更新的时间戳
@@ -151,3 +154,47 @@ class CommentReaction(models.Model):
             f'{self.user.username} - {self.reaction_type} '
             f'on comment {self.comment.id}'
         )
+
+
+# WZY（第9—10周 C92）：评论发布状态表，用数据库行实现“成功评论”的限频与重复保护。
+# 设计要点：
+# 1) 状态行只在与评论写入同一个事务里新增/更新，评论保存失败或事务回滚时状态一起回滚，
+#    因此不会残留“成功冷却”，失败提交可以立即重试。
+# 2) 唯一约束 (user, scope, state_key) 让并发重复请求中只有一个能写入状态行，
+#    另一个会被唯一约束挡下并按“重复/过频”拒绝，不依赖缓存后端的原子性。
+# 3) state_key 存 sha256 摘要（规范化正文、文章和回复目标都参与摘要），不落明文内容。
+class CommentPostState(models.Model):
+    # 冷却类型：用户最近一次成功评论的时间窗；用户+文章+正文+回复目标的重复窗
+    SCOPE_INTERVAL = 'interval'
+    SCOPE_DUPLICATE = 'duplicate'
+    SCOPE_CHOICES = (
+        (SCOPE_INTERVAL, _('comment interval')),
+        (SCOPE_DUPLICATE, _('duplicate comment')),
+    )
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('user'),
+        on_delete=models.CASCADE)
+    scope = models.CharField(_('scope'), max_length=16, choices=SCOPE_CHOICES)
+    # 摘要串（sha256 十六进制），敏感正文不写入状态行
+    state_key = models.CharField(_('state key'), max_length=64)
+    # 冷却到期时间；约定边界为 now >= expires_at 即放行
+    expires_at = models.DateTimeField(_('expires at'))
+    updated_at = models.DateTimeField(_('updated at'), auto_now=True)
+
+    class Meta:
+        verbose_name = _('comment post state')
+        verbose_name_plural = verbose_name
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'scope', 'state_key'],
+                name='uniq_comment_post_state',
+            ),
+        ]
+        indexes = [
+            # 过期状态清理与到期判定
+            models.Index(fields=['scope', 'expires_at'], name='idx_cmt_state_expire'),
+        ]
+
+    def __str__(self):
+        return f'{self.user.username} - {self.scope} - {self.expires_at}'

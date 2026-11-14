@@ -1,0 +1,37 @@
+﻿{
+  "status": "failed",
+  "demo_mode": true,
+  "settings_module": "djangoblog.settings_demo",
+  "checks": [
+    {
+      "name": "database",
+      "status": "ok",
+      "detail": "engine=django.db.backends.sqlite3 vendor=sqlite",
+      "fix": null
+    },
+    {
+      "name": "cache",
+      "status": "ok",
+      "detail": "set/get/delete 往返一致",
+      "fix": null
+    },
+    {
+      "name": "templates",
+      "status": "ok",
+      "detail": "已加载 share_layout/base.html；DIRS=['C:\\\\Users\\\\PC\\\\class-3-group-6\\\\src\\\\DjangoBlog\\\\templates']",
+      "fix": null
+    },
+    {
+      "name": "frontend_manifest",
+      "status": "failed",
+      "detail": "缺少 C:\\Users\\PC\\class-3-group-6\\src\\DjangoBlog\\blog\\static\\blog\\dist\\.vite\\manifest.json",
+      "fix": "cd src/DjangoBlog/frontend; npm ci; npm run build"
+    },
+    {
+      "name": "media_directory",
+      "status": "ok",
+      "detail": "C:\\Users\\PC\\class-3-group-6\\src\\DjangoBlog\\demo_runtime\\media 可写",
+      "fix": null
+    }
+  ]
+}

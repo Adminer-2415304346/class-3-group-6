@@ -1,0 +1,145 @@
+[2026-11-09 18:29:05,482] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章结尾版权声明 initialized.
+[2026-11-09 18:29:05,482] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章结尾版权声明 initialized.
+[2026-11-09 18:29:05,486] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: article_copyright - 文章结尾版权声明
+[2026-11-09 18:29:05,486] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: article_copyright - 文章结尾版权声明
+[2026-11-09 18:29:05,488] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 阅读时间预测 initialized.
+[2026-11-09 18:29:05,488] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 阅读时间预测 initialized.
+[2026-11-09 18:29:05,488] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: reading_time - 阅读时间预测
+[2026-11-09 18:29:05,488] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: reading_time - 阅读时间预测
+[2026-11-09 18:29:05,491] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 外部链接处理器 initialized.
+[2026-11-09 18:29:05,491] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 外部链接处理器 initialized.
+[2026-11-09 18:29:05,491] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: external_links - 外部链接处理器
+[2026-11-09 18:29:05,491] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: external_links - 外部链接处理器
+[2026-11-09 18:29:05,493] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章浏览次数统计 initialized.
+[2026-11-09 18:29:05,493] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章浏览次数统计 initialized.
+[2026-11-09 18:29:05,494] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: view_count - 文章浏览次数统计
+[2026-11-09 18:29:05,494] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: view_count - 文章浏览次数统计
+[2026-11-09 18:29:05,496] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] SEO 优化器 initialized.
+[2026-11-09 18:29:05,496] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] SEO 优化器 initialized.
+[2026-11-09 18:29:05,496] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: seo_optimizer - SEO 优化器
+[2026-11-09 18:29:05,496] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: seo_optimizer - SEO 优化器
+[2026-11-09 18:29:05,498] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 图片性能优化插件 initialized.
+[2026-11-09 18:29:05,498] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 图片性能优化插件 initialized.
+[2026-11-09 18:29:05,498] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: image_lazy_loading - 图片性能优化插件
+[2026-11-09 18:29:05,498] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: image_lazy_loading - 图片性能优化插件
+[2026-11-09 18:29:05,501] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章推荐 initialized.
+[2026-11-09 18:29:05,501] INFO [djangoblog.plugin_manage.base_plugin.init_plugin:55 base_plugin] 文章推荐 initialized.
+[2026-11-09 18:29:05,501] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: article_recommendation - 文章推荐
+[2026-11-09 18:29:05,501] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: article_recommendation - 文章推荐
+[2026-11-09 18:29:05,504] INFO [plugins.cloudflare_cache.plugin.init_plugin:68 plugin] Initializing Cloudflare 缓存管理 v1.0.0
+[2026-11-09 18:29:05,504] ERROR [plugins.cloudflare_cache.plugin._validate_config:104 plugin] [CF Plugin] CLOUDFLARE_ZONE_ID not configured
+[2026-11-09 18:29:05,504] INFO [plugins.cloudflare_cache.plugin._validate_config:105 plugin] [CF Plugin] Please set environment variable: CLOUDFLARE_ZONE_ID
+[2026-11-09 18:29:05,505] WARNING [plugins.cloudflare_cache.plugin.init_plugin:80 plugin] [CF Plugin] Plugin disabled due to invalid configuration
+[2026-11-09 18:29:05,505] INFO [plugins.cloudflare_cache.plugin.register_hooks:184 plugin] [CF Plugin] Plugin is disabled, skipping hook registration
+[2026-11-09 18:29:05,505] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: cloudflare_cache - Cloudflare 缓存管理
+[2026-11-09 18:29:05,505] INFO [djangoblog.plugin_manage.loader.load_plugins:35 loader] Successfully loaded plugin: cloudflare_cache - Cloudflare 缓存管理
+[09/Nov/2026 18:29:12] "GET /health/ HTTP/1.1" 200 54
+[09/Nov/2026 18:29:12,915] - Broken pipe from ('127.0.0.1', 65195)
+[2026-11-09 18:29:17,871] INFO [djangoblog.mixins.get_queryset_from_cache:236 mixins] Cache MISS: index_1
+[2026-11-09 18:29:17,871] INFO [djangoblog.mixins.get_queryset_from_cache:236 mixins] Cache MISS: index_1
+[2026-11-09 18:29:17,885] INFO [djangoblog.utils.get_blog_setting:187 utils] set cache get_blog_setting
+[2026-11-09 18:29:17,885] INFO [djangoblog.utils.get_blog_setting:187 utils] set cache get_blog_setting
+[2026-11-09 18:29:17,893] INFO [blog.context_processors.seo_processor:23 context_processors] set processor cache.
+[2026-11-09 18:29:17,900] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:29:17,901] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:29:18,028] INFO [blog.templatetags.blog_tags.load_sidebar:271 blog_tags] load sidebar
+[2026-11-09 18:29:18,036] INFO [blog.templatetags.blog_tags.load_sidebar:331 blog_tags] set sidebar cache.key:sidebarp
+[09/Nov/2026 18:29:18] "GET / HTTP/1.1" 200 43677
+[09/Nov/2026 18:29:18] "GET /static/blog/dist/css/main-C_vVv2Od.css HTTP/1.1" 200 183961
+[09/Nov/2026 18:29:18] "GET /static/blog/dist/js/main-Bef77X5D.js HTTP/1.1" 200 184344
+[2026-11-09 18:29:18,129] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:29:18,130] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[09/Nov/2026 18:29:18] "GET /login/ HTTP/1.1" 200 12335
+[09/Nov/2026 18:29:18] "GET /admin/ HTTP/1.1" 302 0
+[09/Nov/2026 18:29:18] "GET /admin/login/ HTTP/1.1" 200 4185
+[2026-11-09 18:29:18,185] INFO [blog.models.comment_list:180 models] Cache MISS: article comments (id=1)
+[2026-11-09 18:29:18,249] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:29:18,261] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:29:18,262] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:29:18,275] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[09/Nov/2026 18:29:18] "GET /article/2026/11/9/1.html HTTP/1.1" 200 49323
+Not Found: /definitely-not-a-page-gcy/
+[2026-11-09 18:29:18,286] WARNING [django.request.log_response:253 log] Not Found: /definitely-not-a-page-gcy/
+[09/Nov/2026 18:29:18] "GET /definitely-not-a-page-gcy/ HTTP/1.1" 404 14581
+[09/Nov/2026 18:29:18] "GET /health/ HTTP/1.1" 200 54
+[2026-11-09 18:30:14,311] INFO [djangoblog.mixins.get_queryset_from_cache:236 mixins] Cache MISS: index_1
+[2026-11-09 18:30:14,311] INFO [djangoblog.mixins.get_queryset_from_cache:236 mixins] Cache MISS: index_1
+[2026-11-09 18:30:14,313] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,313] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[09/Nov/2026 18:30:14] "GET / HTTP/1.1" 200 43677
+[09/Nov/2026 18:30:14] "GET /static/blog/dist/css/main-C_vVv2Od.css HTTP/1.1" 200 183961
+[09/Nov/2026 18:30:14] "GET /static/blog/dist/js/main-Bef77X5D.js HTTP/1.1" 200 184344
+[2026-11-09 18:30:14,332] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,333] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[09/Nov/2026 18:30:14] "GET /login/ HTTP/1.1" 200 12335
+[09/Nov/2026 18:30:14] "GET /admin/ HTTP/1.1" 302 0
+[09/Nov/2026 18:30:14] "GET /admin/login/ HTTP/1.1" 200 4185
+[2026-11-09 18:30:14,346] INFO [blog.models.comment_list:180 models] Cache MISS: article comments (id=1)
+[2026-11-09 18:30:14,351] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:30:14,362] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,363] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,372] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[09/Nov/2026 18:30:14] "GET /article/2026/11/9/1.html HTTP/1.1" 200 49323
+Not Found: /definitely-not-a-page-gcy/
+[2026-11-09 18:30:14,383] WARNING [django.request.log_response:253 log] Not Found: /definitely-not-a-page-gcy/
+[09/Nov/2026 18:30:14] "GET /definitely-not-a-page-gcy/ HTTP/1.1" 404 14581
+[09/Nov/2026 18:30:14] "GET /health/ HTTP/1.1" 200 54
+[2026-11-09 18:30:14,407] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,408] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[09/Nov/2026 18:30:14] "GET /login/ HTTP/1.1" 200 12335
+[2026-11-09 18:30:14,731] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,731] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,735] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,735] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,736] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,736] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,736] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,736] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,737] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[2026-11-09 18:30:14,737] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[2026-11-09 18:30:14,737] INFO [accounts.views.form_valid:152 views] next
+[2026-11-09 18:30:14,751] ERROR [djangoblog.spider_notify.baidu_notify:24 spider_notify] Invalid URL '': No scheme supplied. Perhaps you meant https://?
+[2026-11-09 18:30:14,751] ERROR [djangoblog.spider_notify.baidu_notify:24 spider_notify] Invalid URL '': No scheme supplied. Perhaps you meant https://?
+[2026-11-09 18:30:14,751] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,751] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,751] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,751] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,753] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,753] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,753] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,753] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,754] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[2026-11-09 18:30:14,754] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[2026-11-09 18:30:14,754] INFO [djangoblog.blog_signals.user_auth_callback:194 blog_signals] gcy_demo@localhost
+[2026-11-09 18:30:14,754] INFO [djangoblog.blog_signals.user_auth_callback:194 blog_signals] gcy_demo@localhost
+[2026-11-09 18:30:14,754] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,754] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebari
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarl
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebarp
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,756] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebara
+[2026-11-09 18:30:14,757] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[2026-11-09 18:30:14,757] INFO [djangoblog.utils.delete_sidebar_cache:224 utils] delete sidebar key:sidebars
+[09/Nov/2026 18:30:14] "POST /login/ HTTP/1.1" 302 0
+[2026-11-09 18:30:14,769] INFO [blog.models.comment_list:180 models] Cache MISS: article comments (id=1)
+[2026-11-09 18:30:14,776] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:30:14,782] INFO [blog.context_processors.seo_processor:23 context_processors] set processor cache.
+[2026-11-09 18:30:14,787] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,788] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,798] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:30:14,800] INFO [blog.templatetags.blog_tags.load_sidebar:271 blog_tags] load sidebar
+[2026-11-09 18:30:14,805] INFO [blog.templatetags.blog_tags.load_sidebar:331 blog_tags] set sidebar cache.key:sidebarp
+[09/Nov/2026 18:30:14] "GET /article/2026/11/9/1.html HTTP/1.1" 200 53245
+[09/Nov/2026 18:30:14] "POST /article/1/postcomment HTTP/1.1" 302 0
+[2026-11-09 18:30:14,847] INFO [blog.models.comment_list:180 models] Cache MISS: article comments (id=1)
+[2026-11-09 18:30:14,853] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:30:14,875] INFO [blog.context_processors.seo_processor:23 context_processors] set processor cache.
+[2026-11-09 18:30:14,880] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,881] INFO [blog.templatetags.vite_tags.load_manifest:54 vite_tags] ✅ Vite manifest loaded from: C:\Users\PC\class-3-group-6\src\DjangoBlog\blog/static/blog/dist/.vite/manifest.json
+[2026-11-09 18:30:14,921] INFO [plugins.article_recommendation.plugin.get_recommendations:191 plugin] 原始推荐数量: 0, 有效推荐数量: 0
+[2026-11-09 18:30:14,925] INFO [blog.templatetags.blog_tags.gravatar_url:557 blog_tags] Using default avatar for gcy_demo@localhost
+[2026-11-09 18:30:14,944] INFO [blog.templatetags.blog_tags.load_sidebar:271 blog_tags] load sidebar
+[2026-11-09 18:30:14,950] INFO [blog.templatetags.blog_tags.load_sidebar:331 blog_tags] set sidebar cache.key:sidebarp
+[09/Nov/2026 18:30:14] "GET /article/2026/11/9/1.html HTTP/1.1" 200 70127

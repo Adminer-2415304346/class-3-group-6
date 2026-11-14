@@ -8,9 +8,9 @@ import urllib.parse
 from abc import ABCMeta, abstractmethod
 
 import requests
-
 from djangoblog.utils import cache_decorator
-from oauth.models import OAuthUser, OAuthConfig
+
+from oauth.models import OAuthConfig, OAuthUser
 
 logger = logging.getLogger(__name__)
 
@@ -49,10 +49,10 @@ class BaseOauthManager(metaclass=ABCMeta):
 
     @property
     def is_authorized(self):
-        return self.is_access_token_set and self.access_token is not None and self.openid is not None
+        return self.is_access_token_set and self.openid is not None
 
     @abstractmethod
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
         pass
 
     @abstractmethod
@@ -68,25 +68,22 @@ class BaseOauthManager(metaclass=ABCMeta):
         pass
 
     def do_get(self, url, params, headers=None):
-        # GZX：统一 GET 出口；本轮改进显式传 timeout 防止挂起；
-        # 遗留候选：logger.info 记录完整响应体，可能把 token/邮箱写进日志（见改进计划，未本轮改）。
+        # GZX：统一 GET 出口，显式传 timeout 防止挂起。
         rsp = requests.get(url=url, params=params, headers=headers,
                            timeout=OAUTH_HTTP_TIMEOUT)
-        logger.info(rsp.text)
+        rsp.raise_for_status()
         return rsp.text
 
     def do_post(self, url, params, headers=None):
         # GZX：统一 POST 出口，本轮改进显式传 timeout；返回原始文本交给调用方解析。
         rsp = requests.post(url, params, headers=headers,
                             timeout=OAUTH_HTTP_TIMEOUT)
-        logger.info(rsp.text)
+        rsp.raise_for_status()
         return rsp.text
 
     def get_config(self):
-        # GZX：按本渠道 ICON_NAME 取第一条启用配置；filter 不过滤 is_enable，
-        # 也不保证唯一，取 value[0]，多条/禁用配置的边界由调用层与缓存共同决定。
-        value = OAuthConfig.objects.filter(type=self.ICON_NAME)
-        return value[0] if value else None
+        configs = OAuthConfig.objects.filter(type=self.ICON_NAME, is_enable=True)
+        return configs.order_by('pk').first()
 
 
 class WBOauthManager(BaseOauthManager):
@@ -106,12 +103,15 @@ class WBOauthManager(BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
+        # GZX（第9—10周 O91）：state 是独立 OAuth2 参数，next 由本站会话保存。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
-            'redirect_uri': self.callback_url + '&next_url=' + nexturl
+            'redirect_uri': self.callback_url,
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -133,7 +133,7 @@ class WBOauthManager(BaseOauthManager):
             self.openid = str(obj['uid'])
             return self.get_oauth_userinfo()
         else:
-            raise OAuthAccessTokenException(rsp)
+            raise OAuthAccessTokenException('Weibo token exchange failed')
 
     def get_oauth_userinfo(self):
         # GZX：已授权才请求；把微博字段 avatar_large/screen_name/id 映射到 OAuthUser，
@@ -158,8 +158,7 @@ class WBOauthManager(BaseOauthManager):
                 user.email = datas['email']
             return user
         except Exception as e:
-            logger.error(e)
-            logger.error('weibo oauth error.rsp:' + rsp)
+            logger.warning('Weibo profile response invalid: %s', type(e).__name__)
             return None
 
     def get_picture(self, metadata):
@@ -183,14 +182,14 @@ class ProxyManagerMixin:
         # GZX（本轮改进）：代理出口同样显式传 timeout，避免走代理时无响应挂起。
         rsp = requests.get(url=url, params=params, headers=headers,
                            proxies=self.proxies, timeout=OAUTH_HTTP_TIMEOUT)
-        logger.info(rsp.text)
+        rsp.raise_for_status()
         return rsp.text
 
     def do_post(self, url, params, headers=None):
         # GZX（本轮改进）：代理出口 POST 同样显式传 timeout。
         rsp = requests.post(url, params, headers=headers,
                             proxies=self.proxies, timeout=OAUTH_HTTP_TIMEOUT)
-        logger.info(rsp.text)
+        rsp.raise_for_status()
         return rsp.text
 
 
@@ -211,13 +210,16 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, nexturl='/'):
+    def get_authorization_url(self, nexturl='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加；nexturl 仅用于兼容回调拼参，回调以会话为准。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': self.callback_url,
             'scope': 'openid email',
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -239,10 +241,9 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
         if 'access_token' in obj:
             self.access_token = str(obj['access_token'])
             self.openid = str(obj['id_token'])
-            logger.info(self.ICON_NAME + ' oauth ' + rsp)
             return self.access_token
         else:
-            raise OAuthAccessTokenException(rsp)
+            raise OAuthAccessTokenException('Google token exchange failed')
 
     def get_oauth_userinfo(self):
         # GZX：取 userinfo 并映射 picture/name/sub；注意 datas['email'] 直接下标访问，
@@ -267,8 +268,7 @@ class GoogleOauthManager(ProxyManagerMixin, BaseOauthManager):
                 user.email = datas['email']
             return user
         except Exception as e:
-            logger.error(e)
-            logger.error('google oauth error.rsp:' + rsp)
+            logger.warning('Google profile response invalid: %s', type(e).__name__)
             return None
 
     def get_picture(self, metadata):
@@ -294,13 +294,16 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加，回调地址使用配置值。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
-            'redirect_uri': f'{self.callback_url}&next_url={next_url}',
+            'redirect_uri': self.callback_url,
             'scope': 'user:email'
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -323,7 +326,7 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
             self.access_token = (r['access_token'][0])
             return self.access_token
         else:
-            raise OAuthAccessTokenException(rsp)
+            raise OAuthAccessTokenException('GitHub token exchange failed')
 
     def get_oauth_userinfo(self):
         # GZX：先取 /user 公开资料；公开资料无邮箱时再请求 /user/emails，
@@ -360,11 +363,10 @@ class GitHubOauthManager(ProxyManagerMixin, BaseOauthManager):
                                 # Use first verified email as fallback
                                 user.email = email_data.get('email')
                 except Exception as e:
-                    logger.warning(f'Failed to fetch private email from GitHub API. User login will fail if email is required: {e}')
+                    logger.warning('GitHub email response unavailable: %s', type(e).__name__)
             return user
         except Exception as e:
-            logger.error(e)
-            logger.error('github oauth error.rsp:' + rsp)
+            logger.warning('GitHub profile response invalid: %s', type(e).__name__)
             return None
 
     def get_picture(self, metadata):
@@ -389,13 +391,16 @@ class FaceBookOauthManager(ProxyManagerMixin, BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加。
         params = {
             'client_id': self.client_id,
             'response_type': 'code',
             'redirect_uri': self.callback_url,
             'scope': 'email,public_profile'
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -416,7 +421,7 @@ class FaceBookOauthManager(ProxyManagerMixin, BaseOauthManager):
             self.access_token = token
             return self.access_token
         else:
-            raise OAuthAccessTokenException(rsp)
+            raise OAuthAccessTokenException('Facebook token exchange failed')
 
     def get_oauth_userinfo(self):
         # GZX：FB 头像在嵌套 picture.data.url，逐层判空后再取；
@@ -436,11 +441,14 @@ class FaceBookOauthManager(ProxyManagerMixin, BaseOauthManager):
             user.metadata = rsp
             if 'email' in datas and datas['email']:
                 user.email = datas['email']
-            if 'picture' in datas and datas['picture'] and datas['picture']['data'] and datas['picture']['data']['url']:
+            if (
+                'picture' in datas and datas['picture']
+                and datas['picture']['data'] and datas['picture']['data']['url']
+            ):
                 user.picture = str(datas['picture']['data']['url'])
             return user
         except Exception as e:
-            logger.error(e)
+            logger.warning('Facebook profile response invalid: %s', type(e).__name__)
             return None
 
     def get_picture(self, metadata):
@@ -466,12 +474,15 @@ class QQOauthManager(BaseOauthManager):
             access_token=access_token,
             openid=openid)
 
-    def get_authorization_url(self, next_url='/'):
+    def get_authorization_url(self, next_url='/', state=None):
+        # GZX（第9—10周 O91）：state 作为独立参数附加，回调地址使用配置值。
         params = {
             'response_type': 'code',
             'client_id': self.client_id,
-            'redirect_uri': self.callback_url + '&next_url=' + next_url,
+            'redirect_uri': self.callback_url,
         }
+        if state:
+            params['state'] = state
         url = self.AUTH_URL + "?" + urllib.parse.urlencode(params)
         return url
 
@@ -493,7 +504,7 @@ class QQOauthManager(BaseOauthManager):
                 self.access_token = token[0]
                 return token
         else:
-            raise OAuthAccessTokenException(rsp)
+            raise OAuthAccessTokenException('QQ token exchange failed')
 
     def get_open_id(self):
         # GZX：QQ /me 返回 JSONP 回调，先剥掉 callback( ) ; 再 json 解析出 openid 存 self。
@@ -522,7 +533,6 @@ class QQOauthManager(BaseOauthManager):
                 'openid': self.openid
             }
             rsp = self.do_get(self.API_URL, params)
-            logger.info(rsp)
             obj = json.loads(rsp)
             user = OAuthUser()
             user.nickname = obj['nickname']
@@ -555,14 +565,9 @@ def get_oauth_apps():
 
 
 def get_manager_by_type(type):
-    # GZX：入参渠道名（大小写不敏感）；从缓存的启用清单里找第一个匹配管理器，
-    # 找不到返回 None，由 views 重定向首页。不复查数据库，受上面 100 分钟缓存影响。
-    applications = get_oauth_apps()
-    if applications:
-        finds = list(
-            filter(
-                lambda x: x.ICON_NAME.lower() == type.lower(),
-                applications))
-        if finds:
-            return finds[0]
+    # SZX（接手GZX）：实际授权每次读取启用配置，后台禁用即时生效。
+    for manager_class in BaseOauthManager.__subclasses__():
+        if manager_class.ICON_NAME == type.lower():
+            manager = manager_class()
+            return manager if getattr(manager, 'client_id', None) else None
     return None

@@ -1,34 +1,33 @@
 # SZX（第7—8周）：前台查询与渲染入口；权限、评论分页、插件和上传各有独立边界。
 import logging
-import os
-import uuid
 
 from django.conf import settings
+from django.contrib.auth.views import redirect_to_login
 from django.core.paginator import Paginator
-from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
-from django.templatetags.static import static
-from django.utils import timezone
+from django.http import HttpResponse, HttpResponseForbidden, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from haystack.views import SearchView
 
-from blog.models import Article, Category, LinkShowType, Links, Tag
+from blog.models import Article, Category, Links, LinkShowType, Tag
+from blog.uploads import ImageUploadRejected, save_uploaded_image
 from comments.forms import CommentForm
+from djangoblog.maintenance_config import get_maintenance_options
+from djangoblog.mixins import (
+    ArticleListMixin,
+    CachedListViewMixin,
+    OptimizedArticleQueryMixin,
+    PageNumberMixin,
+    SlugCachedMixin,
+)
 from djangoblog.plugin_manage import hooks
 from djangoblog.plugin_manage.hook_constants import ARTICLE_CONTENT_HOOK_NAME
-from djangoblog.utils import cache, get_blog_setting, get_sha256
-from djangoblog.mixins import (
-    SlugCachedMixin,
-    ArticleListMixin,
-    OptimizedArticleQueryMixin,
-    CachedListViewMixin,
-    PageNumberMixin
-)
+from djangoblog.utils import cache, get_blog_setting
 
 logger = logging.getLogger(__name__)
 
@@ -168,6 +167,7 @@ class ArticleDetailView(DetailView):
         blog_setting = get_blog_setting()
         from django.utils.html import strip_tags
         from django.utils.text import Truncator
+
         from djangoblog.utils import CommonMarkdown
         
         # 处理description：markdown -> HTML -> 纯文本，彻底去除格式
@@ -381,46 +381,48 @@ class EsSearchView(SearchView):
         return context
 
 
-@csrf_exempt
+@require_POST
+@csrf_protect
 def fileupload(request):
-    """
-    该方法需自己写调用端来上传图片，该方法仅提供图床功能
-    :param request:
-    :return:
-    """
-    if request.method == 'POST':
-        # SZX（第7—8周）：旧上传协议使用固定签名且免 CSRF，不能等同于账号权限校验。
-        sign = request.GET.get('sign', None)
-        if not sign:
-            return HttpResponseForbidden()
-        if not sign == get_sha256(get_sha256(settings.SECRET_KEY)):
-            return HttpResponseForbidden()
-        response = []
-        for filename in request.FILES:
-            # SZX（第7—8周）：这里只按字段名猜类型，未验证 MIME/大小；需后续重设计上传。
-            timestr = timezone.now().strftime('%Y/%m/%d')
-            imgextensions = ['jpg', 'png', 'jpeg', 'bmp']
-            fname = u''.join(str(filename))
-            isimage = len([i for i in imgextensions if fname.find(i) >= 0]) > 0
-            base_dir = os.path.join(settings.STATICFILES, "files" if not isimage else "image", timestr)
-            if not os.path.exists(base_dir):
-                os.makedirs(base_dir)
-            savepath = os.path.normpath(os.path.join(base_dir, f"{uuid.uuid4().hex}{os.path.splitext(filename)[-1]}"))
-            if not savepath.startswith(base_dir):
-                return HttpResponse("only for post")
-            with open(savepath, 'wb+') as wfile:
-                for chunk in request.FILES[filename].chunks():
-                    wfile.write(chunk)
-            if isimage:
-                from PIL import Image
-                image = Image.open(savepath)
-                image.save(savepath, quality=20, optimize=True)
-            url = static(savepath)
-            response.append(url)
-        return HttpResponse(response)
+    """SZX（第9—10周）：有效staff通过CSRF后上传单张经完整验证的图片。"""
+    user = request.user
+    if not (user.is_authenticated and user.is_active and user.is_staff):
+        return JsonResponse({"success": False, "code": "permission_denied",
+                             "message": "仅有效管理员可上传图片。", "data": {}}, status=403)
+    files = request.FILES.getlist('file')
+    count = sum(len(request.FILES.getlist(key)) for key in request.FILES)
+    if len(files) != 1 or count != 1:
+        return JsonResponse({"success": False, "code": "invalid_file",
+                             "message": "请使用file字段上传一张图片。", "data": {}}, status=400)
+    try:
+        data = save_uploaded_image(files[0])
+    except ImageUploadRejected as error:
+        return JsonResponse({"success": False, "code": error.code,
+                             "message": str(error), "data": {}}, status=400)
+    except (OSError, NotImplementedError) as error:
+        logger.warning("图片存储不可用：%s", type(error).__name__)
+        return JsonResponse({"success": False, "code": "storage_unavailable",
+                             "message": "图片暂时无法保存，请稍后重试。", "data": {}}, status=503)
+    return JsonResponse({"success": True, "code": "uploaded",
+                         "message": "图片上传成功。", "data": data})
 
-    else:
-        return HttpResponse("only for post")
+
+@require_GET
+@csrf_protect
+def image_upload_page(request):
+    """SZX：复用本站后台样式提供实际上传入口，便于本地操作和录制演示。"""
+    user = request.user
+    if not user.is_authenticated:
+        return redirect_to_login(request.get_full_path(), reverse('admin:login'))
+    if not (user.is_active and user.is_staff):
+        return HttpResponseForbidden('仅有效管理员可使用图片上传。')
+    from djangoblog.admin_site import admin_site
+    options = get_maintenance_options()
+    context = {**admin_site.each_context(request), 'title': '图片上传',
+               'max_bytes': options['UPLOAD_MAX_BYTES'],
+               'max_pixels': options['UPLOAD_MAX_PIXELS'],
+               'allowed_formats': ', '.join(options['UPLOAD_ALLOWED_FORMATS'])}
+    return render(request, 'blog/image_upload.html', context)
 
 
 # ===== 错误处理视图 =====
@@ -428,11 +430,7 @@ def fileupload(request):
 # 实际实现已经移动到 djangoblog.error_views
 # 可以在 urls.py 中直接引用新的实现
 
-from djangoblog.error_views import (
-    page_not_found_view,
-    server_error_view,
-    permission_denied_view
-)
+from djangoblog.error_views import page_not_found_view, permission_denied_view, server_error_view
 
 
 @require_POST

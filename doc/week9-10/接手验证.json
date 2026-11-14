@@ -1,0 +1,246 @@
+{
+  "verified_date": "2026-11-12",
+  "baseline_develop": "20cb455d712a2b94180175760140c2d424369997",
+  "tested_code_tip": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+  "branch": "szx_branch",
+  "work": {
+    "oauth": {
+      "tasks": [
+        "O91",
+        "O92"
+      ],
+      "assigned_to": "GZX",
+      "completed_by": "GZX + SZX",
+      "original_changes": [
+        "b71811543fcfec64c659f7e6929e9844355f6d13",
+        "147d1051cebfb426359def5eb18bcd7e008b2723"
+      ],
+      "takeover_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
+      "migration": "oauth/0005_oauth_login_state",
+      "member_records": "成员成果/GZX/"
+    },
+    "servermanager": {
+      "tasks": [
+        "S91",
+        "S92"
+      ],
+      "assigned_to": "SY",
+      "completed_by": "SZX",
+      "unmerged_draft": "bc476cbb83c6ad6c9ffb537e3d6d3158c4f8050c",
+      "takeover_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
+      "migration": "servermanager/0003_robotadminsession",
+      "member_records": "成员成果/SY/"
+    }
+  },
+  "environment": {
+    "python": "3.12.10",
+    "django": "5.2.17",
+    "node": "26.13.0",
+    "npm": "11.20.0",
+    "isolated_tests": "SQLite in-memory, LocMem cache and email, SimpleEngine, network blocked",
+    "local_smoke": "djangoblog.settings_demo, fresh disk SQLite, LocMem email override for OAuth"
+  },
+  "baseline_subset": {
+    "purpose": "Existing OAuth, servermanager and shared-configuration tests on the develop baseline",
+    "runner": "doc/week7-8/tools/run_isolated_tests.py",
+    "labels": [
+      "oauth.test_oauth_business_logic",
+      "oauth.test_week910_functional",
+      "servermanager.tests",
+      "servermanager.test_week78_takeover",
+      "djangoblog.test_week910_configuration"
+    ],
+    "exit_code": 0,
+    "tests_run": 81,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "oauth": 38,
+      "servermanager": 33,
+      "djangoblog": 10
+    }
+  },
+  "integrated_regression": {
+    "runner": "doc/week7-8/tools/run_isolated_tests.py",
+    "labels": [
+      "djangoblog.test_week78_gcy_quality",
+      "comments.test_reaction_snapshot",
+      "blog.test_comment_lifecycle",
+      "blog.test_week78_quality",
+      "blog.test_views",
+      "blog.test_templatetags",
+      "blog.test_context_processors",
+      "blog.test_middleware",
+      "blog.test_brand_assets",
+      "blog.test_article_business_logic",
+      "blog.test_comment_interfaces",
+      "accounts.test_auth_hardening",
+      "accounts.tests",
+      "accounts.test_user_business_logic",
+      "accounts.test_admin",
+      "accounts.test_login_page",
+      "accounts.test_account_pages",
+      "oauth.test_oauth_business_logic",
+      "comments.tests",
+      "comments.test_views",
+      "comments.test_comment_business_logic",
+      "comments.test_quality_r45",
+      "djangoblog.tests",
+      "djangoblog.test_plugins",
+      "servermanager.tests",
+      "servermanager.test_week78_takeover",
+      "djangoblog.test_week910_configuration",
+      "blog.test_week910_functional",
+      "blog.tests.ArticleTest.test_image",
+      "accounts.test_week910_functional",
+      "oauth.test_week910_functional",
+      "comments.test_week910_functional",
+      "djangoblog.test_week910_functional",
+      "servermanager.test_week910_functional"
+    ],
+    "exit_code": 0,
+    "tests_run": 535,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "per_app": {
+      "djangoblog": 70,
+      "comments": 80,
+      "blog": 191,
+      "accounts": 100,
+      "oauth": 50,
+      "servermanager": 44
+    }
+  },
+  "demo_smoke": {
+    "frontend_install_exit_code": 0,
+    "frontend_build_exit_code": 0,
+    "migration_consistency_exit_code": 0,
+    "migrate_exit_code": 0,
+    "healthcheck_exit_code": 0,
+    "smoke_exit_code": 0,
+    "http_pages": {
+      "/": 200,
+      "/login/": 200,
+      "/register/": 200,
+      "/admin/": 302
+    },
+    "oauth": {
+      "start": 302,
+      "pending": 302,
+      "pending_page": 200,
+      "confirmed": 302,
+      "user_created_after_confirmation": true
+    },
+    "robot": {
+      "concurrent_requests": 2,
+      "process_calls": 1,
+      "responses": [
+        "Python 3.12.10",
+        "确认已过期或已使用，请重新输入命令标题。"
+      ]
+    },
+    "migrations_applied": 46,
+    "healthchecks": {
+      "database": "ok",
+      "cache": "ok",
+      "templates": "ok",
+      "frontend_manifest": "ok",
+      "media_directory": "ok"
+    },
+    "oauth_provider": "Stubbed provider exchange and profile, real Django HTTP client and local DB",
+    "robot_transport": "Local message objects with separate thread connections, fixed Python version action executed"
+  },
+  "static_scan": {
+    "baseline_commit": "20cb455d712a2b94180175760140c2d424369997",
+    "tools": {
+      "ruff": "0.17.1",
+      "bandit": "1.9.4"
+    },
+    "scope": "App Python excluding migrations and tests",
+    "apps": {
+      "oauth": {
+        "baseline": {
+          "files": 10,
+          "ruff_findings": 23,
+          "ruff_rules": {
+            "C901": 1,
+            "E501": 15,
+            "F401": 3,
+            "F841": 1,
+            "I001": 3
+          },
+          "bandit_findings": 6,
+          "bandit_severity": {
+            "LOW": 6
+          },
+          "bandit_rules": {
+            "B105": 6
+          }
+        },
+        "after": {
+          "files": 10,
+          "ruff_findings": 4,
+          "ruff_rules": {
+            "E501": 1,
+            "I001": 3
+          },
+          "bandit_findings": 6,
+          "bandit_severity": {
+            "LOW": 6
+          },
+          "bandit_rules": {
+            "B105": 6
+          }
+        }
+      },
+      "servermanager": {
+        "baseline": {
+          "files": 11,
+          "ruff_findings": 2,
+          "ruff_rules": {
+            "I001": 2
+          },
+          "bandit_findings": 2,
+          "bandit_severity": {
+            "HIGH": 1,
+            "LOW": 1
+          },
+          "bandit_rules": {
+            "B404": 1,
+            "B602": 1
+          }
+        },
+        "after": {
+          "files": 11,
+          "ruff_findings": 2,
+          "ruff_rules": {
+            "I001": 2
+          },
+          "bandit_findings": 2,
+          "bandit_severity": {
+            "LOW": 2
+          },
+          "bandit_rules": {
+            "B404": 1,
+            "B603": 1
+          }
+        }
+      }
+    },
+    "configs": [
+      "doc/week7-8/tools/ruff.toml",
+      "doc/week7-8/tools/bandit.yaml"
+    ],
+    "changed_python_ruff_exit_code": 0,
+    "notes": [
+      "Existing OAuth B105 findings remain low severity.",
+      "Robot B602 was removed. B404 and B603 flag the remaining subprocess import and the fixed non-shell action."
+    ]
+  },
+  "verification_limits": [
+    "External OAuth providers, SMTP, WeChat, OpenAI and production MySQL were not used.",
+    "This is implementation and integration evidence. Assigned peer review remains to be recorded."
+  ]
+}

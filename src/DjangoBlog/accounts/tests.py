@@ -130,6 +130,7 @@ class AccountTest(TestCase):
         err = utils.verify("admin@123.com", code)
         self.assertEqual(type(err), str)
 
+    # YFY（第9—10周）：接口改为共享约定的JSON契约，旧纯文本断言同步更新。
     def test_forget_password_email_code_success(self):
         resp = self.client.post(
             path=reverse("account:forget_password_code"),
@@ -137,20 +138,25 @@ class AccountTest(TestCase):
         )
 
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(resp.content.decode("utf-8"), "ok")
+        payload = resp.json()
+        self.assertTrue(payload["success"])
+        self.assertEqual(payload["code"], "sent")
+        self.assertEqual(payload["retry_after"], 60)
 
     def test_forget_password_email_code_fail(self):
         resp = self.client.post(
             path=reverse("account:forget_password_code"),
             data=dict()
         )
-        self.assertEqual(resp.content.decode("utf-8"), "错误的邮箱")
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.json()["code"], "invalid_email")
 
         resp = self.client.post(
             path=reverse("account:forget_password_code"),
             data=dict(email="admin@com")
         )
-        self.assertEqual(resp.content.decode("utf-8"), "错误的邮箱")
+        self.assertEqual(resp.status_code, 400)
+        self.assertEqual(resp.json()["code"], "invalid_email")
 
     def test_forget_password_email_success(self):
         code = generate_code()
