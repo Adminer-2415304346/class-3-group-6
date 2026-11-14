@@ -199,7 +199,8 @@
           "actual_executor": "SZX",
           "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
           "evidence": "成员成果/SY/功能测试记录.md",
-          "independent_review": "待WZY本人复核"
+          "independent_review": "王子扬复核，功能通过，成员目录测试/扫描证据归档待补正",
+          "independent_review_record": "成员成果/WZY/互查记录-第9-10周.md"
         },
         {
           "id": "S92",
@@ -208,7 +209,8 @@
           "actual_executor": "SZX",
           "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
           "evidence": "成员成果/SY/功能测试记录.md",
-          "independent_review": "待WZY本人复核"
+          "independent_review": "王子扬复核，功能通过，成员目录测试/扫描证据归档待补正",
+          "independent_review_record": "成员成果/WZY/互查记录-第9-10周.md"
         }
       ],
       "optional_task": {
