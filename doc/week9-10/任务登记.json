@@ -107,14 +107,20 @@
           "id": "C91",
           "title": "评论输入和目标文章校验",
           "status": "已合入 develop 并通过联合回归",
-          "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
+          "code_commits": [
+            "0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1",
+            "bb058c40610cb02dcb1d77abd2df7490c84b1205"
+          ],
           "evidence": "成员成果/WZY/功能测试记录.md"
         },
         {
           "id": "C92",
           "title": "评论限频和重复保护",
           "status": "已合入 develop 并通过联合回归",
-          "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
+          "code_commits": [
+            "0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1",
+            "bb058c40610cb02dcb1d77abd2df7490c84b1205"
+          ],
           "evidence": "成员成果/WZY/功能测试记录.md"
         }
       ],
@@ -149,7 +155,7 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "待YFY本人复核"
+          "independent_review": "已由GZX复核YFY accounts A91/A92，通过（互查记录-第9-10周.md）"
         },
         {
           "id": "O92",
@@ -158,13 +164,13 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "待YFY本人复核"
+          "independent_review": "已由GZX复核YFY accounts A91/A92，通过（互查记录-第9-10周.md）"
         }
       ],
       "optional_task": {
         "id": "O93",
         "title": "后台与日志敏感数据最小化",
-          "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
+        "status": "选做未全部实施，回调日志已收敛，后台密钥显示待处理"
       },
       "baseline_test_labels": [
         "oauth.test_oauth_business_logic"
