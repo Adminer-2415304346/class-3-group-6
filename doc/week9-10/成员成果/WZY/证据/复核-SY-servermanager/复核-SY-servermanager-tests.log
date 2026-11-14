@@ -1,0 +1,123 @@
+Found 54 test(s).
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying comments.0006_week910_comment_body_and_post_state... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying oauth.0004_pendingbinding... OK
+  Applying oauth.0005_oauth_login_state... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying servermanager.0003_robotadminsession... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+test_chat_gpt (servermanager.tests.ServerManagerTest.test_chat_gpt) ... 聊天服务失败：ValueError
+ok
+test_configured_action_runs (servermanager.tests.ServerManagerTest.test_configured_action_runs) ... ok
+test_cancellation_is_not_swallowed (servermanager.test_week78_takeover.CommandExecutionTests.test_cancellation_is_not_swallowed) ... ok
+test_command_list_is_not_stale_after_first_read (servermanager.test_week78_takeover.CommandExecutionTests.test_command_list_is_not_stale_after_first_read) ... ok
+test_configured_command_success_is_bounded (servermanager.test_week78_takeover.CommandExecutionTests.test_configured_command_success_is_bounded) ... ok
+test_invalid_timeout_never_executes (servermanager.test_week78_takeover.CommandExecutionTests.test_invalid_timeout_never_executes) ... ok
+test_nonzero_exit_is_not_success (servermanager.test_week78_takeover.CommandExecutionTests.test_nonzero_exit_is_not_success) ... ok
+test_timeout_has_distinct_failure (servermanager.test_week78_takeover.CommandExecutionTests.test_timeout_has_distinct_failure) ... ok
+test_unknown_command_never_executes (servermanager.test_week78_takeover.CommandExecutionTests.test_unknown_command_never_executes) ... ok
+test_category_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_category_only_contains_published_articles) ... ok
+test_missing_category_preserves_empty_contract (servermanager.test_week78_takeover.PublicArticleTests.test_missing_category_preserves_empty_contract) ... ok
+test_recent_only_contains_published_articles (servermanager.test_week78_takeover.PublicArticleTests.test_recent_only_contains_published_articles) ... ok
+test_search_with_only_stale_private_results_is_empty (servermanager.test_week78_takeover.PublicArticleTests.test_search_with_only_stale_private_results_is_empty) ... ok
+test_stale_search_entries_do_not_render_drafts_or_pages (servermanager.test_week78_takeover.PublicArticleTests.test_stale_search_entries_do_not_render_drafts_or_pages) ... ok
+test_anonymous_never_runs_command (servermanager.test_week78_takeover.RobotStateTests.test_anonymous_never_runs_command) ... ok
+test_configured_password_is_used_in_testing (servermanager.test_week78_takeover.RobotStateTests.test_configured_password_is_used_in_testing) ... ok
+test_exit_clears_verified_and_pending_state (servermanager.test_week78_takeover.RobotStateTests.test_exit_clears_verified_and_pending_state) ... ok
+test_expected_methods_remain_on_class (servermanager.test_week78_takeover.RobotStateTests.test_expected_methods_remain_on_class) ... ok
+test_legacy_object_payload_never_uses_object_deserializer (servermanager.test_week78_takeover.RobotStateTests.test_legacy_object_payload_never_uses_object_deserializer) ... ok
+test_malformed_or_wrongly_typed_session_resets (servermanager.test_week78_takeover.RobotStateTests.test_malformed_or_wrongly_typed_session_resets) ... ok
+test_pending_command_requires_confirmation_and_is_consumed_once (servermanager.test_week78_takeover.RobotStateTests.test_pending_command_requires_confirmation_and_is_consumed_once) ... ok
+test_session_is_plain_json_scalars (servermanager.test_week78_takeover.RobotStateTests.test_session_is_plain_json_scalars) ... ok
+test_third_wrong_password_ends_attempt (servermanager.test_week78_takeover.RobotStateTests.test_third_wrong_password_ends_attempt) ... ok
+test_waiting_for_password_never_runs_command (servermanager.test_week78_takeover.RobotStateTests.test_waiting_for_password_never_runs_command) ... ok
+test_disabled_action_never_reaches_process_or_help (servermanager.test_week910_functional.ActionTests.test_disabled_action_never_reaches_process_or_help) ... ok
+test_help_excludes_legacy_and_admin_validates_new_actions (servermanager.test_week910_functional.ActionTests.test_help_excludes_legacy_and_admin_validates_new_actions) ... ok
+test_legacy_action_never_reaches_process (servermanager.test_week910_functional.ActionTests.test_legacy_action_never_reaches_process) ... ok
+test_registered_action_uses_configured_timeout_and_caps_reply (servermanager.test_week910_functional.ActionTests.test_registered_action_uses_configured_timeout_and_caps_reply) ... ok
+test_confirmation_is_scoped_to_its_sender (servermanager.test_week910_functional.ConfirmationTests.test_confirmation_is_scoped_to_its_sender) ... ok
+test_expired_admin_session_blocks_pending_action (servermanager.test_week910_functional.ConfirmationTests.test_expired_admin_session_blocks_pending_action) ... ok
+test_expired_ticket_can_be_reissued_in_valid_admin_session (servermanager.test_week910_functional.ConfirmationTests.test_expired_ticket_can_be_reissued_in_valid_admin_session) ... ok
+test_logout_and_reauthentication_invalidate_previous_ticket (servermanager.test_week910_functional.ConfirmationTests.test_logout_and_reauthentication_invalidate_previous_ticket) ... ok
+test_old_json_without_current_grant_is_not_authenticated (servermanager.test_week910_functional.ConfirmationTests.test_old_json_without_current_grant_is_not_authenticated) ... ok
+test_session_and_ticket_have_independent_deadlines (servermanager.test_week910_functional.ConfirmationTests.test_session_and_ticket_have_independent_deadlines) ... ok
+test_two_requests_with_same_snapshot_only_claim_once (servermanager.test_week910_functional.ConfirmationTests.test_two_requests_with_same_snapshot_only_claim_once) ... ok
+test_api_error_is_explicit_and_not_logged_with_secret (servermanager.test_week78_takeover.ChatAdapterTests.test_api_error_is_explicit_and_not_logged_with_secret) ... ok
+test_blank_prompt_does_not_call_service (servermanager.test_week78_takeover.ChatAdapterTests.test_blank_prompt_does_not_call_service) ... ok
+test_current_client_success_and_model (servermanager.test_week78_takeover.ChatAdapterTests.test_current_client_success_and_model) ... ok
+test_empty_completion_is_not_success (servermanager.test_week78_takeover.ChatAdapterTests.test_empty_completion_is_not_success) ... 聊天服务失败：IndexError
+ok
+test_missing_key_does_not_construct_client (servermanager.test_week78_takeover.ChatAdapterTests.test_missing_key_does_not_construct_client) ... 聊天服务未配置密钥
+ok
+test_request_has_timeout_and_no_hidden_retries (servermanager.test_week78_takeover.ChatAdapterTests.test_request_has_timeout_and_no_hidden_retries) ... ok
+test_cache_storage_round_trip_and_delete (servermanager.test_week78_takeover.SessionStorageTests.test_cache_storage_round_trip_and_delete) ... ok
+test_file_fallback_does_not_delete_existing_store (servermanager.test_week78_takeover.SessionStorageTests.test_file_fallback_does_not_delete_existing_store) ... ok
+test_unavailable_cache_probe_is_false (servermanager.test_week78_takeover.SessionStorageTests.test_unavailable_cache_probe_is_false) ... 机器人会话缓存不可用：RuntimeError
+ok
+test_action_registry_is_explicit_and_can_be_disabled (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_action_registry_is_explicit_and_can_be_disabled) ... ok
+test_agreed_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_agreed_defaults) ... ok
+test_invalid_upload_formats_are_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_invalid_upload_formats_are_rejected) ... ok
+test_non_dictionary_override_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_non_dictionary_override_is_rejected) ... ok
+test_nonpositive_or_noninteger_limit_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_nonpositive_or_noninteger_limit_is_rejected) ... ok
+test_partial_override_keeps_other_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_partial_override_keeps_other_defaults) ... ok
+test_returned_options_do_not_mutate_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_returned_options_do_not_mutate_defaults) ... ok
+test_supported_sequence_is_returned_as_immutable_tuple (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_supported_sequence_is_returned_as_immutable_tuple) ... ok
+ISOLATED_TEST_FAILURES=0
+test_unknown_override_key_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown_override_key_is_rejected) ... ok
+test_unknown_requested_option_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown_requested_option_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 54 tests in 0.292s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+

@@ -1,0 +1,10 @@
+{
+  "tests_run": 54,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "per_app": {
+    "servermanager": 44,
+    "djangoblog": 10
+  }
+}
