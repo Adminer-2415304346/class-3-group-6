@@ -173,6 +173,25 @@ class HealthcheckCommandTests(TestCase):
         manifest = self._check(json.loads(output), 'frontend_manifest')
         self.assertIn('assets/main-abc.js', manifest['detail'])
 
+    def test_missing_or_invalid_main_entry_fails_with_build_hint(self):
+        manifest_path = self.dist / '.vite' / 'manifest.json'
+        other_entry = {'src/other.js': MANIFEST['src/main.js']}
+        for manifest in (
+            other_entry,
+            {**other_entry, 'src/main.js': {'css': ['assets/main-abc.css']}},
+            {**other_entry, 'src/main.js': {'file': ['assets/main-abc.js']}},
+        ):
+            with self.subTest(manifest=manifest):
+                manifest_path.write_text(json.dumps(manifest), encoding='utf-8')
+                code, output = self._run()
+                self.assertEqual(code, 1)
+                report = json.loads(output)
+                self.assertEqual(report['status'], 'failed')
+                frontend = self._check(report, 'frontend_manifest')
+                self.assertEqual(frontend['status'], 'failed')
+                self.assertIn('src/main.js', frontend['detail'])
+                self.assertIn('npm run build', frontend['fix'])
+
     def test_cache_failure_is_reported(self):
         broken_cache = mock.Mock()
         broken_cache.set.side_effect = RuntimeError('cache backend down')

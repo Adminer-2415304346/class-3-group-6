@@ -1,0 +1,72 @@
+[
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 42,
+      "row": 12
+    },
+    "filename": "D:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\servermanager\\api\\commonapi.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import logging\nimport os\nimport subprocess\nimport sys\n\nfrom django.conf import settings\nfrom django.core.exceptions import ImproperlyConfigured\nfrom openai import OpenAI, OpenAIError\n\nfrom djangoblog.maintenance_config import get_maintenance_option\nfrom servermanager.models import commands\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 14
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  },
+  {
+    "cell": null,
+    "code": "I001",
+    "end_location": {
+      "column": 38,
+      "row": 21
+    },
+    "filename": "D:\\软件工程方法学\\class-3-group-6\\src\\DjangoBlog\\servermanager\\robot.py",
+    "fix": {
+      "applicability": "safe",
+      "edits": [
+        {
+          "content": "import json\nimport os\nimport re\nfrom datetime import timedelta\nfrom pathlib import Path\nfrom secrets import compare_digest, token_hex\n\nfrom django.conf import settings\nfrom django.utils import timezone\nfrom werobot import WeRoBot\nfrom werobot.replies import Article, ArticlesReply\nfrom werobot.session.filestorage import FileStorage\n\nfrom djangoblog.maintenance_config import get_maintenance_option\nfrom djangoblog.utils import get_sha256\nfrom servermanager.api.blogapi import BlogApi\nfrom servermanager.api.commonapi import ChatGPT, CommandHandler\n\nfrom .MemcacheStorage import MemcacheStorage\nfrom .models import RobotAdminSession\n\n\n",
+          "end_location": {
+            "column": 1,
+            "row": 24
+          },
+          "location": {
+            "column": 1,
+            "row": 2
+          }
+        }
+      ],
+      "message": "Organize imports"
+    },
+    "location": {
+      "column": 1,
+      "row": 2
+    },
+    "message": "Import block is un-sorted or un-formatted",
+    "name": "unsorted-imports",
+    "noqa_row": 2,
+    "severity": "error",
+    "url": "https://docs.astral.sh/ruff/rules/unsorted-imports"
+  }
+]

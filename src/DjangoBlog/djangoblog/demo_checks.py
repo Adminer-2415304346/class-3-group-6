@@ -14,6 +14,7 @@ from django.conf import settings
 
 VITE_DIST_RELATIVE = Path('blog/static/blog/dist')
 VITE_MANIFEST_RELATIVE = VITE_DIST_RELATIVE / '.vite' / 'manifest.json'
+VITE_MAIN_ENTRY = 'src/main.js'
 CACHE_PROBE_KEY = 'week910:djangoblog:demo_healthcheck:probe'
 BUILD_FIX = 'cd src/DjangoBlog/frontend; npm ci; npm run build'
 
@@ -114,7 +115,7 @@ def _artifact_problems(manifest, dist_dir):
 
 
 def check_frontend_manifest():
-    """校验 Vite manifest 可解析，且其中引用的 js/css 产物真实存在。"""
+    """校验 Vite manifest 包含页面主入口，且引用的 js/css 产物真实存在。"""
     dist_dir = Path(settings.BASE_DIR) / VITE_DIST_RELATIVE
     manifest_path = Path(settings.BASE_DIR) / VITE_MANIFEST_RELATIVE
     if not manifest_path.is_file():
@@ -129,6 +130,15 @@ def check_frontend_manifest():
         )
     if not isinstance(manifest, dict) or not manifest:
         return _failed('frontend_manifest', f'{manifest_path} 为空或不是对象', BUILD_FIX)
+    # SZX（第9—10周 D92复验）：基础模板通过 vite_js 请求此入口。
+    entry = manifest.get(VITE_MAIN_ENTRY)
+    if not isinstance(entry, dict):
+        return _failed(
+            'frontend_manifest', f'缺少或无法读取 Vite 主入口 {VITE_MAIN_ENTRY}', BUILD_FIX,
+        )
+    main_file = entry.get('file')
+    if not isinstance(main_file, str) or not main_file.strip():
+        return _failed('frontend_manifest', f'{VITE_MAIN_ENTRY} 缺少有效的 file 字段', BUILD_FIX)
 
     problems, checked = _artifact_problems(manifest, dist_dir)
     if problems:

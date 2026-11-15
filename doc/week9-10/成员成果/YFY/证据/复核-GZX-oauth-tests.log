@@ -1,0 +1,241 @@
+﻿python : Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+所在位置 行:15 字符: 1744
++ ... M = 'dumb'; python doc/week7-8/tools/run_isolated_tests.py --result-j ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Creating test d...che=shared')...:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+Found 60 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: compressor, djangoblog, haystack, mdeditor, messages, sitemaps, staticfiles
+  Apply all migrations: accounts, admin, auth, blog, comments, contenttypes, oauth, servermanager, sessions, sites
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying accounts.0001_initial... OK
+  Applying accounts.0002_alter_bloguser_options_remove_bloguser_created_time_and_more... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying blog.0001_initial... OK
+  Applying blog.0002_blogsettings_global_footer_and_more... OK
+  Applying blog.0003_blogsettings_comment_need_review... OK
+  Applying blog.0004_rename_analyticscode_blogsettings_analytics_code_and_more... OK
+  Applying blog.0005_alter_article_options_alter_category_options_and_more... OK
+  Applying blog.0006_alter_blogsettings_options... OK
+  Applying blog.0007_article_idx_type_status_pub_article_idx_status_views_and_more... OK
+  Applying blog.0008_blogsettings_color_scheme... OK
+  Applying blog.0009_rename_demo_categories... OK
+  Applying blog.0010_refresh_demo_content... OK
+  Applying comments.0001_initial... OK
+  Applying comments.0002_alter_comment_is_enable... OK
+  Applying comments.0003_alter_comment_options_remove_comment_created_time_and_more... OK
+  Applying comments.0004_comment_idx_art_parent_enable_comment_idx_enable_id... OK
+  Applying comments.0005_commentreaction... OK
+  Applying comments.0006_week910_comment_body_and_post_state... OK
+  Applying oauth.0001_initial... OK
+  Applying oauth.0002_alter_oauthconfig_options_alter_oauthuser_options_and_more... OK
+  Applying oauth.0003_alter_oauthuser_nickname... OK
+  Applying oauth.0004_pendingbinding... OK
+  Applying oauth.0005_oauth_login_state... OK
+  Applying servermanager.0001_initial... OK
+  Applying servermanager.0002_alter_emailsendlog_options_and_more... OK
+  Applying servermanager.0003_robotadminsession... OK
+  Applying sessions.0001_initial... OK
+  Applying sites.0001_initial... OK
+test_oauth_config_can_be_created (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_can_be_created)
+测试OAuth配置可以被创建 ... ok
+test_oauth_config_has_required_fields (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_has_required_f
+ields)
+测试OAuth配置有必需字段 ... ok
+test_oauth_config_is_enable_field (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_is_enable_field)
+测试OAuth配置的启用字段 ... ok
+test_oauth_config_query_by_type (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_query_by_type)
+测试按类型查询OAuth配置 ... ok
+test_oauth_config_type_uniqueness (oauth.test_oauth_business_logic.OAuthConfigTest.test_oauth_config_type_uniqueness)
+测试OAuth配置类型唯一性 ... ok
+test_oauth_user_email_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_email_field)
+测试OAuth用户邮箱字段 ... ok
+test_oauth_user_metadata_field (oauth.test_oauth_business_logic.OAuthMetadataTest.test_oauth_user_metadata_field)
+测试OAuth用户元数据字段 ... ok
+test_oauth_token_can_be_updated (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_token_can_be_updat
+ed)
+测试OAuth token可以更新 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthTokenManagementTest.test_oauth_user_token_storage)
+测试OAuth token存储 ... ok
+test_bind_oauth_to_existing_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_bind_oauth_to_existing_user
+)
+测试将OAuth绑定到现有用户 ... ok
+test_change_oauth_binding (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_change_oauth_binding)
+测试更改OAuth绑定 ... ok
+test_unbind_oauth_from_user (oauth.test_oauth_business_logic.OAuthUserBindingTest.test_unbind_oauth_from_user)
+测试解绑OAuth账号 ... ok
+test_delete_blog_user_cascade_oauth (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_blog_user_cascad
+e_oauth)
+测试删除博客用户级联删除OAuth用户 ... ok
+test_delete_oauth_user (oauth.test_oauth_business_logic.OAuthUserDeletionTest.test_delete_oauth_user)
+测试删除OAuth用户 ... ok
+test_query_oauth_user_by_openid (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_openid)
+测试按openid查询OAuth用户 ... ok
+test_query_oauth_user_by_type (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_user_by_type)
+测试按类型查询OAuth用户 ... ok
+test_query_oauth_users_by_blog_user (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_query_oauth_users_by_blog_
+user)
+测试按博客用户查询OAuth用户 ... ok
+test_user_can_have_multiple_oauth_accounts (oauth.test_oauth_business_logic.OAuthUserQueryTest.test_user_can_have_multi
+ple_oauth_accounts)
+测试用户可以关联多个OAuth账号 ... ok
+test_oauth_user_can_be_created (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_can_be_created)
+测试OAuth用户可以被创建 ... ok
+test_oauth_user_has_openid (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_openid)
+测试OAuth用户有openid ... ok
+test_oauth_user_has_type (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_has_type)
+测试OAuth用户有类型 ... ok
+test_oauth_user_links_to_blog_user (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_links_to_blog_user)
+测试OAuth用户关联到博客用户 ... ok
+test_oauth_user_nickname_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_nickname_storage)
+测试OAuth用户昵称存储 ... ok
+test_oauth_user_token_storage (oauth.test_oauth_business_logic.OAuthUserTest.test_oauth_user_token_storage)
+测试OAuth用户token存储 ... ok
+test_base_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_base_do_get_post
+_passes_timeout) ... ok
+test_mixin_do_get_post_passes_timeout (oauth.test_oauth_business_logic.OauthHttpRequestTimeoutTest.test_mixin_do_get_po
+st_passes_timeout) ... ok
+test_T01_oauthlogin_generates_state_and_stores_session (oauth.test_week910_functional.OAuthStateFlowTest.test_T01_oauth
+login_generates_state_and_stores_session)
+O-T01: 发起授权 URL 含 state，session 按渠道保存 state/next/时间。 ... ok
+test_T02_valid_callback_consumes_state_and_logs_in (oauth.test_week910_functional.OAuthStateFlowTest.test_T02_valid_cal
+lback_consumes_state_and_logs_in)
+O-T02: 同浏览器合法回调换 token 一次，登录已绑定的有效账号。 ... ok
+test_T03_cross_browser_state_rejected (oauth.test_week910_functional.OAuthStateFlowTest.test_T03_cross_browser_state_re
+jected)
+O-T03b: 换浏览器（不同 session）回调拒绝。 ... Forbidden: /oauth/authorize
+ok
+test_T03_missing_bad_expired_state_rejected (oauth.test_week910_functional.OAuthStateFlowTest.test_T03_missing_bad_expi
+red_state_rejected)
+O-T03: 缺/错/过期 state 拒绝且平台调用 0 次。 ... Forbidden: /oauth/authorize
+Forbidden: /oauth/authorize
+Forbidden: /oauth/authorize
+ok
+test_T04_replay_old_state_rejected (oauth.test_week910_functional.OAuthStateFlowTest.test_T04_replay_old_state_rejected
+)
+O-T04: 同渠道第二次发起后旧 state 失效；成功回调后重复回调拒绝。 ... Forbidden: /oauth/authorize
+Forbidden: /oauth/authorize
+ok
+test_T05_existing_account_must_login_first (oauth.test_week910_functional.OauthEmailBindingTest.test_T05_existing_accou
+nt_must_login_first)
+O-T05b: 同邮箱已有账号时，未登录直接点确认链接拒绝；登录后确认成功。 ... Forbidden: /oauth/emailconfirm/1/1:local@example.com:ae739c464ca63c1e641b363
+2c7474a08:1xS4yi:NVHdPvk5wye_V0bDJkm94JDwJeNlrACkVWemZ6kIvls.html
+ok
+test_T05_existing_email_not_auto_logged_in (oauth.test_week910_functional.OauthEmailBindingTest.test_T05_existing_email
+_not_auto_logged_in)
+O-T05: 同邮箱已有本站账号时不自动登录，转待绑定流程。 ... ok
+test_T06_tampered_signature_rejected (oauth.test_week910_functional.OauthEmailBindingTest.test_T06_tampered_signature_r
+ejected)
+O-T06: 篡改 sign / nonce / 换浏览器均 403，无写入。 ... Forbidden: /oauth/emailconfirm/1/1:tamper@example.com:c6f602cc7bfeea7c745f7
+9467d17d381:1xS4yi:Iacka2B7B-mYgp2sVISN2dTxRFUsn28nmhb2k88csRQ.html
+Forbidden: /oauth/emailconfirm/1/1:tamper@example.com:c6f602cc7bfeea7c745f79467d17d381:1xS4yi:Iacka2B7B-mYgp2sVISN2dTxR
+FUsn28nmhb2k88csRQtamper.html
+Forbidden: /oauth/emailconfirm/2/1:tamper@example.com:c6f602cc7bfeea7c745f79467d17d381:1xS4yi:Iacka2B7B-mYgp2sVISN2dTxR
+FUsn28nmhb2k88csRQ.html
+ok
+test_T07_new_email_bind_successfully (oauth.test_week910_functional.OauthEmailBindingTest.test_T07_new_email_bind_succe
+ssfully)
+O-T07: 第三方无邮箱，经补邮箱表单创建 PendingBinding，确认链接一次成功绑定。 ... ok
+test_T07_replay_link_rejected (oauth.test_week910_functional.OauthEmailBindingTest.test_T07_replay_link_rejected)
+O-T07b: 同一 nonce 第二次打开链接拒绝。 ... Bad Request: /oauth/emailconfirm/1/1:replay@example.com:e45657fda06fffb966f4b267a982dca
+f:1xS4yi:XWVPmbdc00m5L8RbjJaIiYT3qB5n_6CpHikjmMxbyhM.html
+ok
+test_T09_inactive_author_not_logged_in (oauth.test_week910_functional.OauthEmailBindingTest.test_T09_inactive_author_no
+t_logged_in)
+O-T09: 已绑定但 is_active=False 的 author 不建立登录态。 ... Forbidden: /oauth/authorize
+ok
+test_require_email_form_creates_pending_binding (oauth.test_week910_functional.RequireEmailViewFlowTest.test_require_em
+ail_form_creates_pending_binding) ... ok
+test_tampered_oauthid_rejected (oauth.test_week910_functional.RequireEmailViewFlowTest.test_tampered_oauthid_rejected)
+复核: 隐藏 oauthid 与 session pending_oauth_id 不匹配时 403，不创建 PendingBinding。 ... Forbidden: /oauth/requireemail/2.html
+ok
+test_bad_state_does_not_clear_latest_valid_state (oauth.test_week910_functional.StateRejectionPreservesLatestStateTest.
+test_bad_state_does_not_clear_latest_valid_state) ... Forbidden: /oauth/authorize
+ok
+test_database_failure_rolls_back_consumption_and_confirmation_can_retry (oauth.test_week910_functional.TakeoverOAuthTes
+ts.test_database_failure_rolls_back_consumption_and_confirmation_can_retry) ... Conflict: /oauth/emailconfirm/1/eyJvYXV
+0aF9pZCI6MSwiZW1haWwiOiJyZXRyeS1iaW5kaW5nQGV4YW1wbGUuY29tIiwibm9uY2UiOiI4YWI2Mzc0YjgwMjVjNjY1ZjAwNzM0YTg0ZTk1Y2U2NiJ9:1
+xS4yi:iE-y0JR3UhFgjGYePzD9IPIMcgS5PGOA8C-OW--Lbiw.html
+ok
+test_enabled_channels_keep_configured_callback_and_independent_state (oauth.test_week910_functional.TakeoverOAuthTests.
+test_enabled_channels_keep_configured_callback_and_independent_state) ... ok
+test_expired_proof_and_unsigned_legacy_link_are_rejected (oauth.test_week910_functional.TakeoverOAuthTests.test_expired
+_proof_and_unsigned_legacy_link_are_rejected) ... Bad Request: /oauth/emailconfirm/1/eyJvYXV0aF9pZCI6MSwiZW1haWwiOiJleH
+BpcmVzQGV4YW1wbGUuY29tIiwibm9uY2UiOiJmMDk1NDBkYTEwYzk1OWEwZWMyZTg0YmY5MjBlZjVhNCJ9:1xS4yi:YGjRfrDbE3aco3987GfCWHaftH1os
+kgPTrv_E7ajhJ8.html
+Forbidden: /oauth/emailconfirm/1/legacy.html
+ok
+test_invalid_unicode_state_keeps_valid_state (oauth.test_week910_functional.TakeoverOAuthTests.test_invalid_unicode_sta
+te_keeps_valid_state) ... Forbidden: /oauth/authorize
+ok
+test_missing_form_id_returns_validation_error (oauth.test_week910_functional.TakeoverOAuthTests.test_missing_form_id_re
+turns_validation_error) ... Bad Request: /oauth/requireemail/1.html
+ok
+test_new_provider_email_only_creates_local_user_after_confirmation (oauth.test_week910_functional.TakeoverOAuthTests.te
+st_new_provider_email_only_creates_local_user_after_confirmation) ... ok
+test_provider_failure_has_no_login_or_sensitive_log (oauth.test_week910_functional.TakeoverOAuthTests.test_provider_fai
+lure_has_no_login_or_sensitive_log) ... Bad Gateway: /oauth/authorize
+ok
+test_resend_replaces_link_and_cancel_closes_current_confirmation (oauth.test_week910_functional.TakeoverOAuthTests.test
+_resend_replaces_link_and_cancel_closes_current_confirmation) ... Bad Request: /oauth/emailconfirm/1/eyJvYXV0aF9pZCI6MS
+wiZW1haWwiOiJyZXNlbmRAZXhhbXBsZS5jb20iLCJub25jZSI6IjlhMDc1NjAzMDQwZTA5MDdkMWRhODI2ODcyZjI1ODM4In0:1xS4yj:I0UVGNw6kqx8Zz
+1UWwZ0Mty9Dz2htrTCdev_8L6fTw0.html
+Bad Request: /oauth/emailconfirm/1/eyJvYXV0aF9pZCI6MSwiZW1haWwiOiJyZXNlbmRAZXhhbXBsZS5jb20iLCJub25jZSI6IjU1ZTlhMGQ0ZTBj
+NTI4NGQ0ZjhlYmFmNTYzZjQ5YzMxIn0:1xS4yj:KGt0cXUZJr-ktP6rAjsxYM3e88JDJD36Nky9HmYo1kI.html
+ok
+test_state_is_consumed_even_if_a_second_request_loaded_the_old_session (oauth.test_week910_functional.TakeoverOAuthTest
+s.test_state_is_consumed_even_if_a_second_request_loaded_the_old_session) ... Forbidden: /oauth/authorize
+ok
+test_untrusted_redirect_parameters_do_not_override_default (oauth.test_week910_functional.TakeoverOAuthTests.test_untru
+sted_redirect_parameters_do_not_override_default) ... ok
+test_action_registry_is_explicit_and_can_be_disabled (djangoblog.test_week910_configuration.MaintenanceConfigurationTes
+ts.test_action_registry_is_explicit_and_can_be_disabled) ... ok
+test_agreed_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_agreed_defaults) ... ok
+test_invalid_upload_formats_are_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_inva
+lid_upload_formats_are_rejected) ... ok
+test_non_dictionary_override_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_non_
+dictionary_override_is_rejected) ... ok
+test_nonpositive_or_noninteger_limit_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.t
+est_nonpositive_or_noninteger_limit_is_rejected) ... ok
+test_partial_override_keeps_other_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_pa
+rtial_override_keeps_other_defaults) ... ok
+test_returned_options_do_not_mutate_defaults (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_
+returned_options_do_not_mutate_defaults) ... ok
+test_supported_sequence_is_returned_as_immutable_tuple (djangoblog.test_week910_configuration.MaintenanceConfigurationT
+ests.test_supported_sequence_is_returned_as_immutable_tuple) ... ok
+test_unknown_override_key_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unknown
+_override_key_is_rejected) ... ok
+test_unknown_requested_option_is_rejected (djangoblog.test_week910_configuration.MaintenanceConfigurationTests.test_unk
+nown_requested_option_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 60 tests in 2.779s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+
+  Applying sites.0002_alter_domain_unique... OK
+System check identified no issues (0 silenced).
+ISOLATED_TEST_FAILURES=0
