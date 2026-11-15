@@ -1,0 +1,273 @@
+{
+  "app": "servermanager",
+  "owner": "SY",
+  "stage": "after",
+  "timestamp_utc": "2026-11-14T09:37:37.221375+00:00",
+  "base_commit": "a5bd3b49070551231868aa640d0302f7120d863f",
+  "python": "3.11.9",
+  "tools": {
+    "ruff": "0.17.1",
+    "bandit": "1.9.4"
+  },
+  "config_sha256": {
+    "ruff.toml": "1e3cde7b5c71c66da78a61a58693d8bb0f4d27ed834690cbf3877546ad0a98d1",
+    "bandit.yaml": "446a9f44f804e340d3da4e562472301e27603cfcd156393724567c5320cdc61c"
+  },
+  "scope": "App Python excluding migrations and test*.py/tests directories; no Django startup",
+  "excluded_files": [
+    "servermanager/migrations/0001_initial.py",
+    "servermanager/migrations/0002_alter_emailsendlog_options_and_more.py",
+    "servermanager/migrations/0003_robotadminsession.py",
+    "servermanager/migrations/__init__.py",
+    "servermanager/test_week78_takeover.py",
+    "servermanager/test_week910_functional.py",
+    "servermanager/tests.py"
+  ],
+  "files": [
+    {
+      "path": "servermanager/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "physical_lines": 0,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/admin.py",
+      "sha256": "5fcfd74ec24a239adc14a89658e2e2daa901c8761b8e045088e695b5ec3c9231",
+      "physical_lines": 33,
+      "code_token_lines": 22,
+      "comment_lines": 2,
+      "signed_comment_lines": {
+        "SZX": 2,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 2,
+        "GCY": 0
+      },
+      "classes": 4,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "servermanager/api/__init__.py",
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6",
+      "physical_lines": 1,
+      "code_token_lines": 0,
+      "comment_lines": 0,
+      "signed_comment_lines": {
+        "SZX": 0,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 0,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/api/blogapi.py",
+      "sha256": "76089f695073978a4d719abfe0875483153c1f72cdd5626149b2ef74e1705995",
+      "physical_lines": 31,
+      "code_token_lines": 20,
+      "comment_lines": 4,
+      "signed_comment_lines": {
+        "SZX": 4,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 4,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "servermanager/api/commonapi.py",
+      "sha256": "1ad74dd81eba28f838948996443a02ebd2510161c459ce8a3edde426a888ef2a",
+      "physical_lines": 112,
+      "code_token_lines": 96,
+      "comment_lines": 5,
+      "signed_comment_lines": {
+        "SZX": 5,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 5,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 5
+    },
+    {
+      "path": "servermanager/apps.py",
+      "sha256": "964f4e6fe0258dd3eb628168437eca278984b6cc64f105dd49681e33d1b91e9f",
+      "physical_lines": 6,
+      "code_token_lines": 3,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/MemcacheStorage.py",
+      "sha256": "76a1eb05e8903b5619827ccb9b43ccaf57c5c22cc0ad81dd12846fd6bbe520ed",
+      "physical_lines": 46,
+      "code_token_lines": 34,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 3,
+        "GCY": 0
+      },
+      "classes": 1,
+      "functions_and_methods": 6
+    },
+    {
+      "path": "servermanager/models.py",
+      "sha256": "fbf06f301e44e7eb2e0652f785907ab33034a5b76851cccfdeb80d8e71214184",
+      "physical_lines": 49,
+      "code_token_lines": 35,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 3,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 3,
+        "GCY": 0
+      },
+      "classes": 5,
+      "functions_and_methods": 2
+    },
+    {
+      "path": "servermanager/robot.py",
+      "sha256": "74585fb8bc8908114bdebc6a3c25652096ae55c1316e4c232a75097f200260e6",
+      "physical_lines": 291,
+      "code_token_lines": 239,
+      "comment_lines": 12,
+      "signed_comment_lines": {
+        "SZX": 10,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 10,
+        "GCY": 0
+      },
+      "classes": 2,
+      "functions_and_methods": 21
+    },
+    {
+      "path": "servermanager/urls.py",
+      "sha256": "618ccdbd93b6c0492e4a744b2f729305aa399d038c599a34f531396e2575b183",
+      "physical_lines": 12,
+      "code_token_lines": 7,
+      "comment_lines": 3,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 1,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    },
+    {
+      "path": "servermanager/views.py",
+      "sha256": "ac62713eb0613dfce2d48060e38c154c296bfef7df9b48ced7b01116e4d148f9",
+      "physical_lines": 1,
+      "code_token_lines": 0,
+      "comment_lines": 1,
+      "signed_comment_lines": {
+        "SZX": 1,
+        "YFY": 0,
+        "WZY": 0,
+        "GZX": 0,
+        "SY": 1,
+        "GCY": 0
+      },
+      "classes": 0,
+      "functions_and_methods": 0
+    }
+  ],
+  "runs": {
+    "ruff": {
+      "command": [
+        "E:\\git\\Git小组作业\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "--config",
+        "E:\\git\\Git小组作业\\class-3-group-6\\doc\\week7-8\\tools\\ruff.toml",
+        "--output-format",
+        "json",
+        "--output-file",
+        "E:\\git\\Git小组作业\\class-3-group-6\\doc\\week9-10\\成员成果\\WZY\\证据\\复核-SY-servermanager-scan\\ruff.json",
+        "servermanager/__init__.py",
+        "servermanager/admin.py",
+        "servermanager/api/__init__.py",
+        "servermanager/api/blogapi.py",
+        "servermanager/api/commonapi.py",
+        "servermanager/apps.py",
+        "servermanager/MemcacheStorage.py",
+        "servermanager/models.py",
+        "servermanager/robot.py",
+        "servermanager/urls.py",
+        "servermanager/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "bandit": {
+      "command": [
+        "E:\\git\\Git小组作业\\class-3-group-6\\src\\DjangoBlog\\.venv\\Scripts\\python.exe",
+        "-m",
+        "bandit",
+        "-c",
+        "E:\\git\\Git小组作业\\class-3-group-6\\doc\\week7-8\\tools\\bandit.yaml",
+        "--ignore-nosec",
+        "-f",
+        "json",
+        "-o",
+        "E:\\git\\Git小组作业\\class-3-group-6\\doc\\week9-10\\成员成果\\WZY\\证据\\复核-SY-servermanager-scan\\bandit.json",
+        "servermanager/__init__.py",
+        "servermanager/admin.py",
+        "servermanager/api/__init__.py",
+        "servermanager/api/blogapi.py",
+        "servermanager/api/commonapi.py",
+        "servermanager/apps.py",
+        "servermanager/MemcacheStorage.py",
+        "servermanager/models.py",
+        "servermanager/robot.py",
+        "servermanager/urls.py",
+        "servermanager/views.py"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "[main]\tINFO\tprofile include tests: None\r\n[main]\tINFO\tprofile exclude tests: None\r\n[main]\tINFO\tcli include tests: None\r\n[main]\tINFO\tcli exclude tests: None\r\n[json]\tINFO\tJSON output written to file: E:\\git\\Git小组作业\\class-3-group-6\\doc\\week9-10\\成员成果\\WZY\\证据\\复核-SY-servermanager-scan\\bandit.json\r\n"
+    }
+  }
+}
