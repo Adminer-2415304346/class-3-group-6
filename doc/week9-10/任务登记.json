@@ -3,7 +3,7 @@
   "assigned_date": "2026-11-02",
   "baseline_commit": "52b783b4d8e6670b8d22638cf2fdfc39592bf4ad",
   "baseline_branch": "main",
-  "status": "12 项必做优化已实现并通过 536 项联合回归，互查意见和代办验收分别登记",
+  "status": "12 项必做优化已实现并通过 536 项联合回归。四个方向由分工内成员复核，两个方向由组长代办验收",
   "integration_evidence": "接手验证.json",
   "latest_regression_evidence": "成员成果/SZX/证据/GCY互查代办与D92复验.json",
   "shared_contract": "共享配置与接口约定.md",
@@ -117,14 +117,20 @@
           "title": "评论输入和目标文章校验",
           "status": "已合入 develop 并通过联合回归",
           "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
-          "evidence": "成员成果/WZY/功能测试记录.md"
+          "evidence": "成员成果/WZY/功能测试记录.md",
+          "independent_review": "宋洋本人意见待取得",
+          "alternate_acceptance": "石兆翔代办验收通过",
+          "alternate_acceptance_record": "成员成果/SZX/SY互查任务代办记录.md"
         },
         {
           "id": "C92",
           "title": "评论限频和重复保护",
           "status": "已合入 develop 并通过联合回归",
           "code_commits": ["0ba81a97fcf0b6fead4c68fdef5d3115e5bae0c1", "bb058c40610cb02dcb1d77abd2df7490c84b1205"],
-          "evidence": "成员成果/WZY/功能测试记录.md"
+          "evidence": "成员成果/WZY/功能测试记录.md",
+          "independent_review": "宋洋本人意见待取得",
+          "alternate_acceptance": "石兆翔代办验收通过",
+          "alternate_acceptance_record": "成员成果/SZX/SY互查任务代办记录.md"
         }
       ],
       "optional_task": {
@@ -158,7 +164,7 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "喻飞扬复核，功能通过，扫描证据和文档待订正",
+          "independent_review": "喻飞扬复核，功能通过。收尾时已补齐最终源码扫描证据并订正文档",
           "independent_review_record": "成员成果/YFY/互查记录-第9-10周.md"
         },
         {
@@ -168,7 +174,7 @@
           "actual_executor": "GZX + SZX",
           "code_commit": "dd99a32e3b8c94f536d6e62137079ef938a47622",
           "evidence": "成员成果/GZX/功能测试记录.md",
-          "independent_review": "喻飞扬复核，功能通过，扫描证据和文档待订正",
+          "independent_review": "喻飞扬复核，功能通过。收尾时已补齐最终源码扫描证据并订正文档",
           "independent_review_record": "成员成果/YFY/互查记录-第9-10周.md"
         }
       ],
@@ -199,7 +205,7 @@
           "actual_executor": "SZX",
           "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
           "evidence": "成员成果/SY/功能测试记录.md",
-          "independent_review": "王子扬复核，功能通过，成员目录测试/扫描证据归档待补正",
+          "independent_review": "王子扬复核，功能通过。成员目录测试和扫描证据已补归档",
           "independent_review_record": "成员成果/WZY/互查记录-第9-10周.md"
         },
         {
@@ -209,7 +215,7 @@
           "actual_executor": "SZX",
           "code_commit": "10a1c81894fcd14cbd7d95e5868cddd9de6e5fc7",
           "evidence": "成员成果/SY/功能测试记录.md",
-          "independent_review": "王子扬复核，功能通过，成员目录测试/扫描证据归档待补正",
+          "independent_review": "王子扬复核，功能通过。成员目录测试和扫描证据已补归档",
           "independent_review_record": "成员成果/WZY/互查记录-第9-10周.md"
         }
       ],
@@ -268,7 +274,7 @@
     }
   ],
   "shared_contract_version": "1.1",
-  "updated_date": "2026-11-14",
+  "updated_date": "2026-11-15",
   "delivery_responsibilities": {
     "recording_owner": "SZX 石兆翔",
     "recording_work": [
